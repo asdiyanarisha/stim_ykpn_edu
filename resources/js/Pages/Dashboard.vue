@@ -123,10 +123,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import AppSidebar from '../components/AppSidebar.vue';
-import AppNavbar from '../components/AppNavbar.vue';
-import StatCard from '../components/StatCard.vue';
-import AppButton from '../components/AppButton.vue';
+import AppSidebar from '../Components/Organisms/AppSidebar.vue';
+import AppNavbar from '../Components/Organisms/AppNavbar.vue';
+import StatCard from '../Components/Molecules/StatCard.vue';
+import AppButton from '../Components/Atoms/AppButton.vue';
 
 const sidebarOpen = ref(false);
 
