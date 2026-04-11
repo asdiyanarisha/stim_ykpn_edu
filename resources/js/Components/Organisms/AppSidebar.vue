@@ -1,7 +1,7 @@
 <template>
   <aside 
-    class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0"
-    :class="{ '-translate-x-full': !isOpen }"
+    class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 transition-all duration-300 ease-in-out lg:static"
+    :class="isOpen ? 'translate-x-0 lg:-ml-64 lg:-translate-x-full' : '-translate-x-full lg:ml-0 lg:translate-x-0'"
   >
     <div class="flex h-16 items-center justify-between px-6 bg-slate-950">
       <span class="text-xl font-bold text-white flex items-center gap-2">
