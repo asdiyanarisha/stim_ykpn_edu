@@ -5,8 +5,8 @@ import { createApp, h } from 'vue';
 import Dashboard from './Pages/Dashboard.vue';
 import Login from './Pages/Login.vue';
 import Unauthenticated from './Pages/Unauthenticated.vue';
-import Teacher from './Pages/Teacher.vue';
-import TeacherForm from './Pages/TeacherForm.vue';
+import Teacher from './Pages/Teacher/index.vue';
+import TeacherForm from './Pages/Teacher/TeacherForm.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';

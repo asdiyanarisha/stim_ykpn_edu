@@ -487,11 +487,11 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue';
 import axios from 'axios';
-import AppSidebar from '../Components/Organisms/AppSidebar.vue';
-import AppNavbar from '../Components/Organisms/AppNavbar.vue';
-import AppButton from '../Components/Atoms/AppButton.vue';
-import AppInput from '../Components/Atoms/AppInput.vue';
-import { getCookie, deleteCookie, TOKEN_COOKIE_NAME } from '../Helpers/cookie.js';
+import AppSidebar from '../../Components/Organisms/AppSidebar.vue';
+import AppNavbar from '../../Components/Organisms/AppNavbar.vue';
+import AppButton from '../../Components/Atoms/AppButton.vue';
+import AppInput from '../../Components/Atoms/AppInput.vue';
+import { getCookie, deleteCookie, TOKEN_COOKIE_NAME } from '../../Helpers/cookie.js';
 
 const mainScroll = ref(null);
 const sidebarOpen = ref(false);
