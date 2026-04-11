@@ -37,6 +37,17 @@
         class="bg-white py-8 px-4 shadow-xl shadow-slate-200/50 sm:rounded-2xl sm:px-10 border border-slate-100"
       >
         <form class="space-y-6" @submit.prevent="handleLogin">
+          <!-- Error Message -->
+          <div
+            v-if="errorMessage"
+            class="bg-rose-50 border border-rose-200 text-rose-700 px-4 py-3 rounded-xl text-sm font-medium flex items-center gap-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+            {{ errorMessage }}
+          </div>
+
           <AppInput
             id="username"
             label="Username atau Email"
@@ -129,25 +140,44 @@
 
 <script setup>
 import { reactive, ref } from "vue";
+import axios from "axios";
 import AppInput from "../Components/Atoms/AppInput.vue";
 import AppButton from "../Components/Atoms/AppButton.vue";
+import { setCookie, TOKEN_COOKIE_NAME } from "../Helpers/cookie.js";
 
 const loading = ref(false);
+const errorMessage = ref("");
+
 const form = reactive({
   username: "",
   password: "",
-  remember: false,
 });
 
-const handleLogin = () => {
+const handleLogin = async () => {
   loading.value = true;
-  console.log("Logging in with:", form);
+  errorMessage.value = "";
 
-  // Simulate API call
-  setTimeout(() => {
-    loading.value = false;
-    alert("Pesan: Implementasi backend diperlukan untuk proses login.");
+  try {
+    const response = await axios.post("/api/auth/login", {
+      username: form.username,
+      password: form.password,
+    });
+
+    const { token, expires_in } = response.data.data;
+
+    // Simpan token ke cookie dengan durasi sesuai JWT expiry
+    setCookie(TOKEN_COOKIE_NAME, token, expires_in);
+
+    // Redirect ke dashboard
     window.location.href = "/dashboard";
-  }, 1500);
+  } catch (error) {
+    if (error.response && error.response.data) {
+      errorMessage.value = error.response.data.message;
+    } else {
+      errorMessage.value = "Terjadi kesalahan jaringan. Silakan coba lagi.";
+    }
+  } finally {
+    loading.value = false;
+  }
 };
 </script>

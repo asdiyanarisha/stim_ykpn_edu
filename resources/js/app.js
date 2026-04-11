@@ -4,6 +4,7 @@ import { createApp, h } from 'vue';
 // Import Pages
 import Dashboard from './Pages/Dashboard.vue';
 import Login from './Pages/Login.vue';
+import Unauthenticated from './Pages/Unauthenticated.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -12,17 +13,18 @@ import StatCard from './Components/Molecules/StatCard.vue';
 import AppButton from './Components/Atoms/AppButton.vue';
 import AppInput from './Components/Atoms/AppInput.vue';
 
+// Page registry — mapping data-page attribute to Vue component
+const pages = {
+    dashboard: Dashboard,
+    login: Login,
+    unauthenticated: Unauthenticated,
+};
+
 const appElement = document.getElementById('app');
 
 if (appElement) {
     const pageName = appElement.dataset.page;
-    let rootComponent;
-
-    if (pageName === 'dashboard') {
-        rootComponent = Dashboard;
-    } else if (pageName === 'login') {
-        rootComponent = Login;
-    }
+    const rootComponent = pages[pageName];
 
     if (rootComponent) {
         const app = createApp({

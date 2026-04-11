@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-screen bg-slate-50 overflow-hidden">
+  <div v-if="isAuthenticated" class="flex h-screen bg-slate-50 overflow-hidden">
     <!-- Sidebar -->
     <AppSidebar :is-open="sidebarOpen" @close="sidebarOpen = false" />
 
@@ -122,13 +122,40 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 import AppSidebar from '../Components/Organisms/AppSidebar.vue';
 import AppNavbar from '../Components/Organisms/AppNavbar.vue';
 import StatCard from '../Components/Molecules/StatCard.vue';
 import AppButton from '../Components/Atoms/AppButton.vue';
+import { getCookie, deleteCookie, TOKEN_COOKIE_NAME } from '../Helpers/cookie.js';
 
 const sidebarOpen = ref(false);
+const isAuthenticated = ref(false);
+
+onMounted(async () => {
+  const token = getCookie(TOKEN_COOKIE_NAME);
+
+  // Jika token tidak ada di cookie, langsung redirect
+  if (!token) {
+    window.location.href = '/unauthenticated';
+    return;
+  }
+
+  // Validasi token via API
+  try {
+    await axios.post('/api/auth/validate-token', {}, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    // Token valid
+    isAuthenticated.value = true;
+  } catch (error) {
+    // Token tidak valid — hapus cookie dan redirect
+    deleteCookie(TOKEN_COOKIE_NAME);
+    window.location.href = '/unauthenticated';
+  }
+});
 
 const recentUsers = [
   { id: 1, name: 'Budi Santoso', email: 'budi@example.com', status: 'Active', role: 'Premium', date: '12 Jan 2024', avatar: 'https://ui-avatars.com/api/?name=Budi+Santoso&background=random' },
