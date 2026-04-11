@@ -26,3 +26,6 @@ Route::get('/login', function () {
 Route::get('/unauthenticated', function () {
     return view('unauthenticated');
 });
+Route::get('/masterData/teacher', function () {
+    return view('teacher');
+});
