@@ -9,12 +9,22 @@
 
       <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
         <!-- Header Section -->
-        <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <h1 class="text-2xl font-bold text-slate-900">Data Dosen</h1>
-            <p class="text-slate-500">Kelola dan lihat informasi tenaga pengajar di sini.</p>
+        <div class="mb-8">
+          <h1 class="text-2xl font-bold text-slate-900">Data Dosen</h1>
+          <p class="text-slate-500">Kelola dan lihat informasi tenaga pengajar di sini.</p>
+        </div>
+
+        <!-- Toolbar Section -->
+        <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="w-full sm:max-w-md">
+            <AppInput v-model="searchQuery" placeholder="Cari nama dosen, pendidikan, alamat email..." id="search-dosen">
+              <template #icon>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+              </template>
+            </AppInput>
           </div>
-          <div class="flex items-center gap-3">
+          
+          <div class="flex flex-wrap items-center gap-3">
             <!-- Delete Selection Button (Visible only if items selected) -->
             <transition 
               enter-active-class="transition duration-200 ease-out" 
@@ -152,11 +162,12 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import axios from 'axios';
 import AppSidebar from '../Components/Organisms/AppSidebar.vue';
 import AppNavbar from '../Components/Organisms/AppNavbar.vue';
 import AppButton from '../Components/Atoms/AppButton.vue';
+import AppInput from '../Components/Atoms/AppInput.vue';
 import { getCookie, deleteCookie, TOKEN_COOKIE_NAME } from '../Helpers/cookie.js';
 
 const sidebarOpen = ref(false);
@@ -197,15 +208,31 @@ const handleBulkDelete = () => {
     }
 };
 
+const searchQuery = ref('');
+
+const filteredTeachers = computed(() => {
+  if (!searchQuery.value) return allTeachers.value;
+  const q = searchQuery.value.toLowerCase();
+  return allTeachers.value.filter(t => 
+    t.name.toLowerCase().includes(q) || 
+    t.email.toLowerCase().includes(q) || 
+    t.education.toLowerCase().includes(q)
+  );
+});
+
+watch(searchQuery, () => {
+  currentPage.value = 1;
+});
+
 // Pagination logic
 const currentPage = ref(1);
 const limit = ref(10);
-const totalItems = computed(() => allTeachers.value.length);
-const totalPages = computed(() => Math.ceil(totalItems.value / limit.value));
+const totalItems = computed(() => filteredTeachers.value.length);
+const totalPages = computed(() => Math.ceil(totalItems.value / limit.value) || 1);
 
 const paginatedTeachers = computed(() => {
   const offset = (currentPage.value - 1) * limit.value;
-  return allTeachers.value.slice(offset, offset + limit.value);
+  return filteredTeachers.value.slice(offset, offset + limit.value);
 });
 
 const prevPage = () => { if (currentPage.value > 1) currentPage.value--; };
