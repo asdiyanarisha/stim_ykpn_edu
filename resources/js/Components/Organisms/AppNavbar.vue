@@ -23,19 +23,58 @@
       
       <div class="h-8 w-px bg-slate-200 mx-1 hidden sm:block"></div>
       
-      <div class="flex items-center gap-3">
-        <div class="text-right hidden sm:block">
-          <p class="text-xs font-semibold text-slate-900 leading-tight">Admin User</p>
-          <p class="text-[10px] text-slate-500">Super Admin</p>
-        </div>
-        <button class="w-9 h-9 border-2 border-slate-200 rounded-lg overflow-hidden transition-transform active:scale-95 shadow-sm">
-          <img src="https://ui-avatars.com/api/?name=Admin+User&background=6366f1&color=fff" class="w-full h-full object-cover">
+      <div class="relative">
+        <button @click="isUserMenuOpen = !isUserMenuOpen" class="flex items-center gap-3 focus:outline-none rounded-lg p-1 hover:bg-slate-50 transition-colors z-50 relative">
+          <div class="text-right hidden sm:block">
+            <p class="text-xs font-semibold text-slate-900 leading-tight">Admin User</p>
+            <p class="text-[10px] text-slate-500">Super Admin</p>
+          </div>
+          <div class="w-9 h-9 border-2 border-slate-200 rounded-lg overflow-hidden transition-transform active:scale-95 shadow-sm">
+            <img src="https://ui-avatars.com/api/?name=Admin+User&background=6366f1&color=fff" class="w-full h-full object-cover pointer-events-none">
+          </div>
         </button>
+
+        <!-- Dropdown Menu -->
+        <transition 
+          enter-active-class="transition ease-out duration-100" 
+          enter-from-class="transform opacity-0 scale-95" 
+          enter-to-class="transform opacity-100 scale-100" 
+          leave-active-class="transition ease-in duration-75" 
+          leave-from-class="transform opacity-100 scale-100" 
+          leave-to-class="transform opacity-0 scale-95"
+        >
+          <div v-show="isUserMenuOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-slate-100 z-50 overflow-hidden">
+            <div class="py-1">
+              <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                Pengaturan
+              </a>
+              <div class="h-px bg-slate-100 my-1"></div>
+              <button @click="handleLogout" class="w-full text-left flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-slate-50 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                Logout
+              </button>
+            </div>
+          </div>
+        </transition>
+
+        <!-- Overlay to Close Dropdown on Click Outside -->
+        <div v-show="isUserMenuOpen" @click="isUserMenuOpen = false" class="fixed inset-0 z-40"></div>
       </div>
     </div>
   </header>
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import { deleteCookie, TOKEN_COOKIE_NAME } from '../../Helpers/cookie.js';
+
 defineEmits(['toggleSidebar']);
+
+const isUserMenuOpen = ref(false);
+
+const handleLogout = () => {
+    deleteCookie(TOKEN_COOKIE_NAME);
+    window.location.href = '/login';
+};
 </script>
