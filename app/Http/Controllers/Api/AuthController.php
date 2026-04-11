@@ -45,7 +45,7 @@ class AuthController extends Controller
         $password = $request->input('password');
 
         // Cek apakah username ada di database
-        $user = User::with('role')->where('name', $username)->first();
+        $user = User::where('name', $username)->first();
 
         if (!$user) {
             return response()->json([
@@ -66,13 +66,11 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $roleName = $user->role ? $user->role->name : 'user';
-
         // Generate JWT token
         $token = JwtHelper::generate([
             'sub'      => $username,
             'username' => $username,
-            'role'     => $roleName,
+            'role_id'  => $user->role_id,
         ], self::TOKEN_EXPIRY);
 
         return response()->json([
@@ -85,7 +83,7 @@ class AuthController extends Controller
                 'expires_in' => self::TOKEN_EXPIRY,
                 'user'       => [
                     'username' => $username,
-                    'role'     => $roleName,
+                    'role_id'  => $user->role_id,
                 ],
             ],
         ], 200);
@@ -130,7 +128,7 @@ class AuthController extends Controller
             'message' => 'Token valid.',
             'data'    => [
                 'username'   => $result['payload']['username'] ?? null,
-                'role'       => $result['payload']['role'] ?? null,
+                'role_id'    => $result['payload']['role_id'] ?? null,
                 'issued_at'  => date('Y-m-d H:i:s', $result['payload']['iat']),
                 'expires_at' => date('Y-m-d H:i:s', $result['payload']['exp']),
             ],

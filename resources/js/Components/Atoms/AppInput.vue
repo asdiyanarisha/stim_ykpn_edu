@@ -14,7 +14,8 @@
         @input="$emit('update:modelValue', $event.target.value)"
         :placeholder="placeholder"
         :class="[
-          'block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm transition-all duration-200 py-2.5',
+          'block w-full rounded-xl shadow-sm sm:text-sm transition-all duration-200 py-2.5',
+          error ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500 bg-rose-50' : 'border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 bg-white',
           $slots.icon ? 'pl-10' : 'pl-4'
         ]"
         v-bind="$attrs"

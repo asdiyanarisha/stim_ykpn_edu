@@ -85,34 +85,35 @@
                       </div>
                     </div>
                     <div class="flex-1 space-y-4 w-full">
-                      <AppInput v-model="form.nama_lengkap" label="Nama Lengkap (tanpa gelar)" placeholder="contoh: Budi Santoso" id="nama_lengkap" />
+                      <AppInput v-model="form.full_name" :error="formErrors.full_name ? formErrors.full_name[0] : ''" label="Nama Lengkap (tanpa gelar)" placeholder="contoh: Budi Santoso" id="full_name" />
                       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <AppInput v-model="form.gelar_depan" label="Gelar Depan" placeholder="contoh: Prof. Dr." id="gelar_depan" />
-                        <AppInput v-model="form.gelar_belakang" label="Gelar Belakang" placeholder="contoh: S.E., M.M." id="gelar_belakang" />
+                        <AppInput v-model="form.front_title" label="Gelar Depan" placeholder="contoh: Prof. Dr." id="front_title" />
+                        <AppInput v-model="form.back_title" label="Gelar Belakang" placeholder="contoh: S.E., M.M." id="back_title" />
                       </div>
                     </div>
                   </div>
                   <!-- Additional Fields -->
                   <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div class="space-y-1">
-                      <label for="tanggal_lahir" class="block text-sm font-medium text-slate-700">Tanggal Lahir</label>
+                      <label for="birth_date" class="block text-sm font-medium text-slate-700">Tanggal Lahir</label>
                       <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                         </div>
-                        <input type="date" id="tanggal_lahir" v-model="form.tanggal_lahir" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-10 pr-4 transition-all duration-200" />
+                        <input type="date" id="birth_date" v-model="form.birth_date" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-10 pr-4 transition-all duration-200" />
                       </div>
                     </div>
-                    <AppInput v-model="form.email" label="Alamat Email" placeholder="dosen@stimykpn.ac.id" id="email" />
-                    <AppInput v-model="form.no_telpon" label="No. Telepon" placeholder="0812xxxxxxxx" id="no_telpon" />
+                    <AppInput v-model="form.email" :error="formErrors.email ? formErrors.email[0] : ''" label="Alamat Email" placeholder="dosen@stimykpn.ac.id" id="email" />
+                    <AppInput v-model="form.phone_number" :error="formErrors.phone_number ? formErrors.phone_number[0] : ''" label="No. Telepon" placeholder="0812xxxxxxxx" id="phone_number" />
                   </div>
                   <div class="space-y-1">
-                    <label for="alamat" class="block text-sm font-medium text-slate-700">Alamat Rumah</label>
-                    <textarea id="alamat" v-model="form.alamat" rows="4" placeholder="Jl. Contoh No. 123, Kelurahan, Kecamatan, Kota, Provinsi" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200 resize-none"></textarea>
+                    <label for="address" class="block text-sm font-medium text-slate-700">Alamat Rumah</label>
+                    <textarea id="address" v-model="form.address" rows="4" placeholder="Jl. Contoh No. 123, Kelurahan, Kecamatan, Kota, Provinsi" :class="['block w-full rounded-xl shadow-sm sm:text-sm py-2.5 pl-4 transition-all duration-200 resize-none', formErrors.address ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500 bg-rose-50' : 'border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 bg-white']"></textarea>
+                    <p v-if="formErrors.address" class="text-xs text-rose-600 mt-1">{{ formErrors.address[0] }}</p>
                   </div>
                   <div class="space-y-1">
-                    <label for="deskripsi_pribadi" class="block text-sm font-medium text-slate-700">Deskripsi Pribadi</label>
-                    <textarea id="deskripsi_pribadi" v-model="form.deskripsi_pribadi" rows="3" placeholder="Tuliskan ringkasan singkat tentang diri Anda, keahlian, dan minat profesional..." class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200 resize-none"></textarea>
+                    <label for="personal_description" class="block text-sm font-medium text-slate-700">Deskripsi Pribadi</label>
+                    <textarea id="personal_description" v-model="form.personal_description" rows="3" placeholder="Tuliskan ringkasan singkat tentang diri Anda, keahlian, dan minat profesional..." class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200 resize-none"></textarea>
                   </div>
                 </div>
               </div>
@@ -125,39 +126,43 @@
                       <span class="w-8 h-8 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center text-sm font-bold">2</span>
                       Riwayat Pendidikan
                     </h2>
-                    <p class="text-sm text-slate-500 mt-1 ml-10">Riwayat pendidikan formal (S1, S2, S3, dll).</p>
+                    <p class="text-sm text-slate-500 mt-1 ml-10">Riwayat education formal (S1, S2, S3, dll).</p>
                   </div>
-                  <AppButton variant="primary" size="sm" @click="addItem('pendidikan')">
+                  <AppButton variant="primary" size="sm" @click="addItem('education')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" /></svg>
                     Tambah
                   </AppButton>
                 </div>
                 <div class="p-6 space-y-4">
-                  <div v-for="(item, i) in form.pendidikan" :key="i" class="relative border border-slate-200 rounded-xl p-5 bg-slate-50/50 hover:border-indigo-200 transition-colors group">
-                    <button @click="removeItem('pendidikan', i)" class="absolute top-3 right-3 w-7 h-7 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-colors opacity-0 group-hover:opacity-100">
+                  <div v-if="formErrors.education" class="text-xs font-semibold text-rose-600 mb-2">
+                    {{ formErrors.education[0] }}
+                  </div>
+                  <div v-for="(item, i) in form.education" :key="i" class="relative border border-slate-200 rounded-xl p-5 bg-slate-50/50 hover:border-indigo-200 transition-colors group">
+                    <button @click="removeItem('education', i)" class="absolute top-3 right-3 w-7 h-7 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-colors opacity-0 group-hover:opacity-100">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                     <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Pendidikan {{ i + 1 }}</div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                       <div class="space-y-1">
                         <label class="block text-sm font-medium text-slate-700">Jenjang</label>
-                        <select v-model="item.jenjang" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4">
-                          <option value="">Pilih jenjang</option>
+                        <select v-model="item.degree" :class="['block w-full rounded-xl shadow-sm sm:text-sm py-2.5 pl-4 transition-all duration-200', formErrors[`education.${i}.degree`] ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500 bg-rose-50' : 'border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 bg-white']">
+                          <option value="">Pilih degree</option>
                           <option value="D3">D3</option>
                           <option value="S1">S1</option>
                           <option value="S2">S2</option>
                           <option value="S3">S3</option>
                         </select>
+                        <p v-if="formErrors[`education.${i}.degree`]" class="text-xs text-rose-600 mt-1">{{ formErrors[`education.${i}.degree`][0] }}</p>
                       </div>
-                      <AppInput v-model="item.institusi" label="Institusi" placeholder="Universitas..." />
-                      <AppInput v-model="item.jurusan" label="Jurusan / Program Studi" placeholder="Ilmu Komputer..." />
-                      <AppInput v-model="item.negara" label="Negara" placeholder="Indonesia" />
-                      <AppInput v-model="item.tahun_lulus" label="Tahun Lulus" type="number" placeholder="2020" />
+                      <AppInput v-model="item.institution" :error="formErrors[`education.${i}.institution`] ? formErrors[`education.${i}.institution`][0] : ''" label="Institusi" placeholder="Universitas..." />
+                      <AppInput v-model="item.major" label="Jurusan / Program Studi" placeholder="Ilmu Komputer..." />
+                      <AppInput v-model="item.country" label="Negara" placeholder="Indonesia" />
+                      <AppInput v-model="item.graduation_year" label="Tahun Lulus" type="number" placeholder="2020" />
                     </div>
                   </div>
-                  <div v-if="form.pendidikan.length === 0" class="text-center py-10 text-slate-400 text-sm">
+                  <div v-if="form.education.length === 0" class="text-center py-10 text-slate-400 text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto mb-2 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
-                    Belum ada data pendidikan. Klik "Tambah" untuk menambahkan.
+                    Belum ada data education. Klik "Tambah" untuk menambahkan.
                   </div>
                 </div>
               </div>
@@ -172,39 +177,42 @@
                     </h2>
                     <p class="text-sm text-slate-500 mt-1 ml-10">Posisi di perusahaan atau lembaga.</p>
                   </div>
-                  <AppButton variant="primary" size="sm" @click="addItem('jabatan_profesional')">
+                  <AppButton variant="primary" size="sm" @click="addItem('professional_positions')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" /></svg>
                     Tambah
                   </AppButton>
                 </div>
                 <div class="p-6 space-y-4">
-                  <div v-for="(item, i) in form.jabatan_profesional" :key="i" class="relative border border-slate-200 rounded-xl p-5 bg-slate-50/50 hover:border-indigo-200 transition-colors group">
-                    <button @click="removeItem('jabatan_profesional', i)" class="absolute top-3 right-3 w-7 h-7 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-colors opacity-0 group-hover:opacity-100">
+                  <div v-if="formErrors.professional_positions" class="text-xs font-semibold text-rose-600 mb-2">
+                    {{ formErrors.professional_positions[0] }}
+                  </div>
+                  <div v-for="(item, i) in form.professional_positions" :key="i" class="relative border border-slate-200 rounded-xl p-5 bg-slate-50/50 hover:border-indigo-200 transition-colors group">
+                    <button @click="removeItem('professional_positions', i)" class="absolute top-3 right-3 w-7 h-7 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-colors opacity-0 group-hover:opacity-100">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <AppInput v-model="item.nama_jabatan" label="Nama Jabatan" placeholder="Komisaris, Ketua..." />
-                      <AppInput v-model="item.nama_organisasi" label="Nama Organisasi / Lembaga" placeholder="PT Contoh..." />
+                      <AppInput v-model="item.position_name" :error="formErrors[`professional_positions.${i}.position_name`] ? formErrors[`professional_positions.${i}.position_name`][0] : ''" label="Nama Jabatan" placeholder="Komisaris, Ketua..." />
+                      <AppInput v-model="item.organization_name" :error="formErrors[`professional_positions.${i}.organization_name`] ? formErrors[`professional_positions.${i}.organization_name`][0] : ''" label="Nama Organisasi / Lembaga" placeholder="PT Contoh..." />
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
-                      <AppInput v-model="item.tahun_mulai" label="Tahun Mulai" type="number" placeholder="2018" />
+                      <AppInput v-model="item.start_year" label="Tahun Mulai" type="number" placeholder="2018" />
                       <div class="space-y-1">
                         <label class="block text-sm font-medium text-slate-700">Tahun Terakhir</label>
-                        <input type="number" v-model="item.tahun_terakhir" :disabled="item.sekarang" :class="['block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200', item.sekarang ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : '']" placeholder="2024" />
+                        <input type="number" v-model="item.end_year" :disabled="item.is_current" :class="['block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200', item.is_current ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : '']" placeholder="2024" />
                       </div>
                       <div class="flex items-end pb-1">
                         <label class="flex items-center gap-2.5 cursor-pointer select-none group">
-                          <input type="checkbox" v-model="item.sekarang" @change="item.sekarang ? (item.tahun_terakhir = '') : null" class="w-4.5 h-4.5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer" />
+                          <input type="checkbox" v-model="item.is_current" @change="item.is_current ? (item.end_year = '') : null" class="w-4.5 h-4.5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer" />
                           <span class="text-sm font-medium text-slate-600 group-hover:text-slate-900 transition-colors">Masih menjabat saat ini</span>
                         </label>
                       </div>
                     </div>
                     <div class="mt-4 space-y-1">
                       <label class="block text-sm font-medium text-slate-700">Deskripsi Pekerjaan</label>
-                      <textarea v-model="item.deskripsi" rows="2" placeholder="Jelaskan tanggung jawab dan pencapaian di posisi ini..." class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200 resize-none"></textarea>
+                      <textarea v-model="item.description" rows="2" placeholder="Jelaskan tanggung jawab dan pencapaian di posisi ini..." class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200 resize-none"></textarea>
                     </div>
                   </div>
-                  <div v-if="form.jabatan_profesional.length === 0" class="text-center py-10 text-slate-400 text-sm">
+                  <div v-if="form.professional_positions.length === 0" class="text-center py-10 text-slate-400 text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto mb-2 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                     Belum ada jabatan profesional. Klik "Tambah" untuk menambahkan.
                   </div>
@@ -226,21 +234,21 @@
                     </h2>
                     <p class="text-sm text-slate-500 mt-1 ml-10">Topik-topik penelitian yang ditekuni.</p>
                   </div>
-                  <AppButton variant="primary" size="sm" @click="addItem('bidang_riset')">
+                  <AppButton variant="primary" size="sm" @click="addItem('research_areas')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" /></svg>
                     Tambah
                   </AppButton>
                 </div>
                 <div class="p-6 space-y-4">
-                  <div v-for="(item, i) in form.bidang_riset" :key="i" class="relative border border-slate-200 rounded-xl p-5 bg-slate-50/50 hover:border-indigo-200 transition-colors group flex items-center gap-4">
+                  <div v-for="(item, i) in form.research_areas" :key="i" class="relative border border-slate-200 rounded-xl p-5 bg-slate-50/50 hover:border-indigo-200 transition-colors group flex items-center gap-4">
                     <div class="flex-1">
-                      <AppInput v-model="item.nama_bidang" label="Nama Bidang Riset" placeholder="Machine Learning, Data Science..." />
+                      <AppInput v-model="item.area_name" label="Nama Bidang Riset" placeholder="Machine Learning, Data Science..." />
                     </div>
-                    <button @click="removeItem('bidang_riset', i)" class="mt-5 w-7 h-7 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-colors flex-shrink-0">
+                    <button @click="removeItem('research_areas', i)" class="mt-5 w-7 h-7 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-colors flex-shrink-0">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                   </div>
-                  <div v-if="form.bidang_riset.length === 0" class="text-center py-10 text-slate-400 text-sm">
+                  <div v-if="form.research_areas.length === 0" class="text-center py-10 text-slate-400 text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto mb-2 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
                     Belum ada bidang riset. Klik "Tambah" untuk menambahkan.
                   </div>
@@ -257,25 +265,25 @@
                     </h2>
                     <p class="text-sm text-slate-500 mt-1 ml-10">Makalah di jurnal ilmiah dan book chapter.</p>
                   </div>
-                  <AppButton variant="primary" size="sm" @click="addItem('publikasi')">
+                  <AppButton variant="primary" size="sm" @click="addItem('publications')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" /></svg>
                     Tambah
                   </AppButton>
                 </div>
                 <div class="p-6 space-y-4">
-                  <div v-for="(item, i) in form.publikasi" :key="i" class="relative border border-slate-200 rounded-xl p-5 bg-slate-50/50 hover:border-indigo-200 transition-colors group">
-                    <button @click="removeItem('publikasi', i)" class="absolute top-3 right-3 w-7 h-7 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-colors opacity-0 group-hover:opacity-100">
+                  <div v-for="(item, i) in form.publications" :key="i" class="relative border border-slate-200 rounded-xl p-5 bg-slate-50/50 hover:border-indigo-200 transition-colors group">
+                    <button @click="removeItem('publications', i)" class="absolute top-3 right-3 w-7 h-7 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-colors opacity-0 group-hover:opacity-100">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                     <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Publikasi {{ i + 1 }}</div>
                     <div class="space-y-4">
-                      <AppInput v-model="item.judul" label="Judul Publikasi" placeholder="Judul makalah / paper..." />
+                      <AppInput v-model="item.title" label="Judul Publikasi" placeholder="Judul makalah / paper..." />
                       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <AppInput v-model="item.nama_jurnal_buku" label="Nama Jurnal / Buku" placeholder="Journal of..." />
+                        <AppInput v-model="item.journal_book_name" label="Nama Jurnal / Buku" placeholder="Journal of..." />
                         <div class="space-y-1">
                           <label class="block text-sm font-medium text-slate-700">Jenis</label>
-                          <select v-model="item.jenis" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4">
-                            <option value="">Pilih jenis</option>
+                          <select v-model="item.type" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4">
+                            <option value="">Pilih type</option>
                             <option value="jurnal">Jurnal</option>
                             <option value="book_chapter">Book Chapter</option>
                             <option value="conference">Conference Paper</option>
@@ -284,15 +292,15 @@
                       </div>
                       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                         <AppInput v-model="item.volume" label="Volume" placeholder="Vol. 12" />
-                        <AppInput v-model="item.halaman" label="Halaman" placeholder="pp. 1-15" />
-                        <AppInput v-model="item.tahun" label="Tahun" type="number" placeholder="2024" />
+                        <AppInput v-model="item.pages" label="Halaman" placeholder="pp. 1-15" />
+                        <AppInput v-model="item.year" label="Tahun" type="number" placeholder="2024" />
                         <AppInput v-model="item.doi" label="DOI" placeholder="10.1000/xyz" />
                       </div>
                     </div>
                   </div>
-                  <div v-if="form.publikasi.length === 0" class="text-center py-10 text-slate-400 text-sm">
+                  <div v-if="form.publications.length === 0" class="text-center py-10 text-slate-400 text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto mb-2 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                    Belum ada publikasi. Klik "Tambah" untuk menambahkan.
+                    Belum ada publications. Klik "Tambah" untuk menambahkan.
                   </div>
                 </div>
               </div>
@@ -307,29 +315,29 @@
                     </h2>
                     <p class="text-sm text-slate-500 mt-1 ml-10">Buku yang diterbitkan oleh dosen.</p>
                   </div>
-                  <AppButton variant="primary" size="sm" @click="addItem('buku')">
+                  <AppButton variant="primary" size="sm" @click="addItem('books')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" /></svg>
                     Tambah
                   </AppButton>
                 </div>
                 <div class="p-6 space-y-4">
-                  <div v-for="(item, i) in form.buku" :key="i" class="relative border border-slate-200 rounded-xl p-5 bg-slate-50/50 hover:border-indigo-200 transition-colors group">
-                    <button @click="removeItem('buku', i)" class="absolute top-3 right-3 w-7 h-7 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-colors opacity-0 group-hover:opacity-100">
+                  <div v-for="(item, i) in form.books" :key="i" class="relative border border-slate-200 rounded-xl p-5 bg-slate-50/50 hover:border-indigo-200 transition-colors group">
+                    <button @click="removeItem('books', i)" class="absolute top-3 right-3 w-7 h-7 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-colors opacity-0 group-hover:opacity-100">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                     <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Buku {{ i + 1 }}</div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <AppInput v-model="item.judul" label="Judul Buku" placeholder="Judul buku..." class="sm:col-span-2" />
-                      <AppInput v-model="item.penerbit" label="Penerbit" placeholder="Penerbit buku..." />
+                      <AppInput v-model="item.title" label="Judul Buku" placeholder="Judul books..." class="sm:col-span-2" />
+                      <AppInput v-model="item.publisher" label="Penerbit" placeholder="Penerbit books..." />
                       <div class="grid grid-cols-2 gap-4">
-                        <AppInput v-model="item.tahun" label="Tahun" type="number" placeholder="2024" />
+                        <AppInput v-model="item.year" label="Tahun" type="number" placeholder="2024" />
                         <AppInput v-model="item.isbn" label="ISBN" placeholder="978-..." />
                       </div>
                     </div>
                   </div>
-                  <div v-if="form.buku.length === 0" class="text-center py-10 text-slate-400 text-sm">
+                  <div v-if="form.books.length === 0" class="text-center py-10 text-slate-400 text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto mb-2 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
-                    Belum ada buku. Klik "Tambah" untuk menambahkan.
+                    Belum ada books. Klik "Tambah" untuk menambahkan.
                   </div>
                 </div>
               </div>
@@ -349,25 +357,25 @@
                     </h2>
                     <p class="text-sm text-slate-500 mt-1 ml-10">Opini, esai, atau artikel di media massa.</p>
                   </div>
-                  <AppButton variant="primary" size="sm" @click="addItem('tulisan_populer')">
+                  <AppButton variant="primary" size="sm" @click="addItem('popular_writings')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" /></svg>
                     Tambah
                   </AppButton>
                 </div>
                 <div class="p-6 space-y-4">
-                  <div v-for="(item, i) in form.tulisan_populer" :key="i" class="relative border border-slate-200 rounded-xl p-5 bg-slate-50/50 hover:border-indigo-200 transition-colors group">
-                    <button @click="removeItem('tulisan_populer', i)" class="absolute top-3 right-3 w-7 h-7 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-colors opacity-0 group-hover:opacity-100">
+                  <div v-for="(item, i) in form.popular_writings" :key="i" class="relative border border-slate-200 rounded-xl p-5 bg-slate-50/50 hover:border-indigo-200 transition-colors group">
+                    <button @click="removeItem('popular_writings', i)" class="absolute top-3 right-3 w-7 h-7 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-colors opacity-0 group-hover:opacity-100">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                     <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Tulisan {{ i + 1 }}</div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <AppInput v-model="item.judul" label="Judul Tulisan" placeholder="Judul opini / esai..." class="sm:col-span-2" />
+                      <AppInput v-model="item.title" label="Judul Tulisan" placeholder="Judul opini / esai..." class="sm:col-span-2" />
                       <AppInput v-model="item.media" label="Media" placeholder="Kompas, Jakarta Post..." />
-                      <AppInput v-model="item.tanggal" label="Tanggal Terbit" type="date" />
+                      <AppInput v-model="item.date" label="Tanggal Terbit" type="date" />
                       <AppInput v-model="item.url" label="URL Artikel" placeholder="https://..." class="sm:col-span-2" />
                     </div>
                   </div>
-                  <div v-if="form.tulisan_populer.length === 0" class="text-center py-10 text-slate-400 text-sm">
+                  <div v-if="form.popular_writings.length === 0" class="text-center py-10 text-slate-400 text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto mb-2 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>
                     Belum ada tulisan populer. Klik "Tambah" untuk menambahkan.
                   </div>
@@ -382,27 +390,27 @@
                       <span class="w-8 h-8 bg-yellow-100 text-yellow-600 rounded-lg flex items-center justify-center text-sm font-bold">8</span>
                       Penghargaan
                     </h2>
-                    <p class="text-sm text-slate-500 mt-1 ml-10">Penghargaan yang diterima beserta pemberi dan tahunnya.</p>
+                    <p class="text-sm text-slate-500 mt-1 ml-10">Penghargaan yang diterima beserta grantor dan tahunnya.</p>
                   </div>
-                  <AppButton variant="primary" size="sm" @click="addItem('penghargaan')">
+                  <AppButton variant="primary" size="sm" @click="addItem('awards')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" /></svg>
                     Tambah
                   </AppButton>
                 </div>
                 <div class="p-6 space-y-4">
-                  <div v-for="(item, i) in form.penghargaan" :key="i" class="relative border border-slate-200 rounded-xl p-5 bg-slate-50/50 hover:border-indigo-200 transition-colors group">
-                    <button @click="removeItem('penghargaan', i)" class="absolute top-3 right-3 w-7 h-7 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-colors opacity-0 group-hover:opacity-100">
+                  <div v-for="(item, i) in form.awards" :key="i" class="relative border border-slate-200 rounded-xl p-5 bg-slate-50/50 hover:border-indigo-200 transition-colors group">
+                    <button @click="removeItem('awards', i)" class="absolute top-3 right-3 w-7 h-7 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-colors opacity-0 group-hover:opacity-100">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      <AppInput v-model="item.nama_penghargaan" label="Nama Penghargaan" placeholder="Best Paper Award..." />
-                      <AppInput v-model="item.pemberi" label="Pemberi" placeholder="IEEE, ACM..." />
-                      <AppInput v-model="item.tahun" label="Tahun" type="number" placeholder="2024" />
+                      <AppInput v-model="item.award_name" label="Nama Penghargaan" placeholder="Best Paper Award..." />
+                      <AppInput v-model="item.grantor" label="Pemberi" placeholder="IEEE, ACM..." />
+                      <AppInput v-model="item.year" label="Tahun" type="number" placeholder="2024" />
                     </div>
                   </div>
-                  <div v-if="form.penghargaan.length === 0" class="text-center py-10 text-slate-400 text-sm">
+                  <div v-if="form.awards.length === 0" class="text-center py-10 text-slate-400 text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto mb-2 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
-                    Belum ada penghargaan. Klik "Tambah" untuk menambahkan.
+                    Belum ada awards. Klik "Tambah" untuk menambahkan.
                   </div>
                 </div>
               </div>
@@ -417,17 +425,17 @@
                     </h2>
                     <p class="text-sm text-slate-500 mt-1 ml-10">Tautan ke Google Scholar, SINTA, Scopus, dll.</p>
                   </div>
-                  <AppButton variant="primary" size="sm" @click="addItem('profil_akademik_online')">
+                  <AppButton variant="primary" size="sm" @click="addItem('online_academic_profiles')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" /></svg>
                     Tambah
                   </AppButton>
                 </div>
                 <div class="p-6 space-y-4">
-                  <div v-for="(item, i) in form.profil_akademik_online" :key="i" class="relative border border-slate-200 rounded-xl p-5 bg-slate-50/50 hover:border-indigo-200 transition-colors group flex items-end gap-4">
+                  <div v-for="(item, i) in form.online_academic_profiles" :key="i" class="relative border border-slate-200 rounded-xl p-5 bg-slate-50/50 hover:border-indigo-200 transition-colors group flex items-end gap-4">
                     <div class="w-48">
                       <div class="space-y-1">
                         <label class="block text-sm font-medium text-slate-700">Platform</label>
-                        <select v-model="item.nama_platform" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4">
+                        <select v-model="item.platform_name" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4">
                           <option value="">Pilih platform</option>
                           <option value="Google Scholar">Google Scholar</option>
                           <option value="SINTA">SINTA</option>
@@ -441,11 +449,11 @@
                     <div class="flex-1">
                       <AppInput v-model="item.url" label="URL Profil" placeholder="https://scholar.google.com/..." />
                     </div>
-                    <button @click="removeItem('profil_akademik_online', i)" class="mb-1 w-9 h-9 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-colors flex-shrink-0">
+                    <button @click="removeItem('online_academic_profiles', i)" class="mb-1 w-9 h-9 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-rose-600 hover:border-rose-300 transition-colors flex-shrink-0">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                   </div>
-                  <div v-if="form.profil_akademik_online.length === 0" class="text-center py-10 text-slate-400 text-sm">
+                  <div v-if="form.online_academic_profiles.length === 0" class="text-center py-10 text-slate-400 text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto mb-2 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
                     Belum ada profil online. Klik "Tambah" untuk menambahkan.
                   </div>
@@ -473,7 +481,7 @@
           </div>
           <div class="flex items-center gap-3">
             <AppButton variant="secondary" size="md" @click="goBack">Batal</AppButton>
-            <AppButton v-if="currentStep === steps.length - 1" variant="primary" size="md" @click="handleSubmit">
+            <AppButton variant="primary" size="md" @click="handleSubmit">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
               Simpan Semua Data
             </AppButton>
@@ -485,7 +493,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue';
+import { ref, reactive, watch, onMounted } from 'vue';
 import axios from 'axios';
 import AppSidebar from '../../Components/Organisms/AppSidebar.vue';
 import AppNavbar from '../../Components/Organisms/AppNavbar.vue';
@@ -497,7 +505,8 @@ const mainScroll = ref(null);
 const sidebarOpen = ref(false);
 const isAuthenticated = ref(false);
 const currentStep = ref(0);
-
+const formErrors = ref({});
+// Pindahkan wacth ke bawah setelah inisialisasi form
 const steps = [
   { label: 'Identitas & Akademik' },
   { label: 'Riset & Karya Ilmiah' },
@@ -522,37 +531,61 @@ const handleFotoUpload = (event) => {
 };
 
 const form = reactive({
-  nama_lengkap: '',
-  gelar_depan: '',
-  gelar_belakang: '',
-  tanggal_lahir: '',
+  full_name: '',
+  front_title: '',
+  back_title: '',
+  birth_date: '',
   email: '',
-  no_telpon: '',
-  alamat: '',
-  deskripsi_pribadi: '',
-  pendidikan: [{ jenjang: '', institusi: '', jurusan: '', negara: '', tahun_lulus: '' }],
-  bidang_riset: [],
-  publikasi: [],
-  buku: [],
-  tulisan_populer: [],
-  jabatan_profesional: [{ nama_jabatan: '', nama_organisasi: '', tahun_mulai: '', tahun_terakhir: '', sekarang: false, deskripsi: '' }],
-  penghargaan: [],
-  profil_akademik_online: [],
+  phone_number: '',
+  address: '',
+  personal_description: '',
+  education: [{ degree: '', institution: '', major: '', country: '', graduation_year: '' }],
+  research_areas: [],
+  publications: [],
+  books: [],
+  popular_writings: [],
+  professional_positions: [{ position_name: '', organization_name: '', start_year: '', end_year: '', is_current: false, description: '' }],
+  awards: [],
+  online_academic_profiles: [],
 });
 
 const templates = {
-  pendidikan: () => ({ jenjang: '', institusi: '', jurusan: '', negara: '', tahun_lulus: '' }),
-  bidang_riset: () => ({ nama_bidang: '' }),
-  publikasi: () => ({ judul: '', nama_jurnal_buku: '', jenis: '', volume: '', halaman: '', tahun: '', doi: '' }),
-  buku: () => ({ judul: '', penerbit: '', tahun: '', isbn: '' }),
-  tulisan_populer: () => ({ judul: '', media: '', tanggal: '', url: '' }),
-  jabatan_profesional: () => ({ nama_jabatan: '', nama_organisasi: '', tahun_mulai: '', tahun_terakhir: '', sekarang: false, deskripsi: '' }),
-  penghargaan: () => ({ nama_penghargaan: '', pemberi: '', tahun: '' }),
-  profil_akademik_online: () => ({ nama_platform: '', url: '' }),
+  education: () => ({ degree: '', institution: '', major: '', country: '', graduation_year: '' }),
+  research_areas: () => ({ area_name: '' }),
+  publications: () => ({ title: '', journal_book_name: '', type: '', volume: '', pages: '', year: '', doi: '' }),
+  books: () => ({ title: '', publisher: '', year: '', isbn: '' }),
+  popular_writings: () => ({ title: '', media: '', date: '', url: '' }),
+  professional_positions: () => ({ position_name: '', organization_name: '', start_year: '', end_year: '', is_current: false, description: '' }),
+  awards: () => ({ award_name: '', grantor: '', year: '' }),
+  online_academic_profiles: () => ({ platform_name: '', url: '' }),
 };
 
 const addItem = (key) => { form[key].push(templates[key]()); };
 const removeItem = (key, index) => { form[key].splice(index, 1); };
+
+// Otomatis hilangkan pesan error saat pengguna mulai mengetik / mengisi data
+watch(form, (newVal) => {
+  if (newVal.full_name && formErrors.value.full_name) delete formErrors.value.full_name;
+  if (newVal.email && formErrors.value.email) delete formErrors.value.email;
+  if (newVal.phone_number && formErrors.value.phone_number) delete formErrors.value.phone_number;
+  if (newVal.address && formErrors.value.address) delete formErrors.value.address;
+  
+  if (newVal.education && newVal.education.length > 0) {
+    if (formErrors.value.education) delete formErrors.value.education;
+    newVal.education.forEach((edu, idx) => {
+      if (edu.degree && formErrors.value[`education.${idx}.degree`]) delete formErrors.value[`education.${idx}.degree`];
+      if (edu.institution && formErrors.value[`education.${idx}.institution`]) delete formErrors.value[`education.${idx}.institution`];
+    });
+  }
+
+  if (newVal.professional_positions && newVal.professional_positions.length > 0) {
+    if (formErrors.value.professional_positions) delete formErrors.value.professional_positions;
+    newVal.professional_positions.forEach((prof, idx) => {
+      if (prof.position_name && formErrors.value[`professional_positions.${idx}.position_name`]) delete formErrors.value[`professional_positions.${idx}.position_name`];
+      if (prof.organization_name && formErrors.value[`professional_positions.${idx}.organization_name`]) delete formErrors.value[`professional_positions.${idx}.organization_name`];
+    });
+  }
+}, { deep: true });
 
 const prevStep = () => {
   if (currentStep.value > 0) {
@@ -578,9 +611,82 @@ const nextStep = () => {
 
 const goBack = () => { window.location.href = '/masterData/teacher'; };
 
-const handleSubmit = () => {
-  console.log('Form data:', JSON.parse(JSON.stringify(form)));
-  alert('Data dosen berhasil disimpan! (simulasi)');
+const handleSubmit = async () => {
+  formErrors.value = {}; // Reset errors
+
+  let hasError = false;
+
+  // Validasi Frontend (Sama dengan kriteria Backend)
+  if (!form.full_name) { formErrors.value.full_name = ['Nama lengkap wajib diisi.']; hasError = true; }
+  if (!form.email) { formErrors.value.email = ['Alamat email wajib diisi.']; hasError = true; }
+  if (!form.phone_number) { formErrors.value.phone_number = ['No. Telepon wajib diisi.']; hasError = true; }
+  if (!form.address) { formErrors.value.address = ['Alamat rumah wajib diisi.']; hasError = true; }
+
+  if (!form.education || form.education.length === 0) {
+    formErrors.value.education = ['Minimal harus menambahkan 1 riwayat pendidikan.'];
+    hasError = true;
+  } else {
+    for (let i = 0; i < form.education.length; i++) {
+      if (!form.education[i].degree) {
+        formErrors.value[`education.${i}.degree`] = ['Jenjang wajib diisi.'];
+        hasError = true;
+      }
+      if (!form.education[i].institution) {
+        formErrors.value[`education.${i}.institution`] = ['Institusi wajib diisi.'];
+        hasError = true;
+      }
+    }
+  }
+  if (!form.professional_positions || form.professional_positions.length === 0) {
+    formErrors.value.professional_positions = ['Minimal harus menambahkan 1 jabatan profesional.'];
+    hasError = true;
+  } else {
+    for (let i = 0; i < form.professional_positions.length; i++) {
+      if (!form.professional_positions[i].position_name) {
+        formErrors.value[`professional_positions.${i}.position_name`] = ['Nama jabatan wajib diisi.'];
+        hasError = true;
+      }
+      if (!form.professional_positions[i].organization_name) {
+        formErrors.value[`professional_positions.${i}.organization_name`] = ['Organisasi wajib diisi.'];
+        hasError = true;
+      }
+    }
+  }
+
+  if (hasError) {
+    currentStep.value = 0; // Kembali ke Tab 1 (Atau disesuaikan)
+    if (mainScroll.value) { mainScroll.value.scrollTo({ top: 0, behavior: 'smooth' }); }
+    return; // Cegah axios.post kepanggil jika gagal divalidasi frontend
+  }
+
+  try {
+    const token = getCookie(TOKEN_COOKIE_NAME);
+    const payload = JSON.parse(JSON.stringify(form));
+    
+    const response = await axios.post('/api/teachers', payload, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    if (response.status === 200) {
+      alert(response.data.message || 'Data berhasil dikirim ke server!');
+      // goBack(); // Buka komentar ini jika ingin langsung redirect setelah berhasil
+    }
+  } catch (error) {
+    if (error.response && error.response.status === 422) {
+      formErrors.value = error.response.data.errors;
+      alert('Terdapat kesalahan validasi. Silakan periksa kembali isian Anda.');
+      
+      // Kembali ke section awal
+      currentStep.value = 0;
+      
+      if (mainScroll.value) {
+        mainScroll.value.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else {
+      console.error('Error submitting form:', error);
+      alert('Terjadi kesalahan saat mengirim data ke server. Cek console log.');
+    }
+  }
 };
 
 onMounted(async () => {

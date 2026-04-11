@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +32,7 @@ Route::prefix('auth')->group(function () {
 Route::middleware('jwt.auth')->group(function () {
     // Me — mendapatkan info user dari token
     Route::get('/auth/me', [AuthController::class, 'me']);
+
+    // Teacher Management
+    Route::post('/teachers', [TeacherController::class, 'store']);
 });

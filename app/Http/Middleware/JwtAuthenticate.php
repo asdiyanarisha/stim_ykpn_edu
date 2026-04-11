@@ -46,10 +46,22 @@ class JwtAuthenticate
             ], 401);
         }
 
-        // Simpan data user dari payload ke dalam request
+        // Validasi ekstra: Cek ke database apakah user benar-benar masih ada
+        $user = \App\Models\User::where('name', $result['payload']['username'] ?? '')->first();
+
+        if (!$user) {
+            return response()->json([
+                'status'  => 'error',
+                'code'    => 401,
+                'message' => 'Token valid, namun akun pengguna tidak ditemukan di sistem.',
+                'data'    => null,
+            ], 401);
+        }
+
+        // Simpan data user (bisa dari DB langsung atau dari JWT) ke dalam request
         $request->attributes->set('jwt_user', [
-            'username'   => $result['payload']['username'] ?? null,
-            'role'       => $result['payload']['role'] ?? null,
+            'username'   => $user->name,
+            'role_id'    => $user->role_id,
             'issued_at'  => date('Y-m-d H:i:s', $result['payload']['iat']),
             'expires_at' => date('Y-m-d H:i:s', $result['payload']['exp']),
         ]);
