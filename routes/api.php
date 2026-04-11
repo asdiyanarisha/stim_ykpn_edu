@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// ======================================================================
+// Auth Routes (Public — tidak memerlukan token)
+// ======================================================================
+Route::prefix('auth')->group(function () {
+    // Login — menghasilkan JWT token
+    Route::post('/login', [AuthController::class, 'login']);
+
+    // Validate Token — cek apakah token masih valid
+    Route::post('/validate-token', [AuthController::class, 'validateToken']);
+});
+
+// ======================================================================
+// Protected Routes (memerlukan JWT token yang valid)
+// ======================================================================
+Route::middleware('jwt.auth')->group(function () {
+    // Me — mendapatkan info user dari token
+    Route::get('/auth/me', [AuthController::class, 'me']);
 });
