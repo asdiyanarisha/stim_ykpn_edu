@@ -29,3 +29,6 @@ Route::get('/unauthenticated', function () {
 Route::get('/masterData/teacher', function () {
     return view('teacher');
 });
+Route::get('/masterData/teacher/create', function () {
+    return view('teacher-form');
+});

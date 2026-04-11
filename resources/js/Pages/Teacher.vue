@@ -41,10 +41,12 @@
             </transition>
 
             <!-- Add Teacher Button -->
-            <AppButton variant="primary" size="md">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
-              Tambah Dosen
-            </AppButton>
+            <a href="/masterData/teacher/create">
+              <AppButton variant="primary" size="md">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                Tambah Dosen
+              </AppButton>
+            </a>
 
             <!-- Options Dropdown wrapper -->
             <div class="relative z-20">

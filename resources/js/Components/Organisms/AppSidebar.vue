@@ -117,11 +117,11 @@ onMounted(() => {
   });
 
   for (const item of menuItems.value) {
-    if (item.link === path) {
+    if (item.link === path || (item.link && item.link !== '/' && path.startsWith(item.link))) {
       item.active = true;
     } else if (item.submenu) {
       for (const sub of item.submenu) {
-        if (sub.link === path) {
+        if (sub.link === path || (sub.link && path.startsWith(sub.link))) {
           sub.active = true;
           item.isOpen = true;
         }

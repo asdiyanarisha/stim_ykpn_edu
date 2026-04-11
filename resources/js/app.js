@@ -6,6 +6,7 @@ import Dashboard from './Pages/Dashboard.vue';
 import Login from './Pages/Login.vue';
 import Unauthenticated from './Pages/Unauthenticated.vue';
 import Teacher from './Pages/Teacher.vue';
+import TeacherForm from './Pages/TeacherForm.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -20,6 +21,7 @@ const pages = {
     login: Login,
     unauthenticated: Unauthenticated,
     teacher: Teacher,
+    teacherForm: TeacherForm,
 };
 
 const appElement = document.getElementById('app');
