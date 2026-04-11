@@ -4,27 +4,20 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\JwtHelper;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Controller untuk autentikasi JWT.
  *
  * Catatan:
- * - Username dan password di-hardcode (belum terkoneksi database).
+ * - Terkoneksi dengan database (tabel users).
  * - Fokus pada mekanisme generate JWT dan validasi session JWT.
  */
 class AuthController extends Controller
 {
-    /**
-     * Daftar user yang di-hardcode.
-     * Format: username => password
-     */
-    private const USERS = [
-        'admin'    => 'admin123',
-        'operator' => 'operator123',
-    ];
-
     /**
      * Durasi token dalam detik (1 jam).
      */
@@ -51,8 +44,10 @@ class AuthController extends Controller
         $username = $request->input('username');
         $password = $request->input('password');
 
-        // Cek apakah username ada di daftar hardcoded
-        if (!array_key_exists($username, self::USERS)) {
+        // Cek apakah username ada di database
+        $user = User::with('role')->where('name', $username)->first();
+
+        if (!$user) {
             return response()->json([
                 'status'  => 'error',
                 'code'    => 401,
@@ -62,7 +57,7 @@ class AuthController extends Controller
         }
 
         // Cek apakah password cocok
-        if (self::USERS[$username] !== $password) {
+        if (!Hash::check($password, $user->password)) {
             return response()->json([
                 'status'  => 'error',
                 'code'    => 401,
@@ -71,11 +66,13 @@ class AuthController extends Controller
             ], 401);
         }
 
+        $roleName = $user->role ? $user->role->name : 'user';
+
         // Generate JWT token
         $token = JwtHelper::generate([
             'sub'      => $username,
             'username' => $username,
-            'role'     => $username === 'admin' ? 'administrator' : 'operator',
+            'role'     => $roleName,
         ], self::TOKEN_EXPIRY);
 
         return response()->json([
@@ -88,7 +85,7 @@ class AuthController extends Controller
                 'expires_in' => self::TOKEN_EXPIRY,
                 'user'       => [
                     'username' => $username,
-                    'role'     => $username === 'admin' ? 'administrator' : 'operator',
+                    'role'     => $roleName,
                 ],
             ],
         ], 200);
