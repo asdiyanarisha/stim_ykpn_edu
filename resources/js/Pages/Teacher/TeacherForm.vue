@@ -8,6 +8,21 @@
       <AppNavbar @toggle-sidebar="sidebarOpen = !sidebarOpen" />
 
       <main ref="mainScroll" class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+        <!-- Toast -->
+        <div
+          v-if="toast.show"
+          :class="[
+            'fixed top-5 right-5 z-50 min-w-[280px] max-w-md px-4 py-3 rounded-xl shadow-lg text-sm font-medium border',
+            toast.type === 'success'
+              ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+              : 'bg-rose-50 text-rose-700 border-rose-200'
+          ]"
+        >
+          <div class="flex items-start justify-between gap-3">
+            <span>{{ toast.message }}</span>
+            <button @click="toast.show = false" class="text-slate-400 hover:text-slate-600">✕</button>
+          </div>
+        </div>
         <!-- Header Section -->
         <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
@@ -506,6 +521,8 @@ const sidebarOpen = ref(false);
 const isAuthenticated = ref(false);
 const currentStep = ref(0);
 const formErrors = ref({});
+const toast = ref({ show: false, type: 'success', message: '' });
+let toastTimer = null;
 // Pindahkan wacth ke bawah setelah inisialisasi form
 const steps = [
   { label: 'Identitas & Akademik' },
@@ -609,6 +626,14 @@ const nextStep = () => {
   }
 };
 
+const showToast = (type, message) => {
+  toast.value = { show: true, type, message };
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.value.show = false;
+  }, 3500);
+};
+
 const goBack = () => { window.location.href = '/masterData/teacher'; };
 
 const handleSubmit = async () => {
@@ -661,20 +686,56 @@ const handleSubmit = async () => {
 
   try {
     const token = getCookie(TOKEN_COOKIE_NAME);
+
     const payload = JSON.parse(JSON.stringify(form));
-    
-    const response = await axios.post('/api/teachers', payload, {
-      headers: { Authorization: `Bearer ${token}` }
+    const formData = new FormData();
+
+    // scalar fields
+    formData.append('full_name', payload.full_name || '');
+    formData.append('front_title', payload.front_title || '');
+    formData.append('back_title', payload.back_title || '');
+    formData.append('birth_date', payload.birth_date || '');
+    formData.append('email', payload.email || '');
+    formData.append('phone_number', payload.phone_number || '');
+    formData.append('address', payload.address || '');
+    formData.append('personal_description', payload.personal_description || '');
+
+    // arrays as JSON strings (backend can decode)
+    formData.append('education', JSON.stringify(payload.education || []));
+    formData.append('research_areas', JSON.stringify(payload.research_areas || []));
+    formData.append('publications', JSON.stringify(payload.publications || []));
+    formData.append('books', JSON.stringify(payload.books || []));
+    formData.append('popular_writings', JSON.stringify(payload.popular_writings || []));
+    formData.append('professional_positions', JSON.stringify(payload.professional_positions || []));
+    formData.append('awards', JSON.stringify(payload.awards || []));
+    formData.append('online_academic_profiles', JSON.stringify(payload.online_academic_profiles || []));
+
+    // optional uploaded image file
+    if (fotoFile.value) {
+      formData.append('image', fotoFile.value);
+    }
+
+    const response = await axios.post('/api/teachers', formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data'
+      }
     });
 
-    if (response.status === 200) {
-      alert(response.data.message || 'Data berhasil dikirim ke server!');
+    if (response.status === 200 || response.status === 201) {
+      showToast('success', response.data.message || 'Data berhasil dikirim ke server!');
       // goBack(); // Buka komentar ini jika ingin langsung redirect setelah berhasil
     }
   } catch (error) {
     if (error.response && error.response.status === 422) {
-      formErrors.value = error.response.data.errors;
-      alert('Terdapat kesalahan validasi. Silakan periksa kembali isian Anda.');
+      formErrors.value = error.response.data.errors || {};
+
+      const firstErrorKey = Object.keys(formErrors.value)[0];
+      const firstErrorMessage = firstErrorKey
+        ? formErrors.value[firstErrorKey][0]
+        : 'Terdapat kesalahan validasi. Silakan periksa kembali isian Anda.';
+
+      showToast('error', firstErrorMessage);
       
       // Kembali ke section awal
       currentStep.value = 0;
@@ -684,7 +745,8 @@ const handleSubmit = async () => {
       }
     } else {
       console.error('Error submitting form:', error);
-      alert('Terjadi kesalahan saat mengirim data ke server. Cek console log.');
+      const backendMessage = error?.response?.data?.message || 'Terjadi kesalahan saat mengirim data ke server.';
+      showToast('error', backendMessage);
     }
   }
 };
