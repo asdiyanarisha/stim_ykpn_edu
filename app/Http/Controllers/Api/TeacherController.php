@@ -11,6 +11,40 @@ use Illuminate\Support\Facades\Storage;
 class TeacherController extends Controller
 {
     /**
+     * Display a listing of teachers.
+     */
+    public function index()
+    {
+        try {
+            $teachers = DB::table('teachers as t')
+                ->leftJoin('education_teachers as e', 'e.teacher_id', '=', 't.id')
+                ->select(
+                    't.id',
+                    't.front_title',
+                    't.full_name',
+                    't.back_title',
+                    't.email',
+                    't.image_url',
+                    DB::raw('MAX(e.degree) as education')
+                )
+                ->groupBy('t.id', 't.front_title', 't.full_name', 't.back_title', 't.email', 't.image_url')
+                ->orderByDesc('t.created_at')
+                ->get();
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $teachers,
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Gagal mengambil data dosen.',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
      * Store a newly created resource.
      */
     public function store(Request $request)

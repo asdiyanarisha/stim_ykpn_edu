@@ -34,5 +34,6 @@ Route::middleware('jwt.auth')->group(function () {
     Route::get('/auth/me', [AuthController::class, 'me']);
 
     // Teacher Management
+    Route::get('/teachers', [TeacherController::class, 'index']);
     Route::post('/teachers', [TeacherController::class, 'store']);
 });

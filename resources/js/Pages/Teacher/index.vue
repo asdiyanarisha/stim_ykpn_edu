@@ -175,25 +175,7 @@ import { getCookie, deleteCookie, TOKEN_COOKIE_NAME } from '../../Helpers/cookie
 const sidebarOpen = ref(false);
 const isAuthenticated = ref(false);
 
-const baseTeachers = [
-  { name: 'Dr. Budi Santoso, M.Kom', email: 'budi.s@stimykpn.ac.id', education: 'S3 Ilmu Komputer' },
-  { name: 'Sari Wijaya, S.E., M.Si.', email: 'sari.w@stimykpn.ac.id', education: 'S2 Magister Manajemen' },
-  { name: 'Andi Pratama, S.T., M.Eng.', email: 'andi.p@stimykpn.ac.id', education: 'S2 Teknik Informatika' },
-  { name: 'Dr. Lia Ananda, M.Pd.', email: 'lia.a@stimykpn.ac.id', education: 'S3 Pendidikan' },
-  { name: 'Prof. Dr. Hendra K., S.E., M.M.', email: 'hendra.k@stimykpn.ac.id', education: 'Guru Besar Manajemen' },
-  { name: 'Rina Melati, S.Kom., M.Cs.', email: 'rina.m@stimykpn.ac.id', education: 'S2 Ilmu Komputer' },
-];
-
-const allTeachers = ref(Array.from({ length: 45 }, (_, i) => {
-  const base = baseTeachers[i % baseTeachers.length];
-  return {
-    id: i + 1,
-    name: i < baseTeachers.length ? base.name : `Dosen Tester ${i + 1}, M.Pd.`,
-    email: i < baseTeachers.length ? base.email : `dosen${i + 1}@stimykpn.ac.id`,
-    education: base.education,
-    avatar: `https://ui-avatars.com/api/?name=${i < baseTeachers.length ? base.name.replace(/[^a-zA-Z]/g, '+') : 'Dosen+Tester'}&background=random`
-  };
-}));
+const allTeachers = ref([]);
 
 const selectedTeachers = ref([]);
 const isOptionsOpen = ref(false);
@@ -245,6 +227,60 @@ const toggleSelectAll = (e) => {
   else selectedTeachers.value = [];
 };
 
+const buildAvatarUrl = (imageUrl, displayName) => {
+  if (!imageUrl || !String(imageUrl).trim()) {
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random`;
+  }
+
+  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+    return imageUrl;
+  }
+
+  if (imageUrl.startsWith('/storage/')) {
+    return imageUrl;
+  }
+
+  if (imageUrl.startsWith('storage/')) {
+    return `/${imageUrl}`;
+  }
+
+  return `/storage/${imageUrl.replace(/^\/+/, '')}`;
+};
+
+const buildTeacherDisplayName = (frontTitle, fullName, backTitle) => {
+  const prefix = (frontTitle || '').trim();
+  const name = (fullName || '').trim();
+  const suffix = (backTitle || '').trim();
+
+  const main = [prefix, name].filter(Boolean).join(' ').trim();
+  if (!main && suffix) return suffix;
+  if (main && suffix) return `${main}, ${suffix}`;
+  return main || '-';
+};
+
+const fetchTeachers = async (token) => {
+  const response = await axios.get('/api/teachers', {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  const teachers = response?.data?.data ?? [];
+  allTeachers.value = teachers.map((teacher) => {
+    const displayName = buildTeacherDisplayName(
+      teacher.front_title,
+      teacher.full_name,
+      teacher.back_title
+    );
+
+    return {
+      id: teacher.id,
+      name: displayName,
+      email: teacher.email || '-',
+      education: teacher.education || '-',
+      avatar: buildAvatarUrl(teacher.image_url, displayName),
+    };
+  });
+};
+
 onMounted(async () => {
   const token = getCookie(TOKEN_COOKIE_NAME);
 
@@ -257,6 +293,7 @@ onMounted(async () => {
     await axios.post('/api/auth/validate-token', {}, {
       headers: { Authorization: `Bearer ${token}` },
     });
+    await fetchTeachers(token);
     isAuthenticated.value = true;
   } catch (error) {
     deleteCookie(TOKEN_COOKIE_NAME);
