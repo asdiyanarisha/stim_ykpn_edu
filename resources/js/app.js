@@ -8,6 +8,7 @@ import Unauthenticated from './Pages/Unauthenticated.vue';
 import Teacher from './Pages/Teacher/index.vue';
 import TeacherForm from './Pages/Teacher/TeacherForm.vue';
 import TeacherShow from './Pages/Teacher/Show.vue';
+import TeacherEdit from './Pages/Teacher/TeacherEdit.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -24,6 +25,7 @@ const pages = {
     teacher: Teacher,
     teacherForm: TeacherForm,
     teacherShow: TeacherShow,
+    teacherEdit: TeacherEdit,
 };
 
 const appElement = document.getElementById('app');

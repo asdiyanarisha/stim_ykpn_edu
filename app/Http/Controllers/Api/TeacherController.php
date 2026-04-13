@@ -260,6 +260,200 @@ class TeacherController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id)
+    {
+        $validatedData = $this->validateTeacherData($request);
+
+        try {
+            DB::transaction(function () use ($validatedData, $request, $id) {
+                $now = now();
+                
+                $teacher = DB::table('teachers')->where('id', $id)->first();
+                if (!$teacher) {
+                    throw new \Exception('Data dosen tidak ditemukan.');
+                }
+
+                $updateData = [
+                    'user_id' => $validatedData['user_id'] ?? $teacher->user_id,
+                    'full_name' => $validatedData['full_name'],
+                    'front_title' => $validatedData['front_title'] ?? null,
+                    'back_title' => $validatedData['back_title'] ?? null,
+                    'birth_date' => $validatedData['birth_date'] ?? null,
+                    'email' => $validatedData['email'],
+                    'phone_number' => $validatedData['phone_number'],
+                    'address' => $validatedData['address'],
+                    'personal_description' => $validatedData['personal_description'] ?? null,
+                    'updated_at' => $now,
+                ];
+
+                if ($request->hasFile('image')) {
+                    $path = $request->file('image')->store('teachers', 'public');
+                    $updateData['image_url'] = Storage::url($path);
+                }
+
+                DB::table('teachers')->where('id', $id)->update($updateData);
+
+                // 1. Education
+                DB::table('education_teachers')->where('teacher_id', $id)->delete();
+                if (!empty($validatedData['education'])) {
+                    $rows = [];
+                    foreach ($validatedData['education'] as $item) {
+                        $rows[] = [
+                            'teacher_id' => $id,
+                            'degree' => $item['degree'],
+                            'institution' => $item['institution'],
+                            'major' => $item['major'] ?? null,
+                            'country' => $item['country'] ?? null,
+                            'graduation_year' => $item['graduation_year'] ?? null,
+                            'created_at' => $now,
+                            'updated_at' => $now,
+                        ];
+                    }
+                    DB::table('education_teachers')->insert($rows);
+                }
+
+                // 2. Professional Positions
+                DB::table('professional_positions_teachers')->where('teacher_id', $id)->delete();
+                if (!empty($validatedData['professional_positions'])) {
+                    $rows = [];
+                    foreach ($validatedData['professional_positions'] as $item) {
+                        $rows[] = [
+                            'teacher_id' => $id,
+                            'position_name' => $item['position_name'],
+                            'organization_name' => $item['organization_name'],
+                            'start_year' => $item['start_year'] ?? null,
+                            'end_year' => $item['end_year'] ?? null,
+                            'is_current' => $item['is_current'] ?? null,
+                            'description' => $item['description'] ?? null,
+                            'created_at' => $now,
+                            'updated_at' => $now,
+                        ];
+                    }
+                    DB::table('professional_positions_teachers')->insert($rows);
+                }
+
+                // 3. Research Areas
+                DB::table('research_areas_teachers')->where('teacher_id', $id)->delete();
+                if (!empty($validatedData['research_areas'])) {
+                    $rows = [];
+                    foreach ($validatedData['research_areas'] as $item) {
+                        $rows[] = [
+                            'teacher_id' => $id,
+                            'area_name' => $item['area_name'] ?? null,
+                            'created_at' => $now,
+                            'updated_at' => $now,
+                        ];
+                    }
+                    DB::table('research_areas_teachers')->insert($rows);
+                }
+
+                // 4. Publications
+                DB::table('publications_teachers')->where('teacher_id', $id)->delete();
+                if (!empty($validatedData['publications'])) {
+                    $rows = [];
+                    foreach ($validatedData['publications'] as $item) {
+                        $rows[] = [
+                            'teacher_id' => $id,
+                            'title' => $item['title'] ?? null,
+                            'journal_book_name' => $item['journal_book_name'] ?? null,
+                            'type' => $item['type'] ?? null,
+                            'volume' => $item['volume'] ?? null,
+                            'pages' => $item['pages'] ?? null,
+                            'year' => $item['year'] ?? null,
+                            'doi' => $item['doi'] ?? null,
+                            'created_at' => $now,
+                            'updated_at' => $now,
+                        ];
+                    }
+                    DB::table('publications_teachers')->insert($rows);
+                }
+
+                // 5. Books
+                DB::table('books_teachers')->where('teacher_id', $id)->delete();
+                if (!empty($validatedData['books'])) {
+                    $rows = [];
+                    foreach ($validatedData['books'] as $item) {
+                        $rows[] = [
+                            'teacher_id' => $id,
+                            'title' => $item['title'] ?? null,
+                            'publisher' => $item['publisher'] ?? null,
+                            'year' => $item['year'] ?? null,
+                            'isbn' => $item['isbn'] ?? null,
+                            'created_at' => $now,
+                            'updated_at' => $now,
+                        ];
+                    }
+                    DB::table('books_teachers')->insert($rows);
+                }
+
+                // 6. Popular Writings
+                DB::table('popular_writings_teachers')->where('teacher_id', $id)->delete();
+                if (!empty($validatedData['popular_writings'])) {
+                    $rows = [];
+                    foreach ($validatedData['popular_writings'] as $item) {
+                        $rows[] = [
+                            'teacher_id' => $id,
+                            'title' => $item['title'] ?? null,
+                            'media' => $item['media'] ?? null,
+                            'date' => $item['date'] ?? null,
+                            'url' => $item['url'] ?? null,
+                            'created_at' => $now,
+                            'updated_at' => $now,
+                        ];
+                    }
+                    DB::table('popular_writings_teachers')->insert($rows);
+                }
+
+                // 7. Awards
+                DB::table('awards_teachers')->where('teacher_id', $id)->delete();
+                if (!empty($validatedData['awards'])) {
+                    $rows = [];
+                    foreach ($validatedData['awards'] as $item) {
+                        $rows[] = [
+                            'teacher_id' => $id,
+                            'award_name' => $item['award_name'] ?? null,
+                            'grantor' => $item['grantor'] ?? null,
+                            'year' => $item['year'] ?? null,
+                            'created_at' => $now,
+                            'updated_at' => $now,
+                        ];
+                    }
+                    DB::table('awards_teachers')->insert($rows);
+                }
+
+                // 8. Online Academic Profiles
+                DB::table('online_academic_profiles_teachers')->where('teacher_id', $id)->delete();
+                if (!empty($validatedData['online_academic_profiles'])) {
+                    $rows = [];
+                    foreach ($validatedData['online_academic_profiles'] as $item) {
+                        $rows[] = [
+                            'teacher_id' => $id,
+                            'platform_name' => $item['platform_name'] ?? null,
+                            'url' => $item['url'] ?? null,
+                            'created_at' => $now,
+                            'updated_at' => $now,
+                        ];
+                    }
+                    DB::table('online_academic_profiles_teachers')->insert($rows);
+                }
+            });
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Data dosen berhasil diperbarui.',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Gagal memperbarui data dosen.',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
      * Helper validasi untuk data dosen
      */
     private function validateTeacherData(Request $request)

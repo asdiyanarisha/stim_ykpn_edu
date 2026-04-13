@@ -35,3 +35,6 @@ Route::get('/masterData/teacher/create', function () {
 Route::get('/masterData/teacher/show/{id}', function ($id) {
     return view('teacher-show');
 });
+Route::get('/masterData/teacher/edit/{id}', function ($id) {
+    return view('teacher-edit');
+});
