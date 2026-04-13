@@ -38,4 +38,5 @@ Route::middleware('jwt.auth')->group(function () {
     Route::get('/teachers/{id}', [TeacherController::class, 'show']);
     Route::post('/teachers', [TeacherController::class, 'store']);
     Route::post('/teachers/{id}', [TeacherController::class, 'update']);
+    Route::delete('/teachers/{id}', [TeacherController::class, 'destroy']);
 });

@@ -34,7 +34,7 @@
               leave-from-class="transform opacity-100 translate-x-0" 
               leave-to-class="transform opacity-0 translate-x-4"
             >
-              <AppButton v-if="selectedTeachers.length > 0" variant="danger" size="md" @click="handleBulkDelete" class="whitespace-nowrap z-10">
+              <AppButton v-if="selectedTeachers.length > 0" variant="danger" size="md" @click="openBulkDeleteModal" class="whitespace-nowrap z-10">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                 Hapus ({{ selectedTeachers.length }})
               </AppButton>
@@ -116,10 +116,16 @@
                   </td>
                   <td class="px-6 py-4 text-sm text-slate-500">{{ teacher.email }}</td>
                   <td class="px-6 py-4 text-right">
-                    <a :href="`/masterData/teacher/show/${teacher.id}`" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                      Detail
-                    </a>
+                    <div class="flex items-center justify-end gap-2">
+                      <a :href="`/masterData/teacher/show/${teacher.id}`" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                        Detail
+                      </a>
+                      <button @click="openDeleteModal(teacher.id)" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-lg transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                        Hapus
+                      </button>
+                    </div>
                   </td>
                 </tr>
                 <tr v-if="paginatedTeachers.length === 0">
@@ -158,6 +164,34 @@
             </div>
           </div>
         </div>
+
+        <!-- Custom Delete Modal -->
+        <div v-if="showDeleteModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm transition-opacity">
+          <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden transform transition-all translate-y-0 scale-100">
+            <div class="p-6">
+              <div class="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 mb-2">Hapus {{ isBulkDelete ? selectedTeachers.length + ' Data Dosen Terpilih' : 'Data Dosen' }}?</h3>
+              <p class="text-slate-500 text-sm">
+                Tindakan ini tidak dapat dibatalkan. Seluruh data riwayat pendidikan, publikasi, jabatan, dan profil terkait akan ikut terhapus secara permanen.
+              </p>
+            </div>
+            <div class="px-6 py-4 bg-slate-50 flex items-center justify-end gap-3 rounded-b-2xl">
+              <button @click="closeDeleteModal" :disabled="isDeleting" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-slate-800 transition-colors cursor-pointer disabled:opacity-50">
+                Batal
+              </button>
+              <button @click="executeDelete" :disabled="isDeleting" class="px-5 py-2 text-sm font-semibold text-white bg-rose-600 hover:bg-rose-700 active:scale-95 transition-all rounded-xl shadow-sm shadow-rose-200 disabled:opacity-50 disabled:active:scale-100 flex items-center gap-2">
+                <svg v-if="isDeleting" class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                <span v-else>Ya, Hapus</span>
+                <span v-if="isDeleting">Menghapus...</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
       </main>
     </div>
   </div>
@@ -180,16 +214,10 @@ const allTeachers = ref([]);
 const selectedTeachers = ref([]);
 const isOptionsOpen = ref(false);
 
-const handleBulkDelete = () => {
-    if (confirm(`Apakah Anda yakin ingin menghapus ${selectedTeachers.value.length} data dosen terpilih?`)) {
-        allTeachers.value = allTeachers.value.filter(t => !selectedTeachers.value.includes(t.id));
-        selectedTeachers.value = [];
-        
-        // Reset to previous page if current page becomes empty
-        if (paginatedTeachers.value.length === 0 && currentPage.value > 1) {
-            currentPage.value--;
-        }
-    }
+const openBulkDeleteModal = () => {
+    if (selectedTeachers.value.length === 0) return;
+    isBulkDelete.value = true;
+    showDeleteModal.value = true;
 };
 
 const searchQuery = ref('');
@@ -279,6 +307,55 @@ const fetchTeachers = async (token) => {
       avatar: buildAvatarUrl(teacher.image_url, displayName),
     };
   });
+};
+
+const showDeleteModal = ref(false);
+const teacherToDeleteId = ref(null);
+const isDeleting = ref(false);
+const isBulkDelete = ref(false);
+
+const openDeleteModal = (id) => {
+  teacherToDeleteId.value = id;
+  isBulkDelete.value = false;
+  showDeleteModal.value = true;
+};
+
+const closeDeleteModal = () => {
+  showDeleteModal.value = false;
+  teacherToDeleteId.value = null;
+  isBulkDelete.value = false;
+  isDeleting.value = false;
+};
+
+const executeDelete = async () => {
+  isDeleting.value = true;
+  try {
+    const token = getCookie(TOKEN_COOKIE_NAME);
+    
+    if (isBulkDelete.value) {
+       const deletePromises = selectedTeachers.value.map(id => 
+         axios.delete(`/api/teachers/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+       );
+       await Promise.all(deletePromises);
+       
+       selectedTeachers.value = [];
+       if (paginatedTeachers.value && paginatedTeachers.value.length === 0 && currentPage.value > 1) {
+           currentPage.value--;
+       }
+    } else {
+       if (!teacherToDeleteId.value) return;
+       await axios.delete(`/api/teachers/${teacherToDeleteId.value}`, {
+         headers: { Authorization: `Bearer ${token}` }
+       });
+    }
+    
+    closeDeleteModal();
+    await fetchTeachers(token);
+  } catch (error) {
+    console.error('Error deleting teacher:', error);
+    alert(error.response?.data?.message || 'Terjadi kesalahan saat menghapus data dosen.');
+    isDeleting.value = false;
+  }
 };
 
 onMounted(async () => {

@@ -454,6 +454,40 @@ class TeacherController extends Controller
     }
 
     /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
+    {
+        try {
+            DB::transaction(function () use ($id) {
+                // Delete relation tables manually in case cascade on delete is not set
+                DB::table('education_teachers')->where('teacher_id', $id)->delete();
+                DB::table('professional_positions_teachers')->where('teacher_id', $id)->delete();
+                DB::table('research_areas_teachers')->where('teacher_id', $id)->delete();
+                DB::table('publications_teachers')->where('teacher_id', $id)->delete();
+                DB::table('books_teachers')->where('teacher_id', $id)->delete();
+                DB::table('popular_writings_teachers')->where('teacher_id', $id)->delete();
+                DB::table('awards_teachers')->where('teacher_id', $id)->delete();
+                DB::table('online_academic_profiles_teachers')->where('teacher_id', $id)->delete();
+
+                // Delete primary record
+                DB::table('teachers')->where('id', $id)->delete();
+            });
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Data dosen berhasil dihapus.',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Gagal menghapus data dosen.',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
      * Helper validasi untuk data dosen
      */
     private function validateTeacherData(Request $request)
