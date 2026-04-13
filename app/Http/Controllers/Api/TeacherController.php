@@ -45,6 +45,44 @@ class TeacherController extends Controller
     }
 
     /**
+     * Display the specified teacher.
+     */
+    public function show($id)
+    {
+        try {
+            $teacher = DB::table('teachers')->where('id', $id)->first();
+
+            if (!$teacher) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Data dosen tidak ditemukan.',
+                ], 404);
+            }
+
+            // Fetch relations
+            $teacher->education = DB::table('education_teachers')->where('teacher_id', $id)->orderBy('graduation_year', 'desc')->get();
+            $teacher->professional_positions = DB::table('professional_positions_teachers')->where('teacher_id', $id)->orderBy('start_year', 'desc')->get();
+            $teacher->research_areas = DB::table('research_areas_teachers')->where('teacher_id', $id)->get();
+            $teacher->publications = DB::table('publications_teachers')->where('teacher_id', $id)->orderBy('year', 'desc')->get();
+            $teacher->books = DB::table('books_teachers')->where('teacher_id', $id)->orderBy('year', 'desc')->get();
+            $teacher->popular_writings = DB::table('popular_writings_teachers')->where('teacher_id', $id)->orderBy('date', 'desc')->get();
+            $teacher->awards = DB::table('awards_teachers')->where('teacher_id', $id)->orderBy('year', 'desc')->get();
+            $teacher->online_academic_profiles = DB::table('online_academic_profiles_teachers')->where('teacher_id', $id)->get();
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $teacher,
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Gagal mengambil detail dosen.',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
      * Store a newly created resource.
      */
     public function store(Request $request)

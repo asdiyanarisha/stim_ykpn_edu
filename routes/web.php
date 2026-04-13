@@ -32,3 +32,6 @@ Route::get('/masterData/teacher', function () {
 Route::get('/masterData/teacher/create', function () {
     return view('teacher-form');
 });
+Route::get('/masterData/teacher/show/{id}', function ($id) {
+    return view('teacher-show');
+});
