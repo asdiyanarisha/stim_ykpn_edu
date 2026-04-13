@@ -510,6 +510,7 @@
 <script setup>
 import { ref, reactive, watch, onMounted } from 'vue';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import AppSidebar from '../../Components/Organisms/AppSidebar.vue';
 import AppNavbar from '../../Components/Organisms/AppNavbar.vue';
 import AppButton from '../../Components/Atoms/AppButton.vue';
@@ -688,6 +689,13 @@ const handleSubmit = async () => {
     const token = getCookie(TOKEN_COOKIE_NAME);
 
     const payload = JSON.parse(JSON.stringify(form));
+
+    payload.professional_positions = (payload.professional_positions || []).map((item) => ({
+      ...item,
+      start_year: item?.start_year === null || item?.start_year === undefined || item?.start_year === '' ? '' : String(item.start_year),
+      end_year: item?.end_year === null || item?.end_year === undefined || item?.end_year === '' ? '' : String(item.end_year),
+    }));
+
     const formData = new FormData();
 
     // scalar fields
@@ -723,8 +731,13 @@ const handleSubmit = async () => {
     });
 
     if (response.status === 200 || response.status === 201) {
-      showToast('success', response.data.message || 'Data berhasil dikirim ke server!');
-      // goBack(); // Buka komentar ini jika ingin langsung redirect setelah berhasil
+      await Swal.fire({
+        icon: 'success',
+        title: 'Berhasil',
+        text: response.data.message || 'Data berhasil dikirim ke server!',
+        confirmButtonText: 'OK',
+      });
+      window.location.href = 'http://localhost:8000/masterData/teacher';
     }
   } catch (error) {
     if (error.response && error.response.status === 422) {
