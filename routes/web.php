@@ -38,3 +38,15 @@ Route::get('/masterData/teacher/show/{id}', function ($id) {
 Route::get('/masterData/teacher/edit/{id}', function ($id) {
     return view('teacher-edit');
 });
+
+Route::get('/content/banner', function () {
+    return view('banner');
+});
+
+Route::get('/content/banner/show/{id}', function ($id) {
+    return view('banner-show');
+});
+
+Route::get('/content/banner/create', function () {
+    return view('banner-form');
+});

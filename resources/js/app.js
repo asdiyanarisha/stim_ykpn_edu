@@ -9,6 +9,9 @@ import Teacher from './Pages/Teacher/index.vue';
 import TeacherForm from './Pages/Teacher/TeacherForm.vue';
 import TeacherShow from './Pages/Teacher/Show.vue';
 import TeacherEdit from './Pages/Teacher/TeacherEdit.vue';
+import Banner from './Pages/Content/Banner/index.vue';
+import BannerShow from './Pages/Content/Banner/Show.vue';
+import BannerForm from './Pages/Content/Banner/BannerForm.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -26,6 +29,9 @@ const pages = {
     teacherForm: TeacherForm,
     teacherShow: TeacherShow,
     teacherEdit: TeacherEdit,
+    banner: Banner,
+    bannerShow: BannerShow,
+    bannerForm: BannerForm,
 };
 
 const appElement = document.getElementById('app');

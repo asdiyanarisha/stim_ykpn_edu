@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TeacherController;
+use App\Http\Controllers\Api\ContentBannerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,4 +40,11 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/teachers', [TeacherController::class, 'store']);
     Route::post('/teachers/{id}', [TeacherController::class, 'update']);
     Route::delete('/teachers/{id}', [TeacherController::class, 'destroy']);
+
+    // Content Management - Banner
+    Route::get('/banners', [ContentBannerController::class, 'index']);
+    Route::get('/banners/{id}', [ContentBannerController::class, 'show']);
+    Route::post('/banners', [ContentBannerController::class, 'store']);
+    Route::delete('/banners/{id}', [ContentBannerController::class, 'destroy']);
+    Route::post('/banners/bulk-delete', [ContentBannerController::class, 'bulkDestroy']);
 });
