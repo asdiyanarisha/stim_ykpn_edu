@@ -153,12 +153,11 @@ const handleSubmit = async () => {
   // Validation
   let hasError = false;
   if (!form.title) { errors.title = 'Judul banner wajib diisi'; hasError = true; }
-  if (!form.description) { errors.description = 'Deskripsi banner wajib diisi'; hasError = true; }
-  if (!form.button_text) { errors.button_text = 'Teks tombol wajib diisi'; hasError = true; }
-  if (!form.link) { errors.link = 'Link tujuan wajib diisi'; hasError = true; }
   if (!form.url_image) { errors.url_image = 'Gambar banner wajib diunggah'; hasError = true; }
 
   if (hasError) return;
+
+  isSubmitting.value = true;
 
   try {
     const token = getCookie(TOKEN_COOKIE_NAME);

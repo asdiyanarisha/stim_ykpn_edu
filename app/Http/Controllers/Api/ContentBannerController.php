@@ -29,9 +29,9 @@ class ContentBannerController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'button_text' => 'required|string|max:100',
-            'link' => 'required|string',
+            'description' => 'nullable|string',
+            'button_text' => 'nullable|string|max:100',
+            'link' => 'nullable|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:5120',
         ]);
 
