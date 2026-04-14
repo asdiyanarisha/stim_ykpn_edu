@@ -12,6 +12,7 @@ import TeacherEdit from './Pages/Teacher/TeacherEdit.vue';
 import Banner from './Pages/Content/Banner/index.vue';
 import BannerShow from './Pages/Content/Banner/Show.vue';
 import BannerForm from './Pages/Content/Banner/BannerForm.vue';
+import BannerEdit from './Pages/Content/Banner/BannerEdit.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -32,6 +33,7 @@ const pages = {
     banner: Banner,
     bannerShow: BannerShow,
     bannerForm: BannerForm,
+    bannerEdit: BannerEdit,
 };
 
 const appElement = document.getElementById('app');

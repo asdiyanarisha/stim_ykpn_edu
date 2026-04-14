@@ -18,7 +18,24 @@
           </button>
         </div>
 
-        <div class="max-w-5xl mx-auto space-y-8 pb-12">
+        <!-- Global Loading Overlay -->
+        <transition 
+          enter-active-class="transition duration-300 ease-out" 
+          enter-from-class="opacity-0" 
+          enter-to-class="opacity-100" 
+          leave-active-class="transition duration-200 ease-in" 
+          leave-from-class="opacity-100" 
+          leave-to-class="opacity-0"
+        >
+          <div v-if="!isAuthenticated || isLoading" class="absolute inset-0 z-[60] bg-slate-50/80 backdrop-blur-sm flex items-center justify-center">
+              <div class="flex flex-col items-center">
+                  <div class="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mb-4"></div>
+                  <p class="text-slate-500 font-medium animate-pulse">Memuat Detail Banner...</p>
+              </div>
+          </div>
+        </transition>
+
+        <div v-if="banner.id" class="max-w-5xl mx-auto space-y-8 pb-12">
           <!-- Banner Header & Actions -->
           <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2">
             <div>
@@ -38,10 +55,12 @@
               </div>
             </div>
             <div class="flex items-center gap-3">
-              <AppButton variant="secondary" size="md">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
-                Ubah Banner
-              </AppButton>
+              <a :href="`/content/banner/edit/${banner.id}`">
+                <AppButton variant="secondary" size="md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                    Ubah Banner
+                </AppButton>
+              </a>
             </div>
           </div>
 
@@ -80,7 +99,7 @@
                   
                   <div>
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Deskripsi</label>
-                    <p class="text-slate-600 leading-relaxed">{{ banner.description }}</p>
+                    <p class="text-slate-600 leading-relaxed">{{ banner.description || '-' }}</p>
                   </div>
 
                   <div class="pt-6 border-t border-slate-100 flex flex-wrap gap-8">
@@ -117,13 +136,13 @@
                   <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Dibuat Oleh</span>
                     <div class="flex items-center gap-2 mt-1">
-                      <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center text-[10px] font-bold text-indigo-700">A</div>
-                      <span class="text-sm font-semibold text-slate-700">Administrator</span>
+                      <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center text-[10px] font-bold text-indigo-700">{{ banner.created_by == 1 ? 'A' : 'U' }}</div>
+                      <span class="text-sm font-semibold text-slate-700">{{ banner.created_by == 1 ? 'Administrator' : 'User' }}</span>
                     </div>
                   </div>
                   <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Terakhir Diperbarui</span>
-                    <p class="text-sm font-semibold text-slate-700 mt-1">14 April 2026, 14:30</p>
+                    <p class="text-sm font-semibold text-slate-700 mt-1">{{ formatDate(banner.updated_at || banner.created_at) }}</p>
                   </div>
                 </div>
               </div>
@@ -185,7 +204,20 @@ import { getCookie, deleteCookie, TOKEN_COOKIE_NAME } from '../../../Helpers/coo
 
 const sidebarOpen = ref(false);
 const isAuthenticated = ref(false);
+const isLoading = ref(false);
 const banner = ref({});
+
+const formatDate = (dateString) => {
+  if (!dateString) return '-';
+  const date = new Date(dateString);
+  return date.toLocaleDateString('id-ID', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+};
 
 const fetchBannerDetail = async () => {
   isLoading.value = true;

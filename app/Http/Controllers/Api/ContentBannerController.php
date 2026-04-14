@@ -15,11 +15,18 @@ class ContentBannerController extends Controller
      */
     public function index()
     {
-        $banners = ContentBanner::orderBy('created_at', 'desc')->get();
-        return response()->json([
-            'status' => 'success',
-            'data' => $banners
-        ]);
+        try {
+            $banners = ContentBanner::orderBy('created_at', 'desc')->get();
+            return response()->json([
+                'status' => 'success',
+                'data' => $banners
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Gagal mengambil data banner: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -27,39 +34,111 @@ class ContentBannerController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'button_text' => 'nullable|string|max:100',
-            'link' => 'nullable|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:5120',
-        ]);
+        try {
+            $validator = Validator::make($request->all(), [
+                'title' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'button_text' => 'nullable|string|max:100',
+                'link' => 'nullable|string',
+                'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:5120',
+            ]);
 
-        if ($validator->fails()) {
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Validation failed',
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            $path = $request->file('image')->store('banners', 'public');
+            $url = Storage::url($path);
+
+            $banner = ContentBanner::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'button_text' => $request->button_text,
+                'link' => $request->link,
+                'url_image' => asset($url),
+                'created_by' => auth()->id() ?? 1,
+            ]);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Banner created successfully',
+                'data' => $banner
+            ], 201);
+        } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
-                'errors' => $validator->errors()
-            ], 422);
+                'message' => 'Gagal membuat banner: ' . $e->getMessage()
+            ], 500);
         }
+    }
 
-        $path = $request->file('image')->store('banners', 'public');
-        $url = Storage::url($path);
+    /**
+     * Update the specified banner.
+     */
+    public function update(Request $request, $id)
+    {
+        try {
+            $banner = ContentBanner::find($id);
 
-        $banner = ContentBanner::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'button_text' => $request->button_text,
-            'link' => $request->link,
-            'url_image' => asset($url),
-            'created_by' => auth()->id() ?? 1,
-        ]);
+            if (!$banner) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Banner not found'
+                ], 404);
+            }
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Banner created successfully',
-            'data' => $banner
-        ], 201);
+            $validator = Validator::make($request->all(), [
+                'title' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'button_text' => 'nullable|string|max:100',
+                'link' => 'nullable|string',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Validation failed',
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            $data = [
+                'title' => $request->title,
+                'description' => $request->description,
+                'button_text' => $request->button_text,
+                'link' => $request->link,
+            ];
+
+            if ($request->hasFile('image')) {
+                // Delete old image if it exists on our storage
+                if ($banner->url_image && str_contains($banner->url_image, '/storage/')) {
+                    $oldPath = str_replace(asset('storage'), '', $banner->url_image);
+                    Storage::disk('public')->delete($oldPath);
+                }
+
+                $path = $request->file('image')->store('banners', 'public');
+                $url = Storage::url($path);
+                $data['url_image'] = asset($url);
+            }
+
+            $banner->update($data);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Banner updated successfully',
+                'data' => $banner
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Gagal memperbarui banner: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     /**

@@ -50,3 +50,6 @@ Route::get('/content/banner/show/{id}', function ($id) {
 Route::get('/content/banner/create', function () {
     return view('banner-form');
 });
+Route::get('/content/banner/edit/{id}', function ($id) {
+    return view('banner-edit');
+});
