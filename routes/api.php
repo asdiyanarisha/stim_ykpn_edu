@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TeacherController;
 use App\Http\Controllers\Api\ContentBannerController;
+use App\Http\Controllers\Api\NewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,4 +49,13 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/banners/{id}', [ContentBannerController::class, 'update']);
     Route::delete('/banners/{id}', [ContentBannerController::class, 'destroy']);
     Route::post('/banners/bulk-delete', [ContentBannerController::class, 'bulkDestroy']);
+
+    // Content Management - News
+    Route::get('/news', [NewsController::class, 'index']);
+    Route::get('/news/{id}', [NewsController::class, 'show']);
+    Route::post('/news', [NewsController::class, 'store']);
+    Route::post('/news/bulk-delete', [NewsController::class, 'bulkDestroy']);
+    Route::post('/news/bulk-publish', [NewsController::class, 'bulkPublish']);
+    Route::post('/news/{id}', [NewsController::class, 'update']);
+    Route::delete('/news/{id}', [NewsController::class, 'destroy']);
 });

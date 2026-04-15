@@ -13,6 +13,9 @@ import Banner from './Pages/Content/Banner/index.vue';
 import BannerShow from './Pages/Content/Banner/Show.vue';
 import BannerForm from './Pages/Content/Banner/BannerForm.vue';
 import BannerEdit from './Pages/Content/Banner/BannerEdit.vue';
+import News from './Pages/Content/News/index.vue';
+import NewsForm from './Pages/Content/News/NewsForm.vue';
+import NewsShow from './Pages/Content/News/Show.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -34,6 +37,9 @@ const pages = {
     bannerShow: BannerShow,
     bannerForm: BannerForm,
     bannerEdit: BannerEdit,
+    news: News,
+    newsForm: NewsForm,
+    newsShow: NewsShow,
 };
 
 const appElement = document.getElementById('app');

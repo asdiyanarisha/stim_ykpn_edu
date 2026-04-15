@@ -43,6 +43,22 @@ Route::get('/content/banner', function () {
     return view('banner');
 });
 
+Route::get('/content/berita', function () {
+    return view('berita');
+});
+
+Route::get('/content/berita/create', function () {
+    return view('news-form');
+});
+
+Route::get('/content/berita/show/{id}', function ($id) {
+    return view('news-show');
+});
+
+Route::get('/content/berita/edit/{id}', function ($id) {
+    return view('news-edit');
+});
+
 Route::get('/content/banner/show/{id}', function ($id) {
     return view('banner-show');
 });
