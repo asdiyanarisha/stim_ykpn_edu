@@ -71,6 +71,18 @@ Route::get('/content/lowongan-kerja/edit/{id}', function ($id) {
     return view('job-vacancies-edit');
 });
 
+Route::get('/content/logo-sertifikasi', function () {
+    return view('certification-logos');
+});
+
+Route::get('/content/logo-sertifikasi/create', function () {
+    return view('certification-logos-form');
+});
+
+Route::get('/content/logo-sertifikasi/edit/{id}', function ($id) {
+    return view('certification-logos-edit');
+});
+
 Route::get('/content/banner/show/{id}', function ($id) {
     return view('banner-show');
 });

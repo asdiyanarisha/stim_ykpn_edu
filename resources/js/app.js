@@ -18,6 +18,8 @@ import NewsForm from './Pages/Content/News/NewsForm.vue';
 import NewsShow from './Pages/Content/News/Show.vue';
 import JobVacancy from './Pages/Content/JobVacancy/index.vue';
 import JobVacancyForm from './Pages/Content/JobVacancy/JobVacancyForm.vue';
+import CertificationLogo from './Pages/Content/CertificationLogo/index.vue';
+import CertificationLogoForm from './Pages/Content/CertificationLogo/CertificationLogoForm.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -44,6 +46,8 @@ const pages = {
     newsShow: NewsShow,
     jobVacancies: JobVacancy,
     jobVacancyForm: JobVacancyForm,
+    certificationLogos: CertificationLogo,
+    certificationLogoForm: CertificationLogoForm,
 };
 
 const appElement = document.getElementById('app');
