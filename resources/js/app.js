@@ -16,6 +16,8 @@ import BannerEdit from './Pages/Content/Banner/BannerEdit.vue';
 import News from './Pages/Content/News/index.vue';
 import NewsForm from './Pages/Content/News/NewsForm.vue';
 import NewsShow from './Pages/Content/News/Show.vue';
+import JobVacancy from './Pages/Content/JobVacancy/index.vue';
+import JobVacancyForm from './Pages/Content/JobVacancy/JobVacancyForm.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -40,6 +42,8 @@ const pages = {
     news: News,
     newsForm: NewsForm,
     newsShow: NewsShow,
+    jobVacancies: JobVacancy,
+    jobVacancyForm: JobVacancyForm,
 };
 
 const appElement = document.getElementById('app');

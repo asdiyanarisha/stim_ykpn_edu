@@ -59,6 +59,18 @@ Route::get('/content/berita/edit/{id}', function ($id) {
     return view('news-edit');
 });
 
+Route::get('/content/lowongan-kerja', function () {
+    return view('job-vacancies');
+});
+
+Route::get('/content/lowongan-kerja/create', function () {
+    return view('job-vacancies-form');
+});
+
+Route::get('/content/lowongan-kerja/edit/{id}', function ($id) {
+    return view('job-vacancies-edit');
+});
+
 Route::get('/content/banner/show/{id}', function ($id) {
     return view('banner-show');
 });

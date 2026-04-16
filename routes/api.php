@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TeacherController;
 use App\Http\Controllers\Api\ContentBannerController;
 use App\Http\Controllers\Api\NewsController;
+use App\Http\Controllers\Api\JobVacancyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,4 +59,13 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/news/bulk-publish', [NewsController::class, 'bulkPublish']);
     Route::post('/news/{id}', [NewsController::class, 'update']);
     Route::delete('/news/{id}', [NewsController::class, 'destroy']);
+
+    // Content Management - Job Vacancies
+    Route::get('/job-vacancies', [JobVacancyController::class, 'index']);
+    Route::get('/job-vacancies/{id}', [JobVacancyController::class, 'show']);
+    Route::post('/job-vacancies', [JobVacancyController::class, 'store']);
+    Route::post('/job-vacancies/bulk-delete', [JobVacancyController::class, 'bulkDestroy']);
+    Route::post('/job-vacancies/bulk-publish', [JobVacancyController::class, 'bulkPublish']);
+    Route::post('/job-vacancies/{id}', [JobVacancyController::class, 'update']);
+    Route::delete('/job-vacancies/{id}', [JobVacancyController::class, 'destroy']);
 });
