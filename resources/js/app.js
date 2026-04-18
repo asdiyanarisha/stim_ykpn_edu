@@ -20,6 +20,8 @@ import JobVacancy from './Pages/Content/JobVacancy/index.vue';
 import JobVacancyForm from './Pages/Content/JobVacancy/JobVacancyForm.vue';
 import CertificationLogo from './Pages/Content/CertificationLogo/index.vue';
 import CertificationLogoForm from './Pages/Content/CertificationLogo/CertificationLogoForm.vue';
+import GreetingChiefForm from './Pages/Content/GreetingChief/GreetingChiefForm.vue';
+import CoreValueForm from './Pages/Content/CoreValue/CoreValueForm.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -48,6 +50,8 @@ const pages = {
     jobVacancyForm: JobVacancyForm,
     certificationLogos: CertificationLogo,
     certificationLogoForm: CertificationLogoForm,
+    greetingChiefForm: GreetingChiefForm,
+    coreValueForm: CoreValueForm,
 };
 
 const appElement = document.getElementById('app');

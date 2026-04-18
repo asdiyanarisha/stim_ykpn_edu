@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\ContentBannerController;
 use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\JobVacancyController;
 use App\Http\Controllers\Api\CertificationLogoController;
+use App\Http\Controllers\Api\GreetingChiefController;
+use App\Http\Controllers\Api\CoreValueController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,4 +79,12 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/certification-logos/bulk-delete', [CertificationLogoController::class, 'bulkDestroy']);
     Route::post('/certification-logos/{id}', [CertificationLogoController::class, 'update']);
     Route::delete('/certification-logos/{id}', [CertificationLogoController::class, 'destroy']);
+
+    // Content Management - Greeting Chief
+    Route::get('/greeting-chief', [GreetingChiefController::class, 'show']);
+    Route::post('/greeting-chief', [GreetingChiefController::class, 'update']);
+
+    // Content Management - Core Values
+    Route::get('/core-values', [CoreValueController::class, 'show']);
+    Route::post('/core-values', [CoreValueController::class, 'update']);
 });

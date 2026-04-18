@@ -83,6 +83,14 @@ Route::get('/content/logo-sertifikasi/edit/{id}', function ($id) {
     return view('certification-logos-edit');
 });
 
+Route::get('/content/profil/greeting', function () {
+    return view('greeting-chief-form');
+});
+
+Route::get('/content/profil/core-values', function () {
+    return view('core-values-form');
+});
+
 Route::get('/content/banner/show/{id}', function ($id) {
     return view('banner-show');
 });
