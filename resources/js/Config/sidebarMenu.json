@@ -48,6 +48,10 @@
           {
             "name": "Profil & Sejarah",
             "link": "/content/profil/history"
+          },
+          {
+            "name": "Logo & Lambang",
+            "link": "/content/profil/logo-symbol"
           }
         ]
       }

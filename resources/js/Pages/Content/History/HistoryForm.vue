@@ -150,7 +150,7 @@ const editorOptions = {
       [{ list: 'ordered' }, { list: 'bullet' }],
       [{ align: [] }],
       ['blockquote', 'code-block'],
-      ['link'],
+      ['link', 'image'],
       ['clean']
     ]
   }

@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CertificationLogoController;
 use App\Http\Controllers\Api\GreetingChiefController;
 use App\Http\Controllers\Api\CoreValueController;
 use App\Http\Controllers\Api\HistoryController;
+use App\Http\Controllers\Api\LogoSymbolController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -92,4 +93,8 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - History
     Route::get('/history', [HistoryController::class, 'show']);
     Route::post('/history', [HistoryController::class, 'update']);
+
+    // Content Management - Logo Symbol
+    Route::get('/logo-symbol', [LogoSymbolController::class, 'show']);
+    Route::post('/logo-symbol', [LogoSymbolController::class, 'update']);
 });

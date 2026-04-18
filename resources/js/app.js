@@ -23,6 +23,7 @@ import CertificationLogoForm from './Pages/Content/CertificationLogo/Certificati
 import GreetingChiefForm from './Pages/Content/GreetingChief/GreetingChiefForm.vue';
 import CoreValueForm from './Pages/Content/CoreValue/CoreValueForm.vue';
 import HistoryForm from './Pages/Content/History/HistoryForm.vue';
+import LogoSymbolForm from './Pages/Content/LogoSymbol/LogoSymbolForm.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -54,6 +55,7 @@ const pages = {
     greetingChiefForm: GreetingChiefForm,
     coreValueForm: CoreValueForm,
     historyForm: HistoryForm,
+    logoSymbolForm: LogoSymbolForm,
 };
 
 const appElement = document.getElementById('app');

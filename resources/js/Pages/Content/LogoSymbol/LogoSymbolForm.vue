@@ -31,10 +31,10 @@
             <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
               <span class="hover:text-indigo-600 transition-colors">Manajemen Profil</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-              <span class="text-slate-900 font-medium">Visi & Misi</span>
+              <span class="text-slate-900 font-medium">Logo & Lambang</span>
             </div>
-            <h1 class="text-2xl font-bold text-slate-900">Visi & Misi STIM YKPN</h1>
-            <p class="text-slate-500">Kelola informasi visi, misi, dan nilai-nilai inti institusi.</p>
+            <h1 class="text-2xl font-bold text-slate-900">Logo & Lambang STIM YKPN</h1>
+            <p class="text-slate-500">Kelola informasi mengenai logo, lambang, dan identitas visual STIM YKPN.</p>
           </div>
         </div>
 
@@ -57,7 +57,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
                   </div>
                   <p class="text-slate-600 font-bold">Pilih atau Seret Header ke Sini</p>
-                  <p class="text-slate-400 text-sm mt-1">Saran: Gambar representatif (Maks. 5MB)</p>
+                  <p class="text-slate-400 text-sm mt-1">Saran: Gambar representatif identitas (Maks. 5MB)</p>
                 </template>
 
                 <div v-if="imagePreview" class="w-full aspect-[21/9] mx-auto rounded-2xl overflow-hidden shadow-lg border border-slate-200 relative">
@@ -76,11 +76,11 @@
                 <span class="p-2 bg-indigo-50 rounded-xl text-indigo-600">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                 </span>
-                Detail Visi & Misi
+                Detail Logo & Lambang
               </h2>
 
               <div class="space-y-6">
-                <AppInput v-model="form.title" label="Judul" placeholder="Misal: Visi, Misi & Core Values" id="core-title" :error="errors.title" />
+                <AppInput v-model="form.title" label="Judul" placeholder="Misal: Makna Filosofis Logo STIM YKPN" id="logo-title" :error="errors.title" />
 
                 <!-- Quill Editor for Content -->
                 <div class="space-y-1">
@@ -140,7 +140,7 @@ const form = reactive({
 });
 
 const editorOptions = {
-  placeholder: 'Tulis visi, misi, dan nilai-nilai inti di sini...',
+  placeholder: 'Tuliskan makna dan deskripsi logo/lambang di sini...',
   theme: 'snow',
   modules: {
     toolbar: [
@@ -179,7 +179,7 @@ const fetchData = async () => {
     isLoading.value = true;
     try {
         const token = getCookie(TOKEN_COOKIE_NAME);
-        const response = await axios.get('/api/core-values', {
+        const response = await axios.get('/api/logo-symbol', {
             headers: { Authorization: `Bearer ${token}` }
         });
         
@@ -191,7 +191,7 @@ const fetchData = async () => {
         }
     } catch (error) {
         console.error('Error fetching data:', error);
-        Swal.fire({ icon: 'error', title: 'Kesalahan', text: 'Gagal memuat data Visi & Misi.' });
+        Swal.fire({ icon: 'error', title: 'Kesalahan', text: 'Gagal memuat data logo & lambang.' });
     } finally {
         isLoading.value = false;
     }
@@ -213,7 +213,7 @@ const handleSubmit = async () => {
       formData.append('image', form.image);
     }
 
-    const response = await axios.post('/api/core-values', formData, {
+    const response = await axios.post('/api/logo-symbol', formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data'

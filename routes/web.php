@@ -95,6 +95,10 @@ Route::get('/content/profil/history', function () {
     return view('history-form');
 });
 
+Route::get('/content/profil/logo-symbol', function () {
+    return view('logo-symbol-form');
+});
+
 Route::get('/content/banner/show/{id}', function ($id) {
     return view('banner-show');
 });
