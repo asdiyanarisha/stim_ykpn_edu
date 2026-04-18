@@ -52,6 +52,10 @@
           {
             "name": "Logo & Lambang",
             "link": "/content/profil/logo-symbol"
+          },
+          {
+            "name": "Fasilitas",
+            "link": "/content/profil/facility"
           }
         ]
       }

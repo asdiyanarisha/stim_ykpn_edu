@@ -24,6 +24,7 @@ import GreetingChiefForm from './Pages/Content/GreetingChief/GreetingChiefForm.v
 import CoreValueForm from './Pages/Content/CoreValue/CoreValueForm.vue';
 import HistoryForm from './Pages/Content/History/HistoryForm.vue';
 import LogoSymbolForm from './Pages/Content/LogoSymbol/LogoSymbolForm.vue';
+import FacilityForm from './Pages/Content/Facility/FacilityForm.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -56,6 +57,7 @@ const pages = {
     coreValueForm: CoreValueForm,
     historyForm: HistoryForm,
     logoSymbolForm: LogoSymbolForm,
+    facilityForm: FacilityForm,
 };
 
 const appElement = document.getElementById('app');

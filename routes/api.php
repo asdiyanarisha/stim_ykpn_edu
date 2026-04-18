@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\GreetingChiefController;
 use App\Http\Controllers\Api\CoreValueController;
 use App\Http\Controllers\Api\HistoryController;
 use App\Http\Controllers\Api\LogoSymbolController;
+use App\Http\Controllers\Api\FacilityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -97,4 +98,8 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - Logo Symbol
     Route::get('/logo-symbol', [LogoSymbolController::class, 'show']);
     Route::post('/logo-symbol', [LogoSymbolController::class, 'update']);
+
+    // Content Management - Facility
+    Route::get('/facility', [FacilityController::class, 'show']);
+    Route::post('/facility', [FacilityController::class, 'update']);
 });
