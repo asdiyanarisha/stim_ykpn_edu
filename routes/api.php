@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\JobVacancyController;
 use App\Http\Controllers\Api\CertificationLogoController;
 use App\Http\Controllers\Api\GreetingChiefController;
 use App\Http\Controllers\Api\CoreValueController;
+use App\Http\Controllers\Api\HistoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -87,4 +88,8 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - Core Values
     Route::get('/core-values', [CoreValueController::class, 'show']);
     Route::post('/core-values', [CoreValueController::class, 'update']);
+
+    // Content Management - History
+    Route::get('/history', [HistoryController::class, 'show']);
+    Route::post('/history', [HistoryController::class, 'update']);
 });

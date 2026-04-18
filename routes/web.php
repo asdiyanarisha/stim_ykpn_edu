@@ -91,6 +91,10 @@ Route::get('/content/profil/core-values', function () {
     return view('core-values-form');
 });
 
+Route::get('/content/profil/history', function () {
+    return view('history-form');
+});
+
 Route::get('/content/banner/show/{id}', function ($id) {
     return view('banner-show');
 });
