@@ -1,7 +1,7 @@
 <template>
   <aside 
-    class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 transition-all duration-300 ease-in-out lg:static"
-    :class="isOpen ? 'translate-x-0 lg:-ml-64 lg:-translate-x-full' : '-translate-x-full lg:ml-0 lg:translate-x-0'"
+    class="fixed inset-y-0 left-0 z-50 w-72 bg-slate-900 text-slate-300 transition-all duration-300 ease-in-out lg:static"
+    :class="isOpen ? 'translate-x-0 lg:-ml-72 lg:-translate-x-full' : '-translate-x-full lg:ml-0 lg:translate-x-0'"
   >
     <div class="flex h-16 items-center justify-between px-6 bg-slate-950">
       <a href="/dashboard" class="text-lg font-extrabold text-white flex items-center gap-2.5 tracking-tight">
@@ -15,7 +15,7 @@
       </button>
     </div>
 
-    <nav class="mt-6 px-4 space-y-1 overflow-y-auto max-h-[calc(100vh-5.5rem)] pb-4">
+    <nav class="flex-1 px-4 space-y-1 overflow-y-auto custom-scrollbar pt-6 pb-20">
       <SidebarItem 
         v-for="item in menuItems" 
         :key="item.name" 
@@ -25,6 +25,32 @@
     </nav>
   </aside>
 </template>
+
+<style scoped>
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.custom-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+</style>
 
 <script setup>
 import { ref, onMounted } from 'vue';

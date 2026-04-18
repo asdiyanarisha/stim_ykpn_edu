@@ -3,7 +3,7 @@
     <!-- Regular Link (No Submenu) -->
     <a v-if="!item.submenu || item.submenu.length === 0" 
       :href="item.link || '#'"
-      class="flex items-center gap-3 py-2.5 rounded-lg transition-all duration-200 group"
+      class="flex items-center gap-3 py-2 rounded-lg transition-all duration-200 group"
       :class="[
         item.active ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/20' : 'hover:bg-slate-800 hover:text-white',
         indentClass
@@ -19,7 +19,7 @@
     <!-- Toggleable Button (Has Submenu) -->
     <div v-else>
       <button @click="item.isOpen = !item.isOpen"
-        class="w-full flex items-center justify-between py-2.5 rounded-lg transition-all duration-200 group"
+        class="w-full flex items-center justify-between py-2 rounded-lg transition-all duration-200 group"
         :class="[
           item.active ? 'text-white' : 'hover:bg-slate-800 hover:text-white text-slate-300',
           indentClass
@@ -78,8 +78,8 @@ const props = defineProps({
 
 const indentClass = computed(() => {
   if (props.depth === 0) return 'px-3';
-  if (props.depth === 1) return 'pl-11 pr-3';
-  if (props.depth === 2) return 'pl-16 pr-3';
+  if (props.depth === 1) return 'pl-7 pr-3';
+  if (props.depth === 2) return 'pl-10 pr-3';
   // Fallback for deeper levels if needed
   return `pl-${Math.min(20, 11 + props.depth * 5)} pr-3`;
 });
