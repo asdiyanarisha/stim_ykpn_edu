@@ -56,6 +56,10 @@
           {
             "name": "Fasilitas",
             "link": "/content/profil/facility"
+          },
+          {
+            "name": "Prestasi",
+            "link": "/content/profil/achievement"
           }
         ]
       }

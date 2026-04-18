@@ -25,6 +25,10 @@ import CoreValueForm from './Pages/Content/CoreValue/CoreValueForm.vue';
 import HistoryForm from './Pages/Content/History/HistoryForm.vue';
 import LogoSymbolForm from './Pages/Content/LogoSymbol/LogoSymbolForm.vue';
 import FacilityForm from './Pages/Content/Facility/FacilityForm.vue';
+import AchievementIndex from './Pages/Content/Achievement/index.vue';
+import AchievementForm from './Pages/Content/Achievement/AchievementForm.vue';
+import AchievementEdit from './Pages/Content/Achievement/AchievementEdit.vue';
+import AchievementShow from './Pages/Content/Achievement/Show.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -58,6 +62,10 @@ const pages = {
     historyForm: HistoryForm,
     logoSymbolForm: LogoSymbolForm,
     facilityForm: FacilityForm,
+    achievementIndex: AchievementIndex,
+    achievementForm: AchievementForm,
+    achievementEdit: AchievementEdit,
+    achievementShow: AchievementShow,
 };
 
 const appElement = document.getElementById('app');

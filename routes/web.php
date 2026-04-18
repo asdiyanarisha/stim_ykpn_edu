@@ -103,6 +103,22 @@ Route::get('/content/profil/facility', function () {
     return view('facility-form');
 });
 
+Route::get('/content/profil/achievement', function () {
+    return view('achievements');
+});
+
+Route::get('/content/profil/achievement/create', function () {
+    return view('achievement-form');
+});
+
+Route::get('/content/profil/achievement/edit/{id}', function ($id) {
+    return view('achievement-edit');
+});
+
+Route::get('/content/profil/achievement/show/{id}', function ($id) {
+    return view('achievement-show');
+});
+
 Route::get('/content/banner/show/{id}', function ($id) {
     return view('banner-show');
 });

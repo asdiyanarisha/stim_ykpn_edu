@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\CoreValueController;
 use App\Http\Controllers\Api\HistoryController;
 use App\Http\Controllers\Api\LogoSymbolController;
 use App\Http\Controllers\Api\FacilityController;
+use App\Http\Controllers\Api\AchievementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -102,4 +103,12 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - Facility
     Route::get('/facility', [FacilityController::class, 'show']);
     Route::post('/facility', [FacilityController::class, 'update']);
+
+    // Content Management - Achievement
+    Route::get('/achievements', [AchievementController::class, 'index']);
+    Route::get('/achievements/{id}', [AchievementController::class, 'show']);
+    Route::post('/achievements', [AchievementController::class, 'store']);
+    Route::post('/achievements/bulk-delete', [AchievementController::class, 'bulkDestroy']);
+    Route::post('/achievements/{id}', [AchievementController::class, 'update']);
+    Route::delete('/achievements/{id}', [AchievementController::class, 'destroy']);
 });
