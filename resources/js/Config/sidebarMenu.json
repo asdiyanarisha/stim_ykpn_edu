@@ -79,6 +79,10 @@
           {
             "name": "Sasaran Pendidikan",
             "link": "/academic/programs/goals"
+          },
+          {
+            "name": "Cara Mencapai Sasaran",
+            "link": "/academic/programs/how-to-achieve"
           }
         ]
       }

@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\FacilityController;
 use App\Http\Controllers\Api\AchievementController;
 use App\Http\Controllers\Api\SpmiAkreditasiController;
 use App\Http\Controllers\Api\AcademicGoalController;
+use App\Http\Controllers\Api\AcademicGoalAchieveController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -121,4 +122,8 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - Sasaran Pendidikan (Academic Goals)
     Route::get('/academic-goals', [AcademicGoalController::class, 'show']);
     Route::post('/academic-goals', [AcademicGoalController::class, 'update']);
+
+    // Content Management - Cara Mencapai Sasaran (Academic Goal Achieve)
+    Route::get('/academic-goal-achieve', [AcademicGoalAchieveController::class, 'show']);
+    Route::post('/academic-goal-achieve', [AcademicGoalAchieveController::class, 'update']);
 });
