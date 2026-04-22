@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\LogoSymbolController;
 use App\Http\Controllers\Api\FacilityController;
 use App\Http\Controllers\Api\AchievementController;
 use App\Http\Controllers\Api\SpmiAkreditasiController;
+use App\Http\Controllers\Api\AcademicGoalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -116,4 +117,8 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - SPMI & Akreditasi
     Route::get('/spmi-akreditasi', [SpmiAkreditasiController::class, 'show']);
     Route::post('/spmi-akreditasi', [SpmiAkreditasiController::class, 'update']);
+
+    // Content Management - Sasaran Pendidikan (Academic Goals)
+    Route::get('/academic-goals', [AcademicGoalController::class, 'show']);
+    Route::post('/academic-goals', [AcademicGoalController::class, 'update']);
 });
