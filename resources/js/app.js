@@ -25,6 +25,7 @@ import CoreValueForm from './Pages/Content/CoreValue/CoreValueForm.vue';
 import HistoryForm from './Pages/Content/History/HistoryForm.vue';
 import LogoSymbolForm from './Pages/Content/LogoSymbol/LogoSymbolForm.vue';
 import FacilityForm from './Pages/Content/Facility/FacilityForm.vue';
+import SpmiAkreditasiForm from './Pages/Content/SpmiAkreditasi/SpmiAkreditasiForm.vue';
 import AchievementIndex from './Pages/Content/Achievement/index.vue';
 import AchievementForm from './Pages/Content/Achievement/AchievementForm.vue';
 import AchievementEdit from './Pages/Content/Achievement/AchievementEdit.vue';
@@ -62,6 +63,7 @@ const pages = {
     historyForm: HistoryForm,
     logoSymbolForm: LogoSymbolForm,
     facilityForm: FacilityForm,
+    spmiAkreditasiForm: SpmiAkreditasiForm,
     achievementIndex: AchievementIndex,
     achievementForm: AchievementForm,
     achievementEdit: AchievementEdit,

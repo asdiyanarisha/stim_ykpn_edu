@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\HistoryController;
 use App\Http\Controllers\Api\LogoSymbolController;
 use App\Http\Controllers\Api\FacilityController;
 use App\Http\Controllers\Api\AchievementController;
+use App\Http\Controllers\Api\SpmiAkreditasiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -111,4 +112,8 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/achievements/bulk-delete', [AchievementController::class, 'bulkDestroy']);
     Route::post('/achievements/{id}', [AchievementController::class, 'update']);
     Route::delete('/achievements/{id}', [AchievementController::class, 'destroy']);
+
+    // Content Management - SPMI & Akreditasi
+    Route::get('/spmi-akreditasi', [SpmiAkreditasiController::class, 'show']);
+    Route::post('/spmi-akreditasi', [SpmiAkreditasiController::class, 'update']);
 });

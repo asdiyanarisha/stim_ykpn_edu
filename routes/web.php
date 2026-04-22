@@ -103,6 +103,10 @@ Route::get('/content/profil/facility', function () {
     return view('facility-form');
 });
 
+Route::get('/content/profil/spmi-akreditasi', function () {
+    return view('spmi-akreditasi-form');
+});
+
 Route::get('/content/profil/achievement', function () {
     return view('achievements');
 });

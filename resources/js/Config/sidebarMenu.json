@@ -60,6 +60,10 @@
           {
             "name": "Prestasi",
             "link": "/content/profil/achievement"
+          },
+          {
+            "name": "SPMI & Akreditasi",
+            "link": "/content/profil/spmi-akreditasi"
           }
         ]
       }
