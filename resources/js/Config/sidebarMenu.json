@@ -95,6 +95,14 @@
           {
             "name": "Jenjang dan Masa Studi",
             "link": "/academic/programs/level-period-study"
+          },
+          {
+            "name": "Kegiatan Akademik",
+            "link": "/academic/programs/academic-activities"
+          },
+          {
+            "name": "Dosen Pembimbing",
+            "link": "/academic/programs/academic-advisor"
           }
         ]
       }

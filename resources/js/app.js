@@ -31,6 +31,7 @@ import AcademicGoalAchieveForm from './Pages/Content/Academic/AcademicGoalAchiev
 import StudyLoadForm from './Pages/Content/Academic/StudyLoadForm.vue';
 import SksForm from './Pages/Content/Academic/SksForm.vue';
 import LevelPeriodStudyForm from './Pages/Content/Academic/LevelPeriodStudyForm.vue';
+import AcademicActivityForm from './Pages/Content/Academic/AcademicActivityForm.vue';
 import AchievementIndex from './Pages/Content/Achievement/index.vue';
 import AchievementForm from './Pages/Content/Achievement/AchievementForm.vue';
 import AchievementEdit from './Pages/Content/Achievement/AchievementEdit.vue';
@@ -74,6 +75,7 @@ const pages = {
     studyLoadForm: StudyLoadForm,
     sksForm: SksForm,
     levelPeriodStudyForm: LevelPeriodStudyForm,
+    academicActivitiesForm: AcademicActivityForm,
     achievementIndex: AchievementIndex,
     achievementForm: AchievementForm,
     achievementEdit: AchievementEdit,

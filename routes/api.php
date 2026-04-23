@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\AcademicGoalAchieveController;
 use App\Http\Controllers\Api\StudyLoadController;
 use App\Http\Controllers\Api\SksController;
 use App\Http\Controllers\Api\LevelPeriodStudyController;
+use App\Http\Controllers\Api\AcademicActivityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -141,4 +142,8 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - Jenjang dan Masa Studi
     Route::get('/level-period-study', [LevelPeriodStudyController::class, 'show']);
     Route::post('/level-period-study', [LevelPeriodStudyController::class, 'update']);
+
+    // Content Management - Kegiatan Akademik
+    Route::get('/academic-activities', [AcademicActivityController::class, 'show']);
+    Route::post('/academic-activities', [AcademicActivityController::class, 'update']);
 });
