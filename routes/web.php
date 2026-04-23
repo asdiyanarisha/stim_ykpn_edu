@@ -115,6 +115,10 @@ Route::get('/academic/programs/how-to-achieve', function () {
     return view('academic-goal-achieve-form');
 });
 
+Route::get('/academic/programs/study-load', function () {
+    return view('study-load-form');
+});
+
 Route::get('/content/profil/achievement', function () {
     return view('achievements');
 });

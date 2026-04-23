@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\AchievementController;
 use App\Http\Controllers\Api\SpmiAkreditasiController;
 use App\Http\Controllers\Api\AcademicGoalController;
 use App\Http\Controllers\Api\AcademicGoalAchieveController;
+use App\Http\Controllers\Api\StudyLoadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -126,4 +127,8 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - Cara Mencapai Sasaran (Academic Goal Achieve)
     Route::get('/academic-goal-achieve', [AcademicGoalAchieveController::class, 'show']);
     Route::post('/academic-goal-achieve', [AcademicGoalAchieveController::class, 'update']);
+
+    // Content Management - Beban Studi
+    Route::get('/study-load', [StudyLoadController::class, 'show']);
+    Route::post('/study-load', [StudyLoadController::class, 'update']);
 });

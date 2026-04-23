@@ -28,6 +28,7 @@ import FacilityForm from './Pages/Content/Facility/FacilityForm.vue';
 import SpmiAkreditasiForm from './Pages/Content/SpmiAkreditasi/SpmiAkreditasiForm.vue';
 import AcademicGoalForm from './Pages/Content/Academic/AcademicGoalForm.vue';
 import AcademicGoalAchieveForm from './Pages/Content/Academic/AcademicGoalAchieveForm.vue';
+import StudyLoadForm from './Pages/Content/Academic/StudyLoadForm.vue';
 import AchievementIndex from './Pages/Content/Achievement/index.vue';
 import AchievementForm from './Pages/Content/Achievement/AchievementForm.vue';
 import AchievementEdit from './Pages/Content/Achievement/AchievementEdit.vue';
@@ -68,6 +69,7 @@ const pages = {
     spmiAkreditasiForm: SpmiAkreditasiForm,
     academicGoalForm: AcademicGoalForm,
     academicGoalAchieveForm: AcademicGoalAchieveForm,
+    studyLoadForm: StudyLoadForm,
     achievementIndex: AchievementIndex,
     achievementForm: AchievementForm,
     achievementEdit: AchievementEdit,
