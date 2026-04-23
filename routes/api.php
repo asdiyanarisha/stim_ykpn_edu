@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\StudyLoadController;
 use App\Http\Controllers\Api\SksController;
 use App\Http\Controllers\Api\LevelPeriodStudyController;
 use App\Http\Controllers\Api\AcademicActivityController;
+use App\Http\Controllers\Api\AcademicAdvisorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -146,4 +147,8 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - Kegiatan Akademik
     Route::get('/academic-activities', [AcademicActivityController::class, 'show']);
     Route::post('/academic-activities', [AcademicActivityController::class, 'update']);
+
+    // Content Management - Dosen Pembimbing
+    Route::get('/academic-advisor', [AcademicAdvisorController::class, 'show']);
+    Route::post('/academic-advisor', [AcademicAdvisorController::class, 'update']);
 });

@@ -131,6 +131,10 @@ Route::get('/academic/programs/academic-activities', function () {
     return view('academic-activities-form');
 });
 
+Route::get('/academic/programs/academic-advisor', function () {
+    return view('academic-advisor-form');
+});
+
 Route::get('/content/profil/achievement', function () {
     return view('achievements');
 });
