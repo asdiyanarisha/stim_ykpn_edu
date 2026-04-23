@@ -29,6 +29,7 @@ import SpmiAkreditasiForm from './Pages/Content/SpmiAkreditasi/SpmiAkreditasiFor
 import AcademicGoalForm from './Pages/Content/Academic/AcademicGoalForm.vue';
 import AcademicGoalAchieveForm from './Pages/Content/Academic/AcademicGoalAchieveForm.vue';
 import StudyLoadForm from './Pages/Content/Academic/StudyLoadForm.vue';
+import SksForm from './Pages/Content/Academic/SksForm.vue';
 import AchievementIndex from './Pages/Content/Achievement/index.vue';
 import AchievementForm from './Pages/Content/Achievement/AchievementForm.vue';
 import AchievementEdit from './Pages/Content/Achievement/AchievementEdit.vue';
@@ -70,6 +71,7 @@ const pages = {
     academicGoalForm: AcademicGoalForm,
     academicGoalAchieveForm: AcademicGoalAchieveForm,
     studyLoadForm: StudyLoadForm,
+    sksForm: SksForm,
     achievementIndex: AchievementIndex,
     achievementForm: AchievementForm,
     achievementEdit: AchievementEdit,

@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\SpmiAkreditasiController;
 use App\Http\Controllers\Api\AcademicGoalController;
 use App\Http\Controllers\Api\AcademicGoalAchieveController;
 use App\Http\Controllers\Api\StudyLoadController;
+use App\Http\Controllers\Api\SksController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -131,4 +132,8 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - Beban Studi
     Route::get('/study-load', [StudyLoadController::class, 'show']);
     Route::post('/study-load', [StudyLoadController::class, 'update']);
+
+    // Content Management - SKS
+    Route::get('/sks', [SksController::class, 'show']);
+    Route::post('/sks', [SksController::class, 'update']);
 });

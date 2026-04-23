@@ -119,6 +119,10 @@ Route::get('/academic/programs/study-load', function () {
     return view('study-load-form');
 });
 
+Route::get('/academic/programs/sks', function () {
+    return view('sks-form');
+});
+
 Route::get('/content/profil/achievement', function () {
     return view('achievements');
 });
