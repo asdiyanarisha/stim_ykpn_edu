@@ -123,6 +123,10 @@ Route::get('/academic/programs/sks', function () {
     return view('sks-form');
 });
 
+Route::get('/academic/programs/level-period-study', function () {
+    return view('level-period-study-form');
+});
+
 Route::get('/content/profil/achievement', function () {
     return view('achievements');
 });

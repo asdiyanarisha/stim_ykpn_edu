@@ -91,6 +91,10 @@
           {
             "name": "Sistem Kredit Semester (SKS)",
             "link": "/academic/programs/sks"
+          },
+          {
+            "name": "Jenjang dan Masa Studi",
+            "link": "/academic/programs/level-period-study"
           }
         ]
       }
