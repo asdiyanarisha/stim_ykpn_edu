@@ -46,7 +46,7 @@
             "link": "/content/profil/core-values"
           },
           {
-            "name": "Profil & Sejarah",
+            "name": "Profil & Sejarah STIM YKPN",
             "link": "/content/profil/history"
           },
           {
@@ -87,6 +87,10 @@
           {
             "name": "Beban Studi",
             "link": "/academic/programs/study-load"
+          },
+          {
+            "name": "Sistem Kredit Semester (SKS)",
+            "link": "/academic/programs/sks"
           }
         ]
       }
