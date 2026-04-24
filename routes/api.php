@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\AcademicActivityController;
 use App\Http\Controllers\Api\AcademicAdvisorController;
 use App\Http\Controllers\Api\AcademicSanctionController;
 use App\Http\Controllers\Api\AcademicCalendarController;
+use App\Http\Controllers\Api\AttendanceLectureController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -161,4 +162,8 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - Kalender Akademik
     Route::get('/academic-calendar', [AcademicCalendarController::class, 'show']);
     Route::post('/academic-calendar', [AcademicCalendarController::class, 'update']);
+
+    // Content Management - Kehadiran Kuliah
+    Route::get('/attendance-lecture', [AttendanceLectureController::class, 'show']);
+    Route::post('/attendance-lecture', [AttendanceLectureController::class, 'update']);
 });

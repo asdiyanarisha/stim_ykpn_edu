@@ -143,6 +143,10 @@ Route::get('/content/academic-calendar', function () {
     return view('academic-calendar-form');
 });
 
+Route::get('/academic/provision/attendance', function () {
+    return view('attendance-lecture-form');
+});
+
 Route::get('/content/profil/achievement', function () {
     return view('achievements');
 });

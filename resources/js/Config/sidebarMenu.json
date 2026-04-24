@@ -113,6 +113,15 @@
       {
         "name": "Kalender Akademik",
         "link": "/content/academic-calendar"
+      },
+      {
+        "name": "Ketentuan Perkuliahan",
+        "submenu": [
+          {
+            "name": "Kehadiran Kuliah",
+            "link": "/academic/provision/attendance"
+          }
+        ]
       }
     ]
   }
