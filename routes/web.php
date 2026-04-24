@@ -139,6 +139,10 @@ Route::get('/academic/programs/academic-sanction', function () {
     return view('academic-sanction-form');
 });
 
+Route::get('/content/academic-calendar', function () {
+    return view('academic-calendar-form');
+});
+
 Route::get('/content/profil/achievement', function () {
     return view('achievements');
 });

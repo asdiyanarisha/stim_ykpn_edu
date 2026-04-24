@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\LevelPeriodStudyController;
 use App\Http\Controllers\Api\AcademicActivityController;
 use App\Http\Controllers\Api\AcademicAdvisorController;
 use App\Http\Controllers\Api\AcademicSanctionController;
+use App\Http\Controllers\Api\AcademicCalendarController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -156,4 +157,8 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - Sanksi Akademik
     Route::get('/academic-sanction', [AcademicSanctionController::class, 'show']);
     Route::post('/academic-sanction', [AcademicSanctionController::class, 'update']);
+
+    // Content Management - Kalender Akademik
+    Route::get('/academic-calendar', [AcademicCalendarController::class, 'show']);
+    Route::post('/academic-calendar', [AcademicCalendarController::class, 'update']);
 });
