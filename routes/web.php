@@ -147,6 +147,10 @@ Route::get('/academic/provision/attendance', function () {
     return view('attendance-lecture-form');
 });
 
+Route::get('/academic/provision/code-conduct', function () {
+    return view('code-conduct-form');
+});
+
 Route::get('/content/profil/achievement', function () {
     return view('achievements');
 });

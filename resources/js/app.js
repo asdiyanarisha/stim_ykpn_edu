@@ -35,6 +35,7 @@ import AcademicActivityForm from './Pages/Content/Academic/AcademicActivityForm.
 import AcademicAdvisorForm from './Pages/Content/Academic/AcademicAdvisorForm.vue';
 import AcademicSanctionForm from './Pages/Content/Academic/AcademicSanctionForm.vue';
 import AttendanceLectureForm from './Pages/Content/Academic/AttendanceLectureForm.vue';
+import CodeConductForm from './Pages/Content/Academic/CodeConductForm.vue';
 import AcademicCalendarForm from './Pages/Content/AcademicCalendarForm.vue';
 import AchievementIndex from './Pages/Content/Achievement/index.vue';
 import AchievementForm from './Pages/Content/Achievement/AchievementForm.vue';
@@ -83,6 +84,7 @@ const pages = {
     academicAdvisorForm: AcademicAdvisorForm,
     academicSanctionForm: AcademicSanctionForm,
     attendanceLectureForm: AttendanceLectureForm,
+    codeConductForm: CodeConductForm,
     academicCalendarForm: AcademicCalendarForm,
     achievementIndex: AchievementIndex,
     achievementForm: AchievementForm,

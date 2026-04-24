@@ -120,6 +120,10 @@
           {
             "name": "Kehadiran Kuliah",
             "link": "/academic/provision/attendance"
+          },
+          {
+            "name": "Tata Tertib Kuliah",
+            "link": "/academic/provision/code-conduct"
           }
         ]
       }

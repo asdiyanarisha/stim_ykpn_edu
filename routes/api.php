@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\AcademicAdvisorController;
 use App\Http\Controllers\Api\AcademicSanctionController;
 use App\Http\Controllers\Api\AcademicCalendarController;
 use App\Http\Controllers\Api\AttendanceLectureController;
+use App\Http\Controllers\Api\CodeConductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -166,4 +167,8 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - Kehadiran Kuliah
     Route::get('/attendance-lecture', [AttendanceLectureController::class, 'show']);
     Route::post('/attendance-lecture', [AttendanceLectureController::class, 'update']);
+
+    // Content Management - Tata Tertib Kuliah
+    Route::get('/code-conduct', [CodeConductController::class, 'show']);
+    Route::post('/code-conduct', [CodeConductController::class, 'update']);
 });
