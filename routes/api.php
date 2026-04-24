@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\SksController;
 use App\Http\Controllers\Api\LevelPeriodStudyController;
 use App\Http\Controllers\Api\AcademicActivityController;
 use App\Http\Controllers\Api\AcademicAdvisorController;
+use App\Http\Controllers\Api\AcademicSanctionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -151,4 +152,8 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - Dosen Pembimbing
     Route::get('/academic-advisor', [AcademicAdvisorController::class, 'show']);
     Route::post('/academic-advisor', [AcademicAdvisorController::class, 'update']);
+
+    // Content Management - Sanksi Akademik
+    Route::get('/academic-sanction', [AcademicSanctionController::class, 'show']);
+    Route::post('/academic-sanction', [AcademicSanctionController::class, 'update']);
 });

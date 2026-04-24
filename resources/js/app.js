@@ -33,6 +33,7 @@ import SksForm from './Pages/Content/Academic/SksForm.vue';
 import LevelPeriodStudyForm from './Pages/Content/Academic/LevelPeriodStudyForm.vue';
 import AcademicActivityForm from './Pages/Content/Academic/AcademicActivityForm.vue';
 import AcademicAdvisorForm from './Pages/Content/Academic/AcademicAdvisorForm.vue';
+import AcademicSanctionForm from './Pages/Content/Academic/AcademicSanctionForm.vue';
 import AchievementIndex from './Pages/Content/Achievement/index.vue';
 import AchievementForm from './Pages/Content/Achievement/AchievementForm.vue';
 import AchievementEdit from './Pages/Content/Achievement/AchievementEdit.vue';
@@ -78,6 +79,7 @@ const pages = {
     levelPeriodStudyForm: LevelPeriodStudyForm,
     academicActivitiesForm: AcademicActivityForm,
     academicAdvisorForm: AcademicAdvisorForm,
+    academicSanctionForm: AcademicSanctionForm,
     achievementIndex: AchievementIndex,
     achievementForm: AchievementForm,
     achievementEdit: AchievementEdit,

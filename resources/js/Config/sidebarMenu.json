@@ -103,6 +103,10 @@
           {
             "name": "Dosen Pembimbing",
             "link": "/academic/programs/academic-advisor"
+          },
+          {
+            "name": "Sanksi Akademik",
+            "link": "/academic/programs/academic-sanction"
           }
         ]
       }
