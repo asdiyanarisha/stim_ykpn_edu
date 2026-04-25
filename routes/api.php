@@ -24,6 +24,10 @@ use App\Http\Controllers\Api\AcademicSanctionController;
 use App\Http\Controllers\Api\AcademicCalendarController;
 use App\Http\Controllers\Api\AttendanceLectureController;
 use App\Http\Controllers\Api\CodeConductController;
+use App\Http\Controllers\Api\ClassCapacityController;
+use App\Http\Controllers\Api\AttendanceCountController;
+use App\Http\Controllers\Api\EvaluationSystemController;
+use App\Http\Controllers\Api\SeminarProposalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -171,4 +175,20 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - Tata Tertib Kuliah
     Route::get('/code-conduct', [CodeConductController::class, 'show']);
     Route::post('/code-conduct', [CodeConductController::class, 'update']);
+
+    // Content Management - Kapasitas Kelas
+    Route::get('/class-capacity', [ClassCapacityController::class, 'show']);
+    Route::post('/class-capacity', [ClassCapacityController::class, 'update']);
+
+    // Content Management - Jumlah Kehadiran
+    Route::get('/attendance-count', [AttendanceCountController::class, 'show']);
+    Route::post('/attendance-count', [AttendanceCountController::class, 'update']);
+
+    // Content Management - Sistem Evaluasi
+    Route::get('/evaluation-system', [EvaluationSystemController::class, 'show']);
+    Route::post('/evaluation-system', [EvaluationSystemController::class, 'update']);
+
+    // Content Management - Proposal Seminar
+    Route::get('/seminar-proposal', [SeminarProposalController::class, 'show']);
+    Route::post('/seminar-proposal', [SeminarProposalController::class, 'update']);
 });

@@ -124,6 +124,22 @@
           {
             "name": "Tata Tertib Kuliah",
             "link": "/academic/provision/code-conduct"
+          },
+          {
+            "name": "Kapasitas Kelas",
+            "link": "/academic/provision/class-capacity"
+          },
+          {
+            "name": "Jumlah Kehadiran",
+            "link": "/academic/provision/attendance-count"
+          },
+          {
+            "name": "Sistem Evaluasi",
+            "link": "/academic/provision/evaluation-system"
+          },
+          {
+            "name": "Seminar Proposal dan Pendadaran",
+            "link": "/academic/provision/seminar-proposal"
           }
         ]
       }

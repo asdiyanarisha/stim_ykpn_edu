@@ -151,6 +151,22 @@ Route::get('/academic/provision/code-conduct', function () {
     return view('code-conduct-form');
 });
 
+Route::get('/academic/provision/class-capacity', function () {
+    return view('class-capacity-form');
+});
+
+Route::get('/academic/provision/attendance-count', function () {
+    return view('attendance-count-form');
+});
+
+Route::get('/academic/provision/evaluation-system', function () {
+    return view('evaluation-system-form');
+});
+
+Route::get('/academic/provision/seminar-proposal', function () {
+    return view('seminar-proposal-form');
+});
+
 Route::get('/content/profil/achievement', function () {
     return view('achievements');
 });
