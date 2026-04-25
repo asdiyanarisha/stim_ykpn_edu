@@ -187,6 +187,10 @@ Route::get('/academic/graduation-exam-condition/graduation-announcement', functi
     return view('graduation-announcement-form');
 });
 
+Route::get('/academic/library', function () {
+    return view('academic-library-form');
+});
+
 Route::get('/content/profil/achievement', function () {
     return view('achievements');
 });

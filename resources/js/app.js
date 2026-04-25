@@ -46,6 +46,7 @@ import ExamRulesForm from './Pages/Content/Academic/Graduation/ExamRulesForm.vue
 import GraduationForm from './Pages/Content/Academic/Graduation/GraduationForm.vue';
 import YudisiumForm from './Pages/Content/Academic/Graduation/YudisiumForm.vue';
 import GraduationAnnouncementForm from './Pages/Content/Academic/Graduation/GraduationAnnouncementForm.vue';
+import LibraryForm from './Pages/Content/Academic/LibraryForm.vue';
 import AchievementIndex from './Pages/Content/Achievement/index.vue';
 import AchievementForm from './Pages/Content/Achievement/AchievementForm.vue';
 import AchievementEdit from './Pages/Content/Achievement/AchievementEdit.vue';
@@ -104,6 +105,7 @@ const pages = {
     graduationForm: GraduationForm,
     yudisiumForm: YudisiumForm,
     graduationAnnouncementForm: GraduationAnnouncementForm,
+    academicLibraryForm: LibraryForm,
     achievementIndex: AchievementIndex,
     achievementForm: AchievementForm,
     achievementEdit: AchievementEdit,

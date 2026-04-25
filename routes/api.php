@@ -33,6 +33,7 @@ use App\Http\Controllers\Api\ExamRuleController;
 use App\Http\Controllers\Api\GraduationController;
 use App\Http\Controllers\Api\YudisiumController;
 use App\Http\Controllers\Api\GraduationAnnouncementController;
+use App\Http\Controllers\Api\AcademicLibraryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -216,4 +217,8 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - Pengumuman Kelulusan
     Route::get('/graduation-announcement', [GraduationAnnouncementController::class, 'show']);
     Route::post('/graduation-announcement', [GraduationAnnouncementController::class, 'update']);
+
+    // Content Management - Perpustakaan
+    Route::get('/academic-library', [AcademicLibraryController::class, 'show']);
+    Route::post('/academic-library', [AcademicLibraryController::class, 'update']);
 });
