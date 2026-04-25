@@ -167,6 +167,26 @@ Route::get('/academic/provision/seminar-proposal', function () {
     return view('seminar-proposal-form');
 });
 
+Route::get('/academic/graduation-exam-condition/exam', function () {
+    return view('exam-form');
+});
+
+Route::get('/academic/graduation-exam-condition/exam-rules', function () {
+    return view('exam-rules-form');
+});
+
+Route::get('/academic/graduation-exam-condition/graduation', function () {
+    return view('graduation-form');
+});
+
+Route::get('/academic/graduation-exam-condition/yudisium', function () {
+    return view('yudisium-form');
+});
+
+Route::get('/academic/graduation-exam-condition/graduation-announcement', function () {
+    return view('graduation-announcement-form');
+});
+
 Route::get('/content/profil/achievement', function () {
     return view('achievements');
 });

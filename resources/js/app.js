@@ -41,6 +41,11 @@ import AttendanceCountForm from './Pages/Content/Academic/AttendanceCountForm.vu
 import EvaluationSystemForm from './Pages/Content/Academic/EvaluationSystemForm.vue';
 import SeminarProposalForm from './Pages/Content/Academic/SeminarProposalForm.vue';
 import AcademicCalendarForm from './Pages/Content/AcademicCalendarForm.vue';
+import ExamForm from './Pages/Content/Academic/Graduation/ExamForm.vue';
+import ExamRulesForm from './Pages/Content/Academic/Graduation/ExamRulesForm.vue';
+import GraduationForm from './Pages/Content/Academic/Graduation/GraduationForm.vue';
+import YudisiumForm from './Pages/Content/Academic/Graduation/YudisiumForm.vue';
+import GraduationAnnouncementForm from './Pages/Content/Academic/Graduation/GraduationAnnouncementForm.vue';
 import AchievementIndex from './Pages/Content/Achievement/index.vue';
 import AchievementForm from './Pages/Content/Achievement/AchievementForm.vue';
 import AchievementEdit from './Pages/Content/Achievement/AchievementEdit.vue';
@@ -94,6 +99,11 @@ const pages = {
     evaluationSystemForm: EvaluationSystemForm,
     seminarProposalForm: SeminarProposalForm,
     academicCalendarForm: AcademicCalendarForm,
+    examForm: ExamForm,
+    examRulesForm: ExamRulesForm,
+    graduationForm: GraduationForm,
+    yudisiumForm: YudisiumForm,
+    graduationAnnouncementForm: GraduationAnnouncementForm,
     achievementIndex: AchievementIndex,
     achievementForm: AchievementForm,
     achievementEdit: AchievementEdit,

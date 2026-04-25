@@ -147,8 +147,24 @@
         "name": "Ketentuan Ujian Tertulis Dan Kelulusan",
         "submenu": [
           {
-            "name": "Kehadiran Kuliah",
-            "link": "/academic/gradution-exam-condition/attendance"
+            "name": "Ketentuan Ujian",
+            "link": "/academic/graduation-exam-condition/exam"
+          },
+          {
+            "name": "Tata Tertib Ujian",
+            "link": "/academic/graduation-exam-condition/exam-rules"
+          },
+          {
+            "name": "Kelulusan",
+            "link": "/academic/graduation-exam-condition/graduation"
+          },
+          {
+            "name": "Yudisium",
+            "link": "/academic/graduation-exam-condition/yudisium"
+          },
+          {
+            "name": "Pengumuman Kelulusan",
+            "link": "/academic/graduation-exam-condition/graduation-announcement"
           }
         ]
       }

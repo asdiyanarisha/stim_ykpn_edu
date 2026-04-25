@@ -72,8 +72,11 @@ const updateActiveState = (items, currentPath) => {
   items.forEach(item => {
     item.active = false;
     
-    // Check if link matches
-    const isDirectMatch = item.link === currentPath || (item.link && item.link !== '/' && currentPath.startsWith(item.link));
+    // Normalize path by removing trailing slash for exact matching
+    const normalizedPath = currentPath.endsWith('/') && currentPath.length > 1 ? currentPath.slice(0, -1) : currentPath;
+    
+    // Check if link matches precisely or as a directory prefix (with slash boundary)
+    const isDirectMatch = item.link === normalizedPath || (item.link && item.link !== '/' && normalizedPath.startsWith(item.link + '/'));
     
     if (item.submenu && item.submenu.length > 0) {
       const hasActiveChild = updateActiveState(item.submenu, currentPath);

@@ -28,6 +28,11 @@ use App\Http\Controllers\Api\ClassCapacityController;
 use App\Http\Controllers\Api\AttendanceCountController;
 use App\Http\Controllers\Api\EvaluationSystemController;
 use App\Http\Controllers\Api\SeminarProposalController;
+use App\Http\Controllers\Api\ExamController;
+use App\Http\Controllers\Api\ExamRuleController;
+use App\Http\Controllers\Api\GraduationController;
+use App\Http\Controllers\Api\YudisiumController;
+use App\Http\Controllers\Api\GraduationAnnouncementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -191,4 +196,24 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - Proposal Seminar
     Route::get('/seminar-proposal', [SeminarProposalController::class, 'show']);
     Route::post('/seminar-proposal', [SeminarProposalController::class, 'update']);
+
+    // Content Management - Ketentuan Ujian
+    Route::get('/exam', [ExamController::class, 'show']);
+    Route::post('/exam', [ExamController::class, 'update']);
+
+    // Content Management - Tata Tertib Ujian
+    Route::get('/exam-rules', [ExamRuleController::class, 'show']);
+    Route::post('/exam-rules', [ExamRuleController::class, 'update']);
+
+    // Content Management - Kelulusan
+    Route::get('/graduation', [GraduationController::class, 'show']);
+    Route::post('/graduation', [GraduationController::class, 'update']);
+
+    // Content Management - Yudisium
+    Route::get('/yudisium', [YudisiumController::class, 'show']);
+    Route::post('/yudisium', [YudisiumController::class, 'update']);
+
+    // Content Management - Pengumuman Kelulusan
+    Route::get('/graduation-announcement', [GraduationAnnouncementController::class, 'show']);
+    Route::post('/graduation-announcement', [GraduationAnnouncementController::class, 'update']);
 });

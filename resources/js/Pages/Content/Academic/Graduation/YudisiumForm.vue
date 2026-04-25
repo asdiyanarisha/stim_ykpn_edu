@@ -29,12 +29,12 @@
         <div class="max-w-4xl mx-auto mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
-              <span class="hover:text-indigo-600 transition-colors">Ketentuan Perkuliahan</span>
+              <span class="hover:text-indigo-600 transition-colors">Ketentuan Kelulusan & Ujian</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-              <span class="text-slate-900 font-medium">Proposal Seminar</span>
+              <span class="text-slate-900 font-medium">Yudisium</span>
             </div>
-            <h1 class="text-2xl font-bold text-slate-900">Proposal Seminar STIM YKPN</h1>
-            <p class="text-slate-500">Kelola informasi mengenai informasi Proposal Seminar STIM YKPN.</p>
+            <h1 class="text-2xl font-bold text-slate-900">Yudisium STIM YKPN</h1>
+            <p class="text-slate-500">Kelola informasi mengenai informasi Yudisium STIM YKPN.</p>
           </div>
         </div>
 
@@ -57,7 +57,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
                   </div>
                   <p class="text-slate-600 font-bold">Pilih atau Seret Header ke Sini</p>
-                  <p class="text-slate-400 text-sm mt-1">Saran: Gambar terkait Proposal Seminar STIM YKPN (Maks. 5MB)</p>
+                  <p class="text-slate-400 text-sm mt-1">Saran: Gambar terkait Yudisium STIM YKPN (Maks. 5MB)</p>
                 </template>
 
                 <div v-if="imagePreview" class="w-full aspect-[21/9] mx-auto rounded-2xl overflow-hidden shadow-lg border border-slate-200 relative">
@@ -76,11 +76,11 @@
                 <span class="p-2 bg-indigo-50 rounded-xl text-indigo-600">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                 </span>
-                Detail Proposal Seminar
+                Detail Yudisium
               </h2>
 
               <div class="space-y-6">
-                <AppInput v-model="form.title" label="Judul" placeholder="Misal: Ketentuan Seminar Proposal" id="seminar-proposal-title" :error="errors.title" />
+                <AppInput v-model="form.title" label="Judul" placeholder="Misal: Pelaksanaan Yudisium Gelombang I" id="yudisium-title" :error="errors.title" />
 
                 <!-- Quill Editor for Content -->
                 <div class="space-y-1">
@@ -121,11 +121,11 @@ import Swal from 'sweetalert2';
 import { QuillEditor } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
-import AppSidebar from '../../../Components/Organisms/AppSidebar.vue';
-import AppNavbar from '../../../Components/Organisms/AppNavbar.vue';
-import AppButton from '../../../Components/Atoms/AppButton.vue';
-import AppInput from '../../../Components/Atoms/AppInput.vue';
-import { getCookie, deleteCookie, TOKEN_COOKIE_NAME } from '../../../Helpers/cookie.js';
+import AppSidebar from '../../../../Components/Organisms/AppSidebar.vue';
+import AppNavbar from '../../../../Components/Organisms/AppNavbar.vue';
+import AppButton from '../../../../Components/Atoms/AppButton.vue';
+import AppInput from '../../../../Components/Atoms/AppInput.vue';
+import { getCookie, deleteCookie, TOKEN_COOKIE_NAME } from '../../../../Helpers/cookie.js';
 
 const sidebarOpen = ref(false);
 const isAuthenticated = ref(false);
@@ -140,7 +140,7 @@ const form = reactive({
 });
 
 const editorOptions = {
-  placeholder: 'Tuliskan rincian proposal seminar di sini...',
+  placeholder: 'Tuliskan rincian yudisium di sini...',
   theme: 'snow',
   modules: {
     toolbar: [
@@ -179,7 +179,7 @@ const fetchData = async () => {
     isLoading.value = true;
     try {
         const token = getCookie(TOKEN_COOKIE_NAME);
-        const response = await axios.get('/api/seminar-proposal', {
+        const response = await axios.get('/api/yudisium', {
             headers: { Authorization: `Bearer ${token}` }
         });
         
@@ -191,7 +191,7 @@ const fetchData = async () => {
         }
     } catch (error) {
         console.error('Error fetching data:', error);
-        Swal.fire({ icon: 'error', title: 'Kesalahan', text: 'Gagal memuat data Proposal Seminar STIM YKPN.' });
+        Swal.fire({ icon: 'error', title: 'Kesalahan', text: 'Gagal memuat data Yudisium STIM YKPN.' });
     } finally {
         isLoading.value = false;
     }
@@ -213,7 +213,7 @@ const handleSubmit = async () => {
       formData.append('image', form.image);
     }
 
-    const response = await axios.post('/api/seminar-proposal', formData, {
+    const response = await axios.post('/api/yudisium', formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data'

@@ -34,7 +34,7 @@
               <span class="text-slate-900 font-medium">Sistem Evaluasi</span>
             </div>
             <h1 class="text-2xl font-bold text-slate-900">Sistem Evaluasi STIM YKPN</h1>
-            <p class="text-slate-500">Kelola informasi mengenai sejarah dan profil institusi STIM YKPN.</p>
+            <p class="text-slate-500">Kelola informasi mengenai informasi Sistem Evaluasi STIM YKPN.</p>
           </div>
         </div>
 
@@ -57,7 +57,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
                   </div>
                   <p class="text-slate-600 font-bold">Pilih atau Seret Header ke Sini</p>
-                  <p class="text-slate-400 text-sm mt-1">Saran: Gambar institusi bersejarah (Maks. 5MB)</p>
+                  <p class="text-slate-400 text-sm mt-1">Saran: Gambar terkait Sistem Evaluasi STIM YKPN (Maks. 5MB)</p>
                 </template>
 
                 <div v-if="imagePreview" class="w-full aspect-[21/9] mx-auto rounded-2xl overflow-hidden shadow-lg border border-slate-200 relative">
@@ -191,7 +191,7 @@ const fetchData = async () => {
         }
     } catch (error) {
         console.error('Error fetching data:', error);
-        Swal.fire({ icon: 'error', title: 'Kesalahan', text: 'Gagal memuat data sejarah.' });
+        Swal.fire({ icon: 'error', title: 'Kesalahan', text: 'Gagal memuat data Sistem Evaluasi STIM YKPN.' });
     } finally {
         isLoading.value = false;
     }
