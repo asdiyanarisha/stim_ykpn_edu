@@ -80,7 +80,7 @@
               </h2>
 
               <div class="space-y-6">
-                <AppInput v-model="form.title" label="Judul" placeholder="Misal: Sejarah STIM YKPN Yogyakarta" id="evaluation-system-title" :error="errors.title" />
+                <AppInput v-model="form.title" label="Judul" placeholder="Misal: Ketentuan Sistem Evaluasi" id="evaluation-system-title" :error="errors.title" />
 
                 <!-- Quill Editor for Content -->
                 <div class="space-y-1">

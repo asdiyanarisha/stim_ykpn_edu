@@ -79,6 +79,7 @@ const updateActiveState = (items, currentPath) => {
       const hasActiveChild = updateActiveState(item.submenu, currentPath);
       if (hasActiveChild) {
         item.isOpen = true;
+        item.active = true;
         anyChildActive = true;
       }
     }

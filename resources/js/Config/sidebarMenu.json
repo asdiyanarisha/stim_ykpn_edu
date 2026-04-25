@@ -142,6 +142,15 @@
             "link": "/academic/provision/seminar-proposal"
           }
         ]
+      },
+      {
+        "name": "Ketentuan Ujian Tertulis Dan Kelulusan",
+        "submenu": [
+          {
+            "name": "Kehadiran Kuliah",
+            "link": "/academic/gradution-exam-condition/attendance"
+          }
+        ]
       }
     ]
   }

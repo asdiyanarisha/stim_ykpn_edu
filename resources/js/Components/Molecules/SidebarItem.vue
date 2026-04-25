@@ -9,11 +9,14 @@
         indentClass
       ]"
     >
-      <span v-if="item.icon && depth === 0" v-html="item.icon" class="w-5 h-5 opacity-70 group-hover:opacity-100 flex-shrink-0"></span>
-      <div v-else-if="depth > 0" class="flex-shrink-0 w-1.5 h-1.5 rounded-full transition-all duration-200"
-        :class="item.active ? 'bg-white scale-125' : 'bg-slate-600 group-hover:bg-slate-400'"
+      <span v-if="item.icon && depth === 0" v-html="item.icon" 
+        class="w-5 h-5 flex-shrink-0 transition-all duration-200"
+        :class="item.active ? 'text-indigo-400 opacity-100' : 'text-slate-400 group-hover:text-white opacity-70 group-hover:opacity-100'"
+      ></span>
+      <div v-else-if="depth > 0" class="flex-shrink-0 w-2 h-2 rounded-full transition-all duration-200 mt-1.5"
+        :class="item.active ? 'bg-indigo-400 scale-110 shadow-[0_0_10px_rgba(129,140,248,0.5)]' : 'bg-slate-600 group-hover:bg-slate-400'"
       ></div>
-      <span class="font-medium text-[0.9375rem] py-0.5 leading-tight">{{ item.name }}</span>
+      <span class="font-medium text-[0.9375rem] py-0.5 leading-tight text-left">{{ item.name }}</span>
     </a>
 
     <!-- Toggleable Button (Has Submenu) -->
@@ -25,12 +28,15 @@
           indentClass
         ]"
       >
-        <div class="flex items-center gap-3">
-          <span v-if="item.icon && depth === 0" v-html="item.icon" class="w-5 h-5 opacity-70 group-hover:opacity-100 flex-shrink-0"></span>
-          <div v-else-if="depth > 0" class="flex-shrink-0 w-1.5 h-1.5 rounded-full"
-            :class="item.active ? 'bg-indigo-400' : 'bg-slate-600'"
+        <div class="flex items-start gap-3">
+          <span v-if="item.icon && depth === 0" v-html="item.icon" 
+            class="w-5 h-5 flex-shrink-0 transition-all duration-200 mt-0.5"
+            :class="item.active ? 'text-indigo-400 opacity-100' : 'text-slate-400 group-hover:text-white opacity-70 group-hover:opacity-100'"
+          ></span>
+          <div v-else-if="depth > 0" class="flex-shrink-0 w-2 h-2 rounded-full transition-all duration-200 mt-1.5"
+            :class="item.active ? 'bg-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.4)]' : 'bg-slate-600 group-hover:bg-slate-400'"
           ></div>
-          <span class="font-medium text-[0.9375rem] py-0.5 leading-tight">{{ item.name }}</span>
+          <span class="font-medium text-[0.9375rem] py-0.5 leading-tight text-left" :class="item.active ? 'text-white' : 'text-slate-300 group-hover:text-white'">{{ item.name }}</span>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" 
           class="w-4 h-4 transition-transform duration-200 flex-shrink-0" 
