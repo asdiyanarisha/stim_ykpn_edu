@@ -218,15 +218,14 @@ Route::get('/content/banner/edit/{id}', function ($id) {
     return view('banner-edit');
 });
 
-Route::get('/research/journal', function () {
-    return view('journal');
-});
-Route::get('/research/journal/create', function () {
-    return view('journal-form');
-});
-Route::get('/research/journal/show/{id}', function ($id) {
-    return view('journal-show');
-});
-Route::get('/research/journal/edit/{id}', function ($id) {
-    return view('journal-edit');
-});
+// Jurnal Penelitian
+Route::get('/research/journal', fn() => view('journal'))->name('journal');
+Route::get('/research/journal/create', fn() => view('journal-form'))->name('journal.create');
+Route::get('/research/journal/show/{id}', fn() => view('journal-show'))->name('journal.show');
+Route::get('/research/journal/edit/{id}', fn() => view('journal-edit'))->name('journal.edit');
+
+// Kegiatan Mahasiswa
+Route::get('/student/activity', fn() => view('student-activity'))->name('student.activity');
+Route::get('/student/activity/create', fn() => view('student-activity-form'))->name('student.activity.create');
+Route::get('/student/activity/show/{id}', fn() => view('student-activity-show'))->name('student.activity.show');
+Route::get('/student/activity/edit/{id}', fn() => view('student-activity-edit'))->name('student.activity.edit');

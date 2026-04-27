@@ -35,6 +35,7 @@ use App\Http\Controllers\Api\YudisiumController;
 use App\Http\Controllers\Api\GraduationAnnouncementController;
 use App\Http\Controllers\Api\AcademicLibraryController;
 use App\Http\Controllers\Api\ArticleTeacherController;
+use App\Http\Controllers\Api\StudentActivityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -228,6 +229,14 @@ Route::middleware('jwt.auth')->group(function () {
     Route::get('/research-journals/{id}', [ArticleTeacherController::class, 'show']);
     Route::post('/research-journals', [ArticleTeacherController::class, 'store']);
     Route::post('/research-journals/bulk-delete', [ArticleTeacherController::class, 'bulkDestroy']);
+    
+    // Student Activity
+    Route::get('/student-activities', [StudentActivityController::class, 'index']);
+    Route::post('/student-activities', [StudentActivityController::class, 'store']);
+    Route::get('/student-activities/{id}', [StudentActivityController::class, 'show']);
+    Route::post('/student-activities/{id}', [StudentActivityController::class, 'update']);
+    Route::delete('/student-activities/{id}', [StudentActivityController::class, 'destroy']);
+    Route::post('/student-activities/bulk-delete', [StudentActivityController::class, 'bulkDestroy']);
     Route::post('/research-journals/{id}', [ArticleTeacherController::class, 'update']);
     Route::delete('/research-journals/{id}', [ArticleTeacherController::class, 'destroy']);
 });
