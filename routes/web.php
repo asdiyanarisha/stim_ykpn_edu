@@ -217,3 +217,16 @@ Route::get('/content/banner/create', function () {
 Route::get('/content/banner/edit/{id}', function ($id) {
     return view('banner-edit');
 });
+
+Route::get('/research/journal', function () {
+    return view('journal');
+});
+Route::get('/research/journal/create', function () {
+    return view('journal-form');
+});
+Route::get('/research/journal/show/{id}', function ($id) {
+    return view('journal-show');
+});
+Route::get('/research/journal/edit/{id}', function ($id) {
+    return view('journal-edit');
+});

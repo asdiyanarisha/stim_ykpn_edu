@@ -34,6 +34,7 @@ use App\Http\Controllers\Api\GraduationController;
 use App\Http\Controllers\Api\YudisiumController;
 use App\Http\Controllers\Api\GraduationAnnouncementController;
 use App\Http\Controllers\Api\AcademicLibraryController;
+use App\Http\Controllers\Api\ArticleTeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -221,4 +222,12 @@ Route::middleware('jwt.auth')->group(function () {
     // Content Management - Perpustakaan
     Route::get('/academic-library', [AcademicLibraryController::class, 'show']);
     Route::post('/academic-library', [AcademicLibraryController::class, 'update']);
+
+    // Research Journals
+    Route::get('/research-journals', [ArticleTeacherController::class, 'index']);
+    Route::get('/research-journals/{id}', [ArticleTeacherController::class, 'show']);
+    Route::post('/research-journals', [ArticleTeacherController::class, 'store']);
+    Route::post('/research-journals/bulk-delete', [ArticleTeacherController::class, 'bulkDestroy']);
+    Route::post('/research-journals/{id}', [ArticleTeacherController::class, 'update']);
+    Route::delete('/research-journals/{id}', [ArticleTeacherController::class, 'destroy']);
 });

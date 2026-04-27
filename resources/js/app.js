@@ -51,6 +51,9 @@ import AchievementIndex from './Pages/Content/Achievement/index.vue';
 import AchievementForm from './Pages/Content/Achievement/AchievementForm.vue';
 import AchievementEdit from './Pages/Content/Achievement/AchievementEdit.vue';
 import AchievementShow from './Pages/Content/Achievement/Show.vue';
+import JournalIndex from './Pages/Research/Journal/index.vue';
+import JournalForm from './Pages/Research/Journal/Form.vue';
+import JournalShow from './Pages/Research/Journal/Show.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -110,6 +113,9 @@ const pages = {
     achievementForm: AchievementForm,
     achievementEdit: AchievementEdit,
     achievementShow: AchievementShow,
+    journal: JournalIndex,
+    journalForm: JournalForm,
+    journalShow: JournalShow,
 };
 
 const appElement = document.getElementById('app');
