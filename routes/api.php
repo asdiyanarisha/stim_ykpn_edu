@@ -246,6 +246,14 @@ Route::middleware('jwt.auth')->group(function () {
     Route::delete('/student-ukms/{id}', [App\Http\Controllers\Api\StudentUkmController::class, 'destroy']);
     Route::post('/student-ukms/bulk-delete', [App\Http\Controllers\Api\StudentUkmController::class, 'bulkDestroy']);
 
+    // Testimony Alumni
+    Route::get('/testimony-alumnis', [App\Http\Controllers\Api\TestimonyAlumniController::class, 'index']);
+    Route::post('/testimony-alumnis', [App\Http\Controllers\Api\TestimonyAlumniController::class, 'store']);
+    Route::get('/testimony-alumnis/{id}', [App\Http\Controllers\Api\TestimonyAlumniController::class, 'show']);
+    Route::post('/testimony-alumnis/{id}', [App\Http\Controllers\Api\TestimonyAlumniController::class, 'update']);
+    Route::delete('/testimony-alumnis/{id}', [App\Http\Controllers\Api\TestimonyAlumniController::class, 'destroy']);
+    Route::post('/testimony-alumnis/bulk-delete', [App\Http\Controllers\Api\TestimonyAlumniController::class, 'bulkDestroy']);
+
     Route::post('/research-journals/{id}', [ArticleTeacherController::class, 'update']);
     Route::delete('/research-journals/{id}', [ArticleTeacherController::class, 'destroy']);
 });

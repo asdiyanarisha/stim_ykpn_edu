@@ -195,6 +195,10 @@
       {
         "name": "UKM",
         "link": "/student/ukm"
+      },
+      {
+        "name": "Testimoni Alumni",
+        "link": "/student/testimony"
       }
     ]
   }

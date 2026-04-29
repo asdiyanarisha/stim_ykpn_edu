@@ -235,3 +235,9 @@ Route::get('/student/ukm', fn() => view('student-ukm'))->name('student.ukm');
 Route::get('/student/ukm/create', fn() => view('student-ukm-form'))->name('student.ukm.create');
 Route::get('/student/ukm/show/{id}', fn() => view('student-ukm-show'))->name('student.ukm.show');
 Route::get('/student/ukm/edit/{id}', fn() => view('student-ukm-edit'))->name('student.ukm.edit');
+
+// Testimony Alumni
+Route::get('/student/testimony', fn() => view('student-testimony'))->name('student.testimony');
+Route::get('/student/testimony/create', fn() => view('student-testimony-form'))->name('student.testimony.create');
+Route::get('/student/testimony/show/{id}', fn() => view('student-testimony-show'))->name('student.testimony.show');
+Route::get('/student/testimony/edit/{id}', fn() => view('student-testimony-edit'))->name('student.testimony.edit');
