@@ -15,13 +15,19 @@
       </button>
     </div>
 
-    <nav class="flex-1 px-4 space-y-1 overflow-y-auto custom-scrollbar pt-6 pb-20">
-      <SidebarItem 
-        v-for="item in menuItems" 
-        :key="item.name" 
-        :item="item" 
-        :depth="0" 
-      />
+    <nav class="flex-1 px-4 overflow-y-auto custom-scrollbar pt-4 pb-20 space-y-0.5">
+      <template v-for="item in menuItems" :key="item.name || item.category">
+        <!-- Category Header -->
+        <div v-if="item.category" class="pt-5 pb-1.5 px-3">
+          <span class="text-[10px] font-bold tracking-widest uppercase text-slate-500">{{ item.category }}</span>
+        </div>
+        <!-- Regular Menu Item -->
+        <SidebarItem 
+          v-else
+          :item="item" 
+          :depth="0" 
+        />
+      </template>
     </nav>
   </aside>
 </template>
@@ -70,6 +76,9 @@ const updateActiveState = (items, currentPath) => {
   let anyChildActive = false;
   
   items.forEach(item => {
+    // Skip category separator items
+    if (item.category) return;
+
     item.active = false;
     
     // Normalize path by removing trailing slash for exact matching
@@ -95,6 +104,7 @@ const updateActiveState = (items, currentPath) => {
 
   return anyChildActive;
 };
+
 
 onMounted(() => {
   const path = window.location.pathname;
