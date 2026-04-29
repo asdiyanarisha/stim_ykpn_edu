@@ -229,3 +229,9 @@ Route::get('/student/activity', fn() => view('student-activity'))->name('student
 Route::get('/student/activity/create', fn() => view('student-activity-form'))->name('student.activity.create');
 Route::get('/student/activity/show/{id}', fn() => view('student-activity-show'))->name('student.activity.show');
 Route::get('/student/activity/edit/{id}', fn() => view('student-activity-edit'))->name('student.activity.edit');
+
+// Student UKM
+Route::get('/student/ukm', fn() => view('student-ukm'))->name('student.ukm');
+Route::get('/student/ukm/create', fn() => view('student-ukm-form'))->name('student.ukm.create');
+Route::get('/student/ukm/show/{id}', fn() => view('student-ukm-show'))->name('student.ukm.show');
+Route::get('/student/ukm/edit/{id}', fn() => view('student-ukm-edit'))->name('student.ukm.edit');

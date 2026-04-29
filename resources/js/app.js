@@ -57,6 +57,9 @@ import JournalShow from './Pages/Research/Journal/Show.vue';
 import StudentActivity from './Pages/Student/Activity/index.vue';
 import StudentActivityForm from './Pages/Student/Activity/Form.vue';
 import StudentActivityShow from './Pages/Student/Activity/Show.vue';
+import StudentUkm from './Pages/Student/Ukm/index.vue';
+import StudentUkmForm from './Pages/Student/Ukm/Form.vue';
+import StudentUkmShow from './Pages/Student/Ukm/Show.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -122,6 +125,9 @@ const pages = {
     studentActivity: StudentActivity,
     studentActivityForm: StudentActivityForm,
     studentActivityShow: StudentActivityShow,
+    studentUkm: StudentUkm,
+    studentUkmForm: StudentUkmForm,
+    studentUkmShow: StudentUkmShow,
 };
 
 const appElement = document.getElementById('app');

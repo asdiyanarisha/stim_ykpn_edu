@@ -237,6 +237,15 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/student-activities/{id}', [StudentActivityController::class, 'update']);
     Route::delete('/student-activities/{id}', [StudentActivityController::class, 'destroy']);
     Route::post('/student-activities/bulk-delete', [StudentActivityController::class, 'bulkDestroy']);
+    
+    // Student UKM
+    Route::get('/student-ukms', [App\Http\Controllers\Api\StudentUkmController::class, 'index']);
+    Route::post('/student-ukms', [App\Http\Controllers\Api\StudentUkmController::class, 'store']);
+    Route::get('/student-ukms/{id}', [App\Http\Controllers\Api\StudentUkmController::class, 'show']);
+    Route::post('/student-ukms/{id}', [App\Http\Controllers\Api\StudentUkmController::class, 'update']);
+    Route::delete('/student-ukms/{id}', [App\Http\Controllers\Api\StudentUkmController::class, 'destroy']);
+    Route::post('/student-ukms/bulk-delete', [App\Http\Controllers\Api\StudentUkmController::class, 'bulkDestroy']);
+
     Route::post('/research-journals/{id}', [ArticleTeacherController::class, 'update']);
     Route::delete('/research-journals/{id}', [ArticleTeacherController::class, 'destroy']);
 });

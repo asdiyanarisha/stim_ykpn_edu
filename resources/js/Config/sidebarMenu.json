@@ -191,6 +191,10 @@
       {
         "name": "Kegiatan Mahasiswa",
         "link": "/student/activity"
+      },
+      {
+        "name": "UKM",
+        "link": "/student/ukm"
       }
     ]
   }
