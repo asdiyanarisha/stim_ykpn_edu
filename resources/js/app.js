@@ -63,6 +63,9 @@ import StudentUkmShow from './Pages/Student/Ukm/Show.vue';
 import StudentTestimony from './Pages/Student/Testimony/index.vue';
 import StudentTestimonyForm from './Pages/Student/Testimony/Form.vue';
 import StudentTestimonyShow from './Pages/Student/Testimony/Show.vue';
+import CampusLiveVideoIndex from './Pages/CampusLife/Video/index.vue';
+import CampusLiveVideoForm from './Pages/CampusLife/Video/Form.vue';
+import CampusLiveVideoShow from './Pages/CampusLife/Video/Show.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -134,6 +137,9 @@ const pages = {
     studentTestimony: StudentTestimony,
     studentTestimonyForm: StudentTestimonyForm,
     studentTestimonyShow: StudentTestimonyShow,
+    campusLiveVideo: CampusLiveVideoIndex,
+    campusLiveVideoForm: CampusLiveVideoForm,
+    campusLiveVideoShow: CampusLiveVideoShow,
 };
 
 const appElement = document.getElementById('app');

@@ -241,3 +241,9 @@ Route::get('/student/testimony', fn() => view('student-testimony'))->name('stude
 Route::get('/student/testimony/create', fn() => view('student-testimony-form'))->name('student.testimony.create');
 Route::get('/student/testimony/show/{id}', fn() => view('student-testimony-show'))->name('student.testimony.show');
 Route::get('/student/testimony/edit/{id}', fn() => view('student-testimony-edit'))->name('student.testimony.edit');
+
+// Campus Live Video
+Route::get('/campus-life/video', fn() => view('campus-live-video'))->name('campus.live.video');
+Route::get('/campus-life/video/create', fn() => view('campus-live-video-form'))->name('campus.live.video.create');
+Route::get('/campus-life/video/show/{id}', fn() => view('campus-live-video-show'))->name('campus.live.video.show');
+Route::get('/campus-life/video/edit/{id}', fn() => view('campus-live-video-edit'))->name('campus.live.video.edit');

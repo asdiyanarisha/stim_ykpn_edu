@@ -36,6 +36,7 @@ use App\Http\Controllers\Api\GraduationAnnouncementController;
 use App\Http\Controllers\Api\AcademicLibraryController;
 use App\Http\Controllers\Api\ArticleTeacherController;
 use App\Http\Controllers\Api\StudentActivityController;
+use App\Http\Controllers\Api\CampusLiveVideoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -253,6 +254,14 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/testimony-alumnis/{id}', [App\Http\Controllers\Api\TestimonyAlumniController::class, 'update']);
     Route::delete('/testimony-alumnis/{id}', [App\Http\Controllers\Api\TestimonyAlumniController::class, 'destroy']);
     Route::post('/testimony-alumnis/bulk-delete', [App\Http\Controllers\Api\TestimonyAlumniController::class, 'bulkDestroy']);
+
+    // Campus Live Video
+    Route::get('/campus-live-videos', [CampusLiveVideoController::class, 'index']);
+    Route::post('/campus-live-videos', [CampusLiveVideoController::class, 'store']);
+    Route::get('/campus-live-videos/{id}', [CampusLiveVideoController::class, 'show']);
+    Route::post('/campus-live-videos/{id}', [CampusLiveVideoController::class, 'update']);
+    Route::delete('/campus-live-videos/{id}', [CampusLiveVideoController::class, 'destroy']);
+    Route::post('/campus-live-videos/bulk-delete', [CampusLiveVideoController::class, 'bulkDestroy']);
 
     Route::post('/research-journals/{id}', [ArticleTeacherController::class, 'update']);
     Route::delete('/research-journals/{id}', [ArticleTeacherController::class, 'destroy']);
