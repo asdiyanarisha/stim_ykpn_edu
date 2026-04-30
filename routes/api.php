@@ -38,6 +38,10 @@ use App\Http\Controllers\Api\ArticleTeacherController;
 use App\Http\Controllers\Api\StudentActivityController;
 use App\Http\Controllers\Api\CampusLiveVideoController;
 use App\Http\Controllers\Api\LodgingInformationController;
+use App\Http\Controllers\Api\PmbScholarshipController;
+use App\Http\Controllers\Api\PmbProgramExcellenceController;
+use App\Http\Controllers\Api\PmbProgramRegulerController;
+use App\Http\Controllers\Api\PmbProgramExtensiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -267,6 +271,18 @@ Route::middleware('jwt.auth')->group(function () {
     // Lodging Information
     Route::get('/lodging-information', [LodgingInformationController::class, 'show']);
     Route::post('/lodging-information', [LodgingInformationController::class, 'update']);
+
+    // PMB
+    Route::prefix('pmb')->group(function () {
+        Route::get('/scholarship', [PmbScholarshipController::class, 'show']);
+        Route::post('/scholarship', [PmbScholarshipController::class, 'update']);
+        Route::get('/program-excellence', [PmbProgramExcellenceController::class, 'show']);
+        Route::post('/program-excellence', [PmbProgramExcellenceController::class, 'update']);
+        Route::get('/program-reguler', [PmbProgramRegulerController::class, 'show']);
+        Route::post('/program-reguler', [PmbProgramRegulerController::class, 'update']);
+        Route::get('/program-extensi', [PmbProgramExtensiController::class, 'show']);
+        Route::post('/program-extensi', [PmbProgramExtensiController::class, 'update']);
+    });
 
     Route::post('/research-journals/{id}', [ArticleTeacherController::class, 'update']);
     Route::delete('/research-journals/{id}', [ArticleTeacherController::class, 'destroy']);

@@ -67,6 +67,10 @@ import CampusLiveVideoIndex from './Pages/CampusLife/Video/index.vue';
 import CampusLiveVideoForm from './Pages/CampusLife/Video/Form.vue';
 import CampusLiveVideoShow from './Pages/CampusLife/Video/Show.vue';
 import LodgingInformationForm from './Pages/CampusLife/LodgingInformationForm.vue';
+import PmbScholarshipForm from './Pages/Pmb/ScholarshipForm.vue';
+import PmbProgramExcellenceForm from './Pages/Pmb/ProgramExcellenceForm.vue';
+import PmbProgramRegulerForm from './Pages/Pmb/ProgramRegulerForm.vue';
+import PmbProgramExtensiForm from './Pages/Pmb/ProgramExtensiForm.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -142,6 +146,10 @@ const pages = {
     campusLiveVideoForm: CampusLiveVideoForm,
     campusLiveVideoShow: CampusLiveVideoShow,
     lodgingInformationForm: LodgingInformationForm,
+    pmbScholarshipForm: PmbScholarshipForm,
+    pmbProgramExcellenceForm: PmbProgramExcellenceForm,
+    pmbProgramRegulerForm: PmbProgramRegulerForm,
+    pmbProgramExtensiForm: PmbProgramExtensiForm,
 };
 
 const appElement = document.getElementById('app');

@@ -250,3 +250,9 @@ Route::get('/campus-life/video/edit/{id}', fn() => view('campus-live-video-edit'
 
 // Lodging Information
 Route::get('/campus-life/lodging-information', fn() => view('lodging-information-form'))->name('campus.live.lodging.information');
+
+// PMB
+Route::get('/pmb/scholarship', fn() => view('pmb-scholarship-form'))->name('pmb.scholarship');
+Route::get('/pmb/program-excellence', fn() => view('pmb-program-excellence-form'))->name('pmb.program.excellence');
+Route::get('/pmb/program-reguler', fn() => view('pmb-program-reguler-form'))->name('pmb.program.reguler');
+Route::get('/pmb/program-extensi', fn() => view('pmb-program-extensi-form'))->name('pmb.program.extensi');
