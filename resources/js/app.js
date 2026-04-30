@@ -66,6 +66,7 @@ import StudentTestimonyShow from './Pages/Student/Testimony/Show.vue';
 import CampusLiveVideoIndex from './Pages/CampusLife/Video/index.vue';
 import CampusLiveVideoForm from './Pages/CampusLife/Video/Form.vue';
 import CampusLiveVideoShow from './Pages/CampusLife/Video/Show.vue';
+import LodgingInformationForm from './Pages/CampusLife/LodgingInformationForm.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -140,6 +141,7 @@ const pages = {
     campusLiveVideo: CampusLiveVideoIndex,
     campusLiveVideoForm: CampusLiveVideoForm,
     campusLiveVideoShow: CampusLiveVideoShow,
+    lodgingInformationForm: LodgingInformationForm,
 };
 
 const appElement = document.getElementById('app');

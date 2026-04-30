@@ -37,6 +37,7 @@ use App\Http\Controllers\Api\AcademicLibraryController;
 use App\Http\Controllers\Api\ArticleTeacherController;
 use App\Http\Controllers\Api\StudentActivityController;
 use App\Http\Controllers\Api\CampusLiveVideoController;
+use App\Http\Controllers\Api\LodgingInformationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -262,6 +263,10 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/campus-live-videos/{id}', [CampusLiveVideoController::class, 'update']);
     Route::delete('/campus-live-videos/{id}', [CampusLiveVideoController::class, 'destroy']);
     Route::post('/campus-live-videos/bulk-delete', [CampusLiveVideoController::class, 'bulkDestroy']);
+
+    // Lodging Information
+    Route::get('/lodging-information', [LodgingInformationController::class, 'show']);
+    Route::post('/lodging-information', [LodgingInformationController::class, 'update']);
 
     Route::post('/research-journals/{id}', [ArticleTeacherController::class, 'update']);
     Route::delete('/research-journals/{id}', [ArticleTeacherController::class, 'destroy']);

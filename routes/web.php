@@ -247,3 +247,6 @@ Route::get('/campus-life/video', fn() => view('campus-live-video'))->name('campu
 Route::get('/campus-life/video/create', fn() => view('campus-live-video-form'))->name('campus.live.video.create');
 Route::get('/campus-life/video/show/{id}', fn() => view('campus-live-video-show'))->name('campus.live.video.show');
 Route::get('/campus-life/video/edit/{id}', fn() => view('campus-live-video-edit'))->name('campus.live.video.edit');
+
+// Lodging Information
+Route::get('/campus-life/lodging-information', fn() => view('lodging-information-form'))->name('campus.live.lodging.information');
