@@ -261,3 +261,9 @@ Route::get('/pmb/program-extensi', fn() => view('pmb-program-extensi-form'))->na
 Route::get('/roles', fn() => view('role'))->name('role.index');
 Route::get('/roles/create', fn() => view('role-form'))->name('role.create');
 Route::get('/roles/edit/{id}', fn() => view('role-edit'))->name('role.edit');
+
+// User Management
+Route::get('/user', fn() => view('user'))->name('user.index');
+Route::get('/user/create', fn() => view('user-form'))->name('user.create');
+Route::get('/user/show/{id}', fn() => view('user-show'))->name('user.show');
+Route::get('/user/edit/{id}', fn() => view('user-edit'))->name('user.edit');
