@@ -76,6 +76,9 @@ import RoleForm from './Pages/Role/RoleForm.vue';
 import User from './Pages/User/index.vue';
 import UserForm from './Pages/User/UserForm.vue';
 import UserShow from './Pages/User/Show.vue';
+import Brochure from './Pages/Brochure/index.vue';
+import BrochureForm from './Pages/Brochure/BrochureForm.vue';
+import BrochureShow from './Pages/Brochure/Show.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -160,6 +163,9 @@ const pages = {
     user: User,
     userForm: UserForm,
     userShow: UserShow,
+    brochure: Brochure,
+    brochureForm: BrochureForm,
+    brochureShow: BrochureShow,
 };
 
 const appElement = document.getElementById('app');

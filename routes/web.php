@@ -267,3 +267,9 @@ Route::get('/user', fn() => view('user'))->name('user.index');
 Route::get('/user/create', fn() => view('user-form'))->name('user.create');
 Route::get('/user/show/{id}', fn() => view('user-show'))->name('user.show');
 Route::get('/user/edit/{id}', fn() => view('user-edit'))->name('user.edit');
+
+// Brochure Management
+Route::get('/brochure', fn() => view('brochure'))->name('brochure.index');
+Route::get('/brochure/create', fn() => view('brochure-form'))->name('brochure.create');
+Route::get('/brochure/show/{id}', fn() => view('brochure-show'))->name('brochure.show');
+Route::get('/brochure/edit/{id}', fn() => view('brochure-edit'))->name('brochure.edit');
