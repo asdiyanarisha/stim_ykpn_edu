@@ -42,6 +42,7 @@ use App\Http\Controllers\Api\PmbScholarshipController;
 use App\Http\Controllers\Api\PmbProgramExcellenceController;
 use App\Http\Controllers\Api\PmbProgramRegulerController;
 use App\Http\Controllers\Api\PmbProgramExtensiController;
+use App\Http\Controllers\Api\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -286,4 +287,12 @@ Route::middleware('jwt.auth')->group(function () {
 
     Route::post('/research-journals/{id}', [ArticleTeacherController::class, 'update']);
     Route::delete('/research-journals/{id}', [ArticleTeacherController::class, 'destroy']);
+
+    // Roles Management
+    Route::get('/roles', [RoleController::class, 'index']);
+    Route::post('/roles', [RoleController::class, 'store']);
+    Route::post('/roles/{id}', [RoleController::class, 'update']);
+    Route::delete('/roles/{id}', [RoleController::class, 'destroy']);
+    // Bulk actions
+    Route::post('/roles/bulk-delete', [RoleController::class, 'bulkDestroy']);
 });

@@ -71,6 +71,8 @@ import PmbScholarshipForm from './Pages/Pmb/ScholarshipForm.vue';
 import PmbProgramExcellenceForm from './Pages/Pmb/ProgramExcellenceForm.vue';
 import PmbProgramRegulerForm from './Pages/Pmb/ProgramRegulerForm.vue';
 import PmbProgramExtensiForm from './Pages/Pmb/ProgramExtensiForm.vue';
+import Role from './Pages/Role/index.vue';
+import RoleForm from './Pages/Role/RoleForm.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -150,6 +152,8 @@ const pages = {
     pmbProgramExcellenceForm: PmbProgramExcellenceForm,
     pmbProgramRegulerForm: PmbProgramRegulerForm,
     pmbProgramExtensiForm: PmbProgramExtensiForm,
+    role: Role,
+    roleForm: RoleForm,
 };
 
 const appElement = document.getElementById('app');

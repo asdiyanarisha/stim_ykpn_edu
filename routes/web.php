@@ -256,3 +256,8 @@ Route::get('/pmb/scholarship', fn() => view('pmb-scholarship-form'))->name('pmb.
 Route::get('/pmb/program-excellence', fn() => view('pmb-program-excellence-form'))->name('pmb.program.excellence');
 Route::get('/pmb/program-reguler', fn() => view('pmb-program-reguler-form'))->name('pmb.program.reguler');
 Route::get('/pmb/program-extensi', fn() => view('pmb-program-extensi-form'))->name('pmb.program.extensi');
+
+// Roles Management
+Route::get('/roles', fn() => view('role'))->name('role.index');
+Route::get('/roles/create', fn() => view('role-form'))->name('role.create');
+Route::get('/roles/edit/{id}', fn() => view('role-edit'))->name('role.edit');
