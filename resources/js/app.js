@@ -88,6 +88,9 @@ import VoucherShow from './Pages/Voucher/Show.vue';
 import AcademicSchoolYear from './Pages/AcademicYear/index.vue';
 import AcademicSchoolYearForm from './Pages/AcademicYear/SchoolYearForm.vue';
 import AcademicSchoolYearShow from './Pages/AcademicYear/Show.vue';
+import ProgramStudy from './Pages/ProgramStudy/index.vue';
+import ProgramStudyForm from './Pages/ProgramStudy/ProgramStudyForm.vue';
+import ProgramStudyShow from './Pages/ProgramStudy/Show.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -184,6 +187,9 @@ const pages = {
     academicSchoolYear: AcademicSchoolYear,
     academicSchoolYearForm: AcademicSchoolYearForm,
     academicSchoolYearShow: AcademicSchoolYearShow,
+    programStudy: ProgramStudy,
+    programStudyForm: ProgramStudyForm,
+    programStudyShow: ProgramStudyShow,
 };
 
 const appElement = document.getElementById('app');

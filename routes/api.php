@@ -48,6 +48,7 @@ use App\Http\Controllers\Api\BrochureController;
 use App\Http\Controllers\Api\PublicFileController;
 use App\Http\Controllers\Api\VoucherController;
 use App\Http\Controllers\Api\AcademicYearController;
+use App\Http\Controllers\Api\ProgramStudyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -340,4 +341,12 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/academic-years/{id}', [AcademicYearController::class, 'update']);
     Route::delete('/academic-years/{id}', [AcademicYearController::class, 'destroy']);
     Route::post('/academic-years/bulk-delete', [AcademicYearController::class, 'bulkDestroy']);
+
+    // Program Study Management
+    Route::get('/program-studies', [ProgramStudyController::class, 'index']);
+    Route::get('/program-studies/{id}', [ProgramStudyController::class, 'show']);
+    Route::post('/program-studies', [ProgramStudyController::class, 'store']);
+    Route::post('/program-studies/{id}', [ProgramStudyController::class, 'update']);
+    Route::delete('/program-studies/{id}', [ProgramStudyController::class, 'destroy']);
+    Route::post('/program-studies/bulk-delete', [ProgramStudyController::class, 'bulkDestroy']);
 });

@@ -291,3 +291,9 @@ Route::get('/academic/school-year', fn() => view('academic-school-year'))->name(
 Route::get('/academic/school-year/create', fn() => view('academic-school-year-form'))->name('academic-school-year.create');
 Route::get('/academic/school-year/show/{id}', fn() => view('academic-school-year-show'))->name('academic-school-year.show');
 Route::get('/academic/school-year/edit/{id}', fn() => view('academic-school-year-edit'))->name('academic-school-year.edit');
+
+// Program Study Management
+Route::get('/academic/programs', fn() => view('program-study'))->name('program-study.index');
+Route::get('/academic/programs/create', fn() => view('program-study-form'))->name('program-study.create');
+Route::get('/academic/programs/show/{id}', fn() => view('program-study-show'))->name('program-study.show');
+Route::get('/academic/programs/edit/{id}', fn() => view('program-study-edit'))->name('program-study.edit');
