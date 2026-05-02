@@ -279,3 +279,15 @@ Route::get('/public-files', fn() => view('public-files'))->name('public-files.in
 Route::get('/public-files/create', fn() => view('public-files-form'))->name('public-files.create');
 Route::get('/public-files/show/{id}', fn() => view('public-files-show'))->name('public-files.show');
 Route::get('/public-files/edit/{id}', fn() => view('public-files-edit'))->name('public-files.edit');
+
+// Voucher Management
+Route::get('/voucher', fn() => view('voucher'))->name('voucher.index');
+Route::get('/voucher/create', fn() => view('voucher-form'))->name('voucher.create');
+Route::get('/voucher/show/{id}', fn() => view('voucher-show'))->name('voucher.show');
+Route::get('/voucher/edit/{id}', fn() => view('voucher-edit'))->name('voucher.edit');
+
+// Academic School Year Management
+Route::get('/academic/school-year', fn() => view('academic-school-year'))->name('academic-school-year.index');
+Route::get('/academic/school-year/create', fn() => view('academic-school-year-form'))->name('academic-school-year.create');
+Route::get('/academic/school-year/show/{id}', fn() => view('academic-school-year-show'))->name('academic-school-year.show');
+Route::get('/academic/school-year/edit/{id}', fn() => view('academic-school-year-edit'))->name('academic-school-year.edit');

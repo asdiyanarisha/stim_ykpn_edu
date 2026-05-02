@@ -82,6 +82,12 @@ import BrochureShow from './Pages/Brochure/Show.vue';
 import PublicFiles from './Pages/PublicFiles/index.vue';
 import PublicFilesForm from './Pages/PublicFiles/PublicFilesForm.vue';
 import PublicFilesShow from './Pages/PublicFiles/Show.vue';
+import Voucher from './Pages/Voucher/index.vue';
+import VoucherForm from './Pages/Voucher/VoucherForm.vue';
+import VoucherShow from './Pages/Voucher/Show.vue';
+import AcademicSchoolYear from './Pages/AcademicYear/index.vue';
+import AcademicSchoolYearForm from './Pages/AcademicYear/SchoolYearForm.vue';
+import AcademicSchoolYearShow from './Pages/AcademicYear/Show.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -172,6 +178,12 @@ const pages = {
     publicFiles: PublicFiles,
     publicFilesForm: PublicFilesForm,
     publicFilesShow: PublicFilesShow,
+    voucher: Voucher,
+    voucherForm: VoucherForm,
+    voucherShow: VoucherShow,
+    academicSchoolYear: AcademicSchoolYear,
+    academicSchoolYearForm: AcademicSchoolYearForm,
+    academicSchoolYearShow: AcademicSchoolYearShow,
 };
 
 const appElement = document.getElementById('app');

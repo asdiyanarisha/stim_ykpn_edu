@@ -46,6 +46,8 @@ use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\BrochureController;
 use App\Http\Controllers\Api\PublicFileController;
+use App\Http\Controllers\Api\VoucherController;
+use App\Http\Controllers\Api\AcademicYearController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -322,4 +324,20 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/public-files/{id}', [PublicFileController::class, 'update']);
     Route::delete('/public-files/{id}', [PublicFileController::class, 'destroy']);
     Route::post('/public-files/bulk-delete', [PublicFileController::class, 'bulkDestroy']);
+
+    // Voucher Management
+    Route::get('/vouchers', [VoucherController::class, 'index']);
+    Route::get('/vouchers/{id}', [VoucherController::class, 'show']);
+    Route::post('/vouchers', [VoucherController::class, 'store']);
+    Route::post('/vouchers/{id}', [VoucherController::class, 'update']);
+    Route::delete('/vouchers/{id}', [VoucherController::class, 'destroy']);
+    Route::post('/vouchers/bulk-delete', [VoucherController::class, 'bulkDestroy']);
+
+    // Academic Year Management
+    Route::get('/academic-years', [AcademicYearController::class, 'index']);
+    Route::get('/academic-years/{id}', [AcademicYearController::class, 'show']);
+    Route::post('/academic-years', [AcademicYearController::class, 'store']);
+    Route::post('/academic-years/{id}', [AcademicYearController::class, 'update']);
+    Route::delete('/academic-years/{id}', [AcademicYearController::class, 'destroy']);
+    Route::post('/academic-years/bulk-delete', [AcademicYearController::class, 'bulkDestroy']);
 });
