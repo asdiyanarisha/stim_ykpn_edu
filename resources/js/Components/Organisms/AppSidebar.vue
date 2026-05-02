@@ -1,9 +1,9 @@
 <template>
   <aside 
-    class="fixed inset-y-0 left-0 z-50 w-72 bg-slate-900 text-slate-300 transition-all duration-300 ease-in-out lg:static"
+    class="fixed inset-y-0 left-0 z-50 w-72 bg-slate-900 text-slate-300 transition-all duration-300 ease-in-out lg:static flex flex-col h-full"
     :class="isOpen ? 'translate-x-0 lg:-ml-72 lg:-translate-x-full' : '-translate-x-full lg:ml-0 lg:translate-x-0'"
   >
-    <div class="flex h-16 items-center justify-between px-6 bg-slate-950">
+    <div class="flex h-16 items-center justify-between px-6 bg-slate-950 shrink-0">
       <a href="/dashboard" class="text-lg font-extrabold text-white flex items-center gap-2.5 tracking-tight">
         <div class="bg-white rounded-lg p-1.5 shadow-md shadow-black/20 flex items-center justify-center">
           <img src="https://stimykpn.ac.id/storage/quill-upload/19827f3a460e91d1ccb121b2a810d720.webp" alt="Logo STIM YKPN" class="h-7 w-auto">
