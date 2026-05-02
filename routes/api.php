@@ -45,6 +45,7 @@ use App\Http\Controllers\Api\PmbProgramExtensiController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\BrochureController;
+use App\Http\Controllers\Api\PublicFileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -313,4 +314,12 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/brochures/{id}', [BrochureController::class, 'update']);
     Route::delete('/brochures/{id}', [BrochureController::class, 'destroy']);
     Route::post('/brochures/bulk-delete', [BrochureController::class, 'bulkDestroy']);
+
+    // Public File Management
+    Route::get('/public-files', [PublicFileController::class, 'index']);
+    Route::get('/public-files/{id}', [PublicFileController::class, 'show']);
+    Route::post('/public-files', [PublicFileController::class, 'store']);
+    Route::post('/public-files/{id}', [PublicFileController::class, 'update']);
+    Route::delete('/public-files/{id}', [PublicFileController::class, 'destroy']);
+    Route::post('/public-files/bulk-delete', [PublicFileController::class, 'bulkDestroy']);
 });

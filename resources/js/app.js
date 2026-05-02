@@ -79,6 +79,9 @@ import UserShow from './Pages/User/Show.vue';
 import Brochure from './Pages/Brochure/index.vue';
 import BrochureForm from './Pages/Brochure/BrochureForm.vue';
 import BrochureShow from './Pages/Brochure/Show.vue';
+import PublicFiles from './Pages/PublicFiles/index.vue';
+import PublicFilesForm from './Pages/PublicFiles/PublicFilesForm.vue';
+import PublicFilesShow from './Pages/PublicFiles/Show.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -166,6 +169,9 @@ const pages = {
     brochure: Brochure,
     brochureForm: BrochureForm,
     brochureShow: BrochureShow,
+    publicFiles: PublicFiles,
+    publicFilesForm: PublicFilesForm,
+    publicFilesShow: PublicFilesShow,
 };
 
 const appElement = document.getElementById('app');

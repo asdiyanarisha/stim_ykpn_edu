@@ -273,3 +273,9 @@ Route::get('/brochure', fn() => view('brochure'))->name('brochure.index');
 Route::get('/brochure/create', fn() => view('brochure-form'))->name('brochure.create');
 Route::get('/brochure/show/{id}', fn() => view('brochure-show'))->name('brochure.show');
 Route::get('/brochure/edit/{id}', fn() => view('brochure-edit'))->name('brochure.edit');
+
+// Public File Management
+Route::get('/public-files', fn() => view('public-files'))->name('public-files.index');
+Route::get('/public-files/create', fn() => view('public-files-form'))->name('public-files.create');
+Route::get('/public-files/show/{id}', fn() => view('public-files-show'))->name('public-files.show');
+Route::get('/public-files/edit/{id}', fn() => view('public-files-edit'))->name('public-files.edit');
