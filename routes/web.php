@@ -297,3 +297,6 @@ Route::get('/academic/programs', fn() => view('program-study'))->name('program-s
 Route::get('/academic/programs/create', fn() => view('program-study-form'))->name('program-study.create');
 Route::get('/academic/programs/show/{id}', fn() => view('program-study-show'))->name('program-study.show');
 Route::get('/academic/programs/edit/{id}', fn() => view('program-study-edit'))->name('program-study.edit');
+
+// Payment Settings
+Route::get('/payment_settings', fn() => view('payment-setting-form'))->name('payment-settings');

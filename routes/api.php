@@ -49,6 +49,7 @@ use App\Http\Controllers\Api\PublicFileController;
 use App\Http\Controllers\Api\VoucherController;
 use App\Http\Controllers\Api\AcademicYearController;
 use App\Http\Controllers\Api\ProgramStudyController;
+use App\Http\Controllers\Api\PaymentSettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -349,4 +350,8 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/program-studies/{id}', [ProgramStudyController::class, 'update']);
     Route::delete('/program-studies/{id}', [ProgramStudyController::class, 'destroy']);
     Route::post('/program-studies/bulk-delete', [ProgramStudyController::class, 'bulkDestroy']);
+
+    // Payment Settings Management
+    Route::get('/payment-settings', [PaymentSettingController::class, 'show']);
+    Route::post('/payment-settings', [PaymentSettingController::class, 'update']);
 });

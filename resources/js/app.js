@@ -91,6 +91,7 @@ import AcademicSchoolYearShow from './Pages/AcademicYear/Show.vue';
 import ProgramStudy from './Pages/ProgramStudy/index.vue';
 import ProgramStudyForm from './Pages/ProgramStudy/ProgramStudyForm.vue';
 import ProgramStudyShow from './Pages/ProgramStudy/Show.vue';
+import PaymentSettingForm from './Pages/PaymentSetting/PaymentSettingForm.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -190,6 +191,7 @@ const pages = {
     programStudy: ProgramStudy,
     programStudyForm: ProgramStudyForm,
     programStudyShow: ProgramStudyShow,
+    paymentSettingForm: PaymentSettingForm,
 };
 
 const appElement = document.getElementById('app');
