@@ -372,26 +372,49 @@ cat > "${DEPLOY_DIR}/public/_storage_link.php" << 'STORLINK'
 $target = __DIR__ . '/../storage/app/public';
 $link = __DIR__ . '/storage';
 
-if (is_link($link) || is_dir($link)) {
-    echo '✅ Storage link sudah ada.<br>';
-    echo 'Link: <code>' . $link . '</code><br>';
-    echo 'Target: <code>' . readlink($link) . '</code><br>';
+// 1. Cek jika sudah benar-benar berupa Symlink/Shortcut
+if (is_link($link)) {
+    echo '✅ Storage link sudah ada dan aktif.<br>';
+    echo 'Link: <code>' . htmlspecialchars($link) . '</code><br>';
+    echo 'Target: <code>' . htmlspecialchars(@readlink($link)) . '</code><br>';
     echo '<br>⚠️ <strong>HAPUS FILE INI SEKARANG!</strong>';
     exit;
 }
 
-if (!file_exists($target)) {
-    mkdir($target, 0755, true);
+// 2. Cek jika masih berupa Folder Fisik hasil upload ZIP lokal
+if (is_dir($link)) {
+    echo '<h2>⚠️ Perhatian: Folder <code>public/storage</code> terdeteksi sebagai FOLDER FISIK!</h2>';
+    echo '<p>Hal ini terjadi karena folder tersebut ikut ter-copy dari komputer lokal Anda saat proses ZIP.</p>';
+    echo '<p style="color: red; font-weight: bold;">SOLUSI: Silakan masuk ke cPanel File Manager, lalu HAPUS folder bernama "storage" di dalam folder "public". Setelah itu, refresh/jalankan kembali halaman ini.</p>';
+    exit;
 }
 
-if (symlink($target, $link)) {
+// 3. Pastikan folder target di storage asli sudah ada
+if (!file_exists($target)) {
+    @mkdir($target, 0755, true);
+}
+
+// 4. Cek apakah fungsi symlink aktif di server hosting
+if (!function_exists('symlink')) {
+    echo '<h2>❌ Gagal: Fungsi <code>symlink()</code> dinonaktifkan di hosting Anda!</h2>';
+    echo '<p>Shared hosting Anda menonaktifkan fungsi PHP <code>symlink()</code> demi keamanan.</p>';
+    echo '<h3>💡 Solusi Alternatif menggunakan Cron Job cPanel:</h3>';
+    echo '<p>Silakan buat Cron Job sekali jalan di cPanel dengan perintah (Command) berikut:</p>';
+    echo '<pre style="background: #f4f4f4; padding: 15px; border-left: 5px solid #ff5722; font-family: monospace;">';
+    echo 'ln -s ' . escapeshellarg(realpath($target) ?: $target) . ' ' . escapeshellarg($link);
+    echo '</pre>';
+    echo '<p>Tunggu 1 menit, lalu hapus kembali Cron Job tersebut setelah folder "public/storage" berhasil terhubung.</p>';
+    exit;
+}
+
+// 5. Coba buat Symlink
+if (@symlink($target, $link)) {
     echo '<h2>✅ Storage link berhasil dibuat!</h2>';
-    echo '<p>Link: <code>' . $link . '</code></p>';
-    echo '<p>Target: <code>' . $target . '</code></p>';
+    echo '<p>Link: <code>' . htmlspecialchars($link) . '</code></p>';
+    echo '<p>Target: <code>' . htmlspecialchars($target) . '</code></p>';
 } else {
     echo '<h2>❌ Gagal membuat symlink!</h2>';
     echo '<p>Coba buat manual via File Manager cPanel atau hubungi hosting provider.</p>';
-    echo '<p>Alternatif: Copy isi <code>storage/app/public/</code> ke <code>public/storage/</code></p>';
 }
 
 echo '<br><p style="color:red;font-weight:bold;">⚠️ HAPUS FILE INI SETELAH SELESAI!</p>';
@@ -472,6 +495,7 @@ rm -rf "${DEPLOY_DIR}/storage/logs/"*.log 2>/dev/null
 rm -rf "${DEPLOY_DIR}/storage/framework/cache/data/"* 2>/dev/null
 rm -rf "${DEPLOY_DIR}/storage/framework/sessions/"* 2>/dev/null
 rm -rf "${DEPLOY_DIR}/storage/framework/views/"* 2>/dev/null
+rm -rf "${DEPLOY_DIR}/public/storage" 2>/dev/null
 
 # Pastikan directory structure storage ada
 mkdir -p "${DEPLOY_DIR}/storage/app/public"

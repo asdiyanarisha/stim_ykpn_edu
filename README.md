@@ -387,11 +387,34 @@ Karena tidak ada akses terminal, gunakan helper PHP:
 
 #### 🔗 Step 7: Buat Storage Link
 
+Pilih salah satu metode di bawah ini sesuai dengan dukungan server hosting Anda:
+
+##### Opsi A: Tanpa Symlink (Paling Direkomendasikan & Permanen)
+Gunakan opsi ini jika hosting Anda menonaktifkan fungsi symlink dan Anda tidak ingin pusing dengan shortcut.
+1. Di file `config/filesystems.php` (pada disk `'public'`), ubah bagian `'root'` menjadi:
+   ```php
+   'root' => public_path('storage'),
+   ```
+2. Buat folder biasa (bukan shortcut) bernama **`storage`** di dalam folder **`public/`** di cPanel Anda. Berikan permission **`755`**.
+3. Pindahkan (Move) semua folder hasil upload lama yang ada di dalam `storage/app/public/` ke dalam folder baru `public/storage/` Anda.
+
+##### Opsi B: Membuat Symlink via Browser (Default)
+Jika hosting Anda mengizinkan fungsi symlink pada script PHP:
 1. Buka browser: `https://domainmu.com/_storage_link.php`
-2. Symlink `public/storage` → `storage/app/public` akan dibuat
+2. Symlink `public/storage` → `storage/app/public` akan dibuat secara otomatis.
 3. **🗑️ HAPUS file `_storage_link.php` dari `public/` setelah selesai!**
 
-> ℹ️ Jika symlink gagal (beberapa hosting tidak mendukung), buat folder `public/storage/` manual dan copy isi dari `storage/app/public/` ke sana setiap kali ada upload file baru.
+##### Opsi C: Membuat Symlink via cPanel Cron Job (Jika PHP Symlink Dinonaktifkan)
+Jika Opsi B gagal/error 500 karena fungsi `symlink()` diblokir oleh hosting:
+1. Masuk ke cPanel hosting Anda, lalu cari menu **Cron Jobs** (Tugas Cron).
+2. Pada bagian pengaturan waktu, pilih **Once Per Minute** (Satu kali per menit).
+3. Di kolom **Command**, masukkan perintah pembuat link di bawah ini (sesuaikan `username_cpanel` dan path project Anda):
+   ```bash
+   ln -s /home/username_cpanel/path_project_laravel/storage/app/public /home/username_cpanel/path_project_laravel/public/storage
+   ```
+4. Klik **Add New Cron Job** dan tunggu selama 1-2 menit.
+5. Cek File Manager cPanel, pastikan shortcut `public/storage` (ikon folder berpanah) sudah berhasil terbuat.
+6. **⚠️ PENTING:** Segera hapus tugas Cron Job tersebut dari daftar agar tidak berjalan terus-menerus setiap menit.
 
 ---
 
@@ -453,7 +476,7 @@ Untuk deploy perubahan baru:
 | **Halaman blank putih** | Set `APP_DEBUG=true` sementara untuk lihat error, lalu kembalikan ke `false` |
 | **CSS/JS tidak load** | Pastikan folder `public/build/` sudah ada dan berisi file `.js` & `.css` |
 | **Upload file gagal** | Pastikan `storage/app/public/` writable. Cek `upload_max_filesize` di `.htaccess` |
-| **Symlink gagal** | Buat folder `public/storage/` manual, copy isi dari `storage/app/public/` |
+| **Symlink gagal** | Gunakan **cPanel Cron Job** untuk membuat symlink secara manual (lihat Step 7 Opsi C), ATAU ganti config ke **Opsi A (Tanpa Symlink)** |
 | **Migration error** | Pastikan database credentials di `.env` benar. Cek user punya ALL PRIVILEGES |
 | **"Class not found" error** | Folder `vendor/` mungkin corrupt. Upload ulang dari ZIP |
 | **Mixed content warning** | Pastikan `APP_URL` menggunakan `https://`. Cek `.htaccess` force HTTPS |
