@@ -58,7 +58,7 @@ fi
 # ================================================================
 # Step 1: Cek prerequisite lokal
 # ================================================================
-echo -e "\n${CYAN}[1/7] 🔍 Mengecek prerequisite lokal...${NC}"
+echo -e "\n${CYAN}[1/8] 🔍 Mengecek prerequisite lokal...${NC}"
 
 check_command() {
     if ! command -v $1 > /dev/null 2>&1; then
@@ -78,14 +78,14 @@ check_command zip "sudo apt install zip"
 # ================================================================
 # Step 2: Install PHP dependencies (production only)
 # ================================================================
-echo -e "\n${CYAN}[2/7] 📦 Install PHP dependencies (production)...${NC}"
+echo -e "\n${CYAN}[2/8] 📦 Install PHP dependencies (production)...${NC}"
 composer install --no-dev --optimize-autoloader --no-interaction --quiet
 echo -e "  ${GREEN}✓${NC} Composer dependencies installed"
 
 # ================================================================
 # Step 3: Install & build frontend assets
 # ================================================================
-echo -e "\n${CYAN}[3/7] 🎨 Build frontend assets (Vite + Vue)...${NC}"
+echo -e "\n${CYAN}[3/8] 🎨 Build frontend assets (Vite + Vue)...${NC}"
 npm ci --silent 2>/dev/null || npm install --silent
 npm run build
 echo -e "  ${GREEN}✓${NC} Frontend assets built → public/build/"
@@ -93,7 +93,7 @@ echo -e "  ${GREEN}✓${NC} Frontend assets built → public/build/"
 # ================================================================
 # Step 4: Bersihkan deploy folder lama
 # ================================================================
-echo -e "\n${CYAN}[4/7] 🧹 Menyiapkan folder deploy...${NC}"
+echo -e "\n${CYAN}[4/8] 🧹 Menyiapkan folder deploy...${NC}"
 rm -rf "${DEPLOY_DIR}"
 mkdir -p "${DEPLOY_DIR}"
 echo -e "  ${GREEN}✓${NC} Folder ${DEPLOY_DIR}/ siap"
@@ -101,7 +101,7 @@ echo -e "  ${GREEN}✓${NC} Folder ${DEPLOY_DIR}/ siap"
 # ================================================================
 # Step 5: Copy file yang diperlukan
 # ================================================================
-echo -e "\n${CYAN}[5/7] 📋 Menyalin file project...${NC}"
+echo -e "\n${CYAN}[5/8] 📋 Menyalin file project...${NC}"
 
 # ---- Direktori utama ----
 echo -e "  Copying app/..."
@@ -465,7 +465,7 @@ echo -e "  ${GREEN}✓${NC} Semua file berhasil disalin"
 # ================================================================
 # Step 6: Bersihkan file yang tidak perlu dari deploy
 # ================================================================
-echo -e "\n${CYAN}[6/7] 🧹 Membersihkan file yang tidak diperlukan...${NC}"
+echo -e "\n${CYAN}[6/8] 🧹 Membersihkan file yang tidak diperlukan...${NC}"
 
 # Hapus file dev/local yang tidak perlu di hosting
 rm -rf "${DEPLOY_DIR}/storage/logs/"*.log 2>/dev/null
@@ -512,7 +512,7 @@ echo -e "  ${GREEN}✓${NC} File yang tidak perlu sudah dihapus"
 # ================================================================
 # Step 7: ZIP the deploy package
 # ================================================================
-echo -e "\n${CYAN}[7/7] 📦 Membuat file ZIP...${NC}"
+echo -e "\n${CYAN}[7/8] 📦 Membuat file ZIP...${NC}"
 
 cd "${DEPLOY_DIR}"
 zip -r -q "../${ZIP_NAME}" .
@@ -520,6 +520,13 @@ cd ..
 
 ZIP_SIZE=$(du -sh "${ZIP_NAME}" | cut -f1)
 echo -e "  ${GREEN}✓${NC} ZIP berhasil dibuat: ${BOLD}${ZIP_NAME}${NC} (${ZIP_SIZE})"
+
+# ================================================================
+# Step 8: Hapus folder deploy_package
+# ================================================================
+echo -e "\n${CYAN}[8/8] 🗑️  Membersihkan folder deploy...${NC}"
+rm -rf "${DEPLOY_DIR}"
+echo -e "  ${GREEN}✓${NC} Folder ${DEPLOY_DIR}/ berhasil dihapus"
 
 # ================================================================
 # Selesai!

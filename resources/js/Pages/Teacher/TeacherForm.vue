@@ -737,7 +737,7 @@ const handleSubmit = async () => {
         text: response.data.message || 'Data berhasil dikirim ke server!',
         confirmButtonText: 'OK',
       });
-      window.location.href = 'http://localhost:8000/masterData/teacher';
+      window.location.href = '/masterData/teacher';
     }
   } catch (error) {
     if (error.response && error.response.status === 422) {
