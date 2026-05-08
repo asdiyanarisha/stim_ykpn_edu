@@ -159,6 +159,71 @@ class AuthController extends Controller
     }
 
     /**
+     * POST /api/auth/change-password
+     *
+     * Mengubah password user yang sedang login.
+     * Endpoint ini dilindungi oleh middleware JWT.
+     *
+     * @header Authorization Bearer {token}
+     * @bodyParam current_password string required Password saat ini.
+     * @bodyParam new_password string required Password baru (min 8 karakter).
+     * @bodyParam new_password_confirmation string required Konfirmasi password baru.
+     *
+     * @return JsonResponse
+     */
+    public function changePassword(Request $request): JsonResponse
+    {
+        $request->validate([
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Ambil data user dari JWT (di-set oleh middleware)
+        $jwtUser = $request->attributes->get('jwt_user');
+
+        if (!$jwtUser) {
+            return response()->json([
+                'status'  => 'error',
+                'code'    => 401,
+                'message' => 'Data user tidak ditemukan dari token.',
+                'data'    => null,
+            ], 401);
+        }
+
+        $user = User::where('name', $jwtUser['username'])->first();
+
+        if (!$user) {
+            return response()->json([
+                'status'  => 'error',
+                'code'    => 404,
+                'message' => 'User tidak ditemukan.',
+                'data'    => null,
+            ], 404);
+        }
+
+        // Cek apakah password saat ini cocok
+        if (!Hash::check($request->input('current_password'), $user->password)) {
+            return response()->json([
+                'status'  => 'error',
+                'code'    => 422,
+                'message' => 'Password saat ini yang Anda masukkan salah.',
+                'data'    => null,
+            ], 422);
+        }
+
+        // Update password
+        $user->password = Hash::make($request->input('new_password'));
+        $user->save();
+
+        return response()->json([
+            'status'  => 'success',
+            'code'    => 200,
+            'message' => 'Password berhasil diubah.',
+            'data'    => null,
+        ], 200);
+    }
+
+    /**
      * Mengambil token dari header Authorization.
      */
     private function extractToken(Request $request): ?string

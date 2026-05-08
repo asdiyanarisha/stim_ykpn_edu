@@ -81,6 +81,9 @@ Route::middleware('jwt.auth')->group(function () {
     // Me — mendapatkan info user dari token
     Route::get('/auth/me', [AuthController::class, 'me']);
 
+    // Change Password — mengubah password user yang sedang login
+    Route::post('/auth/change-password', [AuthController::class, 'changePassword']);
+
     // Teacher Management
     Route::get('/teachers', [TeacherController::class, 'index']);
     Route::get('/teachers/{id}', [TeacherController::class, 'show']);

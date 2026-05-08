@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/dashboard', function () {
@@ -300,3 +300,6 @@ Route::get('/academic/programs/edit/{id}', fn() => view('program-study-edit'))->
 
 // Payment Settings
 Route::get('/payment_settings', fn() => view('payment-setting-form'))->name('payment-settings');
+
+// User Setting
+Route::get('/setting', fn() => view('user-setting'))->name('user-setting');

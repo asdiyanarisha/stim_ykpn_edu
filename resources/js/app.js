@@ -92,6 +92,7 @@ import ProgramStudy from './Pages/ProgramStudy/index.vue';
 import ProgramStudyForm from './Pages/ProgramStudy/ProgramStudyForm.vue';
 import ProgramStudyShow from './Pages/ProgramStudy/Show.vue';
 import PaymentSettingForm from './Pages/PaymentSetting/PaymentSettingForm.vue';
+import UserSetting from './Pages/Setting/UserSetting.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -192,6 +193,7 @@ const pages = {
     programStudyForm: ProgramStudyForm,
     programStudyShow: ProgramStudyShow,
     paymentSettingForm: PaymentSettingForm,
+    userSetting: UserSetting,
 };
 
 const appElement = document.getElementById('app');
