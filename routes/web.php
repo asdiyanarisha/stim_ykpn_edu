@@ -303,3 +303,131 @@ Route::get('/payment_settings', fn() => view('payment-setting-form'))->name('pay
 
 // User Setting
 Route::get('/setting', fn() => view('user-setting'))->name('user-setting');
+
+// New Academic Landing Pages (Modular Blade)
+Route::get('/sambutan-ketua', fn() => view('sambutan-ketua'));
+Route::get('/sambutan-ketua.html', fn() => view('sambutan-ketua'));
+
+Route::get('/visi-misi', fn() => view('visi-misi'));
+Route::get('/visi-misi.html', fn() => view('visi-misi'));
+
+Route::get('/profil', fn() => view('profil'));
+Route::get('/profil.html', fn() => view('profil'));
+
+Route::get('/logo', fn() => view('logo'));
+Route::get('/logo.html', fn() => view('logo'));
+
+Route::get('/dosen', fn() => view('dosen'));
+Route::get('/dosen.html', fn() => view('dosen'));
+
+Route::get('/pimpinan', fn() => view('pimpinan'));
+Route::get('/pimpinan.html', fn() => view('pimpinan'));
+
+Route::get('/fasilitas', fn() => view('fasilitas'));
+Route::get('/fasilitas.html', fn() => view('fasilitas'));
+
+Route::get('/prestasi', fn() => view('prestasi'));
+Route::get('/prestasi.html', fn() => view('prestasi'));
+
+Route::get('/spmi', fn() => view('spmi'));
+Route::get('/spmi.html', fn() => view('spmi'));
+
+// Academic Program Study Sub-Pages (Modular Blade)
+Route::get('/sasaran-pendidikan', fn() => view('sasaran-pendidikan'));
+Route::get('/sasaran-pendidikan.html', fn() => view('sasaran-pendidikan'));
+
+Route::get('/cara-mencapai-sasaran', fn() => view('cara-mencapai-sasaran'));
+Route::get('/cara-mencapai-sasaran.html', fn() => view('cara-mencapai-sasaran'));
+
+Route::get('/beban-studi', fn() => view('beban-studi'));
+Route::get('/beban-studi.html', fn() => view('beban-studi'));
+
+Route::get('/sks', fn() => view('sks'));
+Route::get('/sks.html', fn() => view('sks'));
+
+Route::get('/jenjang-studi', fn() => view('jenjang-studi'));
+Route::get('/jenjang-studi.html', fn() => view('jenjang-studi'));
+
+Route::get('/kegiatan-akademik', fn() => view('kegiatan-akademik'));
+Route::get('/kegiatan-akademik.html', fn() => view('kegiatan-akademik'));
+
+Route::get('/dosen-pembimbing', fn() => view('dosen-pembimbing'));
+Route::get('/dosen-pembimbing.html', fn() => view('dosen-pembimbing'));
+
+Route::get('/sanksi-akademik', fn() => view('sanksi-akademik'));
+Route::get('/sanksi-akademik.html', fn() => view('sanksi-akademik'));
+
+// Newly Migrated Academic & Provision Pages
+Route::get('/kalender-akademik', fn() => view('kalender-akademik'));
+Route::get('/kalender-akademik.html', fn() => view('kalender-akademik'));
+
+Route::get('/kehadiran-kuliah', fn() => view('kehadiran-kuliah'));
+Route::get('/kehadiran-kuliah.html', fn() => view('kehadiran-kuliah'));
+
+Route::get('/tata-tertib-kuliah', fn() => view('tata-tertib-kuliah'));
+Route::get('/tata-tertib-kuliah.html', fn() => view('tata-tertib-kuliah'));
+
+Route::get('/jumlah-kehadiran', fn() => view('jumlah-kehadiran'));
+Route::get('/jumlah-kehadiran.html', fn() => view('jumlah-kehadiran'));
+
+Route::get('/seminar-proposal', fn() => view('seminar-proposal'));
+Route::get('/seminar-proposal.html', fn() => view('seminar-proposal'));
+
+Route::get('/ketentuan-ujian', fn() => view('ketentuan-ujian'));
+Route::get('/ketentuan-ujian.html', fn() => view('ketentuan-ujian'));
+
+Route::get('/tata-tertib-ujian', fn() => view('tata-tertib-ujian'));
+Route::get('/tata-tertib-ujian.html', fn() => view('tata-tertib-ujian'));
+
+Route::get('/kelulusan', fn() => view('kelulusan'));
+Route::get('/kelulusan.html', fn() => view('kelulusan'));
+
+Route::get('/yudisium', fn() => view('yudisium'));
+Route::get('/yudisium.html', fn() => view('yudisium'));
+
+Route::get('/perpustakaan', fn() => view('perpustakaan'));
+Route::get('/perpustakaan.html', fn() => view('perpustakaan'));
+
+// Newly Migrated PMB Landing Pages
+Route::get('/pmb', fn() => view('pmb'));
+Route::get('/pmb.html', fn() => view('pmb'));
+
+Route::get('/biaya-kuliah', fn() => view('biaya-kuliah'));
+Route::get('/biaya-kuliah.html', fn() => view('biaya-kuliah'));
+
+Route::get('/beasiswa', fn() => view('beasiswa'));
+Route::get('/beasiswa.html', fn() => view('beasiswa'));
+
+Route::get('/program-reguler', fn() => view('program-reguler'));
+Route::get('/program-reguler.html', fn() => view('program-reguler'));
+
+Route::get('/program-ekstensi', fn() => view('program-ekstensi'));
+Route::get('/program-ekstensi.html', fn() => view('program-ekstensi'));
+
+Route::get('/pengumuman-diterima', fn() => view('pengumuman-diterima'));
+Route::get('/pengumuman-diterima.html', fn() => view('pengumuman-diterima'));
+
+// Batch 3 - Student, Campus Life, and Information Pages
+Route::get('/kegiatan-mahasiswa', fn() => view('kegiatan-mahasiswa'));
+Route::get('/kegiatan-mahasiswa.html', fn() => view('kegiatan-mahasiswa'));
+
+Route::get('/ukm', fn() => view('ukm'));
+Route::get('/ukm.html', fn() => view('ukm'));
+
+Route::get('/video', fn() => view('video'));
+Route::get('/video.html', fn() => view('video'));
+
+Route::get('/informasi-tempat-tinggal', fn() => view('informasi-tempat-tinggal'));
+Route::get('/informasi-tempat-tinggal.html', fn() => view('informasi-tempat-tinggal'));
+
+Route::get('/brosur', fn() => view('brosur'));
+Route::get('/brosur.html', fn() => view('brosur'));
+
+Route::get('/unduh', fn() => view('unduh'));
+Route::get('/unduh.html', fn() => view('unduh'));
+
+Route::get('/alumni', fn() => view('alumni'));
+Route::get('/alumni.html', fn() => view('alumni'));
+
+Route::get('/lowongan-kerja', fn() => view('lowongan-kerja'));
+Route::get('/lowongan-kerja.html', fn() => view('lowongan-kerja'));
