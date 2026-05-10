@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\ContentBanner;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    $banners = ContentBanner::orderBy('created_at', 'desc')->get();
+    return view('index', compact('banners'));
 });
 
 Route::get('/dashboard', function () {

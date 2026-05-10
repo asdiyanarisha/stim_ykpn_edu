@@ -73,6 +73,11 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
        ============================================ -->
   <section class="hero" id="beranda">
     <div class="hero-slider" id="heroSlider">
+      @forelse ($banners as $index => $banner)
+      <div class="slide {{ $index === 0 ? 'active' : '' }}">
+        <img src="{{ $banner->url_image }}" alt="{{ $banner->title }}" loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
+      </div>
+      @empty
       <div class="slide active">
         <img src="/images/hero-bg.png" alt="STIM YKPN Campus 1" loading="eager">
       </div>
@@ -82,6 +87,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
       <div class="slide">
         <img src="/images/hero_bg.png" alt="STIM YKPN Campus 3" loading="lazy">
       </div>
+      @endforelse
       <div class="hero-overlay"></div>
 
       <!-- Slider Controls -->
@@ -99,9 +105,15 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
       </button>
 
       <div class="slider-dots" id="heroSliderDots">
-        <button class="dot active" data-index="0" aria-label="Slide 1"></button>
-        <button class="dot" data-index="1" aria-label="Slide 2"></button>
-        <button class="dot" data-index="2" aria-label="Slide 3"></button>
+        @if ($banners->count() > 0)
+          @foreach ($banners as $index => $banner)
+            <button class="dot {{ $index === 0 ? 'active' : '' }}" data-index="{{ $index }}" aria-label="Slide {{ $index + 1 }}"></button>
+          @endforeach
+        @else
+          <button class="dot active" data-index="0" aria-label="Slide 1"></button>
+          <button class="dot" data-index="1" aria-label="Slide 2"></button>
+          <button class="dot" data-index="2" aria-label="Slide 3"></button>
+        @endif
       </div>
     </div>
 
