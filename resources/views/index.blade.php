@@ -435,6 +435,26 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
       </div>
 
       <div class="news-grid">
+        @forelse ($latest_news as $news_item)
+        <article class="news-card animate-on-scroll animate-delay-{{ $loop->iteration }}">
+          <div class="news-card-image">
+            <img src="{{ $news_item->url_image ?? '/images/hero-bg.png' }}" alt="{{ $news_item->title }}">
+            <span class="date-badge">{{ $news_item->created_at->format('d M Y') }}</span>
+          </div>
+          <div class="news-card-body">
+            <span class="category">Berita</span>
+            <h3><a href="/berita/{{ $news_item->id }}">{{ $news_item->title }}</a></h3>
+            <a href="/berita/{{ $news_item->id }}" class="read-more">
+              Baca Selengkapnya
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </article>
+        @empty
         <!-- News 1 -->
         <article class="news-card animate-on-scroll animate-delay-1">
           <div class="news-card-image">
@@ -497,6 +517,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
             </a>
           </div>
         </article>
+        @endforelse
       </div>
     </div>
   </section>

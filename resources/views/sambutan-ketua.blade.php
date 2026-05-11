@@ -189,7 +189,7 @@
         
         <!-- Left Side: Photo & Banner -->
         <div class="chairman-image-box">
-          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80" alt="Ketua STIM YKPN" class="chairman-img">
+          <img src="{{ ($greeting && $greeting->header_image) ? $greeting->header_image : 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80' }}" alt="Ketua STIM YKPN" class="chairman-img">
           <div class="chairman-badge">
             <span class="badge-number">47+</span>
             <span class="badge-text">Tahun Pendidikan Tinggi</span>
@@ -203,10 +203,21 @@
             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
           </svg>
 
+          @if($greeting && $greeting->title)
+          <h2 class="chairman-title">
+            {{ $greeting->title }}
+          </h2>
+          @else
           <h2 class="chairman-title">
             Berkomitmen Mencetak Lulusan Manajemen <span>Unggul & Berdaya Saing Global.</span>
           </h2>
+          @endif
 
+          @if($greeting && $greeting->content)
+          <div class="news-body-content" style="color: #475569; font-size: 16px; line-height: 1.8;">
+            {!! $greeting->content !!}
+          </div>
+          @else
           <div class="chairman-paragraph">
             <strong>Selamat Datang di STIM YKPN Yogyakarta!</strong>
           </div>
@@ -226,6 +237,7 @@
           <div class="chairman-paragraph">
             Selamat menjelajahi website kami, temukan informasi sebanyak-banyaknya dan manfaatkan seluruh fitur yang tersedia agar kita dapat selalu terhubung.
           </div>
+          @endif
 
           <div class="author-box">
             <h3 class="author-name">Dr. Suparmono, M.Si.</h3>

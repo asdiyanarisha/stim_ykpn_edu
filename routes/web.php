@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\ContentBanner;
+use App\Models\News;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,17 @@ use App\Models\ContentBanner;
 
 Route::get('/', function () {
     $banners = ContentBanner::orderBy('created_at', 'desc')->get();
-    return view('index', compact('banners'));
+    $latest_news = News::where('status', 'published')->orderBy('created_at', 'desc')->take(3)->get();
+    return view('index', compact('banners', 'latest_news'));
+});
+
+Route::get('/berita/{id}', function ($id) {
+    $news = News::findOrFail($id);
+    if ($news->status !== 'published') {
+        abort(404);
+    }
+    $news->increment('views_count');
+    return view('berita-detail', compact('news'));
 });
 
 Route::get('/dashboard', function () {
@@ -307,8 +318,14 @@ Route::get('/payment_settings', fn() => view('payment-setting-form'))->name('pay
 Route::get('/setting', fn() => view('user-setting'))->name('user-setting');
 
 // New Academic Landing Pages (Modular Blade)
-Route::get('/sambutan-ketua', fn() => view('sambutan-ketua'));
-Route::get('/sambutan-ketua.html', fn() => view('sambutan-ketua'));
+Route::get('/sambutan-ketua', function () {
+    $greeting = \App\Models\GreetingChief::first();
+    return view('sambutan-ketua', compact('greeting'));
+});
+Route::get('/sambutan-ketua.html', function () {
+    $greeting = \App\Models\GreetingChief::first();
+    return view('sambutan-ketua', compact('greeting'));
+});
 
 Route::get('/visi-misi', fn() => view('visi-misi'));
 Route::get('/visi-misi.html', fn() => view('visi-misi'));
