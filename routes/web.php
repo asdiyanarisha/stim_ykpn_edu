@@ -52,6 +52,10 @@ Route::get('/masterData/teacher/edit/{id}', function ($id) {
     return view('teacher-edit');
 });
 
+// Kategori Dosen
+Route::get('/masterData/teacher/category', fn() => view('category-teacher'))->name('category-teacher.index');
+Route::get('/masterData/teacher/category/show/{id}', fn() => view('category-teacher-show'))->name('category-teacher.show');
+
 Route::get('/content/banner', function () {
     return view('banner');
 });

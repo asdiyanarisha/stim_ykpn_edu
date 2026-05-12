@@ -31,32 +31,12 @@
         "name": "Profil",
         "submenu": [
           {
-            "name": "Sambutan Ketua",
-            "link": "/content/profil/greeting"
+            "name": "Dosen",
+            "link": "/masterData/teacher"
           },
           {
-            "name": "Visi & Misi",
-            "link": "/content/profil/core-values"
-          },
-          {
-            "name": "Profil & Sejarah STIM YKPN",
-            "link": "/content/profil/history"
-          },
-          {
-            "name": "Logo & Lambang",
-            "link": "/content/profil/logo-symbol"
-          },
-          {
-            "name": "Fasilitas",
-            "link": "/content/profil/facility"
-          },
-          {
-            "name": "Prestasi",
-            "link": "/content/profil/achievement"
-          },
-          {
-            "name": "SPMI & Akreditasi",
-            "link": "/content/profil/spmi-akreditasi"
+            "name": "Kategori Dosen",
+            "link": "/masterData/teacher/category"
           }
         ]
       }
@@ -64,16 +44,6 @@
   },
   {
     "category": "AKADEMIK & PENELITIAN"
-  },
-  {
-    "name": "Master Data",
-    "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4\" /></svg>",
-    "submenu": [
-      {
-        "name": "Dosen",
-        "link": "/masterData/teacher"
-      }
-    ]
   },
   {
     "name": "Akademik",

@@ -75,17 +75,30 @@ const menuItems = ref(sidebarMenu);
 const updateActiveState = (items, currentPath) => {
   let anyChildActive = false;
   
+  // Normalize path by removing trailing slash for exact matching
+  const normalizedPath = currentPath.endsWith('/') && currentPath.length > 1 ? currentPath.slice(0, -1) : currentPath;
+
+  // First pass: collect all link-based matches with their specificity
+  let bestLinkMatch = null;
+  let bestLinkLength = 0;
+
+  items.forEach(item => {
+    if (item.category || !item.link) return;
+    const isExact = item.link === normalizedPath;
+    const isPrefix = item.link !== '/' && normalizedPath.startsWith(item.link + '/');
+    if (isExact || isPrefix) {
+      if (item.link.length > bestLinkLength) {
+        bestLinkLength = item.link.length;
+        bestLinkMatch = item;
+      }
+    }
+  });
+
   items.forEach(item => {
     // Skip category separator items
     if (item.category) return;
 
     item.active = false;
-    
-    // Normalize path by removing trailing slash for exact matching
-    const normalizedPath = currentPath.endsWith('/') && currentPath.length > 1 ? currentPath.slice(0, -1) : currentPath;
-    
-    // Check if link matches precisely or as a directory prefix (with slash boundary)
-    const isDirectMatch = item.link === normalizedPath || (item.link && item.link !== '/' && normalizedPath.startsWith(item.link + '/'));
     
     if (item.submenu && item.submenu.length > 0) {
       const hasActiveChild = updateActiveState(item.submenu, currentPath);
@@ -96,7 +109,8 @@ const updateActiveState = (items, currentPath) => {
       }
     }
 
-    if (isDirectMatch) {
+    // Only activate the most specific (longest) matching link among siblings
+    if (item === bestLinkMatch) {
       item.active = true;
       anyChildActive = true;
     }

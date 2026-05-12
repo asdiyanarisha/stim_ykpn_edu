@@ -50,6 +50,7 @@ use App\Http\Controllers\Api\VoucherController;
 use App\Http\Controllers\Api\AcademicYearController;
 use App\Http\Controllers\Api\ProgramStudyController;
 use App\Http\Controllers\Api\PaymentSettingController;
+use App\Http\Controllers\Api\CategoryTeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -357,4 +358,12 @@ Route::middleware('jwt.auth')->group(function () {
     // Payment Settings Management
     Route::get('/payment-settings', [PaymentSettingController::class, 'show']);
     Route::post('/payment-settings', [PaymentSettingController::class, 'update']);
+
+    // Category Teacher Management
+    Route::get('/category-teachers', [CategoryTeacherController::class, 'index']);
+    Route::get('/category-teachers/{id}', [CategoryTeacherController::class, 'show']);
+    Route::post('/category-teachers', [CategoryTeacherController::class, 'store']);
+    Route::post('/category-teachers/{id}', [CategoryTeacherController::class, 'update']);
+    Route::delete('/category-teachers/{id}', [CategoryTeacherController::class, 'destroy']);
+    Route::post('/category-teachers/bulk-delete', [CategoryTeacherController::class, 'bulkDestroy']);
 });
