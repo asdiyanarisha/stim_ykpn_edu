@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\ContentBanner;
 use App\Models\News;
+use App\Models\Teacher;
+use App\Models\CategoryTeacher;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -340,8 +343,36 @@ Route::get('/profil.html', fn() => view('profil'));
 Route::get('/logo', fn() => view('logo'));
 Route::get('/logo.html', fn() => view('logo'));
 
-Route::get('/dosen', fn() => view('dosen'));
-Route::get('/dosen.html', fn() => view('dosen'));
+Route::get('/dosen', function (\Illuminate\Http\Request $request) {
+    $categories = CategoryTeacher::all();
+    
+    $query = Teacher::query();
+    
+    if ($request->has('category') && $request->category != 'all') {
+        $query->whereHas('category', function($q) use ($request) {
+            $q->where('slug', $request->category);
+        });
+    }
+    
+    $teachers = $query->with('category')->paginate(6);
+    
+    return view('dosen', compact('teachers', 'categories'));
+});
+Route::get('/dosen.html', function (\Illuminate\Http\Request $request) {
+    $categories = CategoryTeacher::all();
+    
+    $query = Teacher::query();
+    
+    if ($request->has('category') && $request->category != 'all') {
+        $query->whereHas('category', function($q) use ($request) {
+            $q->where('slug', $request->category);
+        });
+    }
+    
+    $teachers = $query->with('category')->paginate(6);
+    
+    return view('dosen', compact('teachers', 'categories'));
+});
 
 Route::get('/pimpinan', fn() => view('pimpinan'));
 Route::get('/pimpinan.html', fn() => view('pimpinan'));

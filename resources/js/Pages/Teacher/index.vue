@@ -92,7 +92,8 @@
                   <th class="px-6 py-4 w-12">
                     <input type="checkbox" @change="toggleSelectAll" :checked="selectedTeachers.length === paginatedTeachers.length && paginatedTeachers.length > 0" class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer transition-colors">
                   </th>
-                  <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Nama Dosen</th>
+                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Nama Dosen</th>
+                  <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Kategori</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Pendidikan</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Alamat Email</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">Aksi</th>
@@ -110,6 +111,11 @@
                     </div>
                   </td>
                   <td class="px-6 py-4 text-sm text-slate-600">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100">
+                      {{ teacher.category }}
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-slate-600">
                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">
                       {{ teacher.education }}
                     </span>
@@ -123,7 +129,7 @@
                   </td>
                 </tr>
                 <tr v-if="paginatedTeachers.length === 0">
-                  <td colspan="5" class="px-6 py-8 text-center text-slate-500 text-sm">Tidak ada data dosen yang tersedia.</td>
+                  <td colspan="6" class="px-6 py-8 text-center text-slate-500 text-sm">Tidak ada data dosen yang tersedia.</td>
                 </tr>
               </tbody>
             </table>
@@ -222,6 +228,7 @@ const filteredTeachers = computed(() => {
   return allTeachers.value.filter(t => 
     t.name.toLowerCase().includes(q) || 
     t.email.toLowerCase().includes(q) || 
+    t.category.toLowerCase().includes(q) || 
     t.education.toLowerCase().includes(q)
   );
 });
@@ -296,6 +303,7 @@ const fetchTeachers = async (token) => {
     return {
       id: teacher.id,
       name: displayName,
+      category: teacher.category_title || 'Tidak Ada Kategori',
       email: teacher.email || '-',
       education: teacher.education || '-',
       avatar: buildAvatarUrl(teacher.image_url, displayName),

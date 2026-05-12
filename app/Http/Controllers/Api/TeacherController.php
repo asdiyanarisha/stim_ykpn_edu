@@ -18,6 +18,7 @@ class TeacherController extends Controller
         try {
             $teachers = DB::table('teachers as t')
                 ->leftJoin('education_teachers as e', 'e.teacher_id', '=', 't.id')
+                ->leftJoin('category_teachers as c', 'c.id', '=', 't.category_teacher_id')
                 ->select(
                     't.id',
                     't.front_title',
@@ -25,9 +26,10 @@ class TeacherController extends Controller
                     't.back_title',
                     't.email',
                     't.image_url',
+                    'c.title as category_title',
                     DB::raw('MAX(e.degree) as education')
                 )
-                ->groupBy('t.id', 't.front_title', 't.full_name', 't.back_title', 't.email', 't.image_url')
+                ->groupBy('t.id', 't.front_title', 't.full_name', 't.back_title', 't.email', 't.image_url', 'c.title')
                 ->orderByDesc('t.created_at')
                 ->get();
 
@@ -534,7 +536,7 @@ class TeacherController extends Controller
 
         return $request->validate([
             'user_id' => 'nullable|integer',
-            'category_teacher_id' => 'nullable|integer',
+            'category_teacher_id' => 'required|integer',
             'full_name' => 'required|string|max:255',
             'front_title' => 'nullable|string|max:50',
             'back_title' => 'nullable|string|max:50',

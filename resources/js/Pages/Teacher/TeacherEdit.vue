@@ -104,10 +104,11 @@
                         <AppInput v-model="form.full_name" :error="formErrors.full_name ? formErrors.full_name[0] : ''" label="Nama Lengkap (tanpa gelar)" placeholder="contoh: Budi Santoso" id="full_name" />
                         <div class="space-y-1">
                           <label for="category_teacher_id" class="block text-sm font-medium text-slate-700">Kategori Dosen</label>
-                          <select id="category_teacher_id" v-model="form.category_teacher_id" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200 bg-white">
+                          <select id="category_teacher_id" v-model="form.category_teacher_id" :class="['block w-full border rounded-xl shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200', formErrors.category_teacher_id ? 'border-rose-500 bg-rose-50' : 'border-slate-200 bg-white']">
                             <option :value="null">Pilih Kategori</option>
                             <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.title }}</option>
                           </select>
+                          <p v-if="formErrors.category_teacher_id" class="text-xs text-rose-600 mt-1">{{ formErrors.category_teacher_id[0] }}</p>
                         </div>
                       </div>
                       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -124,7 +125,7 @@
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                         </div>
-                        <input type="date" id="birth_date" v-model="form.birth_date" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-10 pr-4 transition-all duration-200" />
+                        <input type="date" id="birth_date" v-model="form.birth_date" class="block w-full border rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-10 pr-4 transition-all duration-200" />
                       </div>
                     </div>
                     <AppInput v-model="form.email" :error="formErrors.email ? formErrors.email[0] : ''" label="Alamat Email" placeholder="dosen@stimykpn.ac.id" id="email" />
@@ -132,12 +133,12 @@
                   </div>
                   <div class="space-y-1">
                     <label for="address" class="block text-sm font-medium text-slate-700">Alamat Rumah</label>
-                    <textarea id="address" v-model="form.address" rows="4" placeholder="Jl. Contoh No. 123, Kelurahan, Kecamatan, Kota, Provinsi" :class="['block w-full rounded-xl shadow-sm sm:text-sm py-2.5 pl-4 transition-all duration-200 resize-none', formErrors.address ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500 bg-rose-50' : 'border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 bg-white']"></textarea>
+                    <textarea id="address" v-model="form.address" rows="4" placeholder="Jl. Contoh No. 123, Kelurahan, Kecamatan, Kota, Provinsi" :class="['block w-full border rounded-xl shadow-sm sm:text-sm py-2.5 pl-4 transition-all duration-200 resize-none', formErrors.address ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500 bg-rose-50' : 'border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 bg-white']"></textarea>
                     <p v-if="formErrors.address" class="text-xs text-rose-600 mt-1">{{ formErrors.address[0] }}</p>
                   </div>
                   <div class="space-y-1">
                     <label for="personal_description" class="block text-sm font-medium text-slate-700">Deskripsi Pribadi</label>
-                    <textarea id="personal_description" v-model="form.personal_description" rows="3" placeholder="Tuliskan ringkasan singkat tentang diri Anda, keahlian, dan minat profesional..." class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200 resize-none"></textarea>
+                    <textarea id="personal_description" v-model="form.personal_description" rows="3" placeholder="Tuliskan ringkasan singkat tentang diri Anda, keahlian, dan minat profesional..." class="block w-full border rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200 resize-none"></textarea>
                   </div>
                 </div>
               </div>
@@ -169,7 +170,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                       <div class="space-y-1">
                         <label class="block text-sm font-medium text-slate-700">Jenjang</label>
-                        <select v-model="item.degree" :class="['block w-full rounded-xl shadow-sm sm:text-sm py-2.5 pl-4 transition-all duration-200', formErrors[`education.${i}.degree`] ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500 bg-rose-50' : 'border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 bg-white']">
+                        <select v-model="item.degree" :class="['block w-full border rounded-xl shadow-sm sm:text-sm py-2.5 pl-4 transition-all duration-200', formErrors[`education.${i}.degree`] ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500 bg-rose-50' : 'border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 bg-white']">
                           <option value="">Pilih degree</option>
                           <option value="D3">D3</option>
                           <option value="S1">S1</option>
@@ -222,7 +223,7 @@
                       <AppInput v-model="item.start_year" label="Tahun Mulai" type="number" placeholder="2018" />
                       <div class="space-y-1">
                         <label class="block text-sm font-medium text-slate-700">Tahun Terakhir</label>
-                        <input type="number" v-model="item.end_year" :disabled="item.is_current" :class="['block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200', item.is_current ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : '']" placeholder="2024" />
+                        <input type="number" v-model="item.end_year" :disabled="item.is_current" :class="['block w-full border rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200', item.is_current ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : '']" placeholder="2024" />
                       </div>
                       <div class="flex items-end pb-1">
                         <label class="flex items-center gap-2.5 cursor-pointer select-none group">
@@ -233,7 +234,7 @@
                     </div>
                     <div class="mt-4 space-y-1">
                       <label class="block text-sm font-medium text-slate-700">Deskripsi Pekerjaan</label>
-                      <textarea v-model="item.description" rows="2" placeholder="Jelaskan tanggung jawab dan pencapaian di posisi ini..." class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200 resize-none"></textarea>
+                      <textarea v-model="item.description" rows="2" placeholder="Jelaskan tanggung jawab dan pencapaian di posisi ini..." class="block w-full border rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200 resize-none"></textarea>
                     </div>
                   </div>
                   <div v-if="form.professional_positions.length === 0" class="text-center py-10 text-slate-400 text-sm">
@@ -306,7 +307,7 @@
                         <AppInput v-model="item.journal_book_name" label="Nama Jurnal / Buku" placeholder="Journal of..." />
                         <div class="space-y-1">
                           <label class="block text-sm font-medium text-slate-700">Jenis</label>
-                          <select v-model="item.type" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4">
+                          <select v-model="item.type" class="block w-full border rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4">
                             <option value="">Pilih type</option>
                             <option value="jurnal">Jurnal</option>
                             <option value="book_chapter">Book Chapter</option>
@@ -459,7 +460,7 @@
                     <div class="w-48">
                       <div class="space-y-1">
                         <label class="block text-sm font-medium text-slate-700">Platform</label>
-                        <select v-model="item.platform_name" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4">
+                        <select v-model="item.platform_name" class="block w-full border rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4">
                           <option value="">Pilih platform</option>
                           <option value="Google Scholar">Google Scholar</option>
                           <option value="SINTA">SINTA</option>
@@ -595,6 +596,7 @@ const removeItem = (key, index) => { form[key].splice(index, 1); };
 // Otomatis hilangkan pesan error saat pengguna mulai mengetik / mengisi data
 watch(form, (newVal) => {
   if (newVal.full_name && formErrors.value.full_name) delete formErrors.value.full_name;
+  if (newVal.category_teacher_id && formErrors.value.category_teacher_id) delete formErrors.value.category_teacher_id;
   if (newVal.email && formErrors.value.email) delete formErrors.value.email;
   if (newVal.phone_number && formErrors.value.phone_number) delete formErrors.value.phone_number;
   if (newVal.address && formErrors.value.address) delete formErrors.value.address;
@@ -655,6 +657,7 @@ const handleSubmit = async () => {
 
   // Validasi Frontend (Sama dengan kriteria Backend)
   if (!form.full_name) { formErrors.value.full_name = ['Nama lengkap wajib diisi.']; hasError = true; }
+  if (!form.category_teacher_id) { formErrors.value.category_teacher_id = ['Kategori dosen wajib dipilih.']; hasError = true; }
   if (!form.email) { formErrors.value.email = ['Alamat email wajib diisi.']; hasError = true; }
   if (!form.phone_number) { formErrors.value.phone_number = ['No. Telepon wajib diisi.']; hasError = true; }
   if (!form.address) { formErrors.value.address = ['Alamat rumah wajib diisi.']; hasError = true; }
