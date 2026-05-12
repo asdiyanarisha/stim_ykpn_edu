@@ -101,6 +101,7 @@ class TeacherController extends Controller
 
                 $teacherId = DB::table('teachers')->insertGetId([
                     'user_id' => $validatedData['user_id'] ?? 0,
+                    'category_teacher_id' => $validatedData['category_teacher_id'] ?? null,
                     'full_name' => $validatedData['full_name'],
                     'front_title' => $validatedData['front_title'] ?? null,
                     'back_title' => $validatedData['back_title'] ?? null,
@@ -277,6 +278,7 @@ class TeacherController extends Controller
 
                 $updateData = [
                     'user_id' => $validatedData['user_id'] ?? $teacher->user_id,
+                    'category_teacher_id' => $validatedData['category_teacher_id'] ?? $teacher->category_teacher_id,
                     'full_name' => $validatedData['full_name'],
                     'front_title' => $validatedData['front_title'] ?? null,
                     'back_title' => $validatedData['back_title'] ?? null,
@@ -532,6 +534,7 @@ class TeacherController extends Controller
 
         return $request->validate([
             'user_id' => 'nullable|integer',
+            'category_teacher_id' => 'nullable|integer',
             'full_name' => 'required|string|max:255',
             'front_title' => 'nullable|string|max:50',
             'back_title' => 'nullable|string|max:50',

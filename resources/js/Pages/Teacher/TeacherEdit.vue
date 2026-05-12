@@ -100,7 +100,16 @@
                       </div>
                     </div>
                     <div class="flex-1 space-y-4 w-full">
-                      <AppInput v-model="form.full_name" :error="formErrors.full_name ? formErrors.full_name[0] : ''" label="Nama Lengkap (tanpa gelar)" placeholder="contoh: Budi Santoso" id="full_name" />
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <AppInput v-model="form.full_name" :error="formErrors.full_name ? formErrors.full_name[0] : ''" label="Nama Lengkap (tanpa gelar)" placeholder="contoh: Budi Santoso" id="full_name" />
+                        <div class="space-y-1">
+                          <label for="category_teacher_id" class="block text-sm font-medium text-slate-700">Kategori Dosen</label>
+                          <select id="category_teacher_id" v-model="form.category_teacher_id" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200 bg-white">
+                            <option :value="null">Pilih Kategori</option>
+                            <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.title }}</option>
+                          </select>
+                        </div>
+                      </div>
                       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <AppInput v-model="form.front_title" label="Gelar Depan" placeholder="contoh: Prof. Dr." id="front_title" />
                         <AppInput v-model="form.back_title" label="Gelar Belakang" placeholder="contoh: S.E., M.M." id="back_title" />
@@ -525,6 +534,7 @@ const formErrors = ref({});
 const toast = ref({ show: false, type: 'success', message: '' });
 let toastTimer = null;
 // Pindahkan wacth ke bawah setelah inisialisasi form
+const categories = ref([]);
 const steps = [
   { label: 'Identitas & Akademik' },
   { label: 'Riset & Karya Ilmiah' },
@@ -550,6 +560,7 @@ const handleFotoUpload = (event) => {
 
 const form = reactive({
   full_name: '',
+  category_teacher_id: null,
   front_title: '',
   back_title: '',
   birth_date: '',
@@ -700,6 +711,7 @@ const handleSubmit = async () => {
 
     // scalar fields
     formData.append('full_name', payload.full_name || '');
+    formData.append('category_teacher_id', payload.category_teacher_id || '');
     formData.append('front_title', payload.front_title || '');
     formData.append('back_title', payload.back_title || '');
     formData.append('birth_date', payload.birth_date || '');
@@ -773,6 +785,12 @@ onMounted(async () => {
   try {
     await axios.post('/api/auth/validate-token', {}, { headers: { Authorization: `Bearer ${token}` } });
     isAuthenticated.value = true;
+
+    // Fetch categories
+    const catResp = await axios.get('/api/category-teachers', { headers: { Authorization: `Bearer ${token}` } });
+    if (catResp.data && catResp.data.data) {
+      categories.value = catResp.data.data;
+    }
     
     // Ambil detail guru yang ada
     const parts = window.location.pathname.split('/');
