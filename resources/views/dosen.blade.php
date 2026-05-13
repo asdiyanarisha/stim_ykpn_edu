@@ -49,7 +49,7 @@
         @forelse($teachers as $teacher)
         <div class="faculty-card animate-on-scroll">
           <div class="faculty-img-wrap">
-            <img src="{{ $teacher->image_url }}" alt="{{ $teacher->full_name }}">
+            <img src="{{ $teacher->image_url ?: '/images/default-user.png' }}" alt="{{ $teacher->full_name }}" onerror="this.onerror=null;this.src='/images/default-user.png';">
             <div class="faculty-overlay">
               <a href="#" class="btn-white-outline" style="text-align: center;">Lihat Profil Lengkap</a>
             </div>
