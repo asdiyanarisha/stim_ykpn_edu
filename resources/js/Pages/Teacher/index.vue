@@ -95,6 +95,7 @@
                    <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Nama Dosen</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Kategori</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Pendidikan</th>
+                  <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Jabatan</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Alamat Email</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">Aksi</th>
                 </tr>
@@ -119,6 +120,12 @@
                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">
                       {{ teacher.education }}
                     </span>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-slate-600">
+                    <span v-if="teacher.job_title" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-100">
+                      {{ teacher.job_title }}
+                    </span>
+                    <span v-else class="text-slate-400">-</span>
                   </td>
                   <td class="px-6 py-4 text-sm text-slate-500">{{ teacher.email }}</td>
                   <td class="px-6 py-4 text-right">
@@ -304,6 +311,7 @@ const fetchTeachers = async (token) => {
       id: teacher.id,
       name: displayName,
       category: teacher.category_title || 'Tidak Ada Kategori',
+      job_title: teacher.job_title || null,
       email: teacher.email || '-',
       education: teacher.education || '-',
       avatar: buildAvatarUrl(teacher.image_url, displayName),
@@ -372,11 +380,21 @@ onMounted(async () => {
     await axios.post('/api/auth/validate-token', {}, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    await fetchTeachers(token);
     isAuthenticated.value = true;
+    try {
+      await fetchTeachers(token);
+    } catch (fetchError) {
+      console.error('Failed to fetch teachers:', fetchError);
+      // Optional: show a toast or error message on page instead of redirecting
+    }
   } catch (error) {
-    deleteCookie(TOKEN_COOKIE_NAME);
-    window.location.href = '/unauthenticated';
+    if (error.response?.status === 401) {
+      deleteCookie(TOKEN_COOKIE_NAME);
+      window.location.href = '/unauthenticated';
+    } else {
+      console.error('Token validation error:', error);
+      isAuthenticated.value = true; // Still allow view if it's not a 401 (e.g. server error on validation)
+    }
   }
 });
 </script>

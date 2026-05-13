@@ -132,6 +132,14 @@
                     <AppInput v-model="form.phone_number" :error="formErrors.phone_number ? formErrors.phone_number[0] : ''" label="No. Telepon" placeholder="0812xxxxxxxx" id="phone_number" />
                   </div>
                   <div class="space-y-1">
+                    <label for="job_title_teacher_id" class="block text-sm font-medium text-slate-700">Jabatan</label>
+                    <select id="job_title_teacher_id" v-model="form.job_title_teacher_id" :class="['block w-full border rounded-xl shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200', formErrors.job_title_teacher_id ? 'border-rose-500 bg-rose-50' : 'border-slate-200 bg-white']">
+                      <option :value="null">Pilih Jabatan</option>
+                      <option v-for="job in jobTitles" :key="job.id" :value="job.id">{{ job.title }}</option>
+                    </select>
+                    <p v-if="formErrors.job_title_teacher_id" class="text-xs text-rose-600 mt-1">{{ formErrors.job_title_teacher_id[0] }}</p>
+                  </div>
+                  <div class="space-y-1">
                     <label for="address" class="block text-sm font-medium text-slate-700">Alamat Rumah</label>
                     <textarea id="address" v-model="form.address" rows="4" placeholder="Jl. Contoh No. 123, Kelurahan, Kecamatan, Kota, Provinsi" :class="['block w-full border rounded-xl shadow-sm sm:text-sm py-2.5 pl-4 transition-all duration-200 resize-none', formErrors.address ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500 bg-rose-50' : 'border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 bg-white']"></textarea>
                     <p v-if="formErrors.address" class="text-xs text-rose-600 mt-1">{{ formErrors.address[0] }}</p>
@@ -536,6 +544,7 @@ const toast = ref({ show: false, type: 'success', message: '' });
 let toastTimer = null;
 // Pindahkan wacth ke bawah setelah inisialisasi form
 const categories = ref([]);
+const jobTitles = ref([]);
 const steps = [
   { label: 'Identitas & Akademik' },
   { label: 'Riset & Karya Ilmiah' },
@@ -562,6 +571,7 @@ const handleFotoUpload = (event) => {
 const form = reactive({
   full_name: '',
   category_teacher_id: null,
+  job_title_teacher_id: null,
   front_title: '',
   back_title: '',
   birth_date: '',
@@ -597,6 +607,7 @@ const removeItem = (key, index) => { form[key].splice(index, 1); };
 watch(form, (newVal) => {
   if (newVal.full_name && formErrors.value.full_name) delete formErrors.value.full_name;
   if (newVal.category_teacher_id && formErrors.value.category_teacher_id) delete formErrors.value.category_teacher_id;
+  if (newVal.job_title_teacher_id && formErrors.value.job_title_teacher_id) delete formErrors.value.job_title_teacher_id;
   if (newVal.email && formErrors.value.email) delete formErrors.value.email;
   if (newVal.phone_number && formErrors.value.phone_number) delete formErrors.value.phone_number;
   if (newVal.address && formErrors.value.address) delete formErrors.value.address;
@@ -658,6 +669,7 @@ const handleSubmit = async () => {
   // Validasi Frontend (Sama dengan kriteria Backend)
   if (!form.full_name) { formErrors.value.full_name = ['Nama lengkap wajib diisi.']; hasError = true; }
   if (!form.category_teacher_id) { formErrors.value.category_teacher_id = ['Kategori dosen wajib dipilih.']; hasError = true; }
+  if (!form.job_title_teacher_id) { formErrors.value.job_title_teacher_id = ['Jabatan wajib dipilih.']; hasError = true; }
   if (!form.email) { formErrors.value.email = ['Alamat email wajib diisi.']; hasError = true; }
   if (!form.phone_number) { formErrors.value.phone_number = ['No. Telepon wajib diisi.']; hasError = true; }
   if (!form.address) { formErrors.value.address = ['Alamat rumah wajib diisi.']; hasError = true; }
@@ -715,6 +727,7 @@ const handleSubmit = async () => {
     // scalar fields
     formData.append('full_name', payload.full_name || '');
     formData.append('category_teacher_id', payload.category_teacher_id || '');
+    formData.append('job_title_teacher_id', payload.job_title_teacher_id || '');
     formData.append('front_title', payload.front_title || '');
     formData.append('back_title', payload.back_title || '');
     formData.append('birth_date', payload.birth_date || '');
@@ -790,6 +803,12 @@ onMounted(async () => {
     const catResp = await axios.get('/api/category-teachers', { headers: { Authorization: `Bearer ${token}` } });
     if (catResp.data && catResp.data.data) {
       categories.value = catResp.data.data;
+    }
+
+    // Fetch job titles
+    const jobResp = await axios.get('/api/job-titles', { headers: { Authorization: `Bearer ${token}` } });
+    if (jobResp.data && jobResp.data.data) {
+      jobTitles.value = jobResp.data.data;
     }
   } catch (error) {
     deleteCookie(TOKEN_COOKIE_NAME);

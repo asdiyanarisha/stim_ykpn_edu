@@ -12,6 +12,7 @@ class Teacher extends Model
     protected $fillable = [
         'user_id',
         'category_teacher_id',
+        'job_title_teacher_id',
         'full_name',
         'front_title',
         'back_title',
@@ -26,6 +27,11 @@ class Teacher extends Model
     public function category()
     {
         return $this->belongsTo(CategoryTeacher::class, 'category_teacher_id');
+    }
+
+    public function jobTitle()
+    {
+        return $this->belongsTo(JobTitle::class, 'job_title_teacher_id');
     }
 
     public function education()

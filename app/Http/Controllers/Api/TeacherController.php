@@ -26,10 +26,13 @@ class TeacherController extends Controller
                     't.back_title',
                     't.email',
                     't.image_url',
+                    't.created_at',
                     'c.title as category_title',
+                    'jt.title as job_title',
                     DB::raw('MAX(e.degree) as education')
                 )
-                ->groupBy('t.id', 't.front_title', 't.full_name', 't.back_title', 't.email', 't.image_url', 'c.title')
+                ->leftJoin('job_titles as jt', 'jt.id', '=', 't.job_title_teacher_id')
+                ->groupBy('t.id', 't.front_title', 't.full_name', 't.back_title', 't.email', 't.image_url', 't.created_at', 'c.title', 'jt.title')
                 ->orderByDesc('t.created_at')
                 ->get();
 
@@ -104,6 +107,7 @@ class TeacherController extends Controller
                 $teacherId = DB::table('teachers')->insertGetId([
                     'user_id' => $validatedData['user_id'] ?? 0,
                     'category_teacher_id' => $validatedData['category_teacher_id'] ?? null,
+                    'job_title_teacher_id' => $validatedData['job_title_teacher_id'] ?? null,
                     'full_name' => $validatedData['full_name'],
                     'front_title' => $validatedData['front_title'] ?? null,
                     'back_title' => $validatedData['back_title'] ?? null,
@@ -281,6 +285,7 @@ class TeacherController extends Controller
                 $updateData = [
                     'user_id' => $validatedData['user_id'] ?? $teacher->user_id,
                     'category_teacher_id' => $validatedData['category_teacher_id'] ?? $teacher->category_teacher_id,
+                    'job_title_teacher_id' => $validatedData['job_title_teacher_id'] ?? $teacher->job_title_teacher_id,
                     'full_name' => $validatedData['full_name'],
                     'front_title' => $validatedData['front_title'] ?? null,
                     'back_title' => $validatedData['back_title'] ?? null,
@@ -537,6 +542,7 @@ class TeacherController extends Controller
         return $request->validate([
             'user_id' => 'nullable|integer',
             'category_teacher_id' => 'required|integer',
+            'job_title_teacher_id' => 'required|integer',
             'full_name' => 'required|string|max:255',
             'front_title' => 'nullable|string|max:50',
             'back_title' => 'nullable|string|max:50',
