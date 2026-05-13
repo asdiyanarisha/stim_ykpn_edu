@@ -95,6 +95,8 @@ import PaymentSettingForm from './Pages/PaymentSetting/PaymentSettingForm.vue';
 import UserSetting from './Pages/Setting/UserSetting.vue';
 import CategoryTeacher from './Pages/Teacher/CategoryTeacher/index.vue';
 import CategoryTeacherShow from './Pages/Teacher/CategoryTeacher/Show.vue';
+import JobTitle from './Pages/MasterData/JobTitle/index.vue';
+import JobTitleShow from './Pages/MasterData/JobTitle/Show.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -198,6 +200,8 @@ const pages = {
     userSetting: UserSetting,
     categoryTeacher: CategoryTeacher,
     categoryTeacherShow: CategoryTeacherShow,
+    jobTitle: JobTitle,
+    jobTitleShow: JobTitleShow,
 };
 
 const appElement = document.getElementById('app');

@@ -37,6 +37,10 @@
           {
             "name": "Kategori Dosen",
             "link": "/masterData/teacher/category"
+          },
+          {
+            "name": "Jabatan",
+            "link": "/masterData/job-title"
           }
         ]
       }

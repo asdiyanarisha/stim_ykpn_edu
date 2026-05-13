@@ -51,6 +51,7 @@ use App\Http\Controllers\Api\AcademicYearController;
 use App\Http\Controllers\Api\ProgramStudyController;
 use App\Http\Controllers\Api\PaymentSettingController;
 use App\Http\Controllers\Api\CategoryTeacherController;
+use App\Http\Controllers\Api\JobTitleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -366,4 +367,11 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/category-teachers/{id}', [CategoryTeacherController::class, 'update']);
     Route::delete('/category-teachers/{id}', [CategoryTeacherController::class, 'destroy']);
     Route::post('/category-teachers/bulk-delete', [CategoryTeacherController::class, 'bulkDestroy']);
+    // Job Title Management
+    Route::get('/job-titles', [JobTitleController::class, 'index']);
+    Route::get('/job-titles/{id}', [JobTitleController::class, 'show']);
+    Route::post('/job-titles', [JobTitleController::class, 'store']);
+    Route::post('/job-titles/{id}', [JobTitleController::class, 'update']);
+    Route::delete('/job-titles/{id}', [JobTitleController::class, 'destroy']);
+    Route::post('/job-titles/bulk-delete', [JobTitleController::class, 'bulkDestroy']);
 });

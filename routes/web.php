@@ -59,6 +59,10 @@ Route::get('/masterData/teacher/edit/{id}', function ($id) {
 Route::get('/masterData/teacher/category', fn() => view('category-teacher'))->name('category-teacher.index');
 Route::get('/masterData/teacher/category/show/{id}', fn() => view('category-teacher-show'))->name('category-teacher.show');
 
+// Jabatan
+Route::get('/masterData/job-title', fn() => view('job-title'))->name('job-title.index');
+Route::get('/masterData/job-title/show/{id}', fn() => view('job-title-show'))->name('job-title.show');
+
 Route::get('/content/banner', function () {
     return view('banner');
 });
