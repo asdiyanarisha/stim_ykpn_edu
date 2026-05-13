@@ -2569,6 +2569,50 @@ a.btn.btn-orange:hover {
   box-shadow: 0 4px 16px rgba(0, 75, 147, 0.3);
 }
 
+/* Faculty Search */
+.faculty-search-wrap {
+  max-width: 600px;
+  margin: 0 auto 48px;
+}
+
+.search-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  width: 20px;
+  height: 20px;
+  color: var(--gray-400);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 24px 14px 52px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  color: var(--navy-900);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--blue-400);
+  box-shadow: 0 0 0 4px rgba(0, 75, 147, 0.1), var(--shadow-md);
+}
+
+.search-input::placeholder {
+  color: var(--gray-400);
+}
+
 /* Faculty Grid */
 .faculty-grid {
   display: grid;

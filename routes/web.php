@@ -357,8 +357,23 @@ Route::get('/dosen', function (\Illuminate\Http\Request $request) {
             $q->where('slug', $request->category);
         });
     }
+
+    if ($request->has('search') && $request->search != '') {
+        $search = $request->search;
+        $query->where(function($q) use ($search) {
+            $q->where('full_name', 'like', "%{$search}%")
+              ->orWhere('front_title', 'like', "%{$search}%")
+              ->orWhere('back_title', 'like', "%{$search}%")
+              ->orWhereHas('category', function($cq) use ($search) {
+                  $cq->where('title', 'like', "%{$search}%");
+              })
+              ->orWhereHas('jobTitle', function($jq) use ($search) {
+                  $jq->where('title', 'like', "%{$search}%");
+              });
+        });
+    }
     
-    $teachers = $query->with('category')->paginate(6);
+    $teachers = $query->with(['category', 'jobTitle'])->paginate(6);
     
     return view('dosen', compact('teachers', 'categories'));
 });
@@ -372,8 +387,23 @@ Route::get('/dosen.html', function (\Illuminate\Http\Request $request) {
             $q->where('slug', $request->category);
         });
     }
+
+    if ($request->has('search') && $request->search != '') {
+        $search = $request->search;
+        $query->where(function($q) use ($search) {
+            $q->where('full_name', 'like', "%{$search}%")
+              ->orWhere('front_title', 'like', "%{$search}%")
+              ->orWhere('back_title', 'like', "%{$search}%")
+              ->orWhereHas('category', function($cq) use ($search) {
+                  $cq->where('title', 'like', "%{$search}%");
+              })
+              ->orWhereHas('jobTitle', function($jq) use ($search) {
+                  $jq->where('title', 'like', "%{$search}%");
+              });
+        });
+    }
     
-    $teachers = $query->with('category')->paginate(6);
+    $teachers = $query->with(['category', 'jobTitle'])->paginate(6);
     
     return view('dosen', compact('teachers', 'categories'));
 });
