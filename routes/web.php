@@ -377,6 +377,43 @@ Route::get('/dosen', function (\Illuminate\Http\Request $request) {
     
     return view('dosen', compact('teachers', 'categories'));
 });
+
+Route::get('/dosen/{id}', function ($id) {
+    $teacher = Teacher::with([
+        'category', 
+        'jobTitle', 
+        'education',
+        'professional_positions',
+        'research_areas',
+        'publications',
+        'books',
+        'popular_writings',
+        'awards',
+        'online_academic_profiles',
+    ])->findOrFail($id);
+
+    return view('dosen-detail', compact('teacher'));
+});
+
+Route::get('/dosen/{id}.html', function ($id) {
+    $teacher = Teacher::with([
+        'category', 
+        'jobTitle', 
+        'education',
+        'professional_positions',
+        'research_areas',
+        'publications',
+        'books',
+        'popular_writings',
+        'awards',
+        'online_academic_profiles',
+    ])->findOrFail($id);
+
+    return view('dosen-detail', compact('teacher'));
+});
+
+
+
 Route::get('/dosen.html', function (\Illuminate\Http\Request $request) {
     $categories = CategoryTeacher::all();
     

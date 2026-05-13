@@ -38,4 +38,39 @@ class Teacher extends Model
     {
         return $this->hasMany(EducationTeacher::class, 'teacher_id');
     }
+
+    public function professional_positions()
+    {
+        return $this->hasMany(ProfessionalPositionTeacher::class, 'teacher_id');
+    }
+
+    public function research_areas()
+    {
+        return $this->hasMany(ResearchAreaTeacher::class, 'teacher_id');
+    }
+
+    public function publications()
+    {
+        return $this->hasMany(PublicationTeacher::class, 'teacher_id');
+    }
+
+    public function books()
+    {
+        return $this->hasMany(BookTeacher::class, 'teacher_id');
+    }
+
+    public function popular_writings()
+    {
+        return $this->hasMany(PopularWritingTeacher::class, 'teacher_id');
+    }
+
+    public function awards()
+    {
+        return $this->hasMany(AwardTeacher::class, 'teacher_id');
+    }
+
+    public function online_academic_profiles()
+    {
+        return $this->hasMany(OnlineAcademicProfileTeacher::class, 'teacher_id');
+    }
 }

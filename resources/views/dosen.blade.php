@@ -66,7 +66,7 @@
           <div class="faculty-img-wrap">
             <img src="{{ $teacher->image_url ?: '/images/default-user.png' }}" alt="{{ $teacher->full_name }}" onerror="this.onerror=null;this.src='/images/default-user.png';">
             <div class="faculty-overlay">
-              <a href="#" class="btn-white-outline" style="text-align: center;">Lihat Profil Lengkap</a>
+              <a href="/dosen/{{ $teacher->id }}" class="btn-white-outline" style="text-align: center;">Lihat Profil Lengkap</a>
             </div>
           </div>
           <div class="faculty-info">
