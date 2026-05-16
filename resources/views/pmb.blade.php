@@ -531,8 +531,8 @@
               <label for="jenis_kelamin">Jenis Kelamin</label>
               <select id="jenis_kelamin" name="jenis_kelamin" class="form-control">
                 <option value="" disabled selected>- Pilih Jenis Kelamin -</option>
-                <option value="L">Laki-Laki</option>
-                <option value="P">Perempuan</option>
+                <option value="Laki-laki">Laki-Laki</option>
+                <option value="Perempuan">Perempuan</option>
               </select>
             </div>
           </div>
@@ -625,6 +625,103 @@
 
   <!-- Script -->
   <script src="/js/script.js?v=2.3"></script>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('.stim-form');
+      const submitBtn = form.querySelector('.btn-submit');
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Pastikan persetujuan dicentang
+        const agreement = form.querySelector('input[name="agreement"]');
+        if (agreement && !agreement.checked) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Perhatian',
+                text: 'Anda harus menyetujui pernyataan kebenaran data.',
+                confirmButtonColor: '#004b93'
+            });
+            return;
+        }
+
+        const originalText = submitBtn.innerText;
+        submitBtn.innerText = 'Mengirim...';
+        submitBtn.disabled = true;
+
+        const formData = {
+          nama_lengkap: document.getElementById('nama').value,
+          email: document.getElementById('email').value,
+          nomor_hp_wa: document.getElementById('phone').value,
+          tempat_lahir: document.getElementById('tempat_lahir').value,
+          tanggal_lahir: document.getElementById('tanggal_lahir').value,
+          jenis_kelamin: document.getElementById('jenis_kelamin').value,
+          alamat_asal: document.getElementById('alamat').value,
+          asal_sekolah: document.getElementById('asal_sekolah').value,
+          program_studi: document.getElementById('program_studi').value,
+          sumber_informasi: document.getElementById('sumber_info').value,
+          jalur_registrasi: document.getElementById('jalur_registrasi').value,
+          kode_voucher: document.getElementById('kode_voucher').value || null
+        };
+
+        try {
+          const response = await fetch('/api/pmb/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: result.message || 'Pendaftaran Mahasiswa Baru berhasil disubmit!',
+                confirmButtonColor: '#f18721'
+            });
+            form.reset();
+          } else {
+            if (response.status === 422) {
+               let errorMsg = '';
+               for (let key in result.errors) {
+                  errorMsg += `${result.errors[key][0]}\n`;
+               }
+               Swal.fire({
+                   icon: 'error',
+                   title: 'Validasi Gagal',
+                   text: errorMsg,
+                   confirmButtonColor: '#d33'
+               });
+            } else {
+               Swal.fire({
+                   icon: 'error',
+                   title: 'Oops...',
+                   text: result.message || 'Terjadi kesalahan pada server.',
+                   confirmButtonColor: '#d33'
+               });
+            }
+          }
+        } catch (error) {
+          console.error(error);
+          Swal.fire({
+              icon: 'error',
+              title: 'Kesalahan Jaringan',
+              text: 'Terjadi kesalahan jaringan.',
+              confirmButtonColor: '#d33'
+          });
+        } finally {
+          submitBtn.innerText = originalText;
+          submitBtn.disabled = false;
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

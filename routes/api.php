@@ -52,6 +52,8 @@ use App\Http\Controllers\Api\ProgramStudyController;
 use App\Http\Controllers\Api\PaymentSettingController;
 use App\Http\Controllers\Api\CategoryTeacherController;
 use App\Http\Controllers\Api\JobTitleController;
+use App\Http\Controllers\Api\PmbPublicController;
+use App\Http\Controllers\Api\PmbAdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -75,6 +77,12 @@ Route::prefix('auth')->group(function () {
     // Validate Token — cek apakah token masih valid
     Route::post('/validate-token', [AuthController::class, 'validateToken']);
 });
+
+// ======================================================================
+// Public Registration (PMB)
+// ======================================================================
+// Menggunakan custom Rate Limiting di Controller (1 request per 10 detik per IP)
+Route::post('/pmb/register', [PmbPublicController::class, 'store']);
 
 // ======================================================================
 // Protected Routes (memerlukan JWT token yang valid)
@@ -296,6 +304,13 @@ Route::middleware('jwt.auth')->group(function () {
         Route::get('/program-extensi', [PmbProgramExtensiController::class, 'show']);
         Route::post('/program-extensi', [PmbProgramExtensiController::class, 'update']);
     });
+    
+    // PMB Admin Data Management
+    Route::get('/pmbs', [PmbAdminController::class, 'index']);
+    Route::get('/pmbs/{id}', [PmbAdminController::class, 'show']);
+    Route::post('/pmbs/{id}', [PmbAdminController::class, 'update']);
+    Route::delete('/pmbs/{id}', [PmbAdminController::class, 'destroy']);
+    Route::post('/pmbs/bulk-delete', [PmbAdminController::class, 'bulkDestroy']);
 
     Route::post('/research-journals/{id}', [ArticleTeacherController::class, 'update']);
     Route::delete('/research-journals/{id}', [ArticleTeacherController::class, 'destroy']);

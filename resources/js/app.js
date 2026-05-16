@@ -97,6 +97,9 @@ import CategoryTeacher from './Pages/Teacher/CategoryTeacher/index.vue';
 import CategoryTeacherShow from './Pages/Teacher/CategoryTeacher/Show.vue';
 import JobTitle from './Pages/MasterData/JobTitle/index.vue';
 import JobTitleShow from './Pages/MasterData/JobTitle/Show.vue';
+import PmbAdminIndex from './Pages/PmbAdmin/index.vue';
+import PmbAdminShow from './Pages/PmbAdmin/Show.vue';
+import PmbAdminEdit from './Pages/PmbAdmin/Edit.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -202,6 +205,9 @@ const pages = {
     categoryTeacherShow: CategoryTeacherShow,
     jobTitle: JobTitle,
     jobTitleShow: JobTitleShow,
+    pmbAdmin: PmbAdminIndex,
+    pmbAdminShow: PmbAdminShow,
+    pmbAdminEdit: PmbAdminEdit,
 };
 
 const appElement = document.getElementById('app');

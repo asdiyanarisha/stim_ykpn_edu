@@ -513,8 +513,12 @@ Route::get('/yudisium.html', fn() => view('yudisium'));
 Route::get('/perpustakaan', fn() => view('perpustakaan'));
 Route::get('/perpustakaan.html', fn() => view('perpustakaan'));
 
+// PMB Admin Dashboard
+Route::get('/pmb', fn() => view('pmb-admin'))->name('pmb.admin.index');
+Route::get('/pmb/show/{id}', fn() => view('pmb-admin-show'))->name('pmb.admin.show');
+Route::get('/pmb/edit/{id}', fn() => view('pmb-admin-edit'))->name('pmb.admin.edit');
+
 // Newly Migrated PMB Landing Pages
-Route::get('/pmb', fn() => view('pmb'));
 Route::get('/pmb.html', fn() => view('pmb'));
 
 Route::get('/biaya-kuliah', fn() => view('biaya-kuliah'));
