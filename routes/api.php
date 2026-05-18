@@ -54,6 +54,7 @@ use App\Http\Controllers\Api\CategoryTeacherController;
 use App\Http\Controllers\Api\JobTitleController;
 use App\Http\Controllers\Api\PmbPublicController;
 use App\Http\Controllers\Api\PmbAdminController;
+use App\Http\Controllers\Api\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -93,6 +94,9 @@ Route::middleware('jwt.auth')->group(function () {
 
     // Change Password — mengubah password user yang sedang login
     Route::post('/auth/change-password', [AuthController::class, 'changePassword']);
+
+    // Dashboard Statistics
+    Route::get('/dashboard/stats', [DashboardController::class, 'stats']);
 
     // Teacher Management
     Route::get('/teachers', [TeacherController::class, 'index']);
