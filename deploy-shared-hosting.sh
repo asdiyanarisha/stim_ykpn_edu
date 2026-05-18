@@ -118,6 +118,8 @@ cp -r database "${DEPLOY_DIR}/"
 
 echo -e "  Copying public/..."
 cp -r public "${DEPLOY_DIR}/"
+# Hapus file hot (indikator dev server) agar tidak error CORS di production
+rm -f "${DEPLOY_DIR}/public/hot"
 
 echo -e "  Copying resources/..."
 # Hanya copy views (blade), bukan js/css source karena sudah di-build
