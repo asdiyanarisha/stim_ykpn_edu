@@ -73,105 +73,112 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
        ============================================ -->
   <section class="hero" id="beranda">
     <div class="hero-slider" id="heroSlider">
-      @forelse ($banners as $index => $banner)
-      <div class="slide {{ $index === 0 ? 'active' : '' }}">
-        <img src="{{ $banner->url_image }}" alt="{{ $banner->title }}" loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
-      </div>
-      @empty
+      <!-- Slide 1: Static Content -->
       <div class="slide active">
         <img src="/images/hero-bg.png" alt="STIM YKPN Campus 1" loading="eager">
+        <div class="hero-overlay"></div>
+        <div style="position: absolute; inset: 0; display: flex; align-items: center; z-index: 2; pointer-events: none;">
+          <div class="container" style="pointer-events: none;">
+            <div class="hero-content" style="pointer-events: auto; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center;">
+              <div class="hero-badge">
+                <span class="badge-dot"></span>
+                Pendaftaran 2026/2027 Dibuka
+              </div>
+              <h1 class="hero-title">
+                Membangun <span class="highlight">Pemimpin Bisnis</span> Masa Depan
+              </h1>
+              <p class="hero-subtitle">
+                Lebih dari 50 tahun menghasilkan lulusan profesional yang siap bersaing
+                di dunia bisnis global dengan sertifikasi kompetensi terakui.
+              </p>
+              <div class="hero-actions" style="justify-content: center; width: 100%;">
+                <a href="/pmb.html" class="btn btn-orange btn-pulse">
+                  Daftar PMB
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                </a>
+                <a href="#campus-tour" class="btn btn-secondary">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" /></svg>
+                  Virtual Tour
+                </a>
+              </div>
+              <div class="hero-stats" style="justify-content: center; width: 100%;">
+                <div class="hero-stat"><div class="stat-number" data-count="50">0</div><div class="stat-label">Tahun Berdiri</div></div>
+                <div class="hero-stat"><div class="stat-number" data-count="15000" data-suffix="+">0</div><div class="stat-label">Alumni Profesional</div></div>
+                <div class="hero-stat"><div class="stat-number" data-count="4" data-suffix="">0</div><div class="stat-label">Sertifikasi Profesi</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- Slide 2+: Dynamic Content -->
+      @foreach ($banners as $index => $banner)
+      <div class="slide">
+        <img src="{{ $banner->url_image }}" alt="{{ $banner->title }}" loading="lazy">
+        <div class="hero-overlay"></div>
+        @if($banner->title || $banner->description)
+        <div style="position: absolute; inset: 0; display: flex; align-items: center; z-index: 2; pointer-events: none;">
+          <div class="container" style="pointer-events: none;">
+            <div class="hero-content" style="pointer-events: auto; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center;">
+              @if($banner->title)
+              <h1 class="hero-title">{{ $banner->title }}</h1>
+              @endif
+              @if($banner->description)
+              <p class="hero-subtitle">{{ $banner->description }}</p>
+              @endif
+              @if($banner->button_text && $banner->link)
+              <div class="hero-actions" style="justify-content: center; width: 100%;">
+                <a href="{{ $banner->link }}" class="btn btn-orange btn-pulse">
+                  {{ $banner->button_text }}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                </a>
+              </div>
+              @endif
+            </div>
+          </div>
+        </div>
+        @endif
+      </div>
+      @endforeach
+
+      @if ($banners->isEmpty())
+      <!-- Fallback slides -->
       <div class="slide">
         <img src="/images/students.png" alt="STIM YKPN Campus 2" loading="lazy">
+        <div class="hero-overlay"></div>
       </div>
       <div class="slide">
         <img src="/images/hero_bg.png" alt="STIM YKPN Campus 3" loading="lazy">
+        <div class="hero-overlay"></div>
       </div>
-      @endforelse
-      <div class="hero-overlay"></div>
+      @endif
 
-      <!-- Slider Controls -->
-      <button class="slider-btn prev-btn" id="heroPrevBtn" aria-label="Previous slide">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="m15 18-6-6 6-6" />
-        </svg>
-      </button>
-      <button class="slider-btn next-btn" id="heroNextBtn" aria-label="Next slide">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="m9 18 6-6-6-6" />
-        </svg>
-      </button>
-
-      <div class="slider-dots" id="heroSliderDots">
-        @if ($banners->count() > 0)
-          @foreach ($banners as $index => $banner)
-            <button class="dot {{ $index === 0 ? 'active' : '' }}" data-index="{{ $index }}" aria-label="Slide {{ $index + 1 }}"></button>
-          @endforeach
-        @else
-          <button class="dot active" data-index="0" aria-label="Slide 1"></button>
+      <div class="slider-dots" id="heroSliderDots" style="bottom: 100px;">
+        <button class="dot active" data-index="0" aria-label="Slide 1"></button>
+        @foreach ($banners as $index => $banner)
+          <button class="dot" data-index="{{ $index + 1 }}" aria-label="Slide {{ $index + 2 }}"></button>
+        @endforeach
+        
+        @if ($banners->isEmpty())
           <button class="dot" data-index="1" aria-label="Slide 2"></button>
           <button class="dot" data-index="2" aria-label="Slide 3"></button>
         @endif
       </div>
     </div>
 
+    <!-- Slider Controls (Absolute top level to prevent ANY overlaps) -->
+    <button class="slider-btn prev-btn" id="heroPrevBtn" aria-label="Previous slide" style="z-index: 9999; pointer-events: auto; padding: 0; outline: none; border: none; background: rgba(255, 255, 255, 0.2);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></svg>
+    </button>
+    <button class="slider-btn next-btn" id="heroNextBtn" aria-label="Next slide" style="z-index: 9999; pointer-events: auto; padding: 0; outline: none; border: none; background: rgba(255, 255, 255, 0.2);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+    </button>
+
+
     <!-- Decorative circles -->
     <div class="hero-decor hero-decor-1"></div>
     <div class="hero-decor hero-decor-2"></div>
     <div class="hero-decor hero-decor-3"></div>
-
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <span class="badge-dot"></span>
-          Pendaftaran 2026/2027 Dibuka
-        </div>
-
-        <h1 class="hero-title">
-          Membangun <span class="highlight">Pemimpin Bisnis</span> Masa Depan
-        </h1>
-
-        <p class="hero-subtitle">
-          Lebih dari 50 tahun menghasilkan lulusan profesional yang siap bersaing
-          di dunia bisnis global dengan sertifikasi kompetensi terakui.
-        </p>
-
-        <div class="hero-actions">
-          <a href="/pmb.html" class="btn btn-orange btn-pulse">
-            Daftar PMB
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14" />
-              <path d="m12 5 7 7-7 7" />
-            </svg>
-          </a>
-          <a href="#campus-tour" class="btn btn-secondary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="5 3 19 12 5 21 5 3" />
-            </svg>
-            Virtual Tour
-          </a>
-        </div>
-
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <div class="stat-number" data-count="50">0</div>
-            <div class="stat-label">Tahun Berdiri</div>
-          </div>
-          <div class="hero-stat">
-            <div class="stat-number" data-count="15000" data-suffix="+">0</div>
-            <div class="stat-label">Alumni Profesional</div>
-          </div>
-          <div class="hero-stat">
-            <div class="stat-number" data-count="4" data-suffix="">0</div>
-            <div class="stat-label">Sertifikasi Profesi</div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="scroll-indicator">
       <div class="mouse"></div>
