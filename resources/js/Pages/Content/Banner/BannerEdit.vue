@@ -200,7 +200,6 @@ const handleSubmit = async () => {
   
   // Validation
   let hasError = false;
-  if (!form.title) { errors.title = 'Judul banner wajib diisi'; hasError = true; }
   // Image is not required in edit if we already have a preview
   if (!imagePreview.value && !form.url_image) { 
     errors.url_image = 'Gambar banner wajib diunggah'; 

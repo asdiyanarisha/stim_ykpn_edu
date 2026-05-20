@@ -560,3 +560,5 @@ Route::get('/alumni.html', fn() => view('alumni'));
 
 Route::get('/lowongan-kerja', fn() => view('lowongan-kerja'));
 Route::get('/lowongan-kerja.html', fn() => view('lowongan-kerja'));
+
+Route::get('/whatsapp-contact', fn() => view('whatsapp-contact'))->name('whatsapp-contact.index');

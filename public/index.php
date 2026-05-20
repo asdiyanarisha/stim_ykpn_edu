@@ -1,5 +1,13 @@
 <?php
 
+// Temporary cache clear hook
+if (file_exists(__DIR__.'/../bootstrap/cache/routes-v7.php')) {
+    @unlink(__DIR__.'/../bootstrap/cache/routes-v7.php');
+}
+if (file_exists(__DIR__.'/../bootstrap/cache/config.php')) {
+    @unlink(__DIR__.'/../bootstrap/cache/config.php');
+}
+
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 

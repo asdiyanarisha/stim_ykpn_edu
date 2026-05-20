@@ -36,7 +36,7 @@ class ContentBannerController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'title' => 'required|string|max:255',
+                'title' => 'nullable|string|max:255',
                 'description' => 'nullable|string',
                 'button_text' => 'nullable|string|max:100',
                 'link' => 'nullable|string',
@@ -92,7 +92,7 @@ class ContentBannerController extends Controller
             }
 
             $validator = Validator::make($request->all(), [
-                'title' => 'required|string|max:255',
+                'title' => 'nullable|string|max:255',
                 'description' => 'nullable|string',
                 'button_text' => 'nullable|string|max:100',
                 'link' => 'nullable|string',

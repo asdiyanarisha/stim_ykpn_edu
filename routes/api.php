@@ -393,4 +393,8 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/job-titles/{id}', [JobTitleController::class, 'update']);
     Route::delete('/job-titles/{id}', [JobTitleController::class, 'destroy']);
     Route::post('/job-titles/bulk-delete', [JobTitleController::class, 'bulkDestroy']);
+
+    // Whatsapp Contacts Management
+    Route::get('/whatsapp-contacts', [\App\Http\Controllers\Api\WhatsappContactController::class, 'index']);
+    Route::post('/whatsapp-contacts', [\App\Http\Controllers\Api\WhatsappContactController::class, 'store']);
 });

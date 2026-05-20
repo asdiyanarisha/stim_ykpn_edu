@@ -152,7 +152,6 @@ const handleSubmit = async () => {
   
   // Validation
   let hasError = false;
-  if (!form.title) { errors.title = 'Judul banner wajib diisi'; hasError = true; }
   if (!form.url_image) { errors.url_image = 'Gambar banner wajib diunggah'; hasError = true; }
 
   if (hasError) return;
