@@ -1094,10 +1094,12 @@ a.btn.btn-orange:hover {
 
 .why-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 32px;
   position: relative;
   z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 @media (max-width: 1024px) {

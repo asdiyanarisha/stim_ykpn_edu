@@ -218,19 +218,6 @@
             style="background: white; border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 4px solid var(--blue-500);">
             <h3 style="color: var(--blue-500); font-size: 1.4rem; margin-bottom: 20px; text-align: center;">S1
               Manajemen</h3>
-
-            <h4
-              style="font-size: 1.1rem; color: #333; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">
-              Biaya Pendaftaran</h4>
-            <ul style="list-style: none; padding: 0; margin: 0 0 20px 0;">
-              <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Pendaftaran</span>
-                <strong>Rp 500.000</strong></li>
-              <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>PKKMB</span>
-                <strong>Rp 1.000.000</strong></li>
-              <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>SPA*</span>
-                <strong>Rp 12.000.000</strong></li>
-            </ul>
-
             <h4
               style="font-size: 1.1rem; color: #333; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">
               Biaya Kuliah</h4>
@@ -240,9 +227,6 @@
               <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>SPP Variabel</span>
                 <strong>Rp 185.000</strong></li>
             </ul>
-
-            <p style="font-size: 0.85rem; color: #666; font-style: italic; margin-top: 15px;">*Biaya SPA dapat
-              dibayarkan bertahap hingga 1 tahun setelah masuk kuliah</p>
           </div>
 
           <!-- D3 Manajemen Card -->
@@ -253,18 +237,6 @@
 
             <h4
               style="font-size: 1.1rem; color: #333; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">
-              Biaya Pendaftaran</h4>
-            <ul style="list-style: none; padding: 0; margin: 0 0 20px 0;">
-              <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Pendaftaran</span>
-                <strong>Rp 500.000</strong></li>
-              <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>PKKMB</span>
-                <strong>Rp 1.000.000</strong></li>
-              <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>SPA*</span>
-                <strong>Rp 8.000.000</strong></li>
-            </ul>
-
-            <h4
-              style="font-size: 1.1rem; color: #333; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">
               Biaya Kuliah</h4>
             <ul style="list-style: none; padding: 0; margin: 0 0 15px 0;">
               <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>SPP Tetap</span>
@@ -272,9 +244,6 @@
               <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>SPP Variabel</span>
                 <strong>Rp 155.000</strong></li>
             </ul>
-
-            <p style="font-size: 0.85rem; color: #666; font-style: italic; margin-top: 15px;">*Biaya SPA dapat
-              dibayarkan bertahap hingga 1 tahun setelah masuk kuliah</p>
           </div>
 
           <!-- S1 Bisnis Digital Card -->
@@ -285,18 +254,6 @@
 
             <h4
               style="font-size: 1.1rem; color: #333; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">
-              Biaya Pendaftaran</h4>
-            <ul style="list-style: none; padding: 0; margin: 0 0 20px 0;">
-              <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Pendaftaran</span>
-                <strong>Rp 500.000</strong></li>
-              <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>PKKMB</span>
-                <strong>Rp 1.000.000</strong></li>
-              <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>SPA*</span>
-                <strong>Rp 12.000.000</strong></li>
-            </ul>
-
-            <h4
-              style="font-size: 1.1rem; color: #333; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">
               Biaya Kuliah</h4>
             <ul style="list-style: none; padding: 0; margin: 0 0 15px 0;">
               <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>SPP Tetap</span>
@@ -304,9 +261,6 @@
               <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>SPP Variabel</span>
                 <strong>Rp 185.000</strong></li>
             </ul>
-
-            <p style="font-size: 0.85rem; color: #666; font-style: italic; margin-top: 15px;">*Biaya SPA dapat
-              dibayarkan bertahap hingga 1 tahun setelah masuk kuliah</p>
           </div>
 
         </div>
@@ -314,16 +268,6 @@
         <!-- Special Offer Banner -->
         <div
           style="background: linear-gradient(135deg, var(--blue-500), var(--navy-800)); border-radius: 12px; padding: 30px; color: white; text-align: center; box-shadow: 0 10px 25px rgba(10, 37, 88, 0.2);">
-          <span
-            style="display: inline-block; background: var(--orange-500); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;">Penawaran
-            Spesial Khusus Hari Ini</span>
-          <h3 style="color: white; font-size: 1.5rem; margin-bottom: 15px; line-height: 1.4;">Segera Daftar dan
-            Dapatkan Gratis Biaya Pendaftaran senilai Rp 200.000 dan Potongan SPA Rp 3.000.000 (S1 Manajemen / S1
-            Bisnis Digital) / Rp 1.000.000 (D3)</h3>
-          <p
-            style="opacity: 0.9; margin-bottom: 25px; font-size: 0.95rem; line-height: 1.6; max-width: 600px; margin-left: auto; margin-right: auto;">
-            Masih mau dibahas dulu dengan orang tua? Atau ada pertimbangan lainnya? Tenang, submit dulu saja hari ini
-            supaya tetap dapat klaim potongan biayanya. Tim kami akan bantu yang terbaik untukmu.</p>
           <a href="/pmb.html" class="btn btn-primary"
             style="background: var(--orange-500); border: none; padding: 12px 30px; font-size: 1.1rem; border-radius: 8px; text-decoration: none; color: white; font-weight: 600; display: inline-block; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(239, 124, 0, 0.3);">Daftar
             Sekarang</a>

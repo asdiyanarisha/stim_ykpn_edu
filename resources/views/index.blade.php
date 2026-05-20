@@ -338,21 +338,6 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
           <p>Bergabung dengan 15.000+ alumni yang telah sukses bekerja di berbagai sektor bisnis dan pemerintahan di
             seluruh Indonesia.</p>
         </div>
-
-        <div class="why-card animate-on-scroll animate-delay-4">
-          <div class="why-card-decor"></div>
-          <div class="icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polygon
-                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-            </svg>
-          </div>
-          <div class="stat-num">A</div>
-          <h4>Terakreditasi Baik Sekali</h4>
-          <p>Mendapatkan pengakuan akreditasi Baik Sekali dari BAN-PT untuk menjamin kualitas standar mutu pendidikan
-            tinggi.</p>
-        </div>
       </div>
     </div>
   </section>

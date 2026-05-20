@@ -194,8 +194,8 @@
           
           <ul class="target-list">
             <li>
-              <h4>Kurikulum Berbasis Kompetensi</h4>
-              Kurikulum yang disusun berdasarkan Kerangka Kualifikasi Nasional Indonesia (KKNI) dan selalu diperbarui sesuai dengan standar kebutuhan industri terkini (link and match).
+              <h4>Kurikulum Berbasis Outcome</h4>
+              Kurikulum yang dirancang dengan berorientasi pada capaian pembelajaran lulusan (Outcome-Based Education/OBE), diselaraskan dengan Kerangka Kualifikasi Nasional Indonesia (KKNI) dan standar kebutuhan industri terkini (link and match).
             </li>
             <li>
               <h4>Metode Student-Centered Learning (SCL)</h4>
