@@ -61,7 +61,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
     rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="/css/style.css?v=2.5">
+  <link rel="stylesheet" href="/css/style.css?v=2.6">
 </head>
 
 <body>

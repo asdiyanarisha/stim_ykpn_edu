@@ -2253,15 +2253,24 @@ a.btn.btn-orange:hover {
   /* Title: smaller to fit banner */
   .hero-title {
     display: block;
-    font-size: 1.35rem;
+    font-size: 1.3rem; /* Sedikit lebih kecil agar subtitle muat */
     line-height: 1.2;
-    margin-bottom: 15px;
+    margin-bottom: 8px; /* Kurangi jarak bawah */
     text-align: center;
   }
 
-  /* Subtitle: hidden inside banner (too long for 240px) */
+  /* Subtitle: default hidden, but shown on Slide 1 */
   .hero-subtitle {
     display: none;
+  }
+  
+  .slide:first-child .hero-subtitle {
+    display: block;
+    font-size: 0.65rem; /* Ukuran pas untuk dibaca */
+    line-height: 1.4;
+    margin-bottom: 12px;
+    padding: 0 10px;
+    color: rgba(255, 255, 255, 0.9);
   }
 
   /* Action buttons: restored and styled inside the slide */
@@ -2277,8 +2286,8 @@ a.btn.btn-orange:hover {
   }
 
   .hero-actions .btn {
-    padding: 5px 18px;
-    font-size: 0.65rem;
+    padding: 5px 16px;
+    font-size: 0.58rem; /* Perkecil ukuran teks button */
     font-weight: 700;
     letter-spacing: 0.8px;
     border-radius: var(--radius-full);
