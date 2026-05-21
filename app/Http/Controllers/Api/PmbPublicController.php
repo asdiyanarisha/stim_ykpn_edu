@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Pmb;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\RateLimiter;
+use App\Mail\PmbRegistrationMail;
 
 class PmbPublicController extends Controller
 {
@@ -61,6 +63,14 @@ class PmbPublicController extends Controller
         try {
             // Data divalidasi, aman untuk dimasukkan ke database
             $pmb = Pmb::create($validator->validated());
+
+            // Kirim email konfirmasi ke pendaftar
+            try {
+                Mail::to($pmb->email)->send(new PmbRegistrationMail($pmb));
+            } catch (\Exception $mailException) {
+                // Log error agar tidak menggagalkan response sukses registrasi jika mail server terkendala
+                \Log::error('Gagal mengirim email PMB: ' . $mailException->getMessage());
+            }
 
             return response()->json([
                 'success' => true,
