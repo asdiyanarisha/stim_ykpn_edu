@@ -92,6 +92,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
 }
 
 body {
@@ -598,6 +599,7 @@ a.btn.btn-orange:hover {
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   background: var(--navy-900);
@@ -627,7 +629,9 @@ a.btn.btn-orange:hover {
 .hero-slider .slide img {
   width: 100%;
   height: 100%;
+  max-width: none;
   object-fit: cover;
+  object-position: center center;
   filter: brightness(0.6) saturate(0.8);
 }
 
@@ -705,6 +709,10 @@ a.btn.btn-orange:hover {
 
 @media (max-width: 768px) {
   .slider-btn {
+    display: none;
+  }
+
+  .hero-decor {
     display: none;
   }
 }
@@ -2169,13 +2177,153 @@ a.btn.btn-orange:hover {
     display: none;
   }
 
-  .hero-stats {
+  /* === MOBILE HERO: Banner image on top + content below === */
+  .hero {
+    min-height: unset;
+    height: auto;
+    display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: stretch;
+    margin-top: 84px;
+    background: var(--navy-900);
   }
 
+  /* Slider becomes a relative block, stacked on top */
+  .hero-slider {
+    position: relative;
+    inset: unset;
+    width: 100%;
+    height: 240px;
+    flex-shrink: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .hero-slider .slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-slider .slide img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  /* Adjusted position for centered content, moved slightly up */
+  .hero .container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px 20px;
+    height: 100%; /* Take full 240px height */
+    width: 100%;
+    background: transparent;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    /* Move content upwards slightly */
+    transform: translateY(-10px);
+  }
+
+  /* Badge: compact */
+  .hero-badge {
+    display: inline-flex;
+    font-size: 0.62rem;
+    padding: 5px 12px;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+  }
+
+  /* Title: smaller to fit banner */
   .hero-title {
-    font-size: 2.2rem;
+    display: block;
+    font-size: 1.35rem;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  /* Subtitle: hidden inside banner (too long for 240px) */
+  .hero-subtitle {
+    display: none;
+  }
+
+  /* Action buttons: restored and styled inside the slide */
+  .hero-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: nowrap;
+    margin-bottom: 0;
+  }
+
+  .hero-actions .btn {
+    padding: 5px 18px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    border-radius: var(--radius-full);
+    justify-content: center;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    min-width: unset;
+  }
+  
+  .hero-actions .btn.btn-orange {
+    background-color: #f18721;
+    color: #ffffff;
+    box-shadow: 0 2px 10px rgba(241, 135, 33, 0.45);
+    border: none;
+  }
+
+  .hero-actions .btn.btn-secondary {
+    background: transparent;
+    color: #ffffff;
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+  }
+
+  /* Hide SVG icons inside buttons to save space */
+  .hero-actions .btn svg {
+    display: none;
+  }
+
+  /* Only show buttons on the first slide */
+  .slide:not(:first-child) .hero-actions {
+    display: none !important;
+  }
+
+  /* Stats: hidden inside banner */
+  .hero-stats {
+    display: none;
+  }
+
+  /* Hide decorative & scroll indicator */
+  .scroll-indicator {
+    display: none;
+  }
+
+  /* Slider dots: hidden on mobile */
+  .slider-dots {
+    display: none;
   }
 
   .programs-grid {
@@ -2237,10 +2385,6 @@ a.btn.btn-orange:hover {
     height: 400px;
   }
 
-  .hero-actions {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 }
 
 @media (max-width: 480px) {

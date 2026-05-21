@@ -61,7 +61,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
     rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="/css/style.css?v=2.3">
+  <link rel="stylesheet" href="/css/style.css?v=2.5">
 </head>
 
 <body>
@@ -165,7 +165,6 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         @endif
       </div>
     </div>
-
     <!-- Slider Controls (Absolute top level to prevent ANY overlaps) -->
     <button class="slider-btn prev-btn" id="heroPrevBtn" aria-label="Previous slide" style="z-index: 9999; pointer-events: auto; padding: 0; outline: none; border: none; background: rgba(255, 255, 255, 0.2);">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></svg>
