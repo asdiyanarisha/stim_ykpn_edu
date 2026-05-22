@@ -556,8 +556,8 @@
               <label for="program_studi">Program Studi (D3 / S1)</label>
               <select id="program_studi" name="program_studi" class="form-control">
                 <option value="" disabled selected>- Pilih Program Studi -</option>
-                <option value="S1 Bisnis Digital">S1 - Bisnis Digital</option>
                 <option value="D3 Manajemen">D3 - Manajemen</option>
+                <option value="S1 Bisnis Digital">S1 - Bisnis Digital</option>
                 <option value="S1 Manajemen">S1 - Manajemen</option>
                 <option value="S1 Ekstensi">S1 - Manajemen - Ekstensi (Kelas Karyawan)</option>
               </select>

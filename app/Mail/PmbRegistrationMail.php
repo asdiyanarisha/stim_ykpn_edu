@@ -30,7 +30,7 @@ class PmbRegistrationMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Konfirmasi Pendaftaran Mahasiswa Baru - STIM YKPN')
+        return $this->subject('Pendaftaran Mahasiswa Baru')
                     ->view('emails.pmb-registration');
     }
 }
