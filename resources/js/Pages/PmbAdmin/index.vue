@@ -73,6 +73,7 @@
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Pendaftar</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Program Studi</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Jalur Registrasi</th>
+                  <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Tgl Daftar</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">Aksi</th>
                 </tr>
@@ -88,7 +89,12 @@
                         {{ item.nama_lengkap.charAt(0) }}
                       </div>
                       <div class="flex flex-col">
-                          <span class="font-semibold text-slate-900 text-sm group-hover:text-indigo-600 transition-colors">{{ item.nama_lengkap }}</span>
+                          <div class="flex items-center gap-1.5">
+                              <span class="font-semibold text-slate-900 text-sm group-hover:text-indigo-600 transition-colors">{{ item.nama_lengkap }}</span>
+                              <span v-if="item.id_pendaftar" class="text-[10px] font-mono font-bold bg-indigo-50 text-indigo-600 px-1.5 py-0.5 rounded shrink-0">
+                                  {{ item.id_pendaftar }}
+                              </span>
+                          </div>
                           <span class="text-xs text-slate-400 mt-0.5">{{ item.email }}</span>
                       </div>
                     </div>
@@ -100,6 +106,19 @@
                     <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600 border border-slate-200">
                         {{ item.jalur_registrasi }}
                     </span>
+                  </td>
+                  <td class="px-6 py-4">
+                    <select 
+                      :value="item.pmb_status_id" 
+                      @change="updateStatus(item, $event.target.value)"
+                      :disabled="updatingStatusId === item.id"
+                      class="text-[10px] font-bold uppercase tracking-wider border rounded-full px-2.5 py-1 bg-transparent cursor-pointer outline-none transition-colors"
+                      :class="getStatusBadgeClass(item.status?.slug || 'registrasi-awal')"
+                    >
+                      <option v-for="statusOpt in statuses" :key="statusOpt.id" :value="statusOpt.id" class="bg-white text-slate-700 normal-case">
+                        {{ statusOpt.status }}
+                      </option>
+                    </select>
                   </td>
                   <td class="px-6 py-4">
                     <span class="text-sm text-slate-500">{{ new Date(item.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
@@ -209,6 +228,22 @@ const isAuthenticated = ref(false);
 
 const allPmb = ref([]);
 const pmbLoading = ref(false);
+const statuses = ref([]);
+const updatingStatusId = ref(null);
+
+const fetchStatuses = async () => {
+  try {
+    const token = getCookie(TOKEN_COOKIE_NAME);
+    const response = await axios.get('/api/pmbs/statuses', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (response.data.status === 'success') {
+      statuses.value = response.data.data;
+    }
+  } catch (error) {
+    console.error('Error fetching statuses:', error);
+  }
+};
 
 const fetchPmb = async () => {
   pmbLoading.value = true;
@@ -233,6 +268,65 @@ const fetchPmb = async () => {
   }
 };
 
+const updateStatus = async (item, newStatusId) => {
+  if (item.pmb_status_id === parseInt(newStatusId)) return;
+  updatingStatusId.value = item.id;
+  try {
+    const token = getCookie(TOKEN_COOKIE_NAME);
+    const payload = {
+      ...item,
+      pmb_status_id: parseInt(newStatusId)
+    };
+    const response = await axios.post(`/api/pmbs/${item.id}`, payload, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    
+    if (response.data.status === 'success') {
+      const updatedItem = response.data.data;
+      const index = allPmb.value.findIndex(p => p.id === item.id);
+      if (index !== -1) {
+        allPmb.value[index] = updatedItem;
+      }
+      
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: 'Status pendaftar berhasil diperbarui.',
+        timer: 1500,
+        showConfirmButton: false
+      });
+    }
+  } catch (error) {
+    console.error('Error updating status:', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Gagal!',
+      text: 'Gagal memperbarui status pendaftaran.'
+    });
+  } finally {
+    updatingStatusId.value = null;
+  }
+};
+
+const getStatusBadgeClass = (slug) => {
+  switch (slug) {
+    case 'registrasi-awal':
+      return 'bg-blue-50 text-blue-700 border-blue-100';
+    case 'menunggu-pembayaran':
+      return 'bg-amber-50 text-amber-700 border-amber-100';
+    case 'pembayaran-dikonfirmasi':
+      return 'bg-emerald-50 text-emerald-700 border-emerald-100';
+    case 'registrasi-ulang':
+      return 'bg-purple-50 text-purple-700 border-purple-100';
+    case 'menunggu-konfirmasi-pendaftaran':
+      return 'bg-sky-50 text-sky-700 border-sky-100';
+    case 'diterima':
+      return 'bg-rose-50 text-rose-700 border-rose-100';
+    default:
+      return 'bg-slate-50 text-slate-700 border-slate-100';
+  }
+};
+
 const selectedPmb = ref([]);
 
 const openBulkDeleteModal = () => {
@@ -247,7 +341,9 @@ const filteredPmb = computed(() => {
   if (!searchQuery.value) return allPmb.value;
   const q = searchQuery.value.toLowerCase();
   return allPmb.value.filter(n => 
-    n.nama_lengkap.toLowerCase().includes(q) || n.email.toLowerCase().includes(q)
+    n.nama_lengkap.toLowerCase().includes(q) || 
+    n.email.toLowerCase().includes(q) ||
+    (n.id_pendaftar && n.id_pendaftar.toLowerCase().includes(q))
   );
 });
 
@@ -335,6 +431,7 @@ onMounted(async () => {
       headers: { Authorization: `Bearer ${token}` },
     });
     isAuthenticated.value = true;
+    await fetchStatuses();
     fetchPmb();
   } catch (error) {
     deleteCookie(TOKEN_COOKIE_NAME);

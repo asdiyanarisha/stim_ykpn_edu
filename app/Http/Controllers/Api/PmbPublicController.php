@@ -62,7 +62,27 @@ class PmbPublicController extends Controller
 
         try {
             // Data divalidasi, aman untuk dimasukkan ke database
-            $pmb = Pmb::create($validator->validated());
+            $prefix = date('y') . date('m') . date('d');
+            
+            // Find the last registrant with today's prefix to calculate sequence
+            $lastPmb = Pmb::where('id_pendaftar', 'like', $prefix . '%')
+                ->orderBy('id_pendaftar', 'desc')
+                ->first();
+                
+            if ($lastPmb) {
+                $lastSequence = intval(substr($lastPmb->id_pendaftar, 6));
+                $newSequence = $lastSequence + 1;
+            } else {
+                $newSequence = 1;
+            }
+            
+            $idPendaftar = $prefix . str_pad($newSequence, 5, '0', STR_PAD_LEFT);
+
+            $validatedData = $validator->validated();
+            $validatedData['pmb_status_id'] = 1; // Default status: Registrasi Awal
+            $validatedData['id_pendaftar'] = $idPendaftar;
+            
+            $pmb = Pmb::create($validatedData);
 
             // Kirim email konfirmasi ke pendaftar
             try {

@@ -128,6 +128,15 @@
                         <AppInput v-model="form.kode_voucher" placeholder="Voucher diskon jika ada" />
                     </div>
 
+                    <div class="space-y-1">
+                        <label class="text-sm font-bold text-slate-700 block mb-1">Status PMB <span class="text-rose-500">*</span></label>
+                        <select v-model="form.pmb_status_id" class="w-full text-sm border border-slate-200 rounded-xl text-slate-700 focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-4 bg-slate-50 focus:bg-white transition-colors" required>
+                            <option v-for="statusOpt in statuses" :key="statusOpt.id" :value="statusOpt.id">
+                                {{ statusOpt.status }}
+                            </option>
+                        </select>
+                    </div>
+
                 </div>
 
                 <!-- Footer Actions -->
@@ -163,9 +172,11 @@ const sidebarOpen = ref(false);
 const isAuthenticated = ref(false);
 const isLoading = ref(false);
 const isSaving = ref(false);
+const statuses = ref([]);
 
 const form = ref({
     id: null,
+    pmb_status_id: null,
     nama_lengkap: '',
     email: '',
     nomor_hp_wa: '',
@@ -181,6 +192,20 @@ const form = ref({
 });
 
 const pmbId = ref(null);
+
+const fetchStatuses = async () => {
+  try {
+    const token = getCookie(TOKEN_COOKIE_NAME);
+    const response = await axios.get('/api/pmbs/statuses', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (response.data.status === 'success') {
+      statuses.value = response.data.data;
+    }
+  } catch (error) {
+    console.error('Error fetching statuses:', error);
+  }
+};
 
 const fetchPmbDetail = async () => {
   isLoading.value = true;
@@ -271,6 +296,7 @@ onMounted(async () => {
       headers: { Authorization: `Bearer ${token}` }
     });
     isAuthenticated.value = true;
+    await fetchStatuses();
     fetchPmbDetail();
   } catch (error) {
     deleteCookie(TOKEN_COOKIE_NAME);

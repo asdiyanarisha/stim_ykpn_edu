@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pmb;
+use App\Models\PmbStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -12,7 +13,7 @@ class PmbAdminController extends Controller
     public function index(Request $request)
     {
         try {
-            $pmbs = Pmb::orderBy('created_at', 'desc')->get();
+            $pmbs = Pmb::with('status')->orderBy('created_at', 'desc')->get();
             return response()->json([
                 'status' => 'success',
                 'data' => $pmbs
@@ -28,7 +29,7 @@ class PmbAdminController extends Controller
     public function show($id)
     {
         try {
-            $pmb = Pmb::findOrFail($id);
+            $pmb = Pmb::with('status')->findOrFail($id);
             return response()->json([
                 'status' => 'success',
                 'data' => $pmb
@@ -44,6 +45,7 @@ class PmbAdminController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
+            'pmb_status_id' => 'required|exists:pmb_status,id',
             'nama_lengkap' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:pmb,email,'.$id,
             'nomor_hp_wa' => 'required|string|max:50',
@@ -118,6 +120,22 @@ class PmbAdminController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Gagal menghapus data PMB terpilih: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function statuses()
+    {
+        try {
+            $statuses = PmbStatus::all();
+            return response()->json([
+                'status' => 'success',
+                'data' => $statuses
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Gagal mengambil data status PMB: ' . $e->getMessage()
             ], 500);
         }
     }

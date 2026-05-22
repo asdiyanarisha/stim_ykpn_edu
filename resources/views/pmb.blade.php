@@ -15,6 +15,8 @@
 
   <!-- Base Styles -->
   <link rel="stylesheet" href="/css/style.css?v=2.3">
+  <!-- Flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
   <style>
     /* ==============================================
@@ -524,8 +526,7 @@
             </div>
             <div class="form-group form-col-33">
               <label for="tanggal_lahir">Tanggal Lahir</label>
-              <input type="date" id="tanggal_lahir" name="tanggal_lahir" class="form-control"
-                onclick="this.showPicker()" onfocus="this.showPicker()">
+              <input type="text" id="tanggal_lahir" name="tanggal_lahir" class="form-control" placeholder="yyyy-mm-dd">
             </div>
             <div class="form-group form-col-33">
               <label for="jenis_kelamin">Jenis Kelamin</label>
@@ -625,10 +626,18 @@
 
   <!-- Script -->
   <script src="/js/script.js?v=2.3"></script>
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Initialize Flatpickr for Tanggal Lahir
+      flatpickr("#tanggal_lahir", {
+        allowInput: true,
+        dateFormat: "Y-m-d"
+      });
+
       const form = document.querySelector('.stim-form');
       const submitBtn = form.querySelector('.btn-submit');
 

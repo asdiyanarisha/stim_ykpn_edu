@@ -12,6 +12,8 @@ class Pmb extends Model
     protected $table = 'pmb';
 
     protected $fillable = [
+        'id_pendaftar',
+        'pmb_status_id',
         'nama_lengkap',
         'email',
         'nomor_hp_wa',
@@ -25,4 +27,9 @@ class Pmb extends Model
         'jalur_registrasi',
         'kode_voucher',
     ];
+
+    public function status()
+    {
+        return $this->belongsTo(PmbStatus::class, 'pmb_status_id');
+    }
 }

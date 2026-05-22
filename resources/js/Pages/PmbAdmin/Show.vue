@@ -37,95 +37,173 @@
           </div>
         </transition>
 
-        <div v-if="pmb.id" class="max-w-4xl mx-auto space-y-6 pb-12">
+        <div v-if="pmb.id" class="max-w-6xl mx-auto pb-12">
           
-          <!-- Header Card -->
-          <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 p-8 flex flex-col md:flex-row items-center gap-8">
-            <div class="w-24 h-24 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-4xl font-black uppercase shrink-0 shadow-inner">
-                {{ pmb.nama_lengkap.charAt(0) }}
-            </div>
-            <div class="flex-1 text-center md:text-left">
-                <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-2">
-                    <span class="px-3 py-1 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-full text-xs font-bold uppercase tracking-wider">
-                        {{ pmb.program_studi }}
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+            
+            <!-- Left Side: Main Details (2 cols) -->
+            <div class="lg:col-span-2 space-y-6">
+              
+              <!-- Header Card -->
+              <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 p-8 flex flex-col md:flex-row items-center gap-8">
+                <div class="w-24 h-24 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-4xl font-black uppercase shrink-0 shadow-inner">
+                    {{ pmb.nama_lengkap.charAt(0) }}
+                </div>
+                <div class="flex-1 text-center md:text-left">
+                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-2">
+                        <span class="px-3 py-1 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-full text-xs font-bold uppercase tracking-wider">
+                            {{ pmb.program_studi }}
+                        </span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 border border-slate-200 rounded-full text-xs font-bold uppercase tracking-wider">
+                            Jalur: {{ pmb.jalur_registrasi }}
+                        </span>
+                    </div>
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 mb-1">{{ pmb.nama_lengkap }}</h1>
+                    <p class="text-slate-500 font-medium">{{ pmb.email }} • {{ pmb.nomor_hp_wa }}</p>
+                </div>
+              </div>
+
+              <!-- Status Card -->
+              <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div>
+                  <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Status Pendaftaran Saat Ini</p>
+                  <div class="flex items-center gap-3">
+                    <span class="px-4 py-1.5 rounded-full text-sm font-extrabold tracking-wide border" :class="getStatusBadgeClass(pmb.status?.slug || 'registrasi-awal')">
+                      {{ pmb.status?.status || 'Registrasi Awal' }}
                     </span>
-                    <span class="px-3 py-1 bg-slate-100 text-slate-600 border border-slate-200 rounded-full text-xs font-bold uppercase tracking-wider">
-                        Jalur: {{ pmb.jalur_registrasi }}
-                    </span>
+                  </div>
                 </div>
-                <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 mb-1">{{ pmb.nama_lengkap }}</h1>
-                <p class="text-slate-500 font-medium">{{ pmb.email }} • {{ pmb.nomor_hp_wa }}</p>
-            </div>
-          </div>
+                <div class="flex items-center gap-3 w-full sm:w-auto">
+                  <label class="text-xs font-bold text-slate-500 uppercase tracking-wider shrink-0">Ubah Status:</label>
+                  <select v-model="selectedStatusId" @change="updateStatus" :disabled="isUpdatingStatus" class="text-sm border border-slate-200 rounded-xl text-slate-700 focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-4 bg-slate-50 focus:bg-white transition-colors cursor-pointer w-full sm:w-auto">
+                    <option v-for="statusOpt in statuses" :key="statusOpt.id" :value="statusOpt.id">
+                      {{ statusOpt.status }}
+                    </option>
+                  </select>
+                </div>
+              </div>
 
-          <!-- Detail Information Grid -->
-          <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
-            <div class="p-8 border-b border-slate-100 bg-slate-50/50">
-                <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" />
-                    </svg>
-                    Informasi Pribadi & Pendaftaran
-                </h2>
-            </div>
-            <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-                <!-- Data Fields -->
-                <div class="space-y-1">
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tempat, Tanggal Lahir</p>
-                    <p class="text-slate-900 font-medium">{{ pmb.tempat_lahir }}, {{ formatDateOnly(pmb.tanggal_lahir) }}</p>
+              <!-- Detail Information Grid -->
+              <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+                <div class="p-8 border-b border-slate-100 bg-slate-50/50">
+                    <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" />
+                        </svg>
+                        Informasi Pribadi & Pendaftaran
+                    </h2>
                 </div>
-                
-                <div class="space-y-1">
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Jenis Kelamin</p>
-                    <p class="text-slate-900 font-medium">{{ pmb.jenis_kelamin }}</p>
-                </div>
+                <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    <!-- Data Fields -->
+                    <div class="space-y-1">
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">No. Pendaftaran (ID Pendaftar)</p>
+                        <p class="text-slate-900 font-mono font-bold">{{ pmb.id_pendaftar || '-' }}</p>
+                    </div>
 
-                <div class="space-y-1 md:col-span-2">
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Alamat Asal</p>
-                    <p class="text-slate-900 font-medium leading-relaxed">{{ pmb.alamat_asal }}</p>
-                </div>
+                    <div class="space-y-1">
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tempat, Tanggal Lahir</p>
+                        <p class="text-slate-900 font-medium">{{ pmb.tempat_lahir }}, {{ formatDateOnly(pmb.tanggal_lahir) }}</p>
+                    </div>
+                    
+                    <div class="space-y-1">
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Jenis Kelamin</p>
+                        <p class="text-slate-900 font-medium">{{ pmb.jenis_kelamin }}</p>
+                    </div>
 
-                <div class="space-y-1">
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Asal Sekolah</p>
-                    <p class="text-slate-900 font-medium">{{ pmb.asal_sekolah }}</p>
-                </div>
+                    <div class="space-y-1 md:col-span-2">
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Alamat Asal</p>
+                        <p class="text-slate-900 font-medium leading-relaxed">{{ pmb.alamat_asal }}</p>
+                    </div>
 
-                <div class="space-y-1">
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Sumber Informasi</p>
-                    <p class="text-slate-900 font-medium">{{ pmb.sumber_informasi }}</p>
-                </div>
+                    <div class="space-y-1">
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Asal Sekolah</p>
+                        <p class="text-slate-900 font-medium">{{ pmb.asal_sekolah }}</p>
+                    </div>
 
-                <div class="space-y-1">
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Kode Voucher</p>
-                    <p class="text-slate-900 font-medium">
-                        <span v-if="pmb.kode_voucher" class="px-2 py-1 bg-amber-50 text-amber-700 font-mono text-sm rounded border border-amber-200">{{ pmb.kode_voucher }}</span>
-                        <span v-else class="text-slate-400 italic">Tidak ada</span>
-                    </p>
-                </div>
+                    <div class="space-y-1">
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Sumber Informasi</p>
+                        <p class="text-slate-900 font-medium">{{ pmb.sumber_informasi }}</p>
+                    </div>
 
-                <div class="space-y-1">
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tanggal Pendaftaran</p>
-                    <p class="text-slate-900 font-medium">{{ formatDateFull(pmb.created_at) }}</p>
-                </div>
-            </div>
-          </div>
+                    <div class="space-y-1">
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Kode Voucher</p>
+                        <p class="text-slate-900 font-medium">
+                            <span v-if="pmb.kode_voucher" class="px-2 py-1 bg-amber-50 text-amber-700 font-mono text-sm rounded border border-amber-200">{{ pmb.kode_voucher }}</span>
+                            <span v-else class="text-slate-400 italic">Tidak ada</span>
+                        </p>
+                    </div>
 
-          <!-- Quick Actions Footer -->
-          <div class="flex justify-between items-center bg-white p-6 rounded-[1.5rem] shadow-sm border border-slate-100">
-            <div class="text-sm text-slate-400">
-                Terakhir diperbarui: {{ formatDateFull(pmb.updated_at || pmb.created_at) }}
-            </div>
-            <div class="flex gap-3">
-                <a :href="`/pmb/edit/${pmb.id}`">
-                    <AppButton variant="secondary" size="md">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
-                        Edit Data
+                    <div class="space-y-1">
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tanggal Pendaftaran</p>
+                        <p class="text-slate-900 font-medium">{{ formatDateFull(pmb.created_at) }}</p>
+                    </div>
+                </div>
+              </div>
+
+              <!-- Quick Actions Footer -->
+              <div class="flex justify-between items-center bg-white p-6 rounded-[1.5rem] shadow-sm border border-slate-100">
+                <div class="text-sm text-slate-400">
+                    Terakhir diperbarui: {{ formatDateFull(pmb.updated_at || pmb.created_at) }}
+                </div>
+                <div class="flex gap-3">
+                    <a :href="`/pmb/edit/${pmb.id}`">
+                        <AppButton variant="secondary" size="md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                            Edit Data
+                        </AppButton>
+                    </a>
+                    <AppButton variant="primary" size="md" @click="goBack">
+                        Selesai
                     </AppButton>
-                </a>
-                <AppButton variant="primary" size="md" @click="goBack">
-                    Selesai
-                </AppButton>
+                </div>
+              </div>
+
             </div>
+
+            <!-- Right Side: Status Timeline Tracker (1 col) -->
+            <div class="space-y-6 lg:sticky lg:top-6">
+              <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 p-8">
+                <h3 class="text-base font-extrabold text-slate-900 mb-6 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                  Status
+                </h3>
+                
+                <div class="relative pl-6 space-y-6 border-l-2 border-slate-100 ml-2">
+                  <div 
+                    v-for="statusOpt in statuses" 
+                    :key="statusOpt.id" 
+                    class="relative flex flex-col"
+                  >
+                    <!-- Marker Dot -->
+                    <div 
+                      class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full border-2 transition-all duration-300"
+                      :class="pmb.pmb_status_id >= statusOpt.id 
+                        ? 'bg-indigo-600 border-white ring-4 ring-indigo-50' 
+                        : 'bg-slate-300 border-white ring-4 ring-slate-50'"
+                    ></div>
+                    
+                    <!-- Text Label -->
+                    <span 
+                      class="text-sm font-semibold transition-colors duration-300"
+                      :class="pmb.pmb_status_id >= statusOpt.id ? 'text-slate-900' : 'text-slate-400'"
+                    >
+                      {{ statusOpt.status }}
+                    </span>
+                    
+                    <!-- Subtext indicator for current active status -->
+                    <span 
+                      v-if="pmb.pmb_status_id === statusOpt.id" 
+                      class="text-[9px] font-bold text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded-md mt-1 self-start uppercase tracking-wider"
+                    >
+                      Aktif saat ini
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
         </div>
@@ -137,6 +215,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import AppSidebar from '../../Components/Organisms/AppSidebar.vue';
 import AppNavbar from '../../Components/Organisms/AppNavbar.vue';
 import AppButton from '../../Components/Atoms/AppButton.vue';
@@ -145,7 +224,29 @@ import { getCookie, deleteCookie, TOKEN_COOKIE_NAME } from '../../Helpers/cookie
 const sidebarOpen = ref(false);
 const isAuthenticated = ref(false);
 const isLoading = ref(false);
+const isUpdatingStatus = ref(false);
 const pmb = ref({});
+const statuses = ref([]);
+const selectedStatusId = ref(null);
+
+const getStatusBadgeClass = (slug) => {
+  switch (slug) {
+    case 'registrasi-awal':
+      return 'bg-blue-50 text-blue-700 border-blue-100';
+    case 'menunggu-pembayaran':
+      return 'bg-amber-50 text-amber-700 border-amber-100';
+    case 'pembayaran-dikonfirmasi':
+      return 'bg-emerald-50 text-emerald-700 border-emerald-100';
+    case 'registrasi-ulang':
+      return 'bg-purple-50 text-purple-700 border-purple-100';
+    case 'menunggu-konfirmasi-pendaftaran':
+      return 'bg-sky-50 text-sky-700 border-sky-100';
+    case 'diterima':
+      return 'bg-rose-50 text-rose-700 border-rose-100';
+    default:
+      return 'bg-slate-50 text-slate-700 border-slate-100';
+  }
+};
 
 const formatDateOnly = (dateString) => {
     if (!dateString) return '-';
@@ -169,6 +270,20 @@ const formatDateFull = (dateString) => {
   });
 };
 
+const fetchStatuses = async () => {
+  try {
+    const token = getCookie(TOKEN_COOKIE_NAME);
+    const response = await axios.get('/api/pmbs/statuses', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (response.data.status === 'success') {
+      statuses.value = response.data.data;
+    }
+  } catch (error) {
+    console.error('Error fetching statuses:', error);
+  }
+};
+
 const fetchPmbDetail = async () => {
   isLoading.value = true;
   try {
@@ -182,6 +297,7 @@ const fetchPmbDetail = async () => {
     
     if (response.data.status === 'success') {
       pmb.value = response.data.data;
+      selectedStatusId.value = pmb.value.pmb_status_id;
     }
   } catch (error) {
     console.error('Error fetching PMB detail:', error);
@@ -190,6 +306,45 @@ const fetchPmbDetail = async () => {
     }
   } finally {
     isLoading.value = false;
+  }
+};
+
+const updateStatus = async () => {
+  if (selectedStatusId.value === pmb.value.pmb_status_id) return;
+  isUpdatingStatus.value = true;
+  try {
+    const token = getCookie(TOKEN_COOKIE_NAME);
+    // Since update endpoint requires all validator fields, send all current fields alongside new pmb_status_id
+    const payload = {
+      ...pmb.value,
+      pmb_status_id: selectedStatusId.value
+    };
+    const response = await axios.post(`/api/pmbs/${pmb.value.id}`, payload, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    
+    if (response.data.status === 'success') {
+      pmb.value = response.data.data;
+      selectedStatusId.value = pmb.value.pmb_status_id;
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: 'Status pendaftaran berhasil diperbarui.',
+        timer: 1500,
+        showConfirmButton: false
+      });
+    }
+  } catch (error) {
+    console.error('Error updating status:', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Gagal!',
+      text: 'Gagal memperbarui status pendaftaran.'
+    });
+    // Revert selection
+    selectedStatusId.value = pmb.value.pmb_status_id;
+  } finally {
+    isUpdatingStatus.value = false;
   }
 };
 
@@ -208,6 +363,7 @@ onMounted(async () => {
       headers: { Authorization: `Bearer ${token}` }
     });
     isAuthenticated.value = true;
+    await fetchStatuses();
     fetchPmbDetail();
   } catch (error) {
     deleteCookie(TOKEN_COOKIE_NAME);
