@@ -92,7 +92,7 @@
         </ul>
       </li>
       <li class="dropdown">
-        <a href="#">Penelitian</a>
+        <a href="#">LMP2M</a>
         <ul class="dropdown-menu">
           <li><a href="https://journal.stimykpn.ac.id/index.php/tb" target="_blank" rel="noopener noreferrer">Jurnal
               Telaah Bisnis</a></li>

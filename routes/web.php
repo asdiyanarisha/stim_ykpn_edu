@@ -445,8 +445,28 @@ Route::get('/dosen.html', function (\Illuminate\Http\Request $request) {
     return view('dosen', compact('teachers', 'categories'));
 });
 
-Route::get('/pimpinan', fn() => view('pimpinan'));
-Route::get('/pimpinan.html', fn() => view('pimpinan'));
+$pimpinanHandler = function () {
+    $pimpinans = \App\Models\Teacher::with(['jobTitle', 'category'])
+        ->whereHas('category', function($q) {
+            $q->where('title', 'like', '%Pimpinan%')
+              ->orWhere('slug', 'like', '%pimpinan%');
+        })
+        ->get();
+        
+    // Sort pimpinans: "Ketua" first, then the rest.
+    $pimpinans = $pimpinans->sortBy(function($p) {
+        $title = $p->jobTitle ? strtolower($p->jobTitle->title) : '';
+        if (strpos($title, 'ketua') !== false && strpos($title, 'wakil') === false) {
+            return 0; // Ketua
+        }
+        return 1; // Others
+    });
+
+    return view('pimpinan', compact('pimpinans'));
+};
+
+Route::get('/pimpinan', $pimpinanHandler);
+Route::get('/pimpinan.html', $pimpinanHandler);
 
 Route::get('/fasilitas', fn() => view('fasilitas'));
 Route::get('/fasilitas.html', fn() => view('fasilitas'));
@@ -562,3 +582,7 @@ Route::get('/lowongan-kerja', fn() => view('lowongan-kerja'));
 Route::get('/lowongan-kerja.html', fn() => view('lowongan-kerja'));
 
 Route::get('/whatsapp-contact', fn() => view('whatsapp-contact'))->name('whatsapp-contact.index');
+
+Route::get('/api/inspect-data', function() {
+    return \App\Models\CategoryTeacher::all();
+});

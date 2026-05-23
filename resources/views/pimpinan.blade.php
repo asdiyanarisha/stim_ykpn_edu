@@ -155,42 +155,31 @@
     <div class="container">
       <div class="pimpinan-grid">
         
-        <!-- Ketua -->
-        <div class="pimpinan-card ketua animate-on-scroll">
-          <div class="pimpinan-photo"></div>
-          <div class="pimpinan-info">
-            <span class="jabatan">Ketua</span>
-            <h3>Dr. Suparmono, M.Si.</h3>
-            <p style="color: #64748b; font-size: 15px; margin-top: 10px;">Memimpin dengan visi inovasi dan keunggulan akademik untuk mencetak lulusan yang siap menghadapi tantangan bisnis global.</p>
+        @forelse($pimpinans as $index => $pimpinan)
+          @php
+              $jobTitle = $pimpinan->jobTitle ? $pimpinan->jobTitle->title : 'Pimpinan';
+              $isKetua = (strpos(strtolower($jobTitle), 'ketua') !== false && strpos(strtolower($jobTitle), 'wakil') === false);
+              $delayClass = ($index % 2 != 0 && !$isKetua) ? 'animate-delay-1' : '';
+          @endphp
+          <div class="pimpinan-card {{ $isKetua ? 'ketua' : '' }} animate-on-scroll {{ $delayClass }}">
+            <div class="pimpinan-photo">
+              @if($pimpinan->image_url)
+                  <img src="{{ $pimpinan->image_url }}" alt="{{ $pimpinan->full_name }}" loading="lazy">
+              @endif
+            </div>
+            <div class="pimpinan-info">
+              <span class="jabatan">{{ $jobTitle }}</span>
+              <h3>{{ $pimpinan->front_title ? $pimpinan->front_title . ' ' : '' }}{{ $pimpinan->full_name }}{{ $pimpinan->back_title ? ', ' . $pimpinan->back_title : '' }}</h3>
+              @if($pimpinan->personal_description)
+                  <p style="color: #64748b; font-size: 15px; margin-top: 10px;">{{ Str::limit(strip_tags($pimpinan->personal_description), 150) }}</p>
+              @endif
+            </div>
           </div>
-        </div>
-
-        <!-- Wakil Ketua I -->
-        <div class="pimpinan-card animate-on-scroll">
-          <div class="pimpinan-photo"></div>
-          <div class="pimpinan-info">
-            <span class="jabatan">Wakil Ketua I</span>
-            <h3>Siti Resmi, Dra., M.M., Ak., CA.</h3>
+        @empty
+          <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+            <p style="color: #64748b;">Data pimpinan belum tersedia.</p>
           </div>
-        </div>
-
-        <!-- Wakil Ketua II -->
-        <div class="pimpinan-card animate-on-scroll animate-delay-1">
-          <div class="pimpinan-photo"></div>
-          <div class="pimpinan-info">
-            <span class="jabatan">Wakil Ketua II</span>
-            <h3>Dr. Anna Partina, M.Si.</h3>
-          </div>
-        </div>
-
-        <!-- Wakil Ketua III -->
-        <div class="pimpinan-card animate-on-scroll">
-          <div class="pimpinan-photo"></div>
-          <div class="pimpinan-info">
-            <span class="jabatan">Wakil Ketua III</span>
-            <h3>Ralina Transistari, Dra., M.Si</h3>
-          </div>
-        </div>
+        @endforelse
 
       </div>
     </div>

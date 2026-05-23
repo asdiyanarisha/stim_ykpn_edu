@@ -79,21 +79,24 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         <div class="hero-overlay"></div>
         <div style="position: absolute; inset: 0; display: flex; align-items: center; z-index: 2; pointer-events: none;">
           <div class="container" style="pointer-events: none;">
-            <div class="hero-content" style="pointer-events: auto; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center;">
-              <div class="hero-badge">
-                <span class="badge-dot"></span>
-                Pendaftaran 2026/2027 Dibuka
+            <div class="hero-content" style="pointer-events: auto; margin: 0; text-align: left; display: flex; flex-direction: column; align-items: flex-start;">
+              <div class="hero-badge" style="text-transform: uppercase;">
+                <span class="badge-dot" style="background: var(--orange-500); box-shadow: 0 0 8px var(--orange-500);"></span>
+                PENDAFTARAN 2026/2027 DIBUKA
               </div>
-              <h1 class="hero-title">
-                Membangun <span class="highlight">Pemimpin Bisnis</span> Masa Depan
+              <h1 class="hero-title" style="line-height: 1.3;">
+                Membangun<br>
+                <span style="color: #3b82f6; text-shadow: 0 4px 30px rgba(0,0,0,0.8);">Pemimpin</span> <span style="color: #fbb03b; text-shadow: 0 4px 30px rgba(0,0,0,0.8);">Bisnis</span><br>
+                Masa Depan
               </h1>
               <p class="hero-subtitle">
-                Lebih dari 50 tahun menghasilkan lulusan profesional yang siap bersaing
-                di dunia bisnis global dengan sertifikasi kompetensi terakui.
+                Lebih dari 50 tahun menghasilkan lulusan profesional yang<br>
+                siap bersaing di dunia bisnis global dengan sertifikasi<br>
+                kompetensi terakui.
               </p>
-              <div class="hero-actions" style="justify-content: center; width: 100%;">
+              <div class="hero-actions" style="justify-content: flex-start; width: 100%;">
                 <a href="/pmb.html" class="btn btn-orange btn-pulse">
-                  Daftar PMB
+                  DAFTAR PMB
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
                 </a>
                 <a href="#campus-tour" class="btn btn-secondary">
@@ -101,7 +104,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
                   Virtual Tour
                 </a>
               </div>
-              <div class="hero-stats" style="justify-content: center; width: 100%;">
+              <div class="hero-stats" style="justify-content: flex-start; width: 100%;">
                 <div class="hero-stat"><div class="stat-number" data-count="50">0</div><div class="stat-label">Tahun Berdiri</div></div>
                 <div class="hero-stat"><div class="stat-number" data-count="15000" data-suffix="+">0</div><div class="stat-label">Alumni Profesional</div></div>
                 <div class="hero-stat"><div class="stat-number" data-count="4" data-suffix="">0</div><div class="stat-label">Sertifikasi Profesi</div></div>
@@ -119,7 +122,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         @if($banner->title || $banner->description)
         <div style="position: absolute; inset: 0; display: flex; align-items: center; z-index: 2; pointer-events: none;">
           <div class="container" style="pointer-events: none;">
-            <div class="hero-content" style="pointer-events: auto; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center;">
+            <div class="hero-content" style="pointer-events: auto; margin: 0; text-align: left; display: flex; flex-direction: column; align-items: flex-start;">
               @if($banner->title)
               <h1 class="hero-title">{{ $banner->title }}</h1>
               @endif
@@ -127,7 +130,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
               <p class="hero-subtitle">{{ $banner->description }}</p>
               @endif
               @if($banner->button_text && $banner->link)
-              <div class="hero-actions" style="justify-content: center; width: 100%;">
+              <div class="hero-actions" style="justify-content: flex-start; width: 100%;">
                 <a href="{{ $banner->link }}" class="btn btn-orange btn-pulse">
                   {{ $banner->button_text }}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
@@ -166,11 +169,11 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
       </div>
     </div>
     <!-- Slider Controls (Absolute top level to prevent ANY overlaps) -->
-    <button class="slider-btn prev-btn" id="heroPrevBtn" aria-label="Previous slide" style="z-index: 9999; pointer-events: auto; padding: 0; outline: none; border: none; background: rgba(255, 255, 255, 0.2);">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></svg>
+    <button class="slider-btn prev-btn" id="heroPrevBtn" aria-label="Previous slide" style="z-index: 9999; pointer-events: auto; padding: 0; outline: none; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; background: rgba(0, 0, 0, 0.5); width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; opacity: 1 !important;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></svg>
     </button>
-    <button class="slider-btn next-btn" id="heroNextBtn" aria-label="Next slide" style="z-index: 9999; pointer-events: auto; padding: 0; outline: none; border: none; background: rgba(255, 255, 255, 0.2);">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+    <button class="slider-btn next-btn" id="heroNextBtn" aria-label="Next slide" style="z-index: 9999; pointer-events: auto; padding: 0; outline: none; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; background: rgba(0, 0, 0, 0.5); width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; opacity: 1 !important;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
     </button>
 
 
@@ -179,10 +182,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
     <div class="hero-decor hero-decor-2"></div>
     <div class="hero-decor hero-decor-3"></div>
 
-    <div class="scroll-indicator">
-      <div class="mouse"></div>
-      Scroll
-    </div>
+
   </section>
 
   <!-- ============================================
