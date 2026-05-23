@@ -79,7 +79,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         <div class="hero-overlay"></div>
         <div style="position: absolute; inset: 0; display: flex; align-items: center; z-index: 2; pointer-events: none;">
           <div class="container" style="pointer-events: none;">
-            <div class="hero-content" style="pointer-events: auto; margin: 0; text-align: left; display: flex; flex-direction: column; align-items: flex-start;">
+            <div class="hero-content hero-content-responsive" style="pointer-events: auto; display: flex; flex-direction: column;">
               <div class="hero-badge" style="text-transform: uppercase;">
                 <span class="badge-dot" style="background: var(--orange-500); box-shadow: 0 0 8px var(--orange-500);"></span>
                 PENDAFTARAN 2026/2027 DIBUKA
@@ -94,7 +94,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
                 siap bersaing di dunia bisnis global dengan sertifikasi<br>
                 kompetensi terakui.
               </p>
-              <div class="hero-actions" style="justify-content: flex-start; width: 100%;">
+              <div class="hero-actions" style="width: 100%;">
                 <a href="/pmb.html" class="btn btn-orange btn-pulse">
                   DAFTAR PMB
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
@@ -104,7 +104,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
                   Virtual Tour
                 </a>
               </div>
-              <div class="hero-stats" style="justify-content: flex-start; width: 100%;">
+              <div class="hero-stats" style="width: 100%;">
                 <div class="hero-stat"><div class="stat-number" data-count="50">0</div><div class="stat-label">Tahun Berdiri</div></div>
                 <div class="hero-stat"><div class="stat-number" data-count="15000" data-suffix="+">0</div><div class="stat-label">Alumni Profesional</div></div>
                 <div class="hero-stat"><div class="stat-number" data-count="4" data-suffix="">0</div><div class="stat-label">Sertifikasi Profesi</div></div>
@@ -122,7 +122,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         @if($banner->title || $banner->description)
         <div style="position: absolute; inset: 0; display: flex; align-items: center; z-index: 2; pointer-events: none;">
           <div class="container" style="pointer-events: none;">
-            <div class="hero-content" style="pointer-events: auto; margin: 0; text-align: left; display: flex; flex-direction: column; align-items: flex-start;">
+            <div class="hero-content hero-content-responsive" style="pointer-events: auto; display: flex; flex-direction: column;">
               @if($banner->title)
               <h1 class="hero-title">{{ $banner->title }}</h1>
               @endif
@@ -130,7 +130,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
               <p class="hero-subtitle">{{ $banner->description }}</p>
               @endif
               @if($banner->button_text && $banner->link)
-              <div class="hero-actions" style="justify-content: flex-start; width: 100%;">
+              <div class="hero-actions" style="width: 100%;">
                 <a href="{{ $banner->link }}" class="btn btn-orange btn-pulse">
                   {{ $banner->button_text }}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
