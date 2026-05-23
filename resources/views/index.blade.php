@@ -86,7 +86,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
               </div>
               <h1 class="hero-title" style="line-height: 1.3;">
                 Membangun<br>
-                <span style="color: #3b82f6; text-shadow: 0 4px 30px rgba(0,0,0,0.8);">Pemimpin</span> <span style="color: #fbb03b; text-shadow: 0 4px 30px rgba(0,0,0,0.8);">Bisnis</span><br>
+                <span style="color: #3b82f6;">Pemimpin</span> <span style="color: #fbb03b;">Bisnis</span><br>
                 Masa Depan
               </h1>
               <p class="hero-subtitle">
@@ -202,11 +202,10 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         <!-- S1 Bisnis Digital -->
         <div class="program-card animate-on-scroll animate-delay-1">
           <div class="program-card-image">
-            <img src="/images/students.png" alt="Program S1 Bisnis Digital">
-            <span class="badge" style="background: var(--blue-500);">Terakreditasi Baik</span>
+            <img src="/images/students.png" alt="Program S1 Bisnis Digital" loading="lazy">
+            <span class="badge">Terakreditasi Baik</span>
           </div>
           <div class="program-card-body">
-            <div class="program-icon">💻</div>
             <h3>S1 Bisnis Digital</h3>
             <p>
               Program sarjana 4 tahun yang berfokus pada inovasi teknologi, manajemen e-commerce, startup, dan strategi
@@ -226,11 +225,10 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         <!-- S1 Manajemen -->
         <div class="program-card animate-on-scroll animate-delay-2">
           <div class="program-card-image">
-            <img src="/images/students.png" alt="Program S1 Manajemen">
+            <img src="/images/students.png" alt="Program S1 Manajemen" loading="lazy">
             <span class="badge">Terakreditasi Baik Sekali</span>
           </div>
           <div class="program-card-body">
-            <div class="program-icon">🎓</div>
             <h3>S1 Manajemen</h3>
             <p>
               Program sarjana 4 tahun yang membekali mahasiswa dengan pengetahuan manajemen bisnis,
@@ -250,11 +248,10 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         <!-- D3 Manajemen -->
         <div class="program-card animate-on-scroll animate-delay-3">
           <div class="program-card-image">
-            <img src="/images/hero-bg.png" alt="Program D3 Manajemen">
+            <img src="/images/hero-bg.png" alt="Program D3 Manajemen" loading="lazy">
             <span class="badge">Terakreditasi Baik Sekali</span>
           </div>
           <div class="program-card-body">
-            <div class="program-icon">📊</div>
             <h3>D3 Manajemen</h3>
             <p>
               Program diploma 3 tahun yang fokus pada keterampilan praktis manajemen bisnis,
@@ -278,7 +275,6 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
        SECTION 4: KEUNGGULAN / WHY STIM YKPN
        ============================================ -->
   <section class="why-us" id="tentang">
-    <div class="why-us-bg-glow"></div>
     <div class="container">
       <div class="section-header animate-on-scroll">
         <div class="section-label">Mengapa STIM YKPN</div>
@@ -336,6 +332,19 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
           <h4>Jaringan Alumni</h4>
           <p>Bergabung dengan 15.000+ alumni yang telah sukses bekerja di berbagai sektor bisnis dan pemerintahan di
             seluruh Indonesia.</p>
+        </div>
+
+        <div class="why-card animate-on-scroll animate-delay-4">
+          <div class="why-card-decor"></div>
+          <div class="icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+          </div>
+          <div class="stat-num">BAN-PT</div>
+          <h4>Terakreditasi Baik Sekali</h4>
+          <p>Mendapatkan pengakuan akreditasi Baik Sekali dari BAN-PT untuk menjamin kualitas standar mutu pendidikan tinggi.</p>
         </div>
       </div>
     </div>
