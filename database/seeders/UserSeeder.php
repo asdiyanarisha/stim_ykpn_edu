@@ -12,13 +12,15 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        \Illuminate\Support\Facades\DB::table('users')->insert([
-            'name' => 'admindev',
-            'email' => 'admindev@admin.com', // Kolom email wajib di tabel bawaan Laravel
-            'password' => bcrypt('12345678Aa*'),
-            'role_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        \Illuminate\Support\Facades\DB::table('users')->updateOrInsert(
+            ['email' => 'admindev@admin.com'],
+            [
+                'name' => 'admindev',
+                'password' => bcrypt('12345678Aa*'),
+                'role_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
     }
 }

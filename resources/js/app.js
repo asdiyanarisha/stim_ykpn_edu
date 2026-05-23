@@ -101,6 +101,7 @@ import PmbAdminIndex from './Pages/PmbAdmin/index.vue';
 import PmbAdminShow from './Pages/PmbAdmin/Show.vue';
 import PmbAdminEdit from './Pages/PmbAdmin/Edit.vue';
 import WhatsappContact from './Pages/WhatsappContact/index.vue';
+import PmbFrontendForm from './Pages/Frontend/PmbForm.vue';
 
 // Import Global Components
 import AppSidebar from './Components/Organisms/AppSidebar.vue';
@@ -210,6 +211,7 @@ const pages = {
     pmbAdminShow: PmbAdminShow,
     pmbAdminEdit: PmbAdminEdit,
     whatsappContact: WhatsappContact,
+    pmbFrontendForm: PmbFrontendForm,
 };
 
 const appElement = document.getElementById('app');
