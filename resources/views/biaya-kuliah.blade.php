@@ -224,7 +224,7 @@
             <ul style="list-style: none; padding: 0; margin: 0 0 15px 0;">
               <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>SPP Tetap</span>
                 <strong>Rp 1.900.000</strong></li>
-              <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>SPP Variabel</span>
+              <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Biaya SPP Variabel/SKS</span>
                 <strong>Rp 185.000</strong></li>
             </ul>
           </div>
@@ -241,7 +241,7 @@
             <ul style="list-style: none; padding: 0; margin: 0 0 15px 0;">
               <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>SPP Tetap</span>
                 <strong>Rp 1.400.000</strong></li>
-              <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>SPP Variabel</span>
+              <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Biaya SPP Variabel/SKS</span>
                 <strong>Rp 155.000</strong></li>
             </ul>
           </div>
@@ -258,7 +258,7 @@
             <ul style="list-style: none; padding: 0; margin: 0 0 15px 0;">
               <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>SPP Tetap</span>
                 <strong>Rp 1.900.000</strong></li>
-              <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>SPP Variabel</span>
+              <li style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Biaya SPP Variabel/SKS</span>
                 <strong>Rp 185.000</strong></li>
             </ul>
           </div>

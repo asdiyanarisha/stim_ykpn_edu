@@ -12,128 +12,181 @@
   <link rel="stylesheet" href="/css/style.css?v=2.3">
 
   <style>
-    /* Premium Academic Styles */
-    body { background-color: #f8fafc; }
-
+    /* Executive Academic Styles */
+    body { background-color: #ffffff; }
     .page-header {
       background: var(--navy-900);
-      padding: 100px 0 80px;
+      background-image: url('https://rasabaik.net/ykpn/assets/hero-bg.png');
+      background-size: cover;
+      background-position: center;
+      padding: 140px 0 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 280px;
       text-align: center;
       position: relative;
     }
-
     .page-header::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 30px 30px;
+      background: rgba(15, 23, 42, 0.85); /* Solid elegant dark */
     }
-
     .pimpinan-section {
-      padding: 100px 0;
-      background: #f8fafc;
-    }
-
-    .pimpinan-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 40px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .pimpinan-card {
+      padding: 100px 0 120px;
       background: #ffffff;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      border: 1px solid #e2e8f0;
+    }
+    .pimpinan-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .pimpinan-ketua-wrapper {
+      margin-bottom: 80px;
+    }
+    .card-ketua {
       display: flex;
-      align-items: center;
-      padding: 30px;
-      transition: all 0.3s ease;
-    }
-
-    .pimpinan-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-      border-color: #cbd5e1;
-    }
-
-    .pimpinan-photo {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: #e2e8f0;
-      flex-shrink: 0;
-      margin-right: 30px;
-      border: 4px solid #fff;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      align-items: stretch;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      width: 100%;
+      transition: all 0.4s ease;
+      border-radius: 8px;
       overflow: hidden;
-      position: relative;
     }
-
-    .pimpinan-photo img {
+    .card-ketua:hover {
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+    }
+    .ketua-photo {
+      width: 45%;
+      min-height: 400px;
+      background-color: #e2e8f0;
+      position: relative;
+      overflow: hidden;
+    }
+    .ketua-photo img {
+      position: absolute;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: top center;
     }
-
-    /* Initials placeholder if no image */
-    .pimpinan-photo::after {
-      content: '🎓';
-      font-size: 40px;
+    .ketua-info {
+      width: 55%;
+      padding: 60px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+    .ketua-info::before {
+      content: '';
       position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      color: #94a3b8;
+      top: 65px;
+      left: 0;
+      width: 4px;
+      height: 60px;
+      background: var(--orange-500);
     }
-
-    .pimpinan-info h3 {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--navy-900);
-      margin-bottom: 8px;
+    .pimpinan-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
     }
-
-    .pimpinan-info .jabatan {
-      font-size: 14px;
+    .card-wakil {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      transition: all 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .card-wakil:hover {
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+      transform: translateY(-5px);
+    }
+    .wakil-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background-color: #f1f5f9;
+      position: relative;
+      overflow: hidden;
+    }
+    .wakil-photo img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.6s ease;
+    }
+    .card-wakil:hover .wakil-photo img {
+      transform: scale(1.03);
+    }
+    .wakil-info {
+      padding: 35px 30px;
+      text-align: left;
+      flex-grow: 1;
+      border-top: 4px solid var(--orange-500);
+      background: #f8fafc;
+    }
+    /* TEXT STYLES */
+    .info-jabatan {
+      font-size: 13px;
       font-weight: 700;
       color: var(--orange-500);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
       margin-bottom: 12px;
-      display: inline-block;
-      padding: 4px 12px;
-      background: rgba(241, 135, 33, 0.1);
-      border-radius: 20px;
+      display: block;
     }
-
-    /* Ketua gets special treatment */
-    .pimpinan-card.ketua {
-      grid-column: 1 / -1;
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: center;
-      flex-direction: column;
-      padding: 50px;
+    .info-name {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 15px;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
     }
-
-    .pimpinan-card.ketua .pimpinan-photo {
-      width: 180px;
-      height: 180px;
-      margin-right: 0;
-      margin-bottom: 24px;
+    .wakil-info .info-name {
+      font-size: 22px;
+      margin-bottom: 12px;
     }
-
+    .info-desc {
+      color: #475569;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .wakil-info .info-desc {
+      font-size: 15px;
+    }
+    @media (max-width: 992px) {
+      .card-ketua {
+        flex-direction: column;
+      }
+      .ketua-photo {
+        width: 100%;
+        min-height: 450px;
+      }
+      .ketua-info {
+        width: 100%;
+        padding: 50px 30px;
+      }
+      .ketua-info::before {
+        top: 0; left: 40px;
+        width: 60px; height: 4px;
+      }
+      .pimpinan-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
     @media (max-width: 768px) {
-      .pimpinan-grid { grid-template-columns: 1fr; }
-      .pimpinan-card { flex-direction: column; text-align: center; padding: 30px; }
-      .pimpinan-photo { margin-right: 0; margin-bottom: 20px; }
-      .pimpinan-card.ketua { padding: 30px; }
+      .pimpinan-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
     }
   </style>
   <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
@@ -152,35 +205,58 @@
   </header>
 
   <section class="pimpinan-section">
-    <div class="container">
-      <div class="pimpinan-grid">
-        
-        @forelse($pimpinans as $index => $pimpinan)
-          @php
-              $jobTitle = $pimpinan->jobTitle ? $pimpinan->jobTitle->title : 'Pimpinan';
-              $isKetua = (strpos(strtolower($jobTitle), 'ketua') !== false && strpos(strtolower($jobTitle), 'wakil') === false);
-              $delayClass = ($index % 2 != 0 && !$isKetua) ? 'animate-delay-1' : '';
-          @endphp
-          <div class="pimpinan-card {{ $isKetua ? 'ketua' : '' }} animate-on-scroll {{ $delayClass }}">
-            <div class="pimpinan-photo">
-              @if($pimpinan->image_url)
-                  <img src="{{ $pimpinan->image_url }}" alt="{{ $pimpinan->full_name }}" loading="lazy">
-              @endif
-            </div>
-            <div class="pimpinan-info">
-              <span class="jabatan">{{ $jobTitle }}</span>
-              <h3>{{ $pimpinan->front_title ? $pimpinan->front_title . ' ' : '' }}{{ $pimpinan->full_name }}{{ $pimpinan->back_title ? ', ' . $pimpinan->back_title : '' }}</h3>
-              @if($pimpinan->personal_description)
-                  <p style="color: #64748b; font-size: 15px; margin-top: 10px;">{{ Str::limit(strip_tags($pimpinan->personal_description), 150) }}</p>
-              @endif
-            </div>
+    <div class="pimpinan-container">
+      <!-- Ketua -->
+      <div class="pimpinan-ketua-wrapper">
+        <div class="card-ketua animate-on-scroll">
+          <div class="ketua-photo">
+            <img loading="lazy" src="https://rasabaik.net/ykpn/assets/img/dosen/suparmono.jpg" alt="Dr. Suparmono, M.Si.">
           </div>
-        @empty
-          <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
-            <p style="color: #64748b;">Data pimpinan belum tersedia.</p>
+          <div class="ketua-info">
+            <span class="info-jabatan">Ketua</span>
+            <h3 class="info-name">Dr. Suparmono, M.Si.</h3>
+            <p class="info-desc">Memimpin dengan visi inovasi dan keunggulan akademik untuk mencetak lulusan profesional yang siap menghadapi tantangan bisnis global, serta terus mendorong transformasi STIM YKPN menuju standar internasional.</p>
           </div>
-        @endforelse
+        </div>
+      </div>
 
+      <!-- Wakil Ketua Grid (3 Columns) -->
+      <div class="pimpinan-grid">
+        <!-- Wakil Ketua I -->
+        <div class="card-wakil animate-on-scroll animate-delay-1">
+          <div class="wakil-photo">
+            <img loading="lazy" src="https://rasabaik.net/ykpn/assets/img/dosen/siti-resmi.jpg" alt="Siti Resmi, Dra., M.M., Ak., CA.">
+          </div>
+          <div class="wakil-info">
+            <span class="info-jabatan">Wakil Ketua I</span>
+            <h3 class="info-name">Siti Resmi, Dra., M.M., Ak., CA.</h3>
+            <p class="info-desc">Bidang Akademik, merumuskan kebijakan pendidikan dan menjamin mutu pembelajaran.</p>
+          </div>
+        </div>
+
+        <!-- Wakil Ketua II -->
+        <div class="card-wakil animate-on-scroll animate-delay-2">
+          <div class="wakil-photo">
+            <img loading="lazy" src="https://rasabaik.net/ykpn/assets/img/dosen/anna-partina.jpg" alt="Dr. Anna Partina, M.Si.">
+          </div>
+          <div class="wakil-info">
+            <span class="info-jabatan">Wakil Ketua II</span>
+            <h3 class="info-name">Dr. Anna Partina, M.Si.</h3>
+            <p class="info-desc">Bidang Keuangan & SDM, mengelola sumber daya dan operasional institusi secara efektif.</p>
+          </div>
+        </div>
+
+        <!-- Wakil Ketua III -->
+        <div class="card-wakil animate-on-scroll animate-delay-3">
+          <div class="wakil-photo">
+            <img loading="lazy" src="https://rasabaik.net/ykpn/assets/img/dosen/ralina-transistari.jpg" alt="Ralina Transistari, Dra., M.Si">
+          </div>
+          <div class="wakil-info">
+            <span class="info-jabatan">Wakil Ketua III</span>
+            <h3 class="info-name">Ralina Transistari, Dra., M.Si</h3>
+            <p class="info-desc">Bidang Kemahasiswaan & Alumni, membina prestasi dan jaringan strategis kampus.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
