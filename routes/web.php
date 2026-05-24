@@ -559,6 +559,10 @@ Route::get('/pengumuman-diterima.html', fn() => view('pengumuman-diterima'));
 // Batch 3 - Student, Campus Life, and Information Pages
 Route::get('/kegiatan-mahasiswa', fn() => view('kegiatan-mahasiswa'));
 Route::get('/kegiatan-mahasiswa.html', fn() => view('kegiatan-mahasiswa'));
+Route::get('/ppkpt', fn() => view('ppkpt'));
+Route::get('/ppkpt.html', fn() => view('ppkpt'));
+Route::get('/pengumuman', fn() => view('pengumuman'));
+Route::get('/pengumuman.html', fn() => view('pengumuman'));
 
 Route::get('/ukm', fn() => view('ukm'));
 Route::get('/ukm.html', fn() => view('ukm'));
