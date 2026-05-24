@@ -79,18 +79,13 @@ class PmbPublicController extends Controller
             $idPendaftar = $prefix . str_pad($newSequence, 5, '0', STR_PAD_LEFT);
 
             $validatedData = $validator->validated();
-            $validatedData['pmb_status_id'] = 1; // Default status: Registrasi Awal
+            $validatedData['pmb_status_id'] = 7; // Default status: Sedang mengirim email
             $validatedData['id_pendaftar'] = $idPendaftar;
             
             $pmb = Pmb::create($validatedData);
 
-            // Kirim email konfirmasi ke pendaftar
-            try {
-                Mail::to($pmb->email)->send(new PmbRegistrationMail($pmb));
-            } catch (\Exception $mailException) {
-                // Log error agar tidak menggagalkan response sukses registrasi jika mail server terkendala
-                \Log::error('Gagal mengirim email PMB: ' . $mailException->getMessage());
-            }
+            // Kirim job ke antrean untuk memproses email dan update status
+            dispatch(new \App\Jobs\SendPmbRegistrationEmail($pmb));
 
             return response()->json([
                 'success' => true,

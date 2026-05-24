@@ -429,7 +429,21 @@ Jika Opsi B gagal/error 500 karena fungsi `symlink()` diblokir oleh hosting:
 
 ---
 
-#### ✅ Step 9: Verifikasi & Cleanup
+#### ⏱️ Step 9: Setup Cron Job untuk Queue Worker (Background Task)
+
+Jika aplikasi Anda menggunakan pengiriman email di background (seperti email pendaftaran PMB), Anda perlu menjalankan Queue Worker agar antrean tersebut dieksekusi.
+
+1. Buka menu **Cron Jobs** di cPanel Anda.
+2. Tambahkan Cron Job baru, set agar berjalan **Setiap Menit** (`* * * * *`).
+3. Masukkan perintah berikut di kolom **Command**:
+   ```bash
+   /usr/local/bin/php /home/username_cpanel/public_html/artisan queue:work database --stop-when-empty > /dev/null 2>&1
+   ```
+   * **Penting**: Sesuaikan `/usr/local/bin/php` dengan path PHP di hosting Anda. Sesuaikan juga `/home/username_cpanel/public_html/artisan` dengan lokasi folder project Anda.
+
+---
+
+#### ✅ Step 10: Verifikasi & Cleanup
 
 1. **Buka website** di browser → pastikan halaman utama tampil
 2. **Login admin** dengan credential default
@@ -498,6 +512,7 @@ Gunakan checklist ini untuk memastikan tidak ada yang terlewat:
 - [ ] ✅ Database sudah di-migrate & seed
 - [ ] ✅ Storage link sudah dibuat
 - [ ] ✅ Cache sudah di-optimize
+- [ ] ✅ Cron Job untuk queue worker sudah di-setup
 - [ ] ✅ Website bisa diakses dan login berhasil
 - [ ] ✅ **Semua file `_*.php` sudah DIHAPUS dari `public/`**
 

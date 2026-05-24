@@ -55,6 +55,20 @@ class PmbStatusSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'id' => 7,
+                'status' => 'Sedang Mengirim Email',
+                'slug' => 'sedang-mengirim-email',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 8,
+                'status' => 'Gagal Mengirim Email',
+                'slug' => 'gagal-mengirim-email',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         foreach ($statuses as $status) {
