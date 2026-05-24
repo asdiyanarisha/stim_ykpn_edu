@@ -70,7 +70,11 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: top center;
+      object-position: center 62%; /* Fokus awal pada wajah Dr. Suparmono */
+      transition: object-position 0.5s ease; /* Efek transisi scrolling yang mulus */
+    }
+    .card-ketua:hover .ketua-photo img {
+      object-position: center 88%; /* Scrolling/shifting ke atas (menampilkan tubuh/jas lebih banyak) saat hover */
     }
     .ketua-info {
       width: 55%;
@@ -210,7 +214,7 @@
       <div class="pimpinan-ketua-wrapper">
         <div class="card-ketua animate-on-scroll">
           <div class="ketua-photo">
-            <img loading="lazy" src="https://rasabaik.net/ykpn/assets/img/dosen/suparmono.jpg" alt="Dr. Suparmono, M.Si.">
+            <img loading="lazy" src="/images/dosen/pimpinan_dr_suparmono_msi.jpg" alt="Dr. Suparmono, M.Si.">
           </div>
           <div class="ketua-info">
             <span class="info-jabatan">Ketua</span>
@@ -225,7 +229,7 @@
         <!-- Wakil Ketua I -->
         <div class="card-wakil animate-on-scroll animate-delay-1">
           <div class="wakil-photo">
-            <img loading="lazy" src="https://rasabaik.net/ykpn/assets/img/dosen/siti-resmi.jpg" alt="Siti Resmi, Dra., M.M., Ak., CA.">
+            <img loading="lazy" src="/images/dosen/pimpinan_siti_resmi.JPG" alt="Siti Resmi, Dra., M.M., Ak., CA.">
           </div>
           <div class="wakil-info">
             <span class="info-jabatan">Wakil Ketua I</span>
@@ -237,7 +241,7 @@
         <!-- Wakil Ketua II -->
         <div class="card-wakil animate-on-scroll animate-delay-2">
           <div class="wakil-photo">
-            <img loading="lazy" src="https://rasabaik.net/ykpn/assets/img/dosen/anna-partina.jpg" alt="Dr. Anna Partina, M.Si.">
+            <img loading="lazy" src="/images/dosen/pimpinan_anna_partina.JPG" alt="Dr. Anna Partina, M.Si.">
           </div>
           <div class="wakil-info">
             <span class="info-jabatan">Wakil Ketua II</span>
@@ -249,7 +253,7 @@
         <!-- Wakil Ketua III -->
         <div class="card-wakil animate-on-scroll animate-delay-3">
           <div class="wakil-photo">
-            <img loading="lazy" src="https://rasabaik.net/ykpn/assets/img/dosen/ralina-transistari.jpg" alt="Ralina Transistari, Dra., M.Si">
+            <img loading="lazy" src="/images/dosen/pimpinan_ralina.JPG" alt="Ralina Transistari, Dra., M.Si">
           </div>
           <div class="wakil-info">
             <span class="info-jabatan">Wakil Ketua III</span>
