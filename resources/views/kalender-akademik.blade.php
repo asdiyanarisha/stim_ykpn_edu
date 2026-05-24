@@ -15,7 +15,13 @@
 
     .page-header {
       background: var(--navy-900);
-      padding: 100px 0 80px;
+      background-image: url('/images/hero-bg.png');
+      background-size: cover;
+      background-position: center;
+      padding: 120px 0 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       position: relative;
     }
@@ -24,10 +30,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 30px 30px;
+      background: linear-gradient(180deg, rgba(0,20,50,0.75) 0%, rgba(0,30,70,0.85) 100%);
     }
 
     .calendar-section {
@@ -173,7 +176,7 @@
 
   <header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
-      <h1 class="page-title animate-on-scroll">Kalender Akademik</h1>
+      <h1 class="page-title animate-on-scroll">{{ $calendar ? $calendar->title : 'Kalender Akademik' }}</h1>
       <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">
         Jadwal penting kegiatan perkuliahan, ujian, dan hari libur di lingkungan STIM YKPN Yogyakarta.
       </p>
@@ -183,99 +186,25 @@
   <section class="calendar-section">
     <div class="container">
       
-      <div class="calendar-container animate-on-scroll">
-        
-        <div class="calendar-controls">
-          <div class="calendar-tabs">
-            <button class="tab-btn active">Semester Gasal</button>
-            <button class="tab-btn">Semester Genap</button>
-          </div>
-          <a href="#" class="download-btn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Unduh PDF
-          </a>
-        </div>
-
-        <div class="table-responsive">
-          <table class="calendar-table">
-            <thead>
-              <tr>
-                <th width="30%">Tanggal / Waktu</th>
-                <th width="50%">Kegiatan Akademik</th>
-                <th width="20%">Kategori</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <span class="event-date">1 - 15 Agustus</span>
-                  2026
-                </td>
-                <td>
-                  <strong>Pembayaran SPP Tetap & Registrasi Ulang</strong><br>
-                  Pembayaran SPP Tetap dan Heregistrasi mahasiswa lama semester gasal.
-                </td>
-                <td><span class="event-badge badge-akademik">Administrasi</span></td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="event-date">18 - 22 Agustus</span>
-                  2026
-                </td>
-                <td>
-                  <strong>Pengisian Kartu Rencana Studi (KRS)</strong><br>
-                  Pengisian dan bimbingan KRS online melalui sistem E-Campuz.
-                </td>
-                <td><span class="event-badge badge-akademik">Akademik</span></td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="event-date">1 September</span>
-                  2026
-                </td>
-                <td>
-                  <strong>Awal Perkuliahan Semester Gasal</strong><br>
-                  Kuliah perdana tatap muka untuk seluruh jenjang program studi.
-                </td>
-                <td><span class="event-badge badge-kegiatan">Perkuliahan</span></td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="event-date">20 - 31 Oktober</span>
-                  2026
-                </td>
-                <td>
-                  <strong>Ujian Tengah Semester (UTS)</strong><br>
-                  Pelaksanaan UTS gasal secara terjadwal.
-                </td>
-                <td><span class="event-badge badge-ujian">Ujian</span></td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="event-date">25 Desember</span>
-                  2026
-                </td>
-                <td>
-                  <strong>Libur Nasional Hari Raya Natal</strong><br>
-                  Kegiatan kampus diliburkan.
-                </td>
-                <td><span class="event-badge badge-libur">Libur</span></td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="event-date">5 - 17 Januari</span>
-                  2027
-                </td>
-                <td>
-                  <strong>Ujian Akhir Semester (UAS)</strong><br>
-                  Pelaksanaan UAS gasal sebagai syarat ketuntasan studi.
-                </td>
-                <td><span class="event-badge badge-ujian">Ujian</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
+      <div class="calendar-container animate-on-scroll" style="padding: 40px; border-radius: 20px;">
+        @if($calendar)
+            <div class="prose max-w-none text-slate-700" style="line-height: 1.8; font-size: 16px;">
+                {!! $calendar->content !!}
+            </div>
+            
+            @if($calendar->header_image)
+                <div style="margin-top: 40px; text-align: center;">
+                    <img src="{{ $calendar->header_image }}" alt="Kalender Akademik" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                </div>
+            @endif
+        @else
+            <div style="text-align: center; padding: 40px 0; color: #64748b;">
+                <svg xmlns="http://www.w3.org/2000/svg" style="width: 64px; height: 64px; margin: 0 auto 16px; opacity: 0.5;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <p>Data Kalender Akademik belum tersedia.</p>
+            </div>
+        @endif
       </div>
 
     </div>
@@ -286,3 +215,6 @@
   <script src="/js/script.js?v=2.3"></script>
 </body>
 </html>
+
+
+

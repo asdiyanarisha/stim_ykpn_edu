@@ -64,21 +64,147 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
   <link rel="stylesheet" href="/css/style.css?v=2.6">
   
   <style>
-    @media (max-width: 992px) {
-      .slider-btn {
-        --btn-size: 36px !important;
-        width: 36px !important;
-        height: 36px !important;
+    /* Visual Improvements from Index 3 */
+    @media (max-width: 768px) {
+      .hero .container {
+        top: 0 !important;
+        height: 100% !important;
       }
-      .slider-btn svg {
-        width: 16px !important;
-        height: 16px !important;
+    }
+
+    .hero-overlay {
+      display: none !important;
+      /* Remove dark overlay */
+    }
+
+    .slider-btn {
+      background: rgba(255, 255, 255, 0.1) !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      backdrop-filter: blur(10px);
+      width: 60px !important;
+      height: 60px !important;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .hero-slider:hover .slider-btn {
+      opacity: 1;
+    }
+
+    .slider-btn:hover {
+      background: rgba(255, 255, 255, 0.3) !important;
+      transform: translateY(-50%) scale(1.1) !important;
+    }
+
+    .slider-dots,
+    .scroll-indicator {
+      position: absolute !important;
+      left: 0 !important;
+      right: 0 !important;
+      margin: 0 auto !important;
+      width: max-content !important;
+      transform: none !important;
+      z-index: 10;
+    }
+
+    .slider-dots {
+      bottom: 110px !important;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 12px 24px;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
+    .slider-dots .dot {
+      width: 10px !important;
+      height: 10px !important;
+      margin: 0 8px !important;
+      border-radius: 50% !important;
+      background: rgba(255, 255, 255, 0.4) !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .slider-dots .dot.active {
+      background: #ffffff !important;
+      transform: scale(1.3) !important;
+    }
+
+    .hero-slider::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      box-shadow: none;
+      /* Removed vignette */
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .slide img {
+      filter: brightness(1.05) contrast(1.05) saturate(1.1);
+      transform: scale(1.01);
+      transition: transform 8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform-origin: 50% 50%;
+    }
+
+    .slide.active img {
+      transform: scale(1.08);
+      /* Slow Cinematic Ken Burns Zoom */
+    }
+
+    .hero-decor {
+      animation: floatOrbs 12s ease-in-out infinite alternate !important;
+      opacity: 0.6 !important;
+      filter: blur(60px) !important;
+    }
+
+    @keyframes floatOrbs {
+      0% {
+        transform: translate(0, 0) scale(1);
       }
-      .prev-btn {
-        left: 16px !important;
+
+      100% {
+        transform: translate(40px, -40px) scale(1.3);
       }
-      .next-btn {
-        right: 16px !important;
+    }
+
+    .hero-content {
+      z-index: 5;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+      /* Universal shadow for readability on any photo */
+    }
+
+    /* Specific readability fix ONLY for Slide 1 removed per user request */
+
+    .hero-title .highlight {
+      background: rgba(255, 255, 255, 0.1) !important;
+      padding: 4px 16px;
+      border-radius: 16px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: inline-block;
+      margin: 8px 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-title .highlight .blue {
+      color: #3b82f6 !important;
+    }
+
+    .hero-title .highlight .orange {
+      color: #fbb03b !important;
+    }
+
+    @media (max-width: 768px) {
+      .slider-dots {
+        bottom: 10px !important;
+        padding: 4px 12px !important;
       }
     }
   </style>
@@ -99,14 +225,14 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         <div class="hero-overlay"></div>
         <div style="position: absolute; inset: 0; display: flex; align-items: center; z-index: 2; pointer-events: none;">
           <div class="container" style="pointer-events: none;">
-            <div class="hero-content hero-content-responsive" style="pointer-events: auto; display: flex; flex-direction: column;">
-              <div class="hero-badge" style="text-transform: uppercase;">
-                <span class="badge-dot" style="background: var(--orange-500); box-shadow: 0 0 8px var(--orange-500);"></span>
-                PENDAFTARAN 2026/2027 DIBUKA
+            <div class="hero-content" style="pointer-events: auto;">
+              <div class="hero-badge" style="display: inline-flex; align-items: center; gap: 8px;">
+                <span class="badge-dot"></span>
+                <span style="display: inline-block; transform: translateY(-1px);">Pendaftaran 2026/2027 Dibuka</span>
               </div>
               <h1 class="hero-title" style="line-height: 1.3;">
                 Membangun<br>
-                <span style="color: #3b82f6;">Pemimpin</span> <span style="color: #fbb03b;">Bisnis</span><br>
+                <span style="color: #2563eb; text-shadow: 0 4px 30px rgba(0,0,0,0.8);">Pemimpin</span> <span style="color: #f59e0b; text-shadow: 0 4px 30px rgba(0,0,0,0.8);">Bisnis</span><br>
                 Masa Depan
               </h1>
               <p class="hero-subtitle">
@@ -142,7 +268,13 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         @if($banner->title || $banner->description)
         <div style="position: absolute; inset: 0; display: flex; align-items: center; z-index: 2; pointer-events: none;">
           <div class="container" style="pointer-events: none;">
-            <div class="hero-content hero-content-responsive" style="pointer-events: auto; display: flex; flex-direction: column;">
+            <div class="hero-content" style="pointer-events: auto;">
+              @if($banner->badge_text)
+              <div class="hero-badge" style="display: inline-flex; align-items: center; gap: 8px;">
+                <span class="badge-dot"></span>
+                <span style="display: inline-block; transform: translateY(-1px);">{{ $banner->badge_text }}</span>
+              </div>
+              @endif
               @if($banner->title)
               <h1 class="hero-title">{{ $banner->title }}</h1>
               @endif
@@ -188,21 +320,23 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         @endif
       </div>
     </div>
-    <!-- Slider Controls (Absolute top level to prevent ANY overlaps) -->
-    <button class="slider-btn prev-btn" id="heroPrevBtn" aria-label="Previous slide" style="z-index: 9999; pointer-events: auto; padding: 0; outline: none; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; background: rgba(0, 0, 0, 0.5); --btn-size: 50px; width: var(--btn-size); height: var(--btn-size); display: flex; justify-content: center; align-items: center; opacity: 1 !important;">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></svg>
+    <!-- Slider Controls -->
+    <button class="slider-btn prev-btn" id="heroPrevBtn" aria-label="Previous slide">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></svg>
     </button>
-    <button class="slider-btn next-btn" id="heroNextBtn" aria-label="Next slide" style="z-index: 9999; pointer-events: auto; padding: 0; outline: none; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; background: rgba(0, 0, 0, 0.5); --btn-size: 50px; width: var(--btn-size); height: var(--btn-size); display: flex; justify-content: center; align-items: center; opacity: 1 !important;">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+    <button class="slider-btn next-btn" id="heroNextBtn" aria-label="Next slide">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
     </button>
-
 
     <!-- Decorative circles -->
     <div class="hero-decor hero-decor-1"></div>
     <div class="hero-decor hero-decor-2"></div>
     <div class="hero-decor hero-decor-3"></div>
 
-
+    <div class="scroll-indicator">
+      <div class="mouse"></div>
+      Scroll
+    </div>
   </section>
 
   <!-- ============================================
@@ -219,74 +353,60 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
       </div>
 
       <div class="programs-grid">
-        <!-- S1 Bisnis Digital -->
-        <div class="program-card animate-on-scroll animate-delay-1">
-          <div class="program-card-image">
-            <img src="/images/students.png" alt="Program S1 Bisnis Digital" loading="lazy">
-            <span class="badge">Terakreditasi Baik</span>
+          <!-- Program 1 -->
+          <div class="program-card animate-on-scroll animate-delay-1">
+            <div class="program-card-image">
+              <img src="{{ asset('images/STIMYK/optimized_STIMYK-300.jpg') }}" alt="S1 Bisnis Digital" loading="lazy" style="object-fit: cover;">
+              <span class="badge">TERAKREDITASI BAIK</span>
+            </div>
+            <div class="program-card-body">
+              <h3>S1 Bisnis Digital</h3>
+              <p>
+                Program sarjana 4 tahun yang berfokus pada inovasi teknologi, manajemen e-commerce, startup, dan strategi
+                bisnis di era digital.
+              </p>
+              <a href="/program/s1-bisnis-digital" class="program-link">
+                Selengkapnya &rarr;
+              </a>
+            </div>
           </div>
-          <div class="program-card-body">
-            <h3>S1 Bisnis Digital</h3>
-            <p>
-              Program sarjana 4 tahun yang berfokus pada inovasi teknologi, manajemen e-commerce, startup, dan strategi
-              bisnis di era digital.
-            </p>
-            <a href="/sasaran-pendidikan.html" class="program-link">
-              Selengkapnya
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </a>
+  
+          <!-- Program 2 -->
+          <div class="program-card animate-on-scroll animate-delay-2">
+            <div class="program-card-image">
+              <img src="{{ asset('images/STIMYK/optimized_STIMYK-290.jpg') }}" alt="S1 Manajemen" loading="lazy" style="object-fit: cover;">
+              <span class="badge">TERAKREDITASI BAIK SEKALI</span>
+            </div>
+            <div class="program-card-body">
+              <h3>S1 Manajemen</h3>
+              <p>
+                Program sarjana 4 tahun yang membekali mahasiswa dengan pengetahuan manajemen bisnis,
+                keuangan, pemasaran, dan SDM untuk menjadi pemimpin profesional.
+              </p>
+              <a href="/program/s1-manajemen" class="program-link">
+                Selengkapnya &rarr;
+              </a>
+            </div>
           </div>
-        </div>
-
-        <!-- S1 Manajemen -->
-        <div class="program-card animate-on-scroll animate-delay-2">
-          <div class="program-card-image">
-            <img src="/images/students.png" alt="Program S1 Manajemen" loading="lazy">
-            <span class="badge">Terakreditasi Baik Sekali</span>
+  
+          <!-- Program 3 -->
+          <div class="program-card animate-on-scroll animate-delay-3">
+            <div class="program-card-image">
+              <img src="{{ asset('images/STIMYK/optimized_STIMYK-378.jpg') }}" alt="D3 Manajemen" loading="lazy" style="object-fit: cover;">
+              <span class="badge">TERAKREDITASI BAIK SEKALI</span>
+            </div>
+            <div class="program-card-body">
+              <h3>D3 Manajemen</h3>
+              <p>
+                Program diploma 3 tahun yang fokus pada keterampilan praktis manajemen bisnis,
+                siap kerja dengan sertifikasi kompetensi profesional.
+              </p>
+              <a href="/program/d3-manajemen" class="program-link">
+                Selengkapnya
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+              </a>
+            </div>
           </div>
-          <div class="program-card-body">
-            <h3>S1 Manajemen</h3>
-            <p>
-              Program sarjana 4 tahun yang membekali mahasiswa dengan pengetahuan manajemen bisnis,
-              keuangan, pemasaran, dan SDM untuk menjadi pemimpin profesional.
-            </p>
-            <a href="https://stimykpn.ac.id/academic/s1-management" class="program-link">
-              Selengkapnya
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- D3 Manajemen -->
-        <div class="program-card animate-on-scroll animate-delay-3">
-          <div class="program-card-image">
-            <img src="/images/hero-bg.png" alt="Program D3 Manajemen" loading="lazy">
-            <span class="badge">Terakreditasi Baik Sekali</span>
-          </div>
-          <div class="program-card-body">
-            <h3>D3 Manajemen</h3>
-            <p>
-              Program diploma 3 tahun yang fokus pada keterampilan praktis manajemen bisnis,
-              siap kerja dengan sertifikasi kompetensi profesional.
-            </p>
-            <a href="https://stimykpn.ac.id/academic/d3-management" class="program-link">
-              Selengkapnya
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </a>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -377,7 +497,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
     <div class="container">
       <div class="pmb-wrapper">
         <div class="pmb-image animate-on-scroll">
-          <img src="/images/students.png" alt="Mahasiswa STIM YKPN">
+          <img src="{{ asset('images/STIMYK/optimized_STIMYK-282.jpg') }}" alt="Mahasiswa STIM YKPN">
           <div class="floating-badge">
             <div class="periode-label">Periode</div>
             <div class="periode-year">2026/2027</div>
@@ -451,7 +571,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
           <div class="section-label">Berita & Kegiatan</div>
           <h2 class="section-title">Kabar Terbaru Kampus</h2>
         </div>
-        <a href="https://stimykpn.ac.id/page/news/news" class="btn btn-outline">Semua Berita</a>
+        <a href="/berita" class="btn btn-outline">Semua Berita</a>
       </div>
 
       <div class="news-grid">
@@ -475,68 +595,9 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
           </div>
         </article>
         @empty
-        <!-- News 1 -->
-        <article class="news-card animate-on-scroll animate-delay-1">
-          <div class="news-card-image">
-            <img src="/images/hero-bg.png" alt="Halal bi Halal STIM YKPN">
-            <span class="date-badge">30 Mar 2026</span>
-          </div>
-          <div class="news-card-body">
-            <span class="category">Kegiatan</span>
-            <h3><a href="https://stimykpn.ac.id/page/news/news/a16c11a6-b018-45a9-9ea9-3280f69db114">STIM YKPN
-                Yogyakarta menjadi Tuan Rumah Halal bi Halal se-YKPN</a></h3>
-            <a href="https://stimykpn.ac.id/page/news/news/a16c11a6-b018-45a9-9ea9-3280f69db114" class="read-more">
-              Baca Selengkapnya
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- News 2 -->
-        <article class="news-card animate-on-scroll animate-delay-2">
-          <div class="news-card-image">
-            <img src="/images/students.png" alt="Dies Natalis STIM YKPN">
-            <span class="date-badge">06 Jan 2026</span>
-          </div>
-          <div class="news-card-body">
-            <span class="category">Dies Natalis</span>
-            <h3><a href="https://stimykpn.ac.id/page/news/news/a0c50908-536e-4adb-81bd-9b44a6cd2693">Malam Tasyakuran
-                Dies Natalis ke-50 STIM YKPN, Momentum Syukur dan Apresiasi</a></h3>
-            <a href="https://stimykpn.ac.id/page/news/news/a0c50908-536e-4adb-81bd-9b44a6cd2693" class="read-more">
-              Baca Selengkapnya
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- News 3 -->
-        <article class="news-card animate-on-scroll animate-delay-3">
-          <div class="news-card-image">
-            <img src="/images/hero-bg.png" alt="Anugerah Kerja Sama LLDIKTI">
-            <span class="date-badge">11 Des 2025</span>
-          </div>
-          <div class="news-card-body">
-            <span class="category">Prestasi</span>
-            <h3><a href="https://stimykpn.ac.id/page/news/news/a0905bed-e3d1-4b8a-8113-0c5969931e0b">STIM YKPN Raih
-                Terbaik I Anugerah Kerja Sama Joint Resources Program 2025</a></h3>
-            <a href="https://stimykpn.ac.id/page/news/news/a0905bed-e3d1-4b8a-8113-0c5969931e0b" class="read-more">
-              Baca Selengkapnya
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </a>
-          </div>
-        </article>
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; color: #64748b;">
+          <p>Belum ada berita terbaru.</p>
+        </div>
         @endforelse
       </div>
     </div>
@@ -557,36 +618,60 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
 
       <div class="testimonial-slider animate-on-scroll">
         <div class="testimonial-card" id="testimonialCard">
-          <div class="quote-icon">❝</div>
+          <div class="quote-icon">"</div>
           <p class="quote-text" id="quoteText">
-            Kuliah di STIM YKPN memberi saya banyak pengalaman berharga. Dengan dukungan dosen dan bekal ilmu manajemen
-            yang kuat, saya dapat menerapkannya langsung dalam pekerjaan saya sebagai Regional Manager ERIGO.
+            Memuat testimoni...
           </p>
           <div class="alumni-info">
-            <div class="alumni-avatar" id="alumniAvatar">AY</div>
-            <div class="alumni-name" id="alumniName">Agil Yudha Aryakusuma, S.M.</div>
-            <div class="alumni-role" id="alumniRole">Regional Manager</div>
-            <div class="alumni-company" id="alumniCompany">PT Idea Solusi Indonesia (ERIGO)</div>
+            <div class="alumni-avatar" id="alumniAvatar">...</div>
+            <div class="alumni-name" id="alumniName">...</div>
+            <div class="alumni-role" id="alumniRole"></div>
+            <div class="alumni-company" id="alumniCompany"></div>
           </div>
         </div>
 
         <div class="testimonial-dots" id="testimonialDots">
-          <button class="dot active" data-index="0" aria-label="Testimoni 1"></button>
-          <button class="dot" data-index="1" aria-label="Testimoni 2"></button>
-          <button class="dot" data-index="2" aria-label="Testimoni 3"></button>
-          <button class="dot" data-index="3" aria-label="Testimoni 4"></button>
-          <button class="dot" data-index="4" aria-label="Testimoni 5"></button>
+          @if(isset($alumnis) && $alumnis->count() > 0)
+            @foreach($alumnis as $index => $alumni)
+              <button class="dot {{ $index === 0 ? 'active' : '' }}" data-index="{{ $index }}" aria-label="Testimoni {{ $index + 1 }}"></button>
+            @endforeach
+          @else
+            <button class="dot active" data-index="0" aria-label="Testimoni 1"></button>
+            <button class="dot" data-index="1" aria-label="Testimoni 2"></button>
+            <button class="dot" data-index="2" aria-label="Testimoni 3"></button>
+            <button class="dot" data-index="3" aria-label="Testimoni 4"></button>
+            <button class="dot" data-index="4" aria-label="Testimoni 5"></button>
+          @endif
         </div>
       </div>
     </div>
   </section>
+
+  @if(isset($alumnis) && $alumnis->count() > 0)
+  <script>
+    window.dynamicTestimonials = {!! json_encode($alumnis->map(function($a) {
+        $words = explode(' ', $a->name);
+        $initials = '';
+        foreach(array_slice($words, 0, 2) as $w) {
+            $initials .= strtoupper(substr($w, 0, 1));
+        }
+        return [
+            'text' => $a->testimony,
+            'name' => $a->name,
+            'role' => '',
+            'company' => '',
+            'initials' => $initials
+        ];
+    })) !!};
+  </script>
+  @endif
 
   <!-- ============================================
        SECTION 8: CAMPUS TOUR VIDEO
        ============================================ -->
   <section class="campus-tour" id="campus-tour">
     <div class="campus-tour-bg">
-      <img src="/images/hero-bg.png" alt="STIM YKPN Campus Aerial View">
+      <img src="{{ asset('images/STIMYK/optimized_STIMYK-324.jpg') }}" alt="STIM YKPN Campus Aerial View" style="object-fit: cover;">
     </div>
     <div class="container">
       <div class="play-button" id="playButton" role="button" aria-label="Play campus tour video">

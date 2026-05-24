@@ -587,6 +587,27 @@ Route::get('/lowongan-kerja.html', fn() => view('lowongan-kerja'));
 
 Route::get('/whatsapp-contact', fn() => view('whatsapp-contact'))->name('whatsapp-contact.index');
 
+Route::get('/kalender-akademik', function () {
+    $calendar = \App\Models\AcademicCalendar::first();
+    return view('kalender-akademik', compact('calendar'));
+});
+Route::get('/kalender-akademik.html', function () {
+    $calendar = \App\Models\AcademicCalendar::first();
+    return view('kalender-akademik', compact('calendar'));
+});
+
+Route::get('/logo', fn() => view('logo'));
+Route::get('/logo.html', fn() => view('logo'));
+
+Route::get('/berita', function () {
+    $newsList = \App\Models\News::orderBy('created_at', 'desc')->paginate(12);
+    return view('berita', compact('newsList'));
+});
+Route::get('/berita.html', function () {
+    $newsList = \App\Models\News::orderBy('created_at', 'desc')->paginate(12);
+    return view('berita', compact('newsList'));
+});
+
 Route::get('/api/inspect-data', function() {
     return \App\Models\CategoryTeacher::all();
 });
