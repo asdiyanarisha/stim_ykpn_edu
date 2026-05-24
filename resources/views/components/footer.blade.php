@@ -48,6 +48,7 @@
         <h4>Akademik</h4>
         <ul>
           <li><a href="/sasaran-pendidikan.html">S1 Manajemen</a></li>
+          <li><a href="/sasaran-pendidikan.html">S1 Bisnis Digital</a></li>
           <li><a href="/sasaran-pendidikan.html">D3 Manajemen</a></li>
           <li><a href="/kalender-akademik.html">Kalender Akademik</a></li>
           <li><a href="https://stimykpn.ecampuz.com/" target="_blank" rel="noopener noreferrer">E-Campuz Portal</a>
