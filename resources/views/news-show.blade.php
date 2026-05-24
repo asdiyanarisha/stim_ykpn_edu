@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Detail Berita | Dashboard STIM YKPN</title>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body class="antialiased h-screen overflow-hidden bg-slate-50">
+        <div id="app" data-page="newsShow"></div>
+    </body>
+</html>

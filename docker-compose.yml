@@ -1,0 +1,87 @@
+services:
+  # ============================================
+  # Laravel Application
+  # ============================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stim-ykpn-app
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:80"
+    environment:
+      - APP_NAME=${APP_NAME:-STIM_YKPN}
+      - APP_ENV=${APP_ENV:-production}
+      - APP_KEY=${APP_KEY}
+      - APP_DEBUG=${APP_DEBUG:-false}
+      - APP_URL=${APP_URL:-http://localhost:8080}
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=${DB_DATABASE:-stim_ykpn_edu}
+      - DB_USERNAME=${DB_USERNAME:-stim_user}
+      - DB_PASSWORD=${DB_PASSWORD:-secret}
+      - CACHE_DRIVER=file
+      - SESSION_DRIVER=file
+      - QUEUE_CONNECTION=sync
+    volumes:
+      - app-storage:/var/www/html/storage/app/public
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - stim-network
+
+  # ============================================
+  # MySQL Database
+  # ============================================
+  db:
+    image: mysql:8.0
+    container_name: stim-ykpn-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-stim_ykpn_edu}
+      MYSQL_USER: ${DB_USERNAME:-stim_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootsecret}
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "${DB_PORT:-3307}:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - stim-network
+
+  # ============================================
+  # phpMyAdmin (opsional, untuk development)
+  # ============================================
+  phpmyadmin:
+    image: phpmyadmin:5
+    container_name: stim-ykpn-pma
+    restart: unless-stopped
+    ports:
+      - "${PMA_PORT:-8081}:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: ${DB_USERNAME:-stim_user}
+      PMA_PASSWORD: ${DB_PASSWORD:-secret}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - stim-network
+    profiles:
+      - dev
+
+volumes:
+  db-data:
+  app-storage:
+
+networks:
+  stim-network:
+    driver: bridge
