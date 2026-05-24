@@ -62,6 +62,26 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
 
   <!-- Styles -->
   <link rel="stylesheet" href="/css/style.css?v=2.6">
+  
+  <style>
+    @media (max-width: 992px) {
+      .slider-btn {
+        --btn-size: 36px !important;
+        width: 36px !important;
+        height: 36px !important;
+      }
+      .slider-btn svg {
+        width: 16px !important;
+        height: 16px !important;
+      }
+      .prev-btn {
+        left: 16px !important;
+      }
+      .next-btn {
+        right: 16px !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -75,7 +95,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
     <div class="hero-slider" id="heroSlider">
       <!-- Slide 1: Static Content -->
       <div class="slide active">
-        <img src="/images/hero-bg.png" alt="STIM YKPN Campus 1" loading="eager">
+        <img src="/images/banner_slide_1.jpeg" alt="STIM YKPN Campus 1" loading="eager">
         <div class="hero-overlay"></div>
         <div style="position: absolute; inset: 0; display: flex; align-items: center; z-index: 2; pointer-events: none;">
           <div class="container" style="pointer-events: none;">
@@ -169,10 +189,10 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
       </div>
     </div>
     <!-- Slider Controls (Absolute top level to prevent ANY overlaps) -->
-    <button class="slider-btn prev-btn" id="heroPrevBtn" aria-label="Previous slide" style="z-index: 9999; pointer-events: auto; padding: 0; outline: none; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; background: rgba(0, 0, 0, 0.5); width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; opacity: 1 !important;">
+    <button class="slider-btn prev-btn" id="heroPrevBtn" aria-label="Previous slide" style="z-index: 9999; pointer-events: auto; padding: 0; outline: none; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; background: rgba(0, 0, 0, 0.5); --btn-size: 50px; width: var(--btn-size); height: var(--btn-size); display: flex; justify-content: center; align-items: center; opacity: 1 !important;">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></svg>
     </button>
-    <button class="slider-btn next-btn" id="heroNextBtn" aria-label="Next slide" style="z-index: 9999; pointer-events: auto; padding: 0; outline: none; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; background: rgba(0, 0, 0, 0.5); width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; opacity: 1 !important;">
+    <button class="slider-btn next-btn" id="heroNextBtn" aria-label="Next slide" style="z-index: 9999; pointer-events: auto; padding: 0; outline: none; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; background: rgba(0, 0, 0, 0.5); --btn-size: 50px; width: var(--btn-size); height: var(--btn-size); display: flex; justify-content: center; align-items: center; opacity: 1 !important;">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
     </button>
 
