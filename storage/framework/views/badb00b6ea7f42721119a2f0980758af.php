@@ -93,7 +93,7 @@
         <div class="email-content">
             <!-- Greeting -->
             <div class="greeting">
-                Halo <strong>{{ $pmb->nama_lengkap }}</strong>,
+                Halo <strong><?php echo e($pmb->nama_lengkap); ?></strong>,
             </div>
             
             <!-- Opening -->
@@ -108,32 +108,32 @@
             <table class="data-table">
                 <tr>
                     <td class="label">ID Pendaftaran</td>
-                    <td class="value">{{ $pmb->id_pendaftar }}</td>
+                    <td class="value"><?php echo e($pmb->id_pendaftar); ?></td>
                 </tr>
                 <tr>
                     <td class="label">Jalur Registrasi</td>
-                    <td class="value">{{ $pmb->jalur_registrasi }}</td>
+                    <td class="value"><?php echo e($pmb->jalur_registrasi); ?></td>
                 </tr>
                 <tr>
                     <td class="label">Program Studi</td>
-                    <td class="value">{{ $pmb->program_studi }}</td>
+                    <td class="value"><?php echo e($pmb->program_studi); ?></td>
                 </tr>
                 <tr>
                     <td class="label">Nama Lengkap</td>
-                    <td class="value">{{ $pmb->nama_lengkap }}</td>
+                    <td class="value"><?php echo e($pmb->nama_lengkap); ?></td>
                 </tr>
                 <tr>
                     <td class="label">Asal Sekolah</td>
-                    <td class="value">{{ $pmb->asal_sekolah }}</td>
+                    <td class="value"><?php echo e($pmb->asal_sekolah); ?></td>
                 </tr>
                 <tr>
                     <td class="label">No. HP / WhatsApp</td>
-                    <td class="value">{{ $pmb->nomor_hp_wa }}</td>
+                    <td class="value"><?php echo e($pmb->nomor_hp_wa); ?></td>
                 </tr>
                 <tr>
                     <td class="label">Email</td>
                     <td class="value">
-                        <a href="mailto:{{ $pmb->email }}" class="email-link">{{ $pmb->email }}</a>
+                        <a href="mailto:<?php echo e($pmb->email); ?>" class="email-link"><?php echo e($pmb->email); ?></a>
                     </td>
                 </tr>
             </table>
@@ -153,3 +153,4 @@
     </div>
 </body>
 </html>
+<?php /**PATH /home/xau/rasabaik/stim_ykpn_edu/resources/views/emails/pmb-registration.blade.php ENDPATH**/ ?>
