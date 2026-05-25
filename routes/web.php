@@ -21,7 +21,8 @@ use App\Models\CategoryTeacher;
 Route::get('/', function () {
     $banners = ContentBanner::orderBy('created_at', 'desc')->get();
     $latest_news = News::where('status', 'published')->orderBy('created_at', 'desc')->take(3)->get();
-    return view('index', compact('banners', 'latest_news'));
+    $alumnis = \App\Models\TestimonyAlumni::all();
+    return view('index', compact('banners', 'latest_news', 'alumnis'));
 });
 
 Route::get('/berita/{id}', function ($id) {
@@ -503,8 +504,14 @@ Route::get('/sanksi-akademik', fn() => view('sanksi-akademik'));
 Route::get('/sanksi-akademik.html', fn() => view('sanksi-akademik'));
 
 // Newly Migrated Academic & Provision Pages
-Route::get('/kalender-akademik', fn() => view('kalender-akademik'));
-Route::get('/kalender-akademik.html', fn() => view('kalender-akademik'));
+Route::get('/kalender-akademik', function () {
+    $calendar = \App\Models\AcademicCalendar::first();
+    return view('kalender-akademik', compact('calendar'));
+});
+Route::get('/kalender-akademik.html', function () {
+    $calendar = \App\Models\AcademicCalendar::first();
+    return view('kalender-akademik', compact('calendar'));
+});
 
 Route::get('/kehadiran-kuliah', fn() => view('kehadiran-kuliah'));
 Route::get('/kehadiran-kuliah.html', fn() => view('kehadiran-kuliah'));
@@ -557,15 +564,29 @@ Route::get('/pengumuman-diterima', fn() => view('pengumuman-diterima'));
 Route::get('/pengumuman-diterima.html', fn() => view('pengumuman-diterima'));
 
 // Batch 3 - Student, Campus Life, and Information Pages
-Route::get('/kegiatan-mahasiswa', fn() => view('kegiatan-mahasiswa'));
-Route::get('/kegiatan-mahasiswa.html', fn() => view('kegiatan-mahasiswa'));
+Route::get('/kegiatan-mahasiswa', function () {
+    $activities = \App\Models\StudentActivity::where('is_publish', true)->orderBy('created_at', 'desc')->get();
+    return view('kegiatan-mahasiswa', compact('activities'));
+});
+Route::get('/kegiatan-mahasiswa.html', function () {
+    $activities = \App\Models\StudentActivity::where('is_publish', true)->orderBy('created_at', 'desc')->get();
+    return view('kegiatan-mahasiswa', compact('activities'));
+});
+
+Route::get('/ukm', function () {
+    $ukms = \App\Models\StudentUkm::all();
+    return view('ukm', compact('ukms'));
+});
+Route::get('/ukm.html', function () {
+    $ukms = \App\Models\StudentUkm::all();
+    return view('ukm', compact('ukms'));
+});
+
 Route::get('/ppkpt', fn() => view('ppkpt'));
 Route::get('/ppkpt.html', fn() => view('ppkpt'));
+
 Route::get('/pengumuman', fn() => view('pengumuman'));
 Route::get('/pengumuman.html', fn() => view('pengumuman'));
-
-Route::get('/ukm', fn() => view('ukm'));
-Route::get('/ukm.html', fn() => view('ukm'));
 
 Route::get('/video', fn() => view('video'));
 Route::get('/video.html', fn() => view('video'));
@@ -579,25 +600,23 @@ Route::get('/brosur.html', fn() => view('brosur'));
 Route::get('/unduh', fn() => view('unduh'));
 Route::get('/unduh.html', fn() => view('unduh'));
 
-Route::get('/alumni', fn() => view('alumni'));
-Route::get('/alumni.html', fn() => view('alumni'));
+Route::get('/alumni', function () {
+    $alumnis = \App\Models\TestimonyAlumni::all();
+    return view('alumni', compact('alumnis'));
+});
+Route::get('/alumni.html', function () {
+    $alumnis = \App\Models\TestimonyAlumni::all();
+    return view('alumni', compact('alumnis'));
+});
 
 Route::get('/lowongan-kerja', fn() => view('lowongan-kerja'));
 Route::get('/lowongan-kerja.html', fn() => view('lowongan-kerja'));
 
 Route::get('/whatsapp-contact', fn() => view('whatsapp-contact'))->name('whatsapp-contact.index');
 
-Route::get('/kalender-akademik', function () {
-    $calendar = \App\Models\AcademicCalendar::first();
-    return view('kalender-akademik', compact('calendar'));
+Route::get('/api/inspect-data', function() {
+    return \App\Models\CategoryTeacher::all();
 });
-Route::get('/kalender-akademik.html', function () {
-    $calendar = \App\Models\AcademicCalendar::first();
-    return view('kalender-akademik', compact('calendar'));
-});
-
-Route::get('/logo', fn() => view('logo'));
-Route::get('/logo.html', fn() => view('logo'));
 
 Route::get('/berita', function () {
     $newsList = \App\Models\News::orderBy('created_at', 'desc')->paginate(12);
@@ -608,6 +627,4 @@ Route::get('/berita.html', function () {
     return view('berita', compact('newsList'));
 });
 
-Route::get('/api/inspect-data', function() {
-    return \App\Models\CategoryTeacher::all();
-});
+

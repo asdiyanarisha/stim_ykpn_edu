@@ -149,4 +149,13 @@
     <div class="wa-we-are-here">We Are Here!</div>
   </button>
 </div>
+
+<!-- Video Modal -->
+<div class="video-modal" id="videoModal">
+  <div class="video-modal-overlay" id="videoModalOverlay"></div>
+  <div class="video-modal-content">
+    <button class="video-modal-close" id="videoModalClose">&times;</button>
+    <div class="video-iframe-wrapper"></div>
+  </div>
+</div>
 <?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/components/footer.blade.php ENDPATH**/ ?>

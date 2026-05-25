@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kehadiran Kuliah - STIM YKPN Yogyakarta</title>
+  <title>Brosur - STIM YKPN Yogyakarta</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -116,13 +116,16 @@
       border-radius: 12px;
       border: 1px solid #e2e8f0;
     }
-
     .target-list li::before {
-      content: '🎯';
+      content: '';
       position: absolute;
       left: 20px;
-      top: 24px;
-      font-size: 20px;
+      top: 26px;
+      width: 20px;
+      height: 20px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23f18721' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
     }
 
     .target-list li h4 {
@@ -144,8 +147,8 @@
 
   <header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
-      <h1 class="page-title animate-on-scroll">Kehadiran Kuliah</h1>
-      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">Kebijakan dan prosedur kehadiran mahasiswa dalam setiap mata kuliah.</p>
+      <h1 class="page-title animate-on-scroll">Brosur</h1>
+      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">Informasi program pendidikan STIM YKPN Yogyakarta dalam format dokumen brosur.</p>
     </div>
   </header>
 
@@ -153,40 +156,47 @@
     <div class="container academic-layout">
       
       <!-- Sidebar -->
+      
       <aside class="academic-sidebar animate-on-scroll">
-        <div class="sidebar-title">Ketentuan Perkuliahan</div>
+        <div class="sidebar-title">Informasi</div>
         <ul class="sidebar-menu">
-          <li><a href="/kehadiran-kuliah.html" class="active">Kehadiran Kuliah</a></li>
-          <li><a href="/tata-tertib-kuliah.html">Tata Tertib Kuliah</a></li>
-          <li><a href="/jumlah-kehadiran.html">Jumlah Kehadiran</a></li>
-          <li><a href="/seminar-proposal.html">Seminar Proposal Dan Pendadaran</a></li>
+          <li><a href="/brosur.html" class="active">Brosur</a></li>
+          <li><a href="https://stimykpn.ecampuz.com/" target="_blank" rel="noopener noreferrer">Portal</a></li>
+          <li><a href="/unduh.html">Unduh</a></li>
+          <li><a href="/alumni.html">Alumni</a></li>
+          <li><a href="/lowongan-kerja.html">Lowongan Kerja</a></li>
         </ul>
       </aside>
+
 
       <!-- Main Content -->
       <article class="academic-article animate-on-scroll animate-delay-1">
         <div class="article-header">
-          <h2>Kehadiran Kuliah</h2>
+          <h2>Brosur STIM YKPN</h2>
         </div>
         <div class="article-body">
           
-          <p>Kehadiran di kelas merupakan salah satu indikator penting dalam proses belajar mengajar di STIM YKPN Yogyakarta. Mahasiswa diwajibkan untuk hadir dan berpartisipasi aktif dalam setiap sesi perkuliahan sesuai dengan jadwal yang telah ditentukan.</p>
-          
-          <ul class="target-list">
-            <li>
-              <h4>Sistem Presensi</h4>
-              Presensi mahasiswa dilakukan secara digital menggunakan aplikasi E-Campuz. Mahasiswa diwajibkan untuk melakukan pemindaian barcode atau verifikasi kehadiran yang disediakan oleh dosen pengampu di awal atau di akhir sesi.
-            </li>
-            <li>
-              <h4>Syarat Kehadiran Minimal</h4>
-              Untuk dapat mengikuti Ujian Akhir Semester (UAS), mahasiswa wajib memenuhi tingkat kehadiran minimal 75% dari total tatap muka yang diselenggarakan dalam satu semester.
-            </li>
-            <li>
-              <h4>Izin Ketidakhadiran</h4>
-              Ketidakhadiran karena alasan sakit atau izin penting lainnya (seperti urusan keluarga mendesak) wajib dibuktikan dengan surat keterangan resmi (misal: Surat Dokter) yang diserahkan paling lambat 3 hari setelah mahasiswa kembali masuk kuliah.
-            </li>
-          </ul>
-        
+      <p style="margin-bottom: 30px;">Unduh brosur resmi STIM YKPN untuk mendapatkan informasi lengkap mengenai program studi, fasilitas, rincian biaya kuliah, dan keunggulan kampus kami.</p>
+      
+      <div style="text-align: center; padding: 40px; background: #f8fafc; border-radius: 16px; border: 1px dashed #cbd5e1; margin-bottom: 30px;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px;">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="12" y1="18" x2="12" y2="12"></line>
+            <line x1="9" y1="15" x2="15" y2="15"></line>
+        </svg>
+        <h3 style="font-size: 1.25rem; color: var(--navy-900); margin-bottom: 12px;">Brosur PMB STIM YKPN 2026/2027</h3>
+        <p style="color: var(--gray-500); margin-bottom: 24px;">Format: PDF | Ukuran: ~2MB</p>
+        <a href="#" class="btn btn-primary" style="display: inline-flex;">
+          Unduh Brosur
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+        </a>
+      </div>
+
         </div>
       </article>
 
@@ -199,4 +209,7 @@
 </body>
 </html>
 
-<?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/kehadiran-kuliah.blade.php ENDPATH**/ ?>
+
+
+
+<?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/brosur.blade.php ENDPATH**/ ?>

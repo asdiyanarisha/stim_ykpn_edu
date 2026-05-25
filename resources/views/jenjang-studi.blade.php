@@ -116,13 +116,16 @@
       border-radius: 12px;
       border: 1px solid #e2e8f0;
     }
-
     .target-list li::before {
-      content: '🎯';
+      content: '';
       position: absolute;
       left: 20px;
-      top: 24px;
-      font-size: 20px;
+      top: 26px;
+      width: 20px;
+      height: 20px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23f18721' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
     }
 
     .target-list li h4 {
@@ -200,4 +203,7 @@
   <script src="/js/script.js?v=2.3"></script>
 </body>
 </html>
+
+
+
 
