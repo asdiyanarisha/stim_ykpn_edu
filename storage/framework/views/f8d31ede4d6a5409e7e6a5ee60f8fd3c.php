@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beban Studi - STIM YKPN Yogyakarta</title>
+  <title>Kehadiran Kuliah - STIM YKPN Yogyakarta</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -140,12 +140,12 @@
 </head>
 <body>
 
-  @include('components.navbar')
+  <?php echo $__env->make('components.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
-      <h1 class="page-title animate-on-scroll">Beban Studi</h1>
-      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">Ketentuan mengenai jumlah SKS yang harus ditempuh oleh mahasiswa STIM YKPN.</p>
+      <h1 class="page-title animate-on-scroll">Kehadiran Kuliah</h1>
+      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">Kebijakan dan prosedur kehadiran mahasiswa dalam setiap mata kuliah.</p>
     </div>
   </header>
 
@@ -154,51 +154,49 @@
       
       <!-- Sidebar -->
       <aside class="academic-sidebar animate-on-scroll">
-        <div class="sidebar-title">Program Pendidikan</div>
+        <div class="sidebar-title">Ketentuan Perkuliahan</div>
         <ul class="sidebar-menu">
-          <li><a href="/sasaran-pendidikan.html">Sasaran Pendidikan</a></li>
-          <li><a href="/cara-mencapai-sasaran.html">Cara Mencapai Sasaran</a></li>
-          <li><a href="/beban-studi.html" class="active">Beban Studi</a></li>
-          <li><a href="/sks.html">Sistem Kredit Semester (SKS)</a></li>
-          <li><a href="/jenjang-studi.html">Jenjang Studi Dan Masa Studi</a></li>
-          <li><a href="/kegiatan-akademik.html">Kegiatan Akademik</a></li>
-          <li><a href="/dosen-pembimbing.html">Dosen Pembimbing</a></li>
-          <li><a href="/sanksi-akademik.html">Sanksi Akademik</a></li>
+          <li><a href="/kehadiran-kuliah.html" class="active">Kehadiran Kuliah</a></li>
+          <li><a href="/tata-tertib-kuliah.html">Tata Tertib Kuliah</a></li>
+          <li><a href="/jumlah-kehadiran.html">Jumlah Kehadiran</a></li>
+          <li><a href="/seminar-proposal.html">Seminar Proposal Dan Pendadaran</a></li>
         </ul>
       </aside>
 
       <!-- Main Content -->
       <article class="academic-article animate-on-scroll animate-delay-1">
         <div class="article-header">
-          <h2>Beban Studi Mahasiswa</h2>
+          <h2>Kehadiran Kuliah</h2>
         </div>
         <div class="article-body">
-          <p>Beban studi di STIM YKPN Yogyakarta dirancang agar mahasiswa dapat menyelesaikan pendidikan dengan optimal dan tepat waktu. Besarnya beban studi dinyatakan dalam bentuk Satuan Kredit Semester (SKS).</p>
-          <p>Jumlah SKS yang dapat diambil oleh seorang mahasiswa pada setiap semester bergantung pada prestasi akademik yang dicapai pada semester sebelumnya, yang ditunjukkan dengan Indeks Prestasi Semester (IPS).</p>
-
+          
+          <p>Kehadiran di kelas merupakan salah satu indikator penting dalam proses belajar mengajar di STIM YKPN Yogyakarta. Mahasiswa diwajibkan untuk hadir dan berpartisipasi aktif dalam setiap sesi perkuliahan sesuai dengan jadwal yang telah ditentukan.</p>
+          
           <ul class="target-list">
             <li>
-              <h4>Program Sarjana (S1) Manajemen</h4>
-              Untuk menyelesaikan program S1, mahasiswa diwajibkan menempuh beban studi minimal 144 SKS, yang umumnya dirancang untuk diselesaikan dalam 8 semester (4 tahun).
+              <h4>Sistem Presensi</h4>
+              Presensi mahasiswa dilakukan secara digital menggunakan aplikasi E-Campuz. Mahasiswa diwajibkan untuk melakukan pemindaian barcode atau verifikasi kehadiran yang disediakan oleh dosen pengampu di awal atau di akhir sesi.
             </li>
             <li>
-              <h4>Program Diploma (D3) Manajemen</h4>
-              Beban studi minimal untuk program D3 adalah 110 SKS, yang umumnya dirancang untuk diselesaikan dalam 6 semester (3 tahun).
+              <h4>Syarat Kehadiran Minimal</h4>
+              Untuk dapat mengikuti Ujian Akhir Semester (UAS), mahasiswa wajib memenuhi tingkat kehadiran minimal 75% dari total tatap muka yang diselenggarakan dalam satu semester.
             </li>
             <li>
-              <h4>Pengambilan SKS per Semester</h4>
-              Beban studi maksimum yang dapat diambil dalam satu semester adalah 24 SKS, khusus bagi mahasiswa yang memiliki IPS &gt; 3.00 pada semester sebelumnya.
+              <h4>Izin Ketidakhadiran</h4>
+              Ketidakhadiran karena alasan sakit atau izin penting lainnya (seperti urusan keluarga mendesak) wajib dibuktikan dengan surat keterangan resmi (misal: Surat Dokter) yang diserahkan paling lambat 3 hari setelah mahasiswa kembali masuk kuliah.
             </li>
           </ul>
+        
         </div>
       </article>
 
     </div>
   </section>
 
-  @include('components.footer')
+  <?php echo $__env->make('components.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <script src="/js/script.js?v=2.3"></script>
 </body>
 </html>
 
+<?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/kehadiran-kuliah.blade.php ENDPATH**/ ?>

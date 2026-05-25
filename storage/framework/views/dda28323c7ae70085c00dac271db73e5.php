@@ -152,11 +152,11 @@
 </head>
 <body>
 
-  @include('components.navbar')
+  <?php echo $__env->make('components.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
-      <h1 class="page-title animate-on-scroll">{{ $calendar ? $calendar->title : 'Kalender Akademik' }}</h1>
+      <h1 class="page-title animate-on-scroll"><?php echo e($calendar ? $calendar->title : 'Kalender Akademik'); ?></h1>
       <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">
         Jadwal penting kegiatan perkuliahan, ujian, dan hari libur di lingkungan STIM YKPN Yogyakarta.
       </p>
@@ -167,30 +167,31 @@
     <div class="container">
       
       <div class="calendar-container animate-on-scroll" style="padding: 40px; border-radius: 20px;">
-        @if($calendar)
+        <?php if($calendar): ?>
             <div class="prose max-w-none text-slate-700" style="line-height: 1.8; font-size: 16px;">
-                {!! $calendar->content !!}
+                <?php echo $calendar->content; ?>
+
             </div>
             
-            @if($calendar->header_image)
+            <?php if($calendar->header_image): ?>
                 <div style="margin-top: 40px; text-align: center;">
-                    <img src="{{ $calendar->header_image }}" alt="Kalender Akademik" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                    <img src="<?php echo e($calendar->header_image); ?>" alt="Kalender Akademik" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                 </div>
-            @endif
-        @else
+            <?php endif; ?>
+        <?php else: ?>
             <div style="text-align: center; padding: 40px 0; color: #64748b;">
                 <svg xmlns="http://www.w3.org/2000/svg" style="width: 64px; height: 64px; margin: 0 auto 16px; opacity: 0.5;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 <p>Data Kalender Akademik belum tersedia.</p>
             </div>
-        @endif
+        <?php endif; ?>
       </div>
 
     </div>
   </section>
 
-  @include('components.footer')
+  <?php echo $__env->make('components.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <script src="/js/script.js?v=2.3"></script>
 </body>
@@ -199,3 +200,4 @@
 
 
 
+<?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/kalender-akademik.blade.php ENDPATH**/ ?>

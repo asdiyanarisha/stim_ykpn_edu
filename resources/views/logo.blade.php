@@ -13,26 +13,6 @@
   <style>
     body { background-color: #f8fafc; }
 
-    .page-header {
-      background: var(--navy-900);
-      background-image: url('/images/hero-bg.png');
-      background-size: cover;
-      background-position: center;
-      padding: 120px 0 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-    }
-
-    .page-header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(180deg, rgba(0,20,50,0.75) 0%, rgba(0,30,70,0.85) 100%);
-    }
-
     .logo-section {
       padding: 80px 0;
     }
@@ -191,3 +171,4 @@
   <script src="/js/script.js?v=2.3"></script>
 </body>
 </html>
+

@@ -373,7 +373,10 @@ function initMobileNav() {
   submenuToggles.forEach(toggle => {
     toggle.addEventListener('click', () => {
       const group = toggle.parentElement;
-      // Allow multiple to be open by not removing 'active' from other groups
+      // Close other active groups
+      document.querySelectorAll('.mobile-nav-group').forEach(otherGroup => {
+        if (otherGroup !== group) otherGroup.classList.remove('active');
+      });
       group.classList.toggle('active');
     });
   });

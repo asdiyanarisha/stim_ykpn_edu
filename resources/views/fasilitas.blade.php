@@ -15,27 +15,6 @@
   <style>
     body { background-color: #ffffff; }
 
-    .page-header {
-      background: var(--navy-900);
-      background-image: url('https://rasabaik.net/ykpn/assets/hero-bg.png');
-      background-size: cover;
-      background-position: center;
-      padding: 140px 0 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 280px;
-      text-align: center;
-      position: relative;
-    }
-
-    .page-header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(15, 23, 42, 0.85); /* Solid elegant dark */
-    }
-
     .fasilitas-section {
       padding: 100px 0;
       background-color: var(--slate-50, #f8fafc);
@@ -273,3 +252,4 @@
   <script src="/js/script.js?v=2.3"></script>
 </body>
 </html>
+

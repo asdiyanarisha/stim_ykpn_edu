@@ -13,13 +13,6 @@
   <style>
     body { background-color: #ffffff; }
 
-    .page-header {
-      background: var(--navy-900);
-      padding: 100px 0 80px;
-      text-align: center;
-      position: relative;
-    }
-
     .spmi-section {
       padding: 100px 0;
     }
@@ -351,3 +344,4 @@
   <script src="/js/script.js?v=2.3"></script>
 </body>
 </html>
+

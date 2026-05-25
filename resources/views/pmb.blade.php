@@ -65,13 +65,6 @@
     /* ==============================================
        PAGE HEADER STYLING
        ============================================== */
-    .page-header {
-      padding: 160px 0 120px;
-      background: linear-gradient(135deg, var(--navy-900) 0%, var(--blue-600) 100%);
-      color: white;
-      text-align: center;
-      position: relative;
-    }
 
     .page-header::after {
       content: '';
@@ -495,3 +488,4 @@
 </body>
 
 </html>
+
