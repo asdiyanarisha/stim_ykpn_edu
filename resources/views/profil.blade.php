@@ -12,56 +12,53 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
 
   <!-- Base Styles -->
-  <link rel="stylesheet" href="/css/style.css?v=2.3">
+  <link rel="stylesheet" href="/css/style.css?v=3.0">
 
   <style>
     /* ==============================================
        PROFIL LAYOUT (PREMIUM ACADEMIC)
        ============================================== */
     body {
-      background-color: #ffffff;
+      background-color: #f8fafc;
+    /* Intro Section - Clean & Centered */
+    .intro-section {
+      padding: 120px 0 80px;
+      background: #ffffff;
     }
 
-    /* Page Header Override */
-
     .intro-container {
-      max-width: 1000px;
+      max-width: 900px;
       margin: 0 auto;
       text-align: center;
     }
 
     .intro-text {
-      font-size: 24px;
-      line-height: 1.6;
+      font-size: 28px;
+      line-height: 1.7;
       color: var(--navy-900);
       font-weight: 700;
-      font-family: Georgia, "Times New Roman", serif;
-      position: relative;
-      padding: 0 40px;
+      font-family: var(--font-display);
+      letter-spacing: -0.01em;
     }
 
-    .intro-text::before {
-      content: '"';
-      font-size: 100px;
-      color: rgba(241, 135, 33, 0.15);
-      position: absolute;
-      top: -40px;
-      left: -10px;
-      font-family: Georgia, serif;
-      line-height: 1;
+    @media (max-width: 768px) {
+      .intro-text { font-size: 22px; }
+      .intro-section { padding: 80px 0 60px; }
     }
 
     /* Section Headers */
     .section-header {
       text-align: center;
       margin-bottom: 60px;
+      position: relative;
     }
 
     .section-header h2 {
-      font-size: 32px;
+      font-size: 36px;
       font-weight: 800;
       color: var(--navy-900);
       margin-bottom: 16px;
+      font-family: var(--font-display);
     }
 
     .section-header p {
@@ -69,13 +66,13 @@
       color: #64748b;
       max-width: 600px;
       margin: 0 auto;
+      line-height: 1.6;
     }
 
     /* History Timeline */
     .history-section {
-      padding: 100px 0;
-      background: #f8fafc;
-      border-top: 1px solid #e2e8f0;
+      padding: 80px 0 100px;
+      background: #ffffff;
     }
 
     .timeline {
@@ -89,9 +86,10 @@
       position: absolute;
       top: 0; bottom: 0;
       left: 50%;
-      width: 2px;
-      background: #cbd5e1;
+      width: 4px;
+      background: linear-gradient(180deg, var(--navy-900) 0%, rgba(11,27,61,0.1) 100%);
       transform: translateX(-50%);
+      border-radius: 4px;
     }
 
     .timeline-item {
@@ -106,58 +104,89 @@
 
     .timeline-item:nth-child(odd) {
       left: 0;
-      padding-right: 50px;
+      padding-right: 60px;
       text-align: right;
     }
 
     .timeline-item:nth-child(even) {
       left: 50%;
-      padding-left: 50px;
+      padding-left: 60px;
     }
 
     .timeline-dot {
       position: absolute;
       top: 0;
-      width: 20px; height: 20px;
-      background: var(--orange-500);
+      width: 24px; height: 24px;
+      background: #ffffff;
       border-radius: 50%;
-      border: 4px solid #f8fafc;
+      border: 6px solid var(--orange-500);
       box-shadow: 0 0 0 4px rgba(241, 135, 33, 0.2);
+      z-index: 2;
     }
 
-    .timeline-item:nth-child(odd) .timeline-dot { right: -10px; }
-    .timeline-item:nth-child(even) .timeline-dot { left: -10px; }
+    .timeline-item:nth-child(odd) .timeline-dot { right: -12px; }
+    .timeline-item:nth-child(even) .timeline-dot { left: -12px; }
 
     .timeline-year {
-      font-size: 32px;
+      font-size: 36px;
       font-weight: 900;
-      color: var(--navy-900);
-      margin-bottom: 16px;
+      background: linear-gradient(90deg, var(--navy-900), #1e3a8a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
       line-height: 1;
+      font-family: var(--font-display);
     }
 
     .timeline-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--orange-500);
-      margin-bottom: 12px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 16px;
     }
 
     .timeline-content {
-      background: #ffffff;
+      background: #f8fafc;
       padding: 30px;
-      border-radius: 16px;
-      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      border: 1px solid #f1f5f9;
       font-size: 15px;
       line-height: 1.7;
       color: #475569;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+      transition: all 0.3s ease;
+    }
+
+    .timeline-content:hover {
+      background: #ffffff;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+      transform: translateY(-5px);
+      border-color: #e2e8f0;
     }
 
     /* Accreditation Section */
     .accreditation-section {
-      background: #ffffff;
+      background: var(--navy-900);
       padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .accreditation-section::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(241, 135, 33, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .accreditation-section .section-header h2 {
+      color: #ffffff;
+    }
+
+    .accreditation-section .section-header p {
+      color: rgba(255, 255, 255, 0.7);
     }
 
     .acc-grid {
@@ -166,50 +195,54 @@
       gap: 30px;
       max-width: 1100px;
       margin: 0 auto;
+      position: relative;
+      z-index: 2;
     }
 
     .acc-card {
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
       padding: 50px 30px;
-      border-radius: 20px;
+      border-radius: 24px;
       text-align: center;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.05);
-      border: 1px solid #f1f5f9;
-      transition: transform 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.4s ease;
     }
 
     .acc-card:hover {
-      transform: translateY(-5px);
-      border-color: #cbd5e1;
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
     .acc-grade {
       font-size: 80px;
       font-weight: 900;
-      color: var(--orange-500);
+      background: linear-gradient(135deg, #f18721 0%, #fbd38d 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       line-height: 1;
       margin-bottom: 24px;
-      font-family: Georgia, serif;
+      font-family: var(--font-display);
     }
 
     .acc-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--navy-900);
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
       margin-bottom: 12px;
     }
 
     .acc-desc {
-      font-size: 13px;
-      color: #64748b;
-      line-height: 1.5;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.6;
     }
 
     /* Certification Section */
     .cert-section {
       padding: 100px 0;
       background: #f8fafc;
-      border-top: 1px solid #e2e8f0;
     }
 
     .cert-grid {
@@ -223,50 +256,80 @@
     .cert-item {
       display: flex;
       align-items: flex-start;
-      gap: 20px;
-      padding: 30px;
+      gap: 24px;
+      padding: 40px;
       background: #ffffff;
-      border-radius: 16px;
-      border-left: 4px solid var(--navy-900);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.02);
-      transition: all 0.3s ease;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+      border: 1px solid #f1f5f9;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cert-item::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 4px;
+      background: var(--navy-900);
+      transition: width 0.3s ease;
     }
 
     .cert-item:hover {
-      box-shadow: 0 15px 30px rgba(0,0,0,0.06);
-      transform: translateX(5px);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      border-color: #e2e8f0;
+    }
+
+    .cert-item:hover::after {
+      width: 6px;
+      background: var(--orange-500);
     }
 
     .cert-icon {
-      width: 48px; height: 48px;
-      background: rgba(11,27,61,0.05);
+      width: 60px; height: 60px;
+      background: linear-gradient(135deg, rgba(11,27,61,0.05) 0%, rgba(11,27,61,0.1) 100%);
       color: var(--navy-900);
-      border-radius: 12px;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .cert-item:hover .cert-icon {
+      background: var(--navy-900);
+      color: #ffffff;
+      transform: rotate(-10deg) scale(1.1);
     }
 
     .cert-info h4 {
       font-weight: 800;
       color: var(--navy-900);
-      margin-bottom: 8px;
-      font-size: 16px;
+      margin-bottom: 12px;
+      font-size: 18px;
     }
 
     .cert-info p {
-      font-size: 14px;
-      color: #475569;
-      line-height: 1.6;
+      font-size: 15px;
+      color: #64748b;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 992px) {
+      .cert-grid { grid-template-columns: 1fr; }
+      .acc-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 768px) {
-      .timeline::before { left: 20px; }
-      .timeline-item { width: 100%; padding-left: 60px !important; left: 0 !important; text-align: left !important; }
-      .timeline-dot { left: 10px !important; }
-      .acc-grid, .cert-grid { grid-template-columns: 1fr; }
-      .intro-text { font-size: 20px; padding: 0 20px; }
+      .intro-card { margin: -60px 20px 0; padding: 40px 20px; }
+      .intro-text { font-size: 18px; }
+      .timeline::before { left: 24px; }
+      .timeline-item { width: 100%; padding-left: 64px !important; left: 0 !important; text-align: left !important; }
+      .timeline-dot { left: 12px !important; }
+      .acc-grid { grid-template-columns: 1fr; }
     }
   </style>
   <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
@@ -291,9 +354,11 @@
        INTRO OVERVIEW
        ============================================ -->
   <section class="intro-section">
-    <div class="container intro-container animate-on-scroll">
-      <div class="intro-text">
-        Sekolah Tinggi Ilmu Manajemen YKPN (STIM YKPN) Yogyakarta merupakan lembaga pendidikan tinggi bereputasi yang didirikan oleh para pakar manajemen untuk memenuhi kebutuhan tenaga profesional di Indonesia.
+    <div class="container animate-on-scroll">
+      <div class="intro-container">
+        <div class="intro-text">
+          Sekolah Tinggi Ilmu Manajemen YKPN (STIM YKPN) Yogyakarta merupakan lembaga pendidikan tinggi bereputasi yang didirikan oleh para pakar manajemen untuk memenuhi kebutuhan tenaga profesional di Indonesia.
+        </div>
       </div>
     </div>
   </section>
@@ -366,19 +431,19 @@
 
       <div class="acc-grid">
         <div class="acc-card animate-on-scroll">
-          <div class="acc-grade">B</div>
+          <div class="acc-grade"><span>B</span></div>
           <div class="acc-title">Institusi STIM YKPN</div>
           <div class="acc-desc">Terakreditasi "Baik Sekali"<br>SK No. 167/SK/BAN-PT/Ak.Ppj/PT/III/2023</div>
         </div>
         
         <div class="acc-card animate-on-scroll animate-delay-1">
-          <div class="acc-grade">B</div>
+          <div class="acc-grade"><span>B</span></div>
           <div class="acc-title">S1 Manajemen</div>
           <div class="acc-desc">Program Sarjana Manajemen<br>SK No. 430/SK/BAN-PT/Ak-PPK/S/I/2021</div>
         </div>
 
         <div class="acc-card animate-on-scroll animate-delay-2">
-          <div class="acc-grade">B</div>
+          <div class="acc-grade"><span>B</span></div>
           <div class="acc-title">D3 Manajemen</div>
           <div class="acc-desc">Program Diploma III Manajemen<br>SK No. 6691/SK/BAN-PT/Ak-PNB/Dipl-III/X/2020</div>
         </div>
@@ -445,9 +510,11 @@
   @include('components.footer')
 
   <!-- Script -->
-  <script src="/js/script.js?v=2.3"></script>
+  <script src="/js/script.js?v=3.0"></script>
 </body>
 </html>
+
+
 
 
 
