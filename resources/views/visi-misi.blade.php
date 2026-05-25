@@ -1,21 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Visi & Misi - STIM YKPN Yogyakarta</title>
-  <meta name="description" content="Visi dan Misi STIM YKPN Yogyakarta.">
-
-  <!-- Fonts -->
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap"
-    rel="stylesheet">
-
-  <!-- Base Styles -->
-  <link rel="stylesheet" href="/css/style.css?v=2.3">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css?v=2.5">
 
   <style>
 body { background: #f8fafc; }
@@ -23,7 +16,7 @@ body { background: #f8fafc; }
 /* === HERO === */
 .vm-hero {
   position: relative;
-  background: #0a1628 url('/assets/hero-bg.png') center/cover no-repeat;
+  background: #0a1628 url('/images/hero-bg.png') center/cover no-repeat;
   min-height: 380px;
   display: flex;
   align-items: center;
@@ -100,6 +93,24 @@ body { background: #f8fafc; }
   width: 32px;
   height: 3px;
   background: #f97316;
+  border-radius: 2px;
+}
+.misi-small-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #004b93;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-top: 16px;
+}
+.misi-small-label::before {
+  content: '';
+  width: 32px;
+  height: 3px;
+  background: #004b93;
   border-radius: 2px;
 }
 .visi-statement {
@@ -237,91 +248,89 @@ body { background: #f8fafc; }
   </style>
   <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
 </head>
-
 <body>
 
   @include('components.navbar')
 
-  <!-- ===== HERO ===== -->
-  <div class="vm-hero">
-    <div class="container vm-hero-content animate-on-scroll">
-      <h1>Visi &amp; Misi</h1>
-      <p>Arah kebijakan dan komitmen teguh STIM YKPN Yogyakarta dalam mencetak generasi unggul di bidang manajemen bisnis.</p>
+<!-- ===== HERO ===== -->
+<div class="vm-hero">
+  <div class="container vm-hero-content animate-on-scroll">
+    <h1>Visi &amp; Misi</h1>
+    <p>Arah kebijakan dan komitmen teguh STIM YKPN Yogyakarta dalam mencetak generasi unggul di bidang manajemen bisnis.</p>
+  </div>
+</div>
+
+<!-- ===== VISI ===== -->
+<section class="visi-section">
+  <div class="container">
+    <div class="visi-layout">
+      <div class="visi-label-side animate-on-scroll">
+        <div class="visi-big-text" style="color: rgba(249, 115, 22, 0.05);">VISI</div>
+        <div class="visi-small-label">Visi Kami</div>
+      </div>
+      <div class="animate-on-scroll animate-delay-1">
+        <div class="visi-statement">
+          Menjadi Sekolah Tinggi Ilmu Manajemen yang unggul di tingkat nasional pada tahun <span class="visi-highlight">2030</span>.
+        </div>
+      </div>
+    </div>
+    <div class="visi-divider animate-on-scroll">
+      <div class="visi-divider-diamond"></div>
     </div>
   </div>
+</section>
 
-  <!-- ===== VISI ===== -->
-  <section class="visi-section">
-    <div class="container">
-      <div class="visi-layout">
-        <div class="visi-label-side animate-on-scroll">
-          <div class="visi-big-text">VISI</div>
-          <div class="visi-small-label">Visi Kami</div>
-        </div>
-        <div class="animate-on-scroll animate-delay-1">
-          <div class="visi-statement">
-            Menjadi Sekolah Tinggi Ilmu Manajemen yang unggul di tingkat nasional pada tahun <span class="visi-highlight">2030</span>.
+<!-- ===== MISI ===== -->
+<section class="misi-section">
+  <div class="container">
+    <div class="visi-layout" style="align-items: flex-start;">
+      <div class="visi-label-side animate-on-scroll">
+        <div class="visi-big-text" style="font-size: 140px; color: rgba(0, 75, 147, 0.05);">MISI</div>
+        <div class="misi-small-label">Misi Kami</div>
+      </div>
+      <div class="animate-on-scroll animate-delay-1">
+        <div class="misi-grid">
+          <!-- Misi 1 -->
+          <div class="misi-box wide">
+            <div class="misi-box-number">01</div>
+            <div class="misi-box-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 2 6 2s6-.9 6-2v-5"/></svg>
+            </div>
+            <div class="misi-box-text">Menyelenggarakan proses pendidikan dan pengajaran di bidang manajemen dengan dukungan sumberdaya manusia yang profesional, sarana dan prasarana yang memadai, dan lingkungan yang kondusif untuk menghasilkan lulusan yang berkualitas.</div>
           </div>
-        </div>
-      </div>
-      <div class="visi-divider animate-on-scroll">
-        <div class="visi-divider-diamond"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== MISI ===== -->
-  <section class="misi-section">
-    <div class="container">
-      <div class="visi-layout" style="align-items: flex-start;">
-        <div class="visi-label-side animate-on-scroll">
-          <div class="visi-big-text" style="font-size: 140px;">MISI</div>
-          <div class="visi-small-label">Misi Kami</div>
-        </div>
-        <div class="animate-on-scroll animate-delay-1">
-          <div class="misi-grid">
-            <!-- Misi 1 -->
-            <div class="misi-box wide">
-              <div class="misi-box-number">01</div>
-              <div class="misi-box-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 2 6 2s6-.9 6-2v-5"/></svg>
-              </div>
-              <div class="misi-box-text">Menyelenggarakan proses pendidikan dan pengajaran di bidang manajemen dengan dukungan sumberdaya manusia yang profesional, sarana dan prasarana yang memadai, dan lingkungan yang kondusif untuk menghasilkan lulusan yang berkualitas.</div>
+          <!-- Misi 2 -->
+          <div class="misi-box">
+            <div class="misi-box-number">02</div>
+            <div class="misi-box-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
             </div>
-            <!-- Misi 2 -->
-            <div class="misi-box">
-              <div class="misi-box-number">02</div>
-              <div class="misi-box-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
-              </div>
-              <div class="misi-box-text">Menyelenggarakan kegiatan penelitian guna pengembangan ilmu manajemen dan memberi manfaat bagi dunia bisnis.</div>
+            <div class="misi-box-text">Menyelenggarakan kegiatan penelitian guna pengembangan ilmu manajemen dan memberi manfaat bagi dunia bisnis.</div>
+          </div>
+          <!-- Misi 3 -->
+          <div class="misi-box">
+            <div class="misi-box-number">03</div>
+            <div class="misi-box-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"/></svg>
             </div>
-            <!-- Misi 3 -->
-            <div class="misi-box">
-              <div class="misi-box-number">03</div>
-              <div class="misi-box-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"/></svg>
-              </div>
-              <div class="misi-box-text">Menyelenggarakan kegiatan pengabdian kepada masyarakat untuk memberi kontribusi kepada pemangku kepentingan.</div>
+            <div class="misi-box-text">Menyelenggarakan kegiatan pengabdian kepada masyarakat untuk memberi kontribusi kepada pemangku kepentingan.</div>
+          </div>
+          <!-- Misi 4 -->
+          <div class="misi-box wide">
+            <div class="misi-box-number">04</div>
+            <div class="misi-box-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
             </div>
-            <!-- Misi 4 -->
-            <div class="misi-box wide">
-              <div class="misi-box-number">04</div>
-              <div class="misi-box-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
-              </div>
-              <div class="misi-box-text">Mengembangkan Sekolah Tinggi menjadi organisasi yang sehat dengan sistem tata kelola yang baik.</div>
-            </div>
+            <div class="misi-box-text">Mengembangkan Sekolah Tinggi menjadi organisasi yang sehat dengan sistem tata kelola yang baik.</div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   @include('components.footer')
 
   <!-- Script -->
-  <script src="/js/script.js?v=2.3"></script>
+  <script src="/js/script.js?v=2.5"></script>
 </body>
-
 </html>

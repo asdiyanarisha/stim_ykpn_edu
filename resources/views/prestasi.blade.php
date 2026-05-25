@@ -13,23 +13,6 @@
   <style>
     body { background-color: #f8fafc; }
 
-    .page-header {
-      background: var(--navy-900);
-      padding: 100px 0 80px;
-      text-align: center;
-      position: relative;
-    }
-
-    .page-header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 30px 30px;
-    }
-
     .prestasi-section {
       padding: 100px 0;
     }
@@ -157,3 +140,7 @@
   <script src="/js/script.js?v=2.3"></script>
 </body>
 </html>
+
+
+
+

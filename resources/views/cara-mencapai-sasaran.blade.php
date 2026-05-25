@@ -13,23 +13,6 @@
   <style>
     body { background-color: #f8fafc; }
 
-    .page-header {
-      background: var(--navy-900);
-      padding: 100px 0 80px;
-      text-align: center;
-      position: relative;
-    }
-
-    .page-header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 30px 30px;
-    }
-
     .academic-content-section {
       padding: 80px 0;
     }
@@ -133,20 +116,16 @@
       border-radius: 12px;
       border: 1px solid #e2e8f0;
     }
-
     .target-list li::before {
-      content: "";
+      content: '';
       position: absolute;
       left: 20px;
-      top: 24px;
-      width: 24px;
-      height: 24px;
-      background-color: var(--navy-900, #0a1628);
-      border-radius: 50%;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+      top: 26px;
+      width: 20px;
+      height: 20px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23f18721' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
+      background-size: contain;
       background-repeat: no-repeat;
-      background-position: center;
-      background-size: 11px;
     }
 
     .target-list li h4 {
@@ -228,3 +207,7 @@
   <script src="/js/script.js?v=2.3"></script>
 </body>
 </html>
+
+
+
+

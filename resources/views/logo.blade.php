@@ -13,45 +13,27 @@
   <style>
     body { background-color: #f8fafc; }
 
-    .page-header {
-      background: var(--navy-900);
-      padding: 100px 0 80px;
-      text-align: center;
-      position: relative;
-    }
-
-    .page-header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 30px 30px;
-    }
-
     .logo-section {
-      padding: 100px 0;
+      padding: 80px 0;
     }
 
     .logo-container {
-      max-width: 1000px;
-      margin: 0 auto;
+      max-width: 1100px;
+      margin: 0 auto 40px auto;
       background: #ffffff;
-      border-radius: 24px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.04);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
       overflow: hidden;
-      border: 1px solid #e2e8f0;
-      margin-bottom: 60px;
+      border: 1px solid #f1f5f9;
     }
 
     .logo-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1.2fr;
+      align-items: center;
     }
 
     .logo-display {
-      background: #f1f5f9;
       padding: 60px;
       display: flex;
       align-items: center;
@@ -59,60 +41,64 @@
     }
 
     .logo-img-box {
-      width: 250px;
-      height: 250px;
-      background: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      width: 100%;
+      max-width: 300px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid #cbd5e1;
-      padding: 20px;
     }
 
     .logo-img-box img {
-      max-width: 100%;
-      max-height: 100%;
+      width: 100%;
+      height: auto;
       object-fit: contain;
     }
 
     .logo-content {
-      padding: 50px;
+      padding: 60px 60px 60px 20px;
     }
 
     .logo-content h2 {
-      font-size: 28px;
-      font-weight: 800;
+      font-size: 24px;
+      font-weight: 700;
       color: var(--navy-900);
       margin-bottom: 24px;
     }
 
     .makna-list {
       list-style: none;
+      padding: 0;
+      margin: 0;
     }
 
     .makna-list li {
       position: relative;
-      padding-left: 30px;
+      padding-left: 28px;
       margin-bottom: 16px;
-      font-size: 15px;
-      color: #475569;
+      font-size: 14px;
+      color: #64748b;
       line-height: 1.6;
+    }
+    
+    .makna-list li strong {
+      color: var(--navy-900);
+      font-weight: 600;
     }
 
     .makna-list li::before {
-      content: '✓';
+      content: '';
       position: absolute;
-      left: 0; top: 2px;
-      color: var(--orange-500);
-      font-weight: bold;
+      left: 0; top: 3px;
+      width: 18px; height: 18px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23f18721' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 13l4 4L19 7'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
     }
 
     @media (max-width: 768px) {
       .logo-grid { grid-template-columns: 1fr; }
-      .logo-display { padding: 40px; }
-      .logo-content { padding: 30px; }
+      .logo-display { padding: 40px 20px 20px; }
+      .logo-content { padding: 20px 30px 40px; }
     }
   </style>
   <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
@@ -138,7 +124,7 @@
         <div class="logo-grid">
           <div class="logo-display">
             <div class="logo-img-box">
-              <img src="/images/img/logo/LOGO STIM YPKN.png" alt="Lambang STIM YKPN">
+              <img src="/images/img/logo/lambang-stim.webp" alt="Lambang STIM YKPN" style="width: 80%;">
             </div>
           </div>
           <div class="logo-content">
@@ -156,11 +142,16 @@
         </div>
       </div>
 
-      <!-- LOGO -->
+      <!-- LOGO BARU -->
       <div class="logo-container animate-on-scroll">
         <div class="logo-grid">
-          <div class="logo-content" style="order: 2;">
-            <h2>Makna Logo Baru</h2>
+          <div class="logo-display">
+            <div class="logo-img-box">
+              <img src="/images/img/logo/logo-stim-baru.webp" alt="Logo Baru STIM YKPN" style="width: 80%;">
+            </div>
+          </div>
+          <div class="logo-content">
+            <h2>Makna Logo</h2>
             <ul class="makna-list">
               <li><strong>3 Kelopak Bunga:</strong> Menggambarkan Tri Dharma perguruan tinggi: Penelitian, Pengajaran, Pengabdian.</li>
               <li><strong>Garis Lengkung:</strong> Simbolisasi payung pelindung sekaligus manifestasi kesegaran berinovasi ("kreativitas yang bertanggungjawab").</li>
@@ -168,11 +159,6 @@
               <li><strong>Warna Biru:</strong> Menampilkan citra STIM yang stabil, kuat dan profesional.</li>
               <li><strong>Warna Kuning Keemasan:</strong> Menggambarkan matahari terbit, citra yang segar, penuh energi dan percaya diri.</li>
             </ul>
-          </div>
-          <div class="logo-display" style="order: 1; background: #fff8f1;">
-            <div class="logo-img-box" style="border-color: var(--orange-500);">
-              <img src="/images/img/logo/logo-stim-new.png" alt="Logo Baru STIM YKPN">
-            </div>
           </div>
         </div>
       </div>
@@ -185,3 +171,4 @@
   <script src="/js/script.js?v=2.3"></script>
 </body>
 </html>
+

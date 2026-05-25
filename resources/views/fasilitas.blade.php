@@ -15,27 +15,6 @@
   <style>
     body { background-color: #ffffff; }
 
-    .page-header {
-      background: var(--navy-900);
-      background-image: url('https://rasabaik.net/ykpn/assets/hero-bg.png');
-      background-size: cover;
-      background-position: center;
-      padding: 140px 0 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 280px;
-      text-align: center;
-      position: relative;
-    }
-
-    .page-header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(15, 23, 42, 0.85); /* Solid elegant dark */
-    }
-
     .fasilitas-section {
       padding: 100px 0;
       background-color: var(--slate-50, #f8fafc);
@@ -178,7 +157,7 @@
         <div class="fasilitas-card animate-on-scroll">
           <div class="fasilitas-img-wrapper">
             <span class="badge">Eksklusif</span>
-            <img src="https://rasabaik.net/ykpn/assets/banner/Banner1.jpeg" alt="Gedung Kampus" loading="lazy">
+            <img src="/images/fasilitas/gedung.png" alt="Gedung Kampus" loading="lazy">
           </div>
           <div class="fasilitas-content">
             <div class="fasilitas-title-wrapper">
@@ -193,7 +172,7 @@
         <div class="fasilitas-card animate-on-scroll animate-delay-1">
           <div class="fasilitas-img-wrapper">
             <span class="badge">Full AC & Multimedia</span>
-            <img src="https://rasabaik.net/ykpn/assets/img/berita/sosialisasi-permendikbudristek.jpg" alt="Ruang Kelas Modern" loading="lazy">
+            <img src="/images/fasilitas/kelas.png" alt="Ruang Kelas Modern" loading="lazy">
           </div>
           <div class="fasilitas-content">
             <div class="fasilitas-title-wrapper">
@@ -208,7 +187,7 @@
         <div class="fasilitas-card animate-on-scroll animate-delay-2">
           <div class="fasilitas-img-wrapper">
             <span class="badge badge-secondary">High-End PC</span>
-            <img src="https://rasabaik.net/ykpn/assets/img/berita/sosialisasi-pasar-modal-diy.jpg" alt="Laboratorium Komputer" loading="lazy">
+            <img src="/images/fasilitas/lab.png" alt="Laboratorium Komputer" loading="lazy">
           </div>
           <div class="fasilitas-content">
             <div class="fasilitas-title-wrapper">
@@ -223,7 +202,7 @@
         <div class="fasilitas-card animate-on-scroll">
           <div class="fasilitas-img-wrapper">
             <span class="badge badge-secondary">Akses Gratis</span>
-            <img src="https://rasabaik.net/ykpn/assets/img/berita/ketua-forum-bi-bali.jpg" alt="BI Corner & Perpustakaan" loading="lazy">
+            <img src="/images/fasilitas/perpus.png" alt="BI Corner & Perpustakaan" loading="lazy">
           </div>
           <div class="fasilitas-content">
             <div class="fasilitas-title-wrapper">
@@ -238,7 +217,7 @@
         <div class="fasilitas-card animate-on-scroll animate-delay-1">
           <div class="fasilitas-img-wrapper">
             <span class="badge">Nyaman & Sejuk</span>
-            <img src="https://rasabaik.net/ykpn/assets/img/berita/halal-bi-halal.jpg" alt="Masjid Kampus" loading="lazy">
+            <img src="/images/fasilitas/masjid.png" alt="Masjid Kampus" loading="lazy">
           </div>
           <div class="fasilitas-content">
             <div class="fasilitas-title-wrapper">
@@ -253,7 +232,7 @@
         <div class="fasilitas-card animate-on-scroll animate-delay-2">
           <div class="fasilitas-img-wrapper">
             <span class="badge badge-secondary">24/7 Wi-Fi</span>
-            <img src="https://rasabaik.net/ykpn/assets/img/berita/mahasiswa-pkm-pm-argosari.jpg" alt="Area Diskusi Mahasiswa" loading="lazy">
+            <img src="/images/fasilitas/diskusi.png" alt="Area Diskusi Mahasiswa" loading="lazy">
           </div>
           <div class="fasilitas-content">
             <div class="fasilitas-title-wrapper">
@@ -273,3 +252,5 @@
   <script src="/js/script.js?v=2.3"></script>
 </body>
 </html>
+
+

@@ -13,23 +13,6 @@
   <style>
     body { background-color: #f8fafc; }
 
-    .page-header {
-      background: var(--navy-900);
-      padding: 100px 0 80px;
-      text-align: center;
-      position: relative;
-    }
-
-    .page-header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 30px 30px;
-    }
-
     .academic-content-section {
       padding: 80px 0;
     }
@@ -133,13 +116,16 @@
       border-radius: 12px;
       border: 1px solid #e2e8f0;
     }
-
     .target-list li::before {
-      content: '🎯';
+      content: '';
       position: absolute;
       left: 20px;
-      top: 24px;
-      font-size: 20px;
+      top: 26px;
+      width: 20px;
+      height: 20px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23f18721' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
     }
 
     .target-list li h4 {
@@ -314,208 +300,27 @@
     <p style="margin-bottom: 30px; font-size: 16px; color: #475569; line-height: 1.8;">Selain kegiatan perkuliahan, STIM YKPN juga mendukung para mahasiswa untuk dapat berprestasi dalam bidang UKM Olahraga dan non-olahraga melalui wadah-wadah berikut:</p>
       
     <div id="ukmGrid">
-      
-        <!-- UKM Kewirausahaan -->
+      @foreach($ukms as $ukm)
         <div class="ukm-card">
           <div class="ukm-image-container">
-            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80" alt="UKM Kewirausahaan" class="ukm-image">
+            <img src="{{ asset('storage/' . $ukm->header_image) }}" alt="{{ $ukm->title }}" class="ukm-image">
           </div>
           <div class="ukm-content">
-            <h3>UKM Kewirausahaan (ANIMA)</h3>
+            <h3>{{ $ukm->title }}</h3>
             <div class="ukm-info">
               <div class="ukm-info-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                <span><strong>Jadwal:</strong><br>Senin - 15.00 WIB</span>
+                <span><strong>Jadwal:</strong><br>{{ $ukm->day }} - {{ \Carbon\Carbon::parse($ukm->time)->format('H:i') }} WIB</span>
               </div>
               <div class="ukm-info-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <span><strong>Lokasi:</strong><br>MPH STIM YKPN Yogyakarta</span>
+                <span><strong>Lokasi:</strong><br>{{ $ukm->location }}</span>
               </div>
             </div>
           </div>
         </div>
-      
-        <!-- UKM MAPEAL -->
-        <div class="ukm-card">
-          <div class="ukm-image-container">
-            <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=600&q=80" alt="UKM MAPEAL" class="ukm-image">
-          </div>
-          <div class="ukm-content">
-            <h3>UKM MAPEAL</h3>
-            <div class="ukm-info">
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                <span><strong>Jadwal:</strong><br>Fleksibel</span>
-              </div>
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <span><strong>Lokasi:</strong><br>Sekre MAPEAL</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <!-- UKM BADMINTON -->
-        <div class="ukm-card">
-          <div class="ukm-image-container">
-            <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=600&q=80" alt="UKM Badminton" class="ukm-image">
-          </div>
-          <div class="ukm-content">
-            <h3>UKM Badminton</h3>
-            <div class="ukm-info">
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                <span><strong>Jadwal:</strong><br>Rabu & Jumat - 16.00 WIB</span>
-              </div>
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <span><strong>Lokasi:</strong><br>GOR STIM YKPN</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <!-- UKM PERS -->
-        <div class="ukm-card">
-          <div class="ukm-image-container">
-            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=80" alt="UKM Pers" class="ukm-image">
-          </div>
-          <div class="ukm-content">
-            <h3>UKM PERS</h3>
-            <div class="ukm-info">
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                <span><strong>Jadwal:</strong><br>Jumat - 09.00 WIB</span>
-              </div>
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <span><strong>Lokasi:</strong><br>Ruang U.3C</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <!-- UKM VOLI -->
-        <div class="ukm-card">
-          <div class="ukm-image-container">
-            <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=600&q=80" alt="UKM Voli" class="ukm-image">
-          </div>
-          <div class="ukm-content">
-            <h3>UKM Voli</h3>
-            <div class="ukm-info">
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                <span><strong>Jadwal:</strong><br>Selasa & Kamis - 19.15 WIB</span>
-              </div>
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <span><strong>Lokasi:</strong><br>GOR STIM YKPN</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <!-- UKM Pasar Modal -->
-        <div class="ukm-card">
-          <div class="ukm-image-container">
-            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80" alt="UKM Pasar Modal" class="ukm-image">
-          </div>
-          <div class="ukm-content">
-            <h3>UKM Pasar Modal</h3>
-            <div class="ukm-info">
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                <span><strong>Jadwal:</strong><br>Jumat - 08.30 WIB</span>
-              </div>
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <span><strong>Lokasi:</strong><br>Galeri Investasi STIM YKPN</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <!-- UKM FUTSAL -->
-        <div class="ukm-card">
-          <div class="ukm-image-container">
-            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80" alt="UKM Futsal" class="ukm-image">
-          </div>
-          <div class="ukm-content">
-            <h3>UKM Futsal</h3>
-            <div class="ukm-info">
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                <span><strong>Jadwal:</strong><br>Senin & Rabu - 19.15 WIB</span>
-              </div>
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <span><strong>Lokasi:</strong><br>GOR STIM YKPN</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <!-- UKM PMK -->
-        <div class="ukm-card">
-          <div class="ukm-image-container">
-            <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=600&q=80" alt="UKM PMK" class="ukm-image">
-          </div>
-          <div class="ukm-content">
-            <h3>UKM PMK</h3>
-            <div class="ukm-info">
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                <span><strong>Jadwal:</strong><br>Jumat - 10.00 WIB</span>
-              </div>
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <span><strong>Lokasi:</strong><br>Ruang U.3D</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <!-- UKM DANCE -->
-        <div class="ukm-card">
-          <div class="ukm-image-container">
-            <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=600&q=80" alt="UKM Dance" class="ukm-image">
-          </div>
-          <div class="ukm-content">
-            <h3>UKM DANCE (SDC)</h3>
-            <div class="ukm-info">
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                <span><strong>Jadwal:</strong><br>Rabu - 16.00 WIB</span>
-              </div>
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <span><strong>Lokasi:</strong><br>MPH STIM YKPN</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <!-- UKM MUSIK -->
-        <div class="ukm-card">
-          <div class="ukm-image-container">
-            <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=600&q=80" alt="UKM Musik" class="ukm-image">
-          </div>
-          <div class="ukm-content">
-            <h3>UKM MUSIK (MARKER)</h3>
-            <div class="ukm-info">
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                <span><strong>Jadwal:</strong><br>Setiap Hari - 16.00 WIB</span>
-              </div>
-              <div class="ukm-info-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <span><strong>Lokasi:</strong><br>Studio Musik STIM YKPN</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-      </div>
+      @endforeach
+    </div>
     
         </div>
       </article>
@@ -528,3 +333,7 @@
   <script src="/js/script.js?v=2.3"></script>
 </body>
 </html>
+
+
+
+

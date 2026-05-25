@@ -13,23 +13,6 @@
   <style>
     body { background-color: #f8fafc; }
 
-    .page-header {
-      background: var(--navy-900);
-      padding: 100px 0 80px;
-      text-align: center;
-      position: relative;
-    }
-
-    .page-header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
-      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 30px 30px;
-    }
-
     .academic-content-section {
       padding: 80px 0;
     }
@@ -133,13 +116,16 @@
       border-radius: 12px;
       border: 1px solid #e2e8f0;
     }
-
     .target-list li::before {
-      content: '🎯';
+      content: '';
       position: absolute;
       left: 20px;
-      top: 24px;
-      font-size: 20px;
+      top: 26px;
+      width: 20px;
+      height: 20px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23f18721' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
     }
 
     .target-list li h4 {
@@ -253,103 +239,21 @@
   
           
       <div id="activityGrid" style="display: flex; flex-direction: column; gap: 30px;">
-        
+        @foreach($activities as $activity)
           <div class="activity-card" style="display: grid; grid-template-columns: 200px 1fr; gap: 25px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
             <div style="background: #eee; height: 100%; min-height: 150px;">
-               <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
+               <img src="{{ asset('storage/' . $activity->header_image) }}" style="width:100%; height:100%; object-fit:cover;" loading="lazy" alt="{{ $activity->title }}">
             </div>
             <div style="padding: 20px;">
-              <span style="font-size: 0.8rem; color: var(--accent-orange); font-weight: bold; text-transform: uppercase;">PENGUMUMAN</span>
-              <h3 style="margin: 10px 0; color: var(--primary-blue);">Pengumuman Lolos Seleksi Panitia Mahasiswa PKKMB 2025</h3>
-              <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">Selamat kepada mahasiswa yang terpilih menjadi bagian dari panitia Pengenalan Kehidupan Kampus bagi Mahasiswa Baru (PKKMB) STIM YKPN 2025.</p>
+              <span style="font-size: 0.8rem; color: var(--accent-orange); font-weight: bold; text-transform: uppercase;">
+                {{ $activity->start_date ? $activity->start_date->format('d M Y') : 'KEGIATAN' }}
+              </span>
+              <h3 style="margin: 10px 0; color: var(--primary-blue);">{{ $activity->title }}</h3>
+              <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">{{ Str::limit(strip_tags($activity->description), 150) }}</p>
               <a href="#" style="color: var(--primary-blue); font-weight: bold; font-size: 0.9rem;">Selengkapnya →</a>
             </div>
           </div>
-        
-          <div class="activity-card" style="display: grid; grid-template-columns: 200px 1fr; gap: 25px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-            <div style="background: #eee; height: 100%; min-height: 150px;">
-               <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
-            </div>
-            <div style="padding: 20px;">
-              <span style="font-size: 0.8rem; color: var(--accent-orange); font-weight: bold; text-transform: uppercase;">PRESTASI</span>
-              <h3 style="margin: 10px 0; color: var(--primary-blue);">Champion FeArstyc 2025</h3>
-              <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">Keberhasilan mahasiswa STIM YKPN dalam meraih juara pada ajang FeArstyc 2025, membuktikan kualitas talenta muda STIM YKPN di kancah nasional.</p>
-              <a href="#" style="color: var(--primary-blue); font-weight: bold; font-size: 0.9rem;">Selengkapnya →</a>
-            </div>
-          </div>
-        
-          <div class="activity-card" style="display: grid; grid-template-columns: 200px 1fr; gap: 25px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-            <div style="background: #eee; height: 100%; min-height: 150px;">
-               <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
-            </div>
-            <div style="padding: 20px;">
-              <span style="font-size: 0.8rem; color: var(--accent-orange); font-weight: bold; text-transform: uppercase;">KEWIRAUSAHAAN</span>
-              <h3 style="margin: 10px 0; color: var(--primary-blue);">Program Kreativitas Mahasiswa & Program Pembinaan Mahasiswa Wirausaha</h3>
-              <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">STIM YKPN terus mendorong semangat wirausaha mahasiswa melalui hibah pendanaan PKM dan P2MW tahun 2025.</p>
-              <a href="#" style="color: var(--primary-blue); font-weight: bold; font-size: 0.9rem;">Selengkapnya →</a>
-            </div>
-          </div>
-        
-          <div class="activity-card" style="display: grid; grid-template-columns: 200px 1fr; gap: 25px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-            <div style="background: #eee; height: 100%; min-height: 150px;">
-               <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
-            </div>
-            <div style="padding: 20px;">
-              <span style="font-size: 0.8rem; color: var(--accent-orange); font-weight: bold; text-transform: uppercase;">AKADEMIK</span>
-              <h3 style="margin: 10px 0; color: var(--primary-blue);">KULIAH UMUM REVOLUSI FINANSIAL : PERBANKAN DIGITAL</h3>
-              <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">Menghadirkan narasumber ahli untuk membahas transformasi dunia perbankan menuju era digital yang semakin masif.</p>
-              <a href="#" style="color: var(--primary-blue); font-weight: bold; font-size: 0.9rem;">Selengkapnya →</a>
-            </div>
-          </div>
-        
-          <div class="activity-card" style="display: grid; grid-template-columns: 200px 1fr; gap: 25px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-            <div style="background: #eee; height: 100%; min-height: 150px;">
-               <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
-            </div>
-            <div style="padding: 20px;">
-              <span style="font-size: 0.8rem; color: var(--accent-orange); font-weight: bold; text-transform: uppercase;">OLAHRAGA</span>
-              <h3 style="margin: 10px 0; color: var(--primary-blue);">ALL UKM CUP #2 2024</h3>
-              <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">Ajang kompetisi olahraga antar UKM di lingkungan STIM YKPN untuk mempererat tali persaudaraan antar mahasiswa.</p>
-              <a href="#" style="color: var(--primary-blue); font-weight: bold; font-size: 0.9rem;">Selengkapnya →</a>
-            </div>
-          </div>
-        
-          <div class="activity-card" style="display: grid; grid-template-columns: 200px 1fr; gap: 25px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-            <div style="background: #eee; height: 100%; min-height: 150px;">
-               <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
-            </div>
-            <div style="padding: 20px;">
-              <span style="font-size: 0.8rem; color: var(--accent-orange); font-weight: bold; text-transform: uppercase;">KOMPETISI</span>
-              <h3 style="margin: 10px 0; color: var(--primary-blue);">National Business Plan Competition 2024</h3>
-              <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">STIM YKPN sukses menyelenggarakan lomba perencanaan bisnis tingkat nasional yang diikuti oleh berbagai perguruan tinggi di Indonesia.</p>
-              <a href="#" style="color: var(--primary-blue); font-weight: bold; font-size: 0.9rem;">Selengkapnya →</a>
-            </div>
-          </div>
-        
-          <div class="activity-card" style="display: grid; grid-template-columns: 200px 1fr; gap: 25px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-            <div style="background: #eee; height: 100%; min-height: 150px;">
-               <img src="https://images.unsplash.com/photo-1454165833762-0204b28c6747?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
-            </div>
-            <div style="padding: 20px;">
-              <span style="font-size: 0.8rem; color: var(--accent-orange); font-weight: bold; text-transform: uppercase;">KARIR</span>
-              <h3 style="margin: 10px 0; color: var(--primary-blue);">BIMBINGAN KARIR BROFESIONAL & STIM YKPN YOGYAKARTA</h3>
-              <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">Mempersiapkan lulusan yang siap kerja melalui bimbingan karir intensif bersama Brofesional.</p>
-              <a href="#" style="color: var(--primary-blue); font-weight: bold; font-size: 0.9rem;">Selengkapnya →</a>
-            </div>
-          </div>
-        
-          <div class="activity-card" style="display: grid; grid-template-columns: 200px 1fr; gap: 25px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-            <div style="background: #eee; height: 100%; min-height: 150px;">
-               <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
-            </div>
-            <div style="padding: 20px;">
-              <span style="font-size: 0.8rem; color: var(--accent-orange); font-weight: bold; text-transform: uppercase;">KEGIATAN</span>
-              <h3 style="margin: 10px 0; color: var(--primary-blue);">KUNJUNGAN INDUSTRI 2024</h3>
-              <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">Mahasiswa melihat langsung proses bisnis dan manajemen di perusahaan-perusahaan terkemuka sebagai bagian dari pembelajaran praktis.</p>
-              <a href="#" style="color: var(--primary-blue); font-weight: bold; font-size: 0.9rem;">Selengkapnya →</a>
-            </div>
-          </div>
-        
+        @endforeach
       </div>
     
         </div>
@@ -363,3 +267,5 @@
   <script src="/js/script.js?v=2.3"></script>
 </body>
 </html>
+
+
