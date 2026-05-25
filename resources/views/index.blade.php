@@ -61,7 +61,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
     rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="/css/style.css?v=2.6">
+  <link rel="stylesheet" href="/css/style.css?v=3.0">
   
   <style>
     /* Visual Improvements from Index 3 */
@@ -730,7 +730,9 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
   @include('components.footer')
 
   <!-- Script -->
-  <script src="/js/script.js?v=2.3"></script>
+  <script src="/js/script.js?v=3.0"></script>
 </body>
 
 </html>
+
+
