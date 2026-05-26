@@ -161,6 +161,46 @@
   </div>
 </nav>
 
+<!-- Mobile Menu Fix -->
+<style>
+  /* Hide WhatsApp & video modal when mobile menu is open */
+  body.mobile-menu-open .wa-floating-container,
+  body.mobile-menu-open .video-modal {
+    display: none !important;
+  }
+  /* Boost mobile overlay above everything */
+  .mobile-overlay {
+    z-index: 99999 !important;
+  }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Hide WA button & video modal when mobile menu opens, show when it closes
+  var waContainer = document.querySelector('.wa-floating-container');
+  var videoModal = document.getElementById('videoModal');
+  var mobileOverlay = document.getElementById('mobileOverlay');
+
+  if (mobileOverlay) {
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        if (m.attributeName === 'class') {
+          if (mobileOverlay.classList.contains('active')) {
+            if (waContainer) waContainer.style.display = 'none';
+            if (videoModal) videoModal.style.display = 'none';
+            document.body.classList.add('mobile-menu-open');
+          } else {
+            if (waContainer) waContainer.style.display = '';
+            if (videoModal) videoModal.style.display = '';
+            document.body.classList.remove('mobile-menu-open');
+          }
+        }
+      });
+    });
+    observer.observe(mobileOverlay, { attributes: true });
+  }
+});
+</script>
+
 <!-- Mobile Menu Overlay -->
 <div class="mobile-overlay" id="mobileOverlay">
   <div class="mobile-header">
