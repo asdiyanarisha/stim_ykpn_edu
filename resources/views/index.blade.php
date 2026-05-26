@@ -730,7 +730,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
   @include('components.footer')
 
   <!-- Script -->
-  <script src="/js/script.js?v=3.0"></script>
+  <script src="/js/script.js?v=3.1"></script>
 </body>
 
 </html>
