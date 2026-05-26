@@ -5,6 +5,7 @@ use App\Models\ContentBanner;
 use App\Models\News;
 use App\Models\Teacher;
 use App\Models\CategoryTeacher;
+use App\Http\Controllers\PublicPagesController;
 
 
 /*
@@ -18,21 +19,9 @@ use App\Models\CategoryTeacher;
 |
 */
 
-Route::get('/', function () {
-    $banners = ContentBanner::orderBy('created_at', 'desc')->get();
-    $latest_news = News::where('status', 'published')->orderBy('created_at', 'desc')->take(3)->get();
-    $alumnis = \App\Models\TestimonyAlumni::all();
-    return view('index', compact('banners', 'latest_news', 'alumnis'));
-});
+Route::get('/', [PublicPagesController::class, 'index']);
 
-Route::get('/berita/{id}', function ($id) {
-    $news = News::findOrFail($id);
-    if ($news->status !== 'published') {
-        abort(404);
-    }
-    $news->increment('views_count');
-    return view('berita-detail', compact('news'));
-});
+Route::get('/berita/{id}', [PublicPagesController::class, 'newsDetail']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -330,14 +319,8 @@ Route::get('/payment_settings', fn() => view('payment-setting-form'))->name('pay
 Route::get('/setting', fn() => view('user-setting'))->name('user-setting');
 
 // New Academic Landing Pages (Modular Blade)
-Route::get('/sambutan-ketua', function () {
-    $greeting = \App\Models\GreetingChief::first();
-    return view('sambutan-ketua', compact('greeting'));
-});
-Route::get('/sambutan-ketua.html', function () {
-    $greeting = \App\Models\GreetingChief::first();
-    return view('sambutan-ketua', compact('greeting'));
-});
+Route::get('/sambutan-ketua', [PublicPagesController::class, 'greeting']);
+Route::get('/sambutan-ketua.html', [PublicPagesController::class, 'greeting']);
 
 Route::get('/visi-misi', fn() => view('visi-misi'));
 Route::get('/visi-misi.html', fn() => view('visi-misi'));
@@ -348,126 +331,16 @@ Route::get('/profil.html', fn() => view('profil'));
 Route::get('/logo', fn() => view('logo'));
 Route::get('/logo.html', fn() => view('logo'));
 
-Route::get('/dosen', function (\Illuminate\Http\Request $request) {
-    $categories = CategoryTeacher::all();
-    
-    $query = Teacher::query();
-    
-    if ($request->has('category') && $request->category != 'all') {
-        $query->whereHas('category', function($q) use ($request) {
-            $q->where('slug', $request->category);
-        });
-    }
+Route::get('/dosen', [PublicPagesController::class, 'teacherList']);
 
-    if ($request->has('search') && $request->search != '') {
-        $search = $request->search;
-        $query->where(function($q) use ($search) {
-            $q->where('full_name', 'like', "%{$search}%")
-              ->orWhere('front_title', 'like', "%{$search}%")
-              ->orWhere('back_title', 'like', "%{$search}%")
-              ->orWhereHas('category', function($cq) use ($search) {
-                  $cq->where('title', 'like', "%{$search}%");
-              })
-              ->orWhereHas('jobTitle', function($jq) use ($search) {
-                  $jq->where('title', 'like', "%{$search}%");
-              });
-        });
-    }
-    
-    $teachers = $query->with(['category', 'jobTitle'])->paginate(6);
-    
-    return view('dosen', compact('teachers', 'categories'));
-});
+Route::get('/dosen/{id}', [PublicPagesController::class, 'teacherDetail']);
 
-Route::get('/dosen/{id}', function ($id) {
-    $teacher = Teacher::with([
-        'category', 
-        'jobTitle', 
-        'education',
-        'professional_positions',
-        'research_areas',
-        'publications',
-        'books',
-        'popular_writings',
-        'awards',
-        'online_academic_profiles',
-    ])->findOrFail($id);
+Route::get('/dosen/{id}.html', [PublicPagesController::class, 'teacherDetail']);
 
-    return view('dosen-detail', compact('teacher'));
-});
+Route::get('/dosen.html', [PublicPagesController::class, 'teacherList']);
 
-Route::get('/dosen/{id}.html', function ($id) {
-    $teacher = Teacher::with([
-        'category', 
-        'jobTitle', 
-        'education',
-        'professional_positions',
-        'research_areas',
-        'publications',
-        'books',
-        'popular_writings',
-        'awards',
-        'online_academic_profiles',
-    ])->findOrFail($id);
-
-    return view('dosen-detail', compact('teacher'));
-});
-
-
-
-Route::get('/dosen.html', function (\Illuminate\Http\Request $request) {
-    $categories = CategoryTeacher::all();
-    
-    $query = Teacher::query();
-    
-    if ($request->has('category') && $request->category != 'all') {
-        $query->whereHas('category', function($q) use ($request) {
-            $q->where('slug', $request->category);
-        });
-    }
-
-    if ($request->has('search') && $request->search != '') {
-        $search = $request->search;
-        $query->where(function($q) use ($search) {
-            $q->where('full_name', 'like', "%{$search}%")
-              ->orWhere('front_title', 'like', "%{$search}%")
-              ->orWhere('back_title', 'like', "%{$search}%")
-              ->orWhereHas('category', function($cq) use ($search) {
-                  $cq->where('title', 'like', "%{$search}%");
-              })
-              ->orWhereHas('jobTitle', function($jq) use ($search) {
-                  $jq->where('title', 'like', "%{$search}%");
-              });
-        });
-    }
-    
-    $teachers = $query->with(['category', 'jobTitle'])->paginate(6);
-    
-    return view('dosen', compact('teachers', 'categories'));
-});
-
-$pimpinanHandler = function () {
-    $pimpinans = \App\Models\Teacher::with(['jobTitle', 'category'])
-        ->whereHas('category', function($q) {
-            $q->where('title', 'like', '%Pimpinan%')
-              ->orWhere('slug', 'like', '%pimpinan%');
-        })
-        ->get();
-        
-    // Sort pimpinans: "Ketua" first, then the rest.
-    $pimpinans = $pimpinans->sortBy(function($p) {
-        $title = $p->jobTitle ? strtolower($p->jobTitle->title) : '';
-        if (strpos($title, 'ketua') !== false && strpos($title, 'wakil') === false) {
-            return 0; // Ketua
-        }
-        return 1; // Others
-    });
-
-    return view('pimpinan', compact('pimpinans'));
-};
-
-Route::get('/pimpinan', $pimpinanHandler);
-Route::get('/pimpinan.html', $pimpinanHandler);
+Route::get('/pimpinan', [PublicPagesController::class, 'pimpinan']);
+Route::get('/pimpinan.html', [PublicPagesController::class, 'pimpinan']);
 
 Route::get('/fasilitas', fn() => view('fasilitas'));
 Route::get('/fasilitas.html', fn() => view('fasilitas'));
@@ -504,14 +377,8 @@ Route::get('/sanksi-akademik', fn() => view('sanksi-akademik'));
 Route::get('/sanksi-akademik.html', fn() => view('sanksi-akademik'));
 
 // Newly Migrated Academic & Provision Pages
-Route::get('/kalender-akademik', function () {
-    $calendar = \App\Models\AcademicCalendar::first();
-    return view('kalender-akademik', compact('calendar'));
-});
-Route::get('/kalender-akademik.html', function () {
-    $calendar = \App\Models\AcademicCalendar::first();
-    return view('kalender-akademik', compact('calendar'));
-});
+Route::get('/kalender-akademik', [PublicPagesController::class, 'academicCalendar']);
+Route::get('/kalender-akademik.html', [PublicPagesController::class, 'academicCalendar']);
 
 Route::get('/kehadiran-kuliah', fn() => view('kehadiran-kuliah'));
 Route::get('/kehadiran-kuliah.html', fn() => view('kehadiran-kuliah'));
@@ -564,23 +431,11 @@ Route::get('/pengumuman-diterima', fn() => view('pengumuman-diterima'));
 Route::get('/pengumuman-diterima.html', fn() => view('pengumuman-diterima'));
 
 // Batch 3 - Student, Campus Life, and Information Pages
-Route::get('/kegiatan-mahasiswa', function () {
-    $activities = \App\Models\StudentActivity::where('is_publish', true)->orderBy('created_at', 'desc')->get();
-    return view('kegiatan-mahasiswa', compact('activities'));
-});
-Route::get('/kegiatan-mahasiswa.html', function () {
-    $activities = \App\Models\StudentActivity::where('is_publish', true)->orderBy('created_at', 'desc')->get();
-    return view('kegiatan-mahasiswa', compact('activities'));
-});
+Route::get('/kegiatan-mahasiswa', [PublicPagesController::class, 'studentActivities']);
+Route::get('/kegiatan-mahasiswa.html', [PublicPagesController::class, 'studentActivities']);
 
-Route::get('/ukm', function () {
-    $ukms = \App\Models\StudentUkm::all();
-    return view('ukm', compact('ukms'));
-});
-Route::get('/ukm.html', function () {
-    $ukms = \App\Models\StudentUkm::all();
-    return view('ukm', compact('ukms'));
-});
+Route::get('/ukm', [PublicPagesController::class, 'ukm']);
+Route::get('/ukm.html', [PublicPagesController::class, 'ukm']);
 
 Route::get('/ppkpt', fn() => view('ppkpt'));
 Route::get('/ppkpt.html', fn() => view('ppkpt'));
@@ -600,82 +455,18 @@ Route::get('/brosur.html', fn() => view('brosur'));
 Route::get('/unduh', fn() => view('unduh'));
 Route::get('/unduh.html', fn() => view('unduh'));
 
-Route::get('/alumni', function () {
-    $alumnis = \App\Models\TestimonyAlumni::all();
-    return view('alumni', compact('alumnis'));
-});
-Route::get('/alumni.html', function () {
-    $alumnis = \App\Models\TestimonyAlumni::all();
-    return view('alumni', compact('alumnis'));
-});
+Route::get('/alumni', [PublicPagesController::class, 'alumni']);
+Route::get('/alumni.html', [PublicPagesController::class, 'alumni']);
 
 Route::get('/lowongan-kerja', fn() => view('lowongan-kerja'));
 Route::get('/lowongan-kerja.html', fn() => view('lowongan-kerja'));
 
 Route::get('/whatsapp-contact', fn() => view('whatsapp-contact'))->name('whatsapp-contact.index');
 
-Route::get('/api/inspect-data', function() {
-    return \App\Models\CategoryTeacher::all();
-});
+Route::get('/api/inspect-data', [PublicPagesController::class, 'inspectData']);
 
-Route::get('/berita', function (\Illuminate\Http\Request $request) {
-    $query = \App\Models\News::where('status', 'published');
-
-    if ($request->has('search') && $request->search != '') {
-        $search = $request->search;
-        $query->where(function($q) use ($search) {
-            $q->where('title', 'like', "%{$search}%")
-              ->orWhere('content', 'like', "%{$search}%");
-        });
-    }
-
-    if ($request->has('category') && $request->category != 'Semua') {
-        $category = $request->category;
-        $query->where(function($q) use ($category) {
-            $q->where('title', 'like', "%{$category}%")
-              ->orWhere('content', 'like', "%{$category}%");
-        });
-    }
-
-    $sort = $request->get('sort', 'terbaru');
-    if ($sort === 'terlama') {
-        $query->orderBy('created_at', 'asc');
-    } else {
-        $query->orderBy('created_at', 'desc');
-    }
-
-    $newsList = $query->paginate(12)->withQueryString();
-    return view('berita', compact('newsList'));
-});
-Route::get('/berita.html', function (\Illuminate\Http\Request $request) {
-    $query = \App\Models\News::where('status', 'published');
-
-    if ($request->has('search') && $request->search != '') {
-        $search = $request->search;
-        $query->where(function($q) use ($search) {
-            $q->where('title', 'like', "%{$search}%")
-              ->orWhere('content', 'like', "%{$search}%");
-        });
-    }
-
-    if ($request->has('category') && $request->category != 'Semua') {
-        $category = $request->category;
-        $query->where(function($q) use ($category) {
-            $q->where('title', 'like', "%{$category}%")
-              ->orWhere('content', 'like', "%{$category}%");
-        });
-    }
-
-    $sort = $request->get('sort', 'terbaru');
-    if ($sort === 'terlama') {
-        $query->orderBy('created_at', 'asc');
-    } else {
-        $query->orderBy('created_at', 'desc');
-    }
-
-    $newsList = $query->paginate(12)->withQueryString();
-    return view('berita', compact('newsList'));
-});
+Route::get('/berita', [PublicPagesController::class, 'newsList']);
+Route::get('/berita.html', [PublicPagesController::class, 'newsList']);
 
 // Jurnal Penelitian Dosen (Public Static Page)
 Route::get('/jurnal-penelitian', fn() => view('jurnal-penelitian'));
