@@ -221,7 +221,7 @@ function initTestimonialSlider() {
 
     setTimeout(() => {
       const t = testimonials[index];
-      quoteText.textContent = t.text;
+      quoteText.innerHTML = t.text;
       alumniName.textContent = t.name;
       alumniRole.textContent = t.role;
       alumniCompany.textContent = t.company;
@@ -265,6 +265,7 @@ function initTestimonialSlider() {
     startAutoPlay();
   }
 
+  showTestimonial(0);
   startAutoPlay();
 }
 
