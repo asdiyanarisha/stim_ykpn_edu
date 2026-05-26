@@ -191,7 +191,7 @@
         <div class="chairman-image-box">
           <img src="/images/dosen/pimpinan_dr_suparmono_msi.jpg" alt="Ketua STIM YKPN" class="chairman-img" loading="lazy">
           <div class="chairman-badge">
-            <span class="badge-number">50+</span>
+            <span class="badge-number">50</span>
             <span class="badge-text">Tahun Pendidikan Tinggi</span>
           </div>
         </div>
