@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             PmbStatusSeeder::class,
+            CategoryTeacherSeeder::class,
+            JobTitleSeeder::class,
         ]);
     }
 }

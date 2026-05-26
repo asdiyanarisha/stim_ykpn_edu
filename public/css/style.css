@@ -2931,6 +2931,8 @@ a.btn.btn-orange:hover {
   left: 20px;
   top: 50%;
   transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
   color: var(--gray-400);
   pointer-events: none;
   transition: all var(--transition-fast);

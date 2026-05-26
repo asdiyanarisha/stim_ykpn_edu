@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="/css/style.css?v=3.0">
+  <link rel="stylesheet" href="/css/style.css?v=3.1">
   <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
 </head>
 <body>
@@ -51,7 +51,7 @@
             <input type="hidden" name="category" value="{{ request('category') }}">
           @endif
           <div class="search-input-group">
-            <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama atau keahlian dosen..." class="search-input">
@@ -92,7 +92,7 @@
   @include('components.footer')
 
   <!-- Script -->
-  <script src="/js/script.js?v=3.0"></script>
+  <script src="/js/script.js?v=3.1"></script>
 </body>
 </html>
 
