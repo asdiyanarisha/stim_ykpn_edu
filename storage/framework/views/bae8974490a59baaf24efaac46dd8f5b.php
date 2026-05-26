@@ -165,7 +165,7 @@
 </head>
 <body>
 
-  @include('components.navbar')
+  <?php echo $__env->make('components.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <!-- ============================================
        PAGE HEADER
@@ -191,7 +191,7 @@
         <div class="chairman-image-box">
           <img src="/images/dosen/pimpinan_dr_suparmono_msi.jpg" alt="Ketua STIM YKPN" class="chairman-img" loading="lazy">
           <div class="chairman-badge">
-            <span class="badge-number">50</span>
+            <span class="badge-number">50+</span>
             <span class="badge-text">Tahun Pendidikan Tinggi</span>
           </div>
         </div>
@@ -238,7 +238,7 @@
     </div>
   </section>
 
-  @include('components.footer')
+  <?php echo $__env->make('components.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <!-- Script -->
   <script src="/js/script.js?v=3.0"></script>
@@ -246,3 +246,4 @@
 </html>
 
 
+<?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/sambutan-ketua.blade.php ENDPATH**/ ?>

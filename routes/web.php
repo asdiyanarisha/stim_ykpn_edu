@@ -627,4 +627,13 @@ Route::get('/berita.html', function () {
     return view('berita', compact('newsList'));
 });
 
+// Jurnal Penelitian Dosen (Public Static Page)
+Route::get('/jurnal-penelitian', fn() => view('jurnal-penelitian'));
+Route::get('/jurnal-penelitian.html', fn() => view('jurnal-penelitian'));
+
+// Jurnal Pengabdian Dosen (Public Static Page)
+Route::get('/jurnal-pengabdian', fn() => view('jurnal-pengabdian'));
+Route::get('/jurnal-pengabdian.html', fn() => view('jurnal-pengabdian'));
+
+
 

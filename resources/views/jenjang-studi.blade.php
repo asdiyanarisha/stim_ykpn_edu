@@ -184,6 +184,10 @@
               Masa studi normal untuk S1 adalah 8 semester (4 tahun). Batas waktu maksimal penyelesaian studi adalah 14 semester (7 tahun). Mahasiswa yang tidak lulus dalam batas waktu tersebut akan dinyatakan *Drop Out* (DO).
             </li>
             <li>
+              <h4>Sarjana Bisnis Digital (S1)</h4>
+              Masa studi normal untuk S1 adalah 8 semester (4 tahun). Batas waktu maksimal penyelesaian studi adalah 14 semester (7 tahun). Mahasiswa yang tidak lulus dalam batas waktu tersebut akan dinyatakan *Drop Out* (DO).
+            </li>
+            <li>
               <h4>Ahli Madya Manajemen (D3)</h4>
               Masa studi normal untuk D3 adalah 6 semester (3 tahun). Batas waktu maksimal penyelesaian studi adalah 10 semester (5 tahun).
             </li>
