@@ -36,27 +36,28 @@
        ============================================ -->
   <section class="faculty-section">
     <div class="container">
-      <!-- Filter -->
+      <!-- Filter & Search -->
       <div class="faculty-filter animate-on-scroll animate-delay-2">
-        <a href="/dosen?category=all" class="filter-btn {{ request('category', 'all') == 'all' ? 'active' : '' }}">Semua</a>
-        @foreach($categories as $cat)
-          <a href="/dosen?category={{ $cat->slug }}" class="filter-btn {{ request('category') == $cat->slug ? 'active' : '' }}">{{ $cat->title }}</a>
-        @endforeach
-      </div>
-      
-      <!-- Search Bar -->
-      <div class="faculty-search-wrap animate-on-scroll animate-delay-3">
-        <form action="/dosen" method="GET" class="search-form">
-          @if(request('category'))
-            <input type="hidden" name="category" value="{{ request('category') }}">
-          @endif
-          <div class="search-input-group">
-            <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama atau keahlian dosen..." class="search-input">
-          </div>
-        </form>
+        <div class="filter-group">
+          <a href="/dosen?category=all" class="filter-btn {{ request('category', 'all') == 'all' ? 'active' : '' }}">Semua</a>
+          @foreach($categories as $cat)
+            <a href="/dosen?category={{ $cat->slug }}" class="filter-btn {{ request('category') == $cat->slug ? 'active' : '' }}">{{ $cat->title }}</a>
+          @endforeach
+        </div>
+
+        <div class="search-group">
+          <form action="/dosen" method="GET" class="search-form">
+            @if(request('category'))
+              <input type="hidden" name="category" value="{{ request('category') }}">
+            @endif
+            <div class="search-input-group" style="position: relative;">
+              <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama atau keahlian dosen..." class="search-input">
+            </div>
+          </form>
+        </div>
       </div>
 
       <!-- Grid -->
