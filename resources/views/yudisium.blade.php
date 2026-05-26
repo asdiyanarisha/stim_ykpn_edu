@@ -183,7 +183,7 @@
 
   @include('components.footer')
 
-  <script src="/js/script.js?v=3.4"></script>
+  <script src="/js/script.js?v=3.6"></script>
 </body>
 </html>
 

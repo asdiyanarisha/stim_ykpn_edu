@@ -477,7 +477,7 @@
   @include('components.footer')
 
   <!-- Script -->
-  <script src="/js/script.js?v=3.4"></script>
+  <script src="/js/script.js?v=3.6"></script>
   <!-- Flatpickr JS -->
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <!-- SweetAlert2 -->
