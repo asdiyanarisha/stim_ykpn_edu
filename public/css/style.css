@@ -3618,7 +3618,7 @@ a.btn.btn-orange:hover {
 }
 
 .mobile-menu-body {
-  padding: 10px 24px 30px;
+  padding: 10px 0 30px;
   flex-grow: 1;
 }
 
@@ -3626,7 +3626,7 @@ a.btn.btn-orange:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 0;
+  padding: 18px 24px;
   border-bottom: 1px solid #f1f5f9;
   color: #0f172a;
   font-size: 1.1rem;
@@ -3642,6 +3642,8 @@ a.btn.btn-orange:hover {
   border-radius: 10px;
   margin-top: 5px;
   margin-bottom: 20px;
+  margin-left: 24px;
+  margin-right: 24px;
   border: none;
   box-shadow: 0 8px 16px rgba(241, 135, 33, 0.15);
   font-size: 1.1rem;
@@ -3674,19 +3676,18 @@ a.btn.btn-orange:hover {
   display: flex;
   flex-direction: column;
   background: #f8fafc;
-  padding: 0 20px;
-  border-radius: 12px;
+  padding: 0;
 }
 
 .mobile-nav-group.active .mobile-submenu {
   max-height: 1000px;
-  padding: 10px 20px 20px;
+  padding: 10px 0 20px;
   margin-bottom: 10px;
 }
 
 .mobile-submenu a {
   display: block;
-  padding: 10px 0;
+  padding: 12px 44px;
   color: #475569;
   text-decoration: none;
   font-weight: 600;

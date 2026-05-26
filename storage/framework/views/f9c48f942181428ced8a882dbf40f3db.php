@@ -129,8 +129,8 @@
         <ul class="sidebar-menu">
           <li><a href="https://journal.stimykpn.ac.id/index.php/tb" target="_blank" rel="noopener noreferrer">Jurnal Telaah Bisnis</a></li>
           <li><a href="https://journal.stimykpn.ac.id/index.php/cb" target="_blank" rel="noopener noreferrer">Jurnal Cakrawangsa Bisnis</a></li>
-          <li><a href="/jurnal-penelitian.html" class="active">Penelitian Dosen</a></li>
-          <li><a href="/jurnal-pengabdian.html" class="active">Pengabdian Dosen</a></li>
+          <li><a href="/jurnal-penelitian">Penelitian Dosen</a></li>
+          <li><a href="/jurnal-pengabdian" class="active">Pengabdian Dosen</a></li>
         </ul>
       </aside>
 
