@@ -148,7 +148,7 @@
   <header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
       <h1 class="page-title animate-on-scroll">Lowongan Kerja</h1>
-      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">Informasi peluang karir terbaru dari berbagai mitra perusahaan untuk lulusan STIM YKPN.</p>
+      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: none; margin: 0 auto;">Informasi peluang karir terbaru dari berbagai mitra perusahaan untuk lulusan STIM YKPN.</p>
     </div>
   </header>
 

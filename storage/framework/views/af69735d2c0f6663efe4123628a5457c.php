@@ -178,7 +178,7 @@
 </head>
 <body>
 
-  @include('components.navbar')
+  <?php echo $__env->make('components.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
@@ -246,7 +246,7 @@
     </div>
   </section>
 
-  @include('components.footer')
+  <?php echo $__env->make('components.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <script src="/js/script.js?v=3.0"></script>
 </body>
@@ -255,3 +255,4 @@
 
 
 
+<?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/pimpinan.blade.php ENDPATH**/ ?>

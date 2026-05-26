@@ -148,7 +148,7 @@
   <header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
       <h1 class="page-title animate-on-scroll">Brosur</h1>
-      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">Informasi program pendidikan STIM YKPN Yogyakarta dalam format dokumen brosur.</p>
+      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: none; margin: 0 auto;">Informasi program pendidikan STIM YKPN Yogyakarta dalam format dokumen brosur.</p>
     </div>
   </header>
 

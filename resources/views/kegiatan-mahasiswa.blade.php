@@ -207,7 +207,7 @@
   <header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
       <h1 class="page-title animate-on-scroll">Kegiatan Mahasiswa</h1>
-      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">Dokumentasi berbagai aktivitas dan acara yang diselenggarakan oleh mahasiswa STIM YKPN.</p>
+      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: none; margin: 0 auto;">Dokumentasi berbagai aktivitas dan acara yang diselenggarakan oleh mahasiswa STIM YKPN.</p>
     </div>
   </header>
 
