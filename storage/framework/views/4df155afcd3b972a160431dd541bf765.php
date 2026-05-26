@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css?v=3.0">
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
 
   <style>
     body { background-color: #f8fafc; }
@@ -158,7 +158,7 @@
 </head>
 <body>
 
-  @include('components.navbar')
+  <?php echo $__env->make('components.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <main>
     <!-- Page Header -->
@@ -175,62 +175,63 @@
 
         <!-- Toolbar -->
         <div class="news-toolbar animate-on-scroll">
-          <input type="text" class="news-search-input" id="newsSearchInput" placeholder="Cari berita..." value="{{ request('search') }}">
+          <input type="text" class="news-search-input" id="newsSearchInput" placeholder="Cari berita..." value="<?php echo e(request('search')); ?>">
           <select class="news-filter-select" id="newsCategoryFilter">
-            <option value="Semua" {{ request('category') === 'Semua' ? 'selected' : '' }}>Semua Kategori</option>
-            <option value="Kegiatan" {{ request('category') === 'Kegiatan' ? 'selected' : '' }}>Kegiatan</option>
-            <option value="Prestasi" {{ request('category') === 'Prestasi' ? 'selected' : '' }}>Prestasi</option>
-            <option value="Dies Natalis" {{ request('category') === 'Dies Natalis' ? 'selected' : '' }}>Dies Natalis</option>
-            <option value="Akademik" {{ request('category') === 'Akademik' ? 'selected' : '' }}>Akademik</option>
-            <option value="Kemahasiswaan" {{ request('category') === 'Kemahasiswaan' ? 'selected' : '' }}>Kemahasiswaan</option>
+            <option value="Semua" <?php echo e(request('category') === 'Semua' ? 'selected' : ''); ?>>Semua Kategori</option>
+            <option value="Kegiatan" <?php echo e(request('category') === 'Kegiatan' ? 'selected' : ''); ?>>Kegiatan</option>
+            <option value="Prestasi" <?php echo e(request('category') === 'Prestasi' ? 'selected' : ''); ?>>Prestasi</option>
+            <option value="Dies Natalis" <?php echo e(request('category') === 'Dies Natalis' ? 'selected' : ''); ?>>Dies Natalis</option>
+            <option value="Akademik" <?php echo e(request('category') === 'Akademik' ? 'selected' : ''); ?>>Akademik</option>
+            <option value="Kemahasiswaan" <?php echo e(request('category') === 'Kemahasiswaan' ? 'selected' : ''); ?>>Kemahasiswaan</option>
           </select>
           <select class="news-filter-select" id="newsSortFilter">
-            <option value="terbaru" {{ request('sort') === 'terbaru' || !request('sort') ? 'selected' : '' }}>Terbaru</option>
-            <option value="terlama" {{ request('sort') === 'terlama' ? 'selected' : '' }}>Terlama</option>
+            <option value="terbaru" <?php echo e(request('sort') === 'terbaru' || !request('sort') ? 'selected' : ''); ?>>Terbaru</option>
+            <option value="terlama" <?php echo e(request('sort') === 'terlama' ? 'selected' : ''); ?>>Terlama</option>
           </select>
-          <span class="news-results-count" id="newsResultsCount">Menampilkan {{ $newsList->count() }} berita</span>
+          <span class="news-results-count" id="newsResultsCount">Menampilkan <?php echo e($newsList->count()); ?> berita</span>
         </div>
 
         <!-- News Grid -->
         <div class="news-page-grid" id="newsGrid">
           
-          @forelse($newsList as $news_item)
+          <?php $__empty_1 = true; $__currentLoopData = $newsList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $news_item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
           <article class="news-card">
             <div class="news-card-image">
-              <img loading="lazy" src="{{ $news_item->url_image ?? '/images/hero-bg.png' }}" alt="{{ $news_item->title }}">
-              <span class="date-badge">{{ $news_item->created_at->format('d M Y') }}</span>
+              <img loading="lazy" src="<?php echo e($news_item->url_image ?? '/images/hero-bg.png'); ?>" alt="<?php echo e($news_item->title); ?>">
+              <span class="date-badge"><?php echo e($news_item->created_at->format('d M Y')); ?></span>
             </div>
             <div class="news-card-body">
               <span class="category">Berita</span>
-              <h3><a href="/berita/{{ $news_item->id }}">{{ $news_item->title }}</a></h3>
-              <a href="/berita/{{ $news_item->id }}" class="read-more">
+              <h3><a href="/berita/<?php echo e($news_item->id); ?>"><?php echo e($news_item->title); ?></a></h3>
+              <a href="/berita/<?php echo e($news_item->id); ?>" class="read-more">
                 Baca Selengkapnya
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </a>
             </div>
           </article>
-          @empty
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
           <div class="no-results" style="display: block;">
             <div class="no-results-icon">📄</div>
             <h3>Belum ada berita</h3>
             <p>Berita terbaru akan segera diperbarui di sini.</p>
           </div>
-          @endforelse
+          <?php endif; ?>
 
         </div>
 
-        @if($newsList->hasPages())
+        <?php if($newsList->hasPages()): ?>
         <div style="margin-top: 40px; display: flex; justify-content: center;">
-          {{ $newsList->links() }}
+          <?php echo e($newsList->links()); ?>
+
         </div>
-        @endif
+        <?php endif; ?>
 
       </div>
     </section>
 
   </main>
 
-  @include('components.footer')
+  <?php echo $__env->make('components.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <script src="/js/script.js?v=3.0"></script>
   <script>
@@ -290,3 +291,4 @@
 
 
 
+<?php /**PATH /home/xau/rasabaik/stim_ykpn_edu/resources/views/berita.blade.php ENDPATH**/ ?>

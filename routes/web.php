@@ -69,7 +69,7 @@ Route::get('/content/banner', function () {
 });
 
 Route::get('/content/berita', function () {
-    return view('berita');
+    return view('news');
 });
 
 Route::get('/content/berita/create', function () {
@@ -618,12 +618,62 @@ Route::get('/api/inspect-data', function() {
     return \App\Models\CategoryTeacher::all();
 });
 
-Route::get('/berita', function () {
-    $newsList = \App\Models\News::orderBy('created_at', 'desc')->paginate(12);
+Route::get('/berita', function (\Illuminate\Http\Request $request) {
+    $query = \App\Models\News::where('status', 'published');
+
+    if ($request->has('search') && $request->search != '') {
+        $search = $request->search;
+        $query->where(function($q) use ($search) {
+            $q->where('title', 'like', "%{$search}%")
+              ->orWhere('content', 'like', "%{$search}%");
+        });
+    }
+
+    if ($request->has('category') && $request->category != 'Semua') {
+        $category = $request->category;
+        $query->where(function($q) use ($category) {
+            $q->where('title', 'like', "%{$category}%")
+              ->orWhere('content', 'like', "%{$category}%");
+        });
+    }
+
+    $sort = $request->get('sort', 'terbaru');
+    if ($sort === 'terlama') {
+        $query->orderBy('created_at', 'asc');
+    } else {
+        $query->orderBy('created_at', 'desc');
+    }
+
+    $newsList = $query->paginate(12)->withQueryString();
     return view('berita', compact('newsList'));
 });
-Route::get('/berita.html', function () {
-    $newsList = \App\Models\News::orderBy('created_at', 'desc')->paginate(12);
+Route::get('/berita.html', function (\Illuminate\Http\Request $request) {
+    $query = \App\Models\News::where('status', 'published');
+
+    if ($request->has('search') && $request->search != '') {
+        $search = $request->search;
+        $query->where(function($q) use ($search) {
+            $q->where('title', 'like', "%{$search}%")
+              ->orWhere('content', 'like', "%{$search}%");
+        });
+    }
+
+    if ($request->has('category') && $request->category != 'Semua') {
+        $category = $request->category;
+        $query->where(function($q) use ($category) {
+            $q->where('title', 'like', "%{$category}%")
+              ->orWhere('content', 'like', "%{$category}%");
+        });
+    }
+
+    $sort = $request->get('sort', 'terbaru');
+    if ($sort === 'terlama') {
+        $query->orderBy('created_at', 'asc');
+    } else {
+        $query->orderBy('created_at', 'desc');
+    }
+
+    $newsList = $query->paginate(12)->withQueryString();
     return view('berita', compact('newsList'));
 });
 
