@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kegiatan Mahasiswa - STIM YKPN Yogyakarta</title>
+  <title>Informasi Tempat Tinggal - STIM YKPN Yogyakarta</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -138,76 +138,17 @@
       .academic-layout { grid-template-columns: 1fr; }
       .academic-sidebar { position: relative; top: 0; }
     }
-
-    /* Search Bar Styling */
-    .search-container {
-      position: relative;
-      margin-bottom: 40px;
-      max-width: 600px;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 16px 20px 16px 50px;
-      font-size: 16px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      border: 2px solid #e2e8f0;
-      border-radius: 16px;
-      outline: none;
-      transition: all 0.3s ease;
-      background: #f8fafc;
-      color: var(--navy-900);
-    }
-
-    .search-input:focus {
-      border-color: var(--orange-500);
-      background: #ffffff;
-      box-shadow: 0 4px 20px rgba(241, 135, 33, 0.1);
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 18px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #94a3b8;
-      pointer-events: none;
-      transition: color 0.3s ease;
-    }
-
-    .search-input:focus ~ .search-icon {
-      color: var(--orange-500);
-    }
-
-    .activity-card {
-      transition: all 0.3s ease;
-      border: 1px solid #e2e8f0;
-    }
-
-    .activity-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.08) !important;
-      border-color: var(--orange-500);
-    }
-
-    .activity-card img {
-      transition: transform 0.5s ease;
-    }
-
-    .activity-card:hover img {
-      transform: scale(1.05);
-    }
   </style>
   <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
 </head>
 <body>
 
-  @include('components.navbar')
+  <?php echo $__env->make('components.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
-      <h1 class="page-title animate-on-scroll">Kegiatan Mahasiswa</h1>
-      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: none; margin: 0 auto;">Dokumentasi berbagai aktivitas dan acara yang diselenggarakan oleh mahasiswa STIM YKPN.</p>
+      <h1 class="page-title animate-on-scroll">Informasi Tempat Tinggal</h1>
+      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">Panduan dan informasi mengenai pilihan tempat tinggal (kost) bagi mahasiswa STIM YKPN.</p>
     </div>
   </header>
 
@@ -217,12 +158,10 @@
       <!-- Sidebar -->
       
       <aside class="academic-sidebar animate-on-scroll">
-        <div class="sidebar-title">Kemahasiswaan</div>
+        <div class="sidebar-title">Campus Life</div>
         <ul class="sidebar-menu">
-          <li><a href="/kegiatan-mahasiswa.html" class="active">Kegiatan Mahasiswa</a></li>
-          <li><a href="/ukm.html">UKM</a></li>
-          <li><a href="/ppkpt.html">PPKPT</a></li>
-          <li><a href="/pengumuman.html">Pengumuman</a></li>
+          <li><a href="/video.html">Video</a></li>
+          <li><a href="/informasi-tempat-tinggal.html" class="active">Informasi Tempat Tinggal</a></li>
         </ul>
       </aside>
 
@@ -230,32 +169,32 @@
       <!-- Main Content -->
       <article class="academic-article animate-on-scroll animate-delay-1">
         <div class="article-header">
-          <h2>Berita & Aktivitas Mahasiswa</h2>
+          <h2>Info Kost Sekitar Kampus</h2>
         </div>
         <div class="article-body">
           
-    <div class="search-container">
-      <input type="text" class="search-input" placeholder="Cari kegiatan..." data-search-target="#activityGrid" data-search-items=".activity-card">
-      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-    </div>
-  
-          
-      <div id="activityGrid" style="display: flex; flex-direction: column; gap: 30px;">
-        @foreach($activities as $activity)
-          <div class="activity-card" style="display: grid; grid-template-columns: 200px 1fr; gap: 25px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-            <div style="background: #eee; height: 100%; min-height: 150px;">
-               <img src="{{ asset('storage/' . $activity->header_image) }}" style="width:100%; height:100%; object-fit:cover;" loading="lazy" alt="{{ $activity->title }}">
-            </div>
-            <div style="padding: 20px;">
-              <span style="font-size: 0.8rem; color: var(--accent-orange); font-weight: bold; text-transform: uppercase;">
-                {{ $activity->start_date ? $activity->start_date->format('d M Y') : 'KEGIATAN' }}
-              </span>
-              <h3 style="margin: 10px 0; color: var(--primary-blue);">{{ $activity->title }}</h3>
-              <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">{{ Str::limit(strip_tags($activity->description), 150) }}</p>
-              <a href="#" style="color: var(--primary-blue); font-weight: bold; font-size: 0.9rem;">Selengkapnya →</a>
-            </div>
+      <div style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); text-align: center;">
+        <div style="width: 80px; height: 80px; background: #fff4e5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px;">
+           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f26522" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        </div>
+        <h3 style="color: var(--primary-blue); font-size: 1.8rem; margin-bottom: 20px;">Temukan Hunian Nyaman Anda</h3>
+        <p style="color: #555; line-height: 1.8; max-width: 700px; margin: 0 auto 35px;">
+          STIM YKPN berlokasi di area strategis Yogyakarta yang dikelilingi oleh various pilihan tempat tinggal (kost/asrama) yang nyaman dan terjangkau bagi mahasiswa. Anda dapat mengeksplorasi lokasi kost melalui integrasi peta interaktif kami di Google Maps.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 40px;">
+          <div style="background: #f8faff; padding: 20px; border-radius: 12px; width: 250px; border: 1px solid #e1e8f0;">
+            <h4 style="color: var(--primary-blue); margin-bottom: 10px;">Area Terdekat</h4>
+            <p style="font-size: 0.9rem; color: #666;">Palagan, Sariharjo, Ngaglik, Sleman</p>
           </div>
-        @endforeach
+          <div style="background: #f8faff; padding: 20px; border-radius: 12px; width: 250px; border: 1px solid #e1e8f0;">
+            <h4 style="color: var(--primary-blue); margin-bottom: 10px;">Jarak Rata-rata</h4>
+            <p style="font-size: 0.9rem; color: #666;">500m - 2km dari Kampus</p>
+          </div>
+        </div>
+        <a href="https://www.google.com/maps/search/kost+dekat+stim+ykpn/" target="_blank" rel="noopener noreferrer" class="btn btn-orange" style="padding: 15px 40px; font-weight: bold; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 10px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          Lihat di Google Maps
+        </a>
       </div>
     
         </div>
@@ -264,7 +203,7 @@
     </div>
   </section>
 
-  @include('components.footer')
+  <?php echo $__env->make('components.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <script src="/js/script.js?v=3.6"></script>
 </body>
@@ -273,3 +212,6 @@
 
 
 
+
+
+<?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/informasi-tempat-tinggal.blade.php ENDPATH**/ ?>

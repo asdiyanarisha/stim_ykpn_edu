@@ -451,7 +451,7 @@
       display: none !important;
     }
   </style>
-  @vite(['resources/js/app.js'])
+  <?php echo app('Illuminate\Foundation\Vite')(['resources/js/app.js']); ?>
   <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
 </head>
 
@@ -462,7 +462,7 @@
   <div class="decor-blob decor-2"></div>
 
   <!-- NAVBAR -->
-  @include('components.navbar')
+  <?php echo $__env->make('components.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <!-- ============================================
        PAGE HEADER
@@ -479,7 +479,7 @@
   <!-- FORM SECTION (VUE) -->
   <div id="app" data-page="pmbFrontendForm"></div>
 
-  @include('components.footer')
+  <?php echo $__env->make('components.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <!-- Script -->
   <script src="/js/script.js?v=3.6"></script>
@@ -497,3 +497,4 @@
 
 
 
+<?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/pmb.blade.php ENDPATH**/ ?>

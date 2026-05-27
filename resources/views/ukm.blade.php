@@ -281,6 +281,8 @@
         <ul class="sidebar-menu">
           <li><a href="/kegiatan-mahasiswa.html">Kegiatan Mahasiswa</a></li>
           <li><a href="/ukm.html" class="active">UKM</a></li>
+          <li><a href="/ppkpt.html">PPKPT</a></li>
+          <li><a href="/pengumuman.html">Pengumuman</a></li>
         </ul>
       </aside>
 

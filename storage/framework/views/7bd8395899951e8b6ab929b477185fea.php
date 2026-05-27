@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kegiatan Mahasiswa - STIM YKPN Yogyakarta</title>
+  <title>Galeri Video - STIM YKPN Yogyakarta</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -138,76 +138,17 @@
       .academic-layout { grid-template-columns: 1fr; }
       .academic-sidebar { position: relative; top: 0; }
     }
-
-    /* Search Bar Styling */
-    .search-container {
-      position: relative;
-      margin-bottom: 40px;
-      max-width: 600px;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 16px 20px 16px 50px;
-      font-size: 16px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      border: 2px solid #e2e8f0;
-      border-radius: 16px;
-      outline: none;
-      transition: all 0.3s ease;
-      background: #f8fafc;
-      color: var(--navy-900);
-    }
-
-    .search-input:focus {
-      border-color: var(--orange-500);
-      background: #ffffff;
-      box-shadow: 0 4px 20px rgba(241, 135, 33, 0.1);
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 18px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #94a3b8;
-      pointer-events: none;
-      transition: color 0.3s ease;
-    }
-
-    .search-input:focus ~ .search-icon {
-      color: var(--orange-500);
-    }
-
-    .activity-card {
-      transition: all 0.3s ease;
-      border: 1px solid #e2e8f0;
-    }
-
-    .activity-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.08) !important;
-      border-color: var(--orange-500);
-    }
-
-    .activity-card img {
-      transition: transform 0.5s ease;
-    }
-
-    .activity-card:hover img {
-      transform: scale(1.05);
-    }
   </style>
   <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
 </head>
 <body>
 
-  @include('components.navbar')
+  <?php echo $__env->make('components.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
-      <h1 class="page-title animate-on-scroll">Kegiatan Mahasiswa</h1>
-      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: none; margin: 0 auto;">Dokumentasi berbagai aktivitas dan acara yang diselenggarakan oleh mahasiswa STIM YKPN.</p>
+      <h1 class="page-title animate-on-scroll">Galeri Video</h1>
+      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">Kumpulan video aktivitas, profil, dan dokumentasi kegiatan kampus STIM YKPN.</p>
     </div>
   </header>
 
@@ -217,12 +158,10 @@
       <!-- Sidebar -->
       
       <aside class="academic-sidebar animate-on-scroll">
-        <div class="sidebar-title">Kemahasiswaan</div>
+        <div class="sidebar-title">Campus Life</div>
         <ul class="sidebar-menu">
-          <li><a href="/kegiatan-mahasiswa.html" class="active">Kegiatan Mahasiswa</a></li>
-          <li><a href="/ukm.html">UKM</a></li>
-          <li><a href="/ppkpt.html">PPKPT</a></li>
-          <li><a href="/pengumuman.html">Pengumuman</a></li>
+          <li><a href="/video.html" class="active">Video</a></li>
+          <li><a href="/informasi-tempat-tinggal.html">Informasi Tempat Tinggal</a></li>
         </ul>
       </aside>
 
@@ -230,32 +169,29 @@
       <!-- Main Content -->
       <article class="academic-article animate-on-scroll animate-delay-1">
         <div class="article-header">
-          <h2>Berita & Aktivitas Mahasiswa</h2>
+          <h2>Video Campus Life</h2>
         </div>
         <div class="article-body">
           
-    <div class="search-container">
-      <input type="text" class="search-input" placeholder="Cari kegiatan..." data-search-target="#activityGrid" data-search-items=".activity-card">
-      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-    </div>
-  
-          
-      <div id="activityGrid" style="display: flex; flex-direction: column; gap: 30px;">
-        @foreach($activities as $activity)
-          <div class="activity-card" style="display: grid; grid-template-columns: 200px 1fr; gap: 25px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-            <div style="background: #eee; height: 100%; min-height: 150px;">
-               <img src="{{ asset('storage/' . $activity->header_image) }}" style="width:100%; height:100%; object-fit:cover;" loading="lazy" alt="{{ $activity->title }}">
-            </div>
-            <div style="padding: 20px;">
-              <span style="font-size: 0.8rem; color: var(--accent-orange); font-weight: bold; text-transform: uppercase;">
-                {{ $activity->start_date ? $activity->start_date->format('d M Y') : 'KEGIATAN' }}
-              </span>
-              <h3 style="margin: 10px 0; color: var(--primary-blue);">{{ $activity->title }}</h3>
-              <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">{{ Str::limit(strip_tags($activity->description), 150) }}</p>
-              <a href="#" style="color: var(--primary-blue); font-weight: bold; font-size: 0.9rem;">Selengkapnya →</a>
-            </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px;">
+        <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+          <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/miUW4EkRWN8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
-        @endforeach
+          <div style="padding: 20px;">
+            <h3 style="color: var(--primary-blue); font-size: 1.2rem; margin-bottom: 10px;">STIM YKPN Campus Life</h3>
+            <p style="color: #666; font-size: 0.9rem;">Melihat lebih dekat lingkungan kampus, fasilitas, dan keseharian mahasiswa di STIM YKPN Yogyakarta.</p>
+          </div>
+        </div>
+        <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+          <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/SLyCS5tOfQI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div style="padding: 20px;">
+            <h3 style="color: var(--primary-blue); font-size: 1.2rem; margin-bottom: 10px;">Profil STIM YKPN</h3>
+            <p style="color: #666; font-size: 0.9rem;">Video profil resmi yang memperkenalkan visi, misi, dan keunggulan akademik STIM YKPN.</p>
+          </div>
+        </div>
       </div>
     
         </div>
@@ -264,7 +200,7 @@
     </div>
   </section>
 
-  @include('components.footer')
+  <?php echo $__env->make('components.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <script src="/js/script.js?v=3.6"></script>
 </body>
@@ -273,3 +209,6 @@
 
 
 
+
+
+<?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/video.blade.php ENDPATH**/ ?>
