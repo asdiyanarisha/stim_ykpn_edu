@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
             PmbStatusSeeder::class,
             CategoryTeacherSeeder::class,
             JobTitleSeeder::class,
+            TahunAkademikSeeder::class,
+            SemesterSeeder::class,
+            KategoriSeeder::class,
         ]);
     }
 }

@@ -55,6 +55,7 @@ use App\Http\Controllers\Api\JobTitleController;
 use App\Http\Controllers\Api\PmbPublicController;
 use App\Http\Controllers\Api\PmbAdminController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\KegiatanAkademikController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -398,4 +399,12 @@ Route::middleware('jwt.auth')->group(function () {
     // Whatsapp Contacts Management
     Route::get('/whatsapp-contacts', [\App\Http\Controllers\Api\WhatsappContactController::class, 'index']);
     Route::post('/whatsapp-contacts', [\App\Http\Controllers\Api\WhatsappContactController::class, 'store']);
+
+    // Kegiatan Akademik CRUD
+    Route::get('/kegiatan-akademik', [KegiatanAkademikController::class, 'index']);
+    Route::get('/kegiatan-akademik/options', [KegiatanAkademikController::class, 'getOptions']);
+    Route::get('/kegiatan-akademik/{id}', [KegiatanAkademikController::class, 'show']);
+    Route::post('/kegiatan-akademik', [KegiatanAkademikController::class, 'store']);
+    Route::post('/kegiatan-akademik/{id}', [KegiatanAkademikController::class, 'update']);
+    Route::delete('/kegiatan-akademik/{id}', [KegiatanAkademikController::class, 'destroy']);
 });
