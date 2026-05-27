@@ -3635,6 +3635,7 @@ a.btn.btn-orange:hover {
   font-weight: 700;
   text-decoration: none;
   cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 75, 147, 0.1);
 }
 
 .mobile-nav-item.primary-cta {
@@ -3695,6 +3696,7 @@ a.btn.btn-orange:hover {
   font-weight: 600;
   font-size: 0.95rem;
   border-bottom: 1px solid #e2e8f0;
+  -webkit-tap-highlight-color: rgba(0, 75, 147, 0.1);
 }
 
 .mobile-submenu a:last-child {

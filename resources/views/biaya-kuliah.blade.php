@@ -11,7 +11,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=3.0">
+  <link rel="stylesheet" href="/css/style.css?v=3.5">
 
   <style>
     body {
@@ -264,7 +264,7 @@
 
 @include('components.footer')
 
-<script src="/js/script.js?v=3.0"></script>
+<script src="/js/script.js?v=3.6"></script>
 
 </body>
 

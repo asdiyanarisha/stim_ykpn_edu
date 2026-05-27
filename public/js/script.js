@@ -240,7 +240,11 @@ function initTestimonialSlider() {
       alumniName.textContent = t.name;
       alumniRole.textContent = t.role;
       alumniCompany.textContent = t.company;
-      alumniAvatar.textContent = t.initials;
+      if (t.image) {
+        alumniAvatar.innerHTML = `<img src="${t.image}" alt="${t.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
+      } else {
+        alumniAvatar.textContent = t.initials;
+      }
 
       // Update dots
       dots.forEach((dot, i) => {

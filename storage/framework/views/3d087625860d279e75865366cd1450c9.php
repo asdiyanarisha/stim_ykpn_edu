@@ -212,7 +212,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
 
 <body>
 
-  @include('components.navbar')
+  <?php echo $__env->make('components.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <!-- ============================================
        SECTION 2: HERO
@@ -261,42 +261,43 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
       </div>
 
       <!-- Slide 2+: Dynamic Content -->
-      @foreach ($banners as $index => $banner)
+      <?php $__currentLoopData = $banners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $banner): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
       <div class="slide">
-        <img src="{{ $banner->url_image }}" alt="{{ $banner->title }}" loading="lazy">
+        <img src="<?php echo e($banner->url_image); ?>" alt="<?php echo e($banner->title); ?>" loading="lazy">
         <div class="hero-overlay"></div>
-        @if($banner->title || $banner->description)
+        <?php if($banner->title || $banner->description): ?>
         <div style="position: absolute; inset: 0; display: flex; align-items: center; z-index: 2; pointer-events: none;">
           <div class="container" style="pointer-events: none;">
             <div class="hero-content" style="pointer-events: auto;">
-              @if($banner->badge_text)
+              <?php if($banner->badge_text): ?>
               <div class="hero-badge" style="display: inline-flex; align-items: center; gap: 8px;">
                 <span class="badge-dot"></span>
-                <span style="display: inline-block; transform: translateY(-1px);">{{ $banner->badge_text }}</span>
+                <span style="display: inline-block; transform: translateY(-1px);"><?php echo e($banner->badge_text); ?></span>
               </div>
-              @endif
-              @if($banner->title)
-              <h1 class="hero-title">{{ $banner->title }}</h1>
-              @endif
-              @if($banner->description)
-              <p class="hero-subtitle">{{ $banner->description }}</p>
-              @endif
-              @if($banner->button_text && $banner->link)
+              <?php endif; ?>
+              <?php if($banner->title): ?>
+              <h1 class="hero-title"><?php echo e($banner->title); ?></h1>
+              <?php endif; ?>
+              <?php if($banner->description): ?>
+              <p class="hero-subtitle"><?php echo e($banner->description); ?></p>
+              <?php endif; ?>
+              <?php if($banner->button_text && $banner->link): ?>
               <div class="hero-actions" style="width: 100%;">
-                <a href="{{ $banner->link }}" class="btn btn-orange btn-pulse">
-                  {{ $banner->button_text }}
+                <a href="<?php echo e($banner->link); ?>" class="btn btn-orange btn-pulse">
+                  <?php echo e($banner->button_text); ?>
+
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
                 </a>
               </div>
-              @endif
+              <?php endif; ?>
             </div>
           </div>
         </div>
-        @endif
+        <?php endif; ?>
       </div>
-      @endforeach
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-      @if ($banners->isEmpty())
+      <?php if($banners->isEmpty()): ?>
       <!-- Fallback slides -->
       <div class="slide">
         <img src="/images/students.png" alt="STIM YKPN Campus 2" loading="lazy">
@@ -306,18 +307,18 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         <img src="/images/hero_bg.png" alt="STIM YKPN Campus 3" loading="lazy">
         <div class="hero-overlay"></div>
       </div>
-      @endif
+      <?php endif; ?>
 
       <div class="slider-dots" id="heroSliderDots" style="bottom: 100px;">
         <button class="dot active" data-index="0" aria-label="Slide 1"></button>
-        @foreach ($banners as $index => $banner)
-          <button class="dot" data-index="{{ $index + 1 }}" aria-label="Slide {{ $index + 2 }}"></button>
-        @endforeach
+        <?php $__currentLoopData = $banners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $banner): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <button class="dot" data-index="<?php echo e($index + 1); ?>" aria-label="Slide <?php echo e($index + 2); ?>"></button>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         
-        @if ($banners->isEmpty())
+        <?php if($banners->isEmpty()): ?>
           <button class="dot" data-index="1" aria-label="Slide 2"></button>
           <button class="dot" data-index="2" aria-label="Slide 3"></button>
-        @endif
+        <?php endif; ?>
       </div>
     </div>
     <!-- Slider Controls -->
@@ -356,7 +357,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
           <!-- Program 1 -->
           <div class="program-card animate-on-scroll animate-delay-1">
             <div class="program-card-image">
-              <img src="{{ asset('images/STIMYK/optimized_STIMYK-300.jpg') }}" alt="S1 Bisnis Digital" loading="lazy" style="object-fit: cover;">
+              <img src="<?php echo e(asset('images/STIMYK/optimized_STIMYK-300.jpg')); ?>" alt="S1 Bisnis Digital" loading="lazy" style="object-fit: cover;">
               <span class="badge">TERAKREDITASI BAIK</span>
             </div>
             <div class="program-card-body">
@@ -374,7 +375,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
           <!-- Program 2 -->
           <div class="program-card animate-on-scroll animate-delay-2">
             <div class="program-card-image">
-              <img src="{{ asset('images/STIMYK/optimized_STIMYK-290.jpg') }}" alt="S1 Manajemen" loading="lazy" style="object-fit: cover;">
+              <img src="<?php echo e(asset('images/STIMYK/optimized_STIMYK-290.jpg')); ?>" alt="S1 Manajemen" loading="lazy" style="object-fit: cover;">
               <span class="badge">TERAKREDITASI BAIK SEKALI</span>
             </div>
             <div class="program-card-body">
@@ -392,7 +393,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
           <!-- Program 3 -->
           <div class="program-card animate-on-scroll animate-delay-3">
             <div class="program-card-image">
-              <img src="{{ asset('images/STIMYK/optimized_STIMYK-378.jpg') }}" alt="D3 Manajemen" loading="lazy" style="object-fit: cover;">
+              <img src="<?php echo e(asset('images/STIMYK/optimized_STIMYK-378.jpg')); ?>" alt="D3 Manajemen" loading="lazy" style="object-fit: cover;">
               <span class="badge">TERAKREDITASI BAIK SEKALI</span>
             </div>
             <div class="program-card-body">
@@ -497,7 +498,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
     <div class="container">
       <div class="pmb-wrapper">
         <div class="pmb-image animate-on-scroll">
-          <img src="{{ asset('images/STIMYK/optimized_STIMYK-282.jpg') }}" alt="Mahasiswa STIM YKPN">
+          <img src="<?php echo e(asset('images/STIMYK/optimized_STIMYK-282.jpg')); ?>" alt="Mahasiswa STIM YKPN">
           <div class="floating-badge">
             <div class="periode-label">Periode</div>
             <div class="periode-year">2026/2027</div>
@@ -575,16 +576,16 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
       </div>
 
       <div class="news-grid">
-        @forelse ($latest_news as $news_item)
-        <article class="news-card animate-on-scroll animate-delay-{{ $loop->iteration }}">
+        <?php $__empty_1 = true; $__currentLoopData = $latest_news; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $news_item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+        <article class="news-card animate-on-scroll animate-delay-<?php echo e($loop->iteration); ?>">
           <div class="news-card-image">
-            <img src="{{ $news_item->url_image ?? '/images/hero-bg.png' }}" alt="{{ $news_item->title }}">
-            <span class="date-badge">{{ $news_item->created_at->format('d M Y') }}</span>
+            <img src="<?php echo e($news_item->url_image ?? '/images/hero-bg.png'); ?>" alt="<?php echo e($news_item->title); ?>">
+            <span class="date-badge"><?php echo e($news_item->created_at->format('d M Y')); ?></span>
           </div>
           <div class="news-card-body">
             <span class="category">Berita</span>
-            <h3><a href="/berita/{{ $news_item->id }}">{{ $news_item->title }}</a></h3>
-            <a href="/berita/{{ $news_item->id }}" class="read-more">
+            <h3><a href="/berita/<?php echo e($news_item->id); ?>"><?php echo e($news_item->title); ?></a></h3>
+            <a href="/berita/<?php echo e($news_item->id); ?>" class="read-more">
               Baca Selengkapnya
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -594,11 +595,11 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
             </a>
           </div>
         </article>
-        @empty
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
         <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; color: #64748b;">
           <p>Belum ada berita terbaru.</p>
         </div>
-        @endforelse
+        <?php endif; ?>
       </div>
     </div>
   </section>
@@ -631,25 +632,25 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         </div>
 
         <div class="testimonial-dots" id="testimonialDots">
-          @if(isset($alumnis) && $alumnis->count() > 0)
-            @foreach($alumnis as $index => $alumni)
-              <button class="dot {{ $index === 0 ? 'active' : '' }}" data-index="{{ $index }}" aria-label="Testimoni {{ $index + 1 }}"></button>
-            @endforeach
-          @else
+          <?php if(isset($alumnis) && $alumnis->count() > 0): ?>
+            <?php $__currentLoopData = $alumnis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $alumni): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <button class="dot <?php echo e($index === 0 ? 'active' : ''); ?>" data-index="<?php echo e($index); ?>" aria-label="Testimoni <?php echo e($index + 1); ?>"></button>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+          <?php else: ?>
             <button class="dot active" data-index="0" aria-label="Testimoni 1"></button>
             <button class="dot" data-index="1" aria-label="Testimoni 2"></button>
             <button class="dot" data-index="2" aria-label="Testimoni 3"></button>
             <button class="dot" data-index="3" aria-label="Testimoni 4"></button>
             <button class="dot" data-index="4" aria-label="Testimoni 5"></button>
-          @endif
+          <?php endif; ?>
         </div>
       </div>
     </div>
   </section>
 
-  @if(isset($alumnis) && $alumnis->count() > 0)
+  <?php if(isset($alumnis) && $alumnis->count() > 0): ?>
   <script>
-    window.dynamicTestimonials = {!! json_encode($alumnis->map(function($a) {
+    window.dynamicTestimonials = <?php echo json_encode($alumnis->map(function($a) {
         $words = explode(' ', $a->name);
         $initials = '';
         foreach(array_slice($words, 0, 2) as $w) {
@@ -663,16 +664,16 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
             'initials' => $initials,
             'image' => $a->image ? (str_contains($a->image, 'http') ? $a->image : asset('storage/' . $a->image)) : null
         ];
-    })) !!};
+    })); ?>;
   </script>
-  @endif
+  <?php endif; ?>
 
   <!-- ============================================
        SECTION 8: CAMPUS TOUR VIDEO
        ============================================ -->
   <section class="campus-tour" id="campus-tour">
     <div class="campus-tour-bg">
-      <img src="{{ asset('images/STIMYK/optimized_STIMYK-324.jpg') }}" alt="STIM YKPN Campus Aerial View" style="object-fit: cover;">
+      <img src="<?php echo e(asset('images/STIMYK/optimized_STIMYK-324.jpg')); ?>" alt="STIM YKPN Campus Aerial View" style="object-fit: cover;">
     </div>
     <div class="container">
       <div class="play-button" id="playButton" role="button" aria-label="Play campus tour video">
@@ -728,7 +729,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
     </div>
   </section>
 
-  @include('components.footer')
+  <?php echo $__env->make('components.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <!-- Script -->
   <script src="/js/script.js?v=3.6"></script>
@@ -737,3 +738,4 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
 </html>
 
 
+<?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/index.blade.php ENDPATH**/ ?>

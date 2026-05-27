@@ -359,3 +359,4 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 </div>
+<?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/components/navbar.blade.php ENDPATH**/ ?>
