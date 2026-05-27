@@ -12,6 +12,10 @@ use App\Models\Teacher;
 use App\Models\AcademicCalendar;
 use App\Models\StudentActivity;
 use App\Models\StudentUkm;
+use App\Models\Semester;
+use App\Models\Kategori;
+use App\Models\KegiatanAkademik;
+use App\Models\TahunAkademik;
 
 class PublicPagesController extends Controller
 {
@@ -142,7 +146,14 @@ class PublicPagesController extends Controller
     public function academicCalendar()
     {
         $calendar = AcademicCalendar::first();
-        return view('kalender-akademik', compact('calendar'));
+        $semesters = Semester::all();
+        $kategori = Kategori::all();
+        $kegiatans = KegiatanAkademik::where('aktif', true)
+            ->orderBy('tanggal_mulai', 'asc')
+            ->get();
+        $activeYear = TahunAkademik::where('aktif', true)->first();
+
+        return view('kalender-akademik', compact('calendar', 'semesters', 'kategori', 'kegiatans', 'activeYear'));
     }
 
     public function studentActivities()
