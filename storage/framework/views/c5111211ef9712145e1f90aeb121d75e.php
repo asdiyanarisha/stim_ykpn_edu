@@ -202,7 +202,7 @@
 </head>
 <body>
 
-  @include('components.navbar')
+  <?php echo $__env->make('components.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
@@ -241,21 +241,22 @@
   
           
       <div id="activityGrid" style="display: flex; flex-direction: column; gap: 30px;">
-        @foreach($activities as $activity)
+        <?php $__currentLoopData = $activities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $activity): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
           <div class="activity-card" style="display: grid; grid-template-columns: 200px 1fr; gap: 25px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
             <div style="background: #eee; height: 100%; min-height: 150px;">
-               <img src="{{ asset('storage/' . $activity->header_image) }}" style="width:100%; height:100%; object-fit:cover;" loading="lazy" alt="{{ $activity->title }}">
+               <img src="<?php echo e(asset('storage/' . $activity->header_image)); ?>" style="width:100%; height:100%; object-fit:cover;" loading="lazy" alt="<?php echo e($activity->title); ?>">
             </div>
             <div style="padding: 20px;">
               <span style="font-size: 0.8rem; color: var(--accent-orange); font-weight: bold; text-transform: uppercase;">
-                {{ $activity->start_date ? $activity->start_date->format('d M Y') : 'KEGIATAN' }}
+                <?php echo e($activity->start_date ? $activity->start_date->format('d M Y') : 'KEGIATAN'); ?>
+
               </span>
-              <h3 style="margin: 10px 0; color: var(--primary-blue);">{{ $activity->title }}</h3>
-              <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">{{ Str::limit(strip_tags($activity->description), 150) }}</p>
+              <h3 style="margin: 10px 0; color: var(--primary-blue);"><?php echo e($activity->title); ?></h3>
+              <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;"><?php echo e(Str::limit(strip_tags($activity->description), 150)); ?></p>
               <a href="#" style="color: var(--primary-blue); font-weight: bold; font-size: 0.9rem;">Selengkapnya →</a>
             </div>
           </div>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
       </div>
     
         </div>
@@ -264,7 +265,7 @@
     </div>
   </section>
 
-  @include('components.footer')
+  <?php echo $__env->make('components.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <script src="/js/script.js?v=3.6"></script>
 </body>
@@ -273,3 +274,4 @@
 
 
 
+<?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/kegiatan-mahasiswa.blade.php ENDPATH**/ ?>

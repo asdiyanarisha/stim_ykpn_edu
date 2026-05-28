@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kegiatan Mahasiswa - STIM YKPN Yogyakarta</title>
+  <title>Unit Kegiatan Mahasiswa (UKM) - STIM YKPN Yogyakarta</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -179,35 +179,95 @@
       color: var(--orange-500);
     }
 
-    .activity-card {
-      transition: all 0.3s ease;
-      border: 1px solid #e2e8f0;
+    /* UKM Card Styling with Image */
+    #ukmGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
     }
 
-    .activity-card:hover {
+    .ukm-card {
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ukm-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.08) !important;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
       border-color: var(--orange-500);
     }
 
-    .activity-card img {
+    .ukm-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid #e2e8f0;
       transition: transform 0.5s ease;
     }
-
-    .activity-card:hover img {
+    
+    .ukm-card:hover .ukm-image {
       transform: scale(1.05);
+    }
+    
+    .ukm-image-container {
+      overflow: hidden;
+      width: 100%;
+      height: 200px;
+    }
+
+    .ukm-content {
+      padding: 24px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ukm-content h3 {
+      color: var(--navy-900);
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    .ukm-info {
+      margin-top: auto;
+    }
+
+    .ukm-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: #64748b;
+    }
+
+    .ukm-info-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--orange-500);
+      flex-shrink: 0;
+      margin-top: 2px;
     }
   </style>
   <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
 </head>
 <body>
 
-  @include('components.navbar')
+  <?php echo $__env->make('components.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
-      <h1 class="page-title animate-on-scroll">Kegiatan Mahasiswa</h1>
-      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: none; margin: 0 auto;">Dokumentasi berbagai aktivitas dan acara yang diselenggarakan oleh mahasiswa STIM YKPN.</p>
+      <h1 class="page-title animate-on-scroll">Unit Kegiatan Mahasiswa (UKM)</h1>
+      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: none; margin: 0 auto;">Wadah pengembangan minat, bakat, dan kreativitas mahasiswa STIM YKPN Yogyakarta.</p>
     </div>
   </header>
 
@@ -219,8 +279,8 @@
       <aside class="academic-sidebar animate-on-scroll">
         <div class="sidebar-title">Kemahasiswaan</div>
         <ul class="sidebar-menu">
-          <li><a href="/kegiatan-mahasiswa.html" class="active">Kegiatan Mahasiswa</a></li>
-          <li><a href="/ukm.html">UKM</a></li>
+          <li><a href="/kegiatan-mahasiswa.html">Kegiatan Mahasiswa</a></li>
+          <li><a href="/ukm.html" class="active">UKM</a></li>
           <li><a href="/ppkpt.html">PPKPT</a></li>
           <li><a href="/pengumuman.html">Pengumuman</a></li>
         </ul>
@@ -230,33 +290,39 @@
       <!-- Main Content -->
       <article class="academic-article animate-on-scroll animate-delay-1">
         <div class="article-header">
-          <h2>Berita & Aktivitas Mahasiswa</h2>
+          <h2>Daftar Unit Kegiatan Mahasiswa</h2>
         </div>
         <div class="article-body">
           
     <div class="search-container">
-      <input type="text" class="search-input" placeholder="Cari kegiatan..." data-search-target="#activityGrid" data-search-items=".activity-card">
+      <input type="text" class="search-input" placeholder="Cari nama UKM atau jadwal..." data-search-target="#ukmGrid" data-search-items=".ukm-card">
       <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
     </div>
   
-          
-      <div id="activityGrid" style="display: flex; flex-direction: column; gap: 30px;">
-        @foreach($activities as $activity)
-          <div class="activity-card" style="display: grid; grid-template-columns: 200px 1fr; gap: 25px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-            <div style="background: #eee; height: 100%; min-height: 150px;">
-               <img src="{{ asset('storage/' . $activity->header_image) }}" style="width:100%; height:100%; object-fit:cover;" loading="lazy" alt="{{ $activity->title }}">
-            </div>
-            <div style="padding: 20px;">
-              <span style="font-size: 0.8rem; color: var(--accent-orange); font-weight: bold; text-transform: uppercase;">
-                {{ $activity->start_date ? $activity->start_date->format('d M Y') : 'KEGIATAN' }}
-              </span>
-              <h3 style="margin: 10px 0; color: var(--primary-blue);">{{ $activity->title }}</h3>
-              <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">{{ Str::limit(strip_tags($activity->description), 150) }}</p>
-              <a href="#" style="color: var(--primary-blue); font-weight: bold; font-size: 0.9rem;">Selengkapnya →</a>
+    <p style="margin-bottom: 30px; font-size: 16px; color: #475569; line-height: 1.8;">Selain kegiatan perkuliahan, STIM YKPN juga mendukung para mahasiswa untuk dapat berprestasi dalam bidang UKM Olahraga dan non-olahraga melalui wadah-wadah berikut:</p>
+      
+    <div id="ukmGrid">
+      <?php $__currentLoopData = $ukms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ukm): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <div class="ukm-card">
+          <div class="ukm-image-container">
+            <img src="<?php echo e(asset('storage/' . $ukm->header_image)); ?>" alt="<?php echo e($ukm->title); ?>" class="ukm-image">
+          </div>
+          <div class="ukm-content">
+            <h3><?php echo e($ukm->title); ?></h3>
+            <div class="ukm-info">
+              <div class="ukm-info-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                <span><strong>Jadwal:</strong><br><?php echo e($ukm->day); ?> - <?php echo e(\Carbon\Carbon::parse($ukm->time)->format('H:i')); ?> WIB</span>
+              </div>
+              <div class="ukm-info-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <span><strong>Lokasi:</strong><br><?php echo e($ukm->location); ?></span>
+              </div>
             </div>
           </div>
-        @endforeach
-      </div>
+        </div>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </div>
     
         </div>
       </article>
@@ -264,7 +330,7 @@
     </div>
   </section>
 
-  @include('components.footer')
+  <?php echo $__env->make('components.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <script src="/js/script.js?v=3.6"></script>
 </body>
@@ -273,3 +339,6 @@
 
 
 
+
+
+<?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/ukm.blade.php ENDPATH**/ ?>
