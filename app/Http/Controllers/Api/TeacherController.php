@@ -181,6 +181,7 @@ class TeacherController extends Controller
                             'pages' => $item['pages'] ?? null,
                             'year' => $item['year'] ?? null,
                             'doi' => $item['doi'] ?? null,
+                            'url' => $item['url'] ?? null,
                             'created_at' => $now,
                             'updated_at' => $now,
                         ];
@@ -372,6 +373,7 @@ class TeacherController extends Controller
                             'pages' => $item['pages'] ?? null,
                             'year' => $item['year'] ?? null,
                             'doi' => $item['doi'] ?? null,
+                            'url' => $item['url'] ?? null,
                             'created_at' => $now,
                             'updated_at' => $now,
                         ];
@@ -573,6 +575,7 @@ class TeacherController extends Controller
             'publications.*.pages' => 'nullable|string|max:50',
             'publications.*.year' => 'nullable|string|max:4',
             'publications.*.doi' => 'nullable|string|max:255',
+            'publications.*.url' => 'nullable|url|max:255',
 
             'books' => 'nullable|array',
             'books.*.title' => 'nullable|string|max:255',

@@ -125,8 +125,8 @@
                 @foreach($teacher->professional_positions as $pos)
                   <div class="edu-item">
                     <div class="edu-year">{{ $pos->start_year }} - {{ $pos->end_year ?: 'Sekarang' }}</div>
-                    <div class="edu-degree">{{ $pos->position }}</div>
-                    <div class="edu-univ">{{ $pos->institution }}</div>
+                    <div class="edu-degree">{{ $pos->position_name }}</div>
+                    <div class="edu-univ">{{ $pos->organization_name }}</div>
                   </div>
                 @endforeach
               </div>
@@ -149,7 +149,7 @@
                 @foreach($teacher->publications as $pub)
                   <div class="pub-item">
                     <div class="pub-title">{{ $pub->title }}</div>
-                    <div class="pub-meta">{{ $pub->journal_name }} | {{ $pub->year }} @if($pub->url) | <a href="{{ $pub->url }}" target="_blank" style="color: var(--blue-500);">Lihat Publikasi</a> @endif</div>
+                    <div class="pub-meta">{{ $pub->journal_book_name }} | {{ $pub->year }} @if($pub->url) | <a href="{{ $pub->url }}" target="_blank" style="color: var(--blue-500);">Lihat Publikasi</a> @endif</div>
                   </div>
                 @endforeach
               </div>

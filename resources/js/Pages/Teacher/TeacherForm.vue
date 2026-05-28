@@ -329,6 +329,7 @@
                         <AppInput v-model="item.year" label="Tahun" type="number" placeholder="2024" />
                         <AppInput v-model="item.doi" label="DOI" placeholder="10.1000/xyz" />
                       </div>
+                      <AppInput v-model="item.url" label="URL Publikasi (opsional)" placeholder="https://..." />
                     </div>
                   </div>
                   <div v-if="form.publications.length === 0" class="text-center py-10 text-slate-400 text-sm">
@@ -592,7 +593,7 @@ const form = reactive({
 const templates = {
   education: () => ({ degree: '', institution: '', major: '', country: '', graduation_year: '' }),
   research_areas: () => ({ area_name: '' }),
-  publications: () => ({ title: '', journal_book_name: '', type: '', volume: '', pages: '', year: '', doi: '' }),
+  publications: () => ({ title: '', journal_book_name: '', type: '', volume: '', pages: '', year: '', doi: '', url: '' }),
   books: () => ({ title: '', publisher: '', year: '', isbn: '' }),
   popular_writings: () => ({ title: '', media: '', date: '', url: '' }),
   professional_positions: () => ({ position_name: '', organization_name: '', start_year: '', end_year: '', is_current: false, description: '' }),
