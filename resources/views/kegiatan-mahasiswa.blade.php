@@ -244,7 +244,7 @@
         @foreach($activities as $activity)
           <div class="activity-card" style="display: grid; grid-template-columns: 200px 1fr; gap: 25px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
             <div style="background: #eee; height: 100%; min-height: 150px;">
-               <img src="{{ asset('storage/' . $activity->header_image) }}" style="width:100%; height:100%; object-fit:cover;" loading="lazy" alt="{{ $activity->title }}">
+                <img src="{{ !empty($activity->header_image) ? (str_contains($activity->header_image, 'http') ? $activity->header_image : asset('storage/' . $activity->header_image)) : asset('images/lambang-stim.webp') }}" style="width:100%; height:100%; object-fit:cover;" loading="lazy" alt="{{ $activity->title }}">
             </div>
             <div style="padding: 20px;">
               <span style="font-size: 0.8rem; color: var(--accent-orange); font-weight: bold; text-transform: uppercase;">

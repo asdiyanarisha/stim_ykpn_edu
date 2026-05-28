@@ -305,14 +305,42 @@
       @foreach($ukms as $ukm)
         <div class="ukm-card">
           <div class="ukm-image-container">
-            <img src="{{ asset('storage/' . $ukm->header_image) }}" alt="{{ $ukm->title }}" class="ukm-image">
+            @php
+              $imageUrl = $ukm->header_image;
+              $src = '';
+              if (!empty($imageUrl)) {
+                  if (str_starts_with($imageUrl, 'http://') || str_starts_with($imageUrl, 'https://') || str_starts_with($imageUrl, '/')) {
+                      $src = $imageUrl;
+                  } else {
+                      if (str_starts_with($imageUrl, 'storage/')) {
+                          $src = asset($imageUrl);
+                      } else {
+                          $src = asset('storage/' . $imageUrl);
+                      }
+                  }
+              } else {
+                  $src = asset('images/lambang-stim.webp');
+              }
+            @endphp
+            <img src="{{ $src }}" alt="{{ $ukm->title }}" class="ukm-image">
           </div>
           <div class="ukm-content">
             <h3>{{ $ukm->title }}</h3>
             <div class="ukm-info">
               <div class="ukm-info-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                <span><strong>Jadwal:</strong><br>{{ $ukm->day }} - {{ \Carbon\Carbon::parse($ukm->time)->format('H:i') }} WIB</span>
+                <span><strong>Jadwal:</strong><br>{{ $ukm->day }} - 
+                @php
+                  $timeDisplay = $ukm->time;
+                  try {
+                      if (!empty($timeDisplay) && strpos($timeDisplay, '-') === false) {
+                          $timeDisplay = \Carbon\Carbon::parse($timeDisplay)->format('H:i');
+                      }
+                  } catch (\Exception $e) {
+                      // Fallback to original string
+                  }
+                @endphp
+                {{ $timeDisplay }} WIB</span>
               </div>
               <div class="ukm-info-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
