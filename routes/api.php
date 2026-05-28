@@ -407,4 +407,12 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/kegiatan-akademik', [KegiatanAkademikController::class, 'store']);
     Route::post('/kegiatan-akademik/{id}', [KegiatanAkademikController::class, 'update']);
     Route::delete('/kegiatan-akademik/{id}', [KegiatanAkademikController::class, 'destroy']);
+
+    // Academic Calendar Category CRUD
+    Route::get('/academic-calendar-categories', [\App\Http\Controllers\Api\AcademicCalendarCategoryController::class, 'index']);
+    Route::get('/academic-calendar-categories/{id}', [\App\Http\Controllers\Api\AcademicCalendarCategoryController::class, 'show']);
+    Route::post('/academic-calendar-categories', [\App\Http\Controllers\Api\AcademicCalendarCategoryController::class, 'store']);
+    Route::post('/academic-calendar-categories/{id}', [\App\Http\Controllers\Api\AcademicCalendarCategoryController::class, 'update']);
+    Route::delete('/academic-calendar-categories/{id}', [\App\Http\Controllers\Api\AcademicCalendarCategoryController::class, 'destroy']);
+    Route::post('/academic-calendar-categories/bulk-delete', [\App\Http\Controllers\Api\AcademicCalendarCategoryController::class, 'bulkDestroy']);
 });

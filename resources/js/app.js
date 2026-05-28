@@ -41,6 +41,7 @@ import AttendanceCountForm from './Pages/Content/Academic/AttendanceCountForm.vu
 import EvaluationSystemForm from './Pages/Content/Academic/EvaluationSystemForm.vue';
 import SeminarProposalForm from './Pages/Content/Academic/SeminarProposalForm.vue';
 import AcademicCalendarForm from './Pages/Content/AcademicCalendarForm.vue';
+import AcademicCalendarCategory from './Pages/Content/AcademicCalendarCategory/index.vue';
 import ExamForm from './Pages/Content/Academic/Graduation/ExamForm.vue';
 import ExamRulesForm from './Pages/Content/Academic/Graduation/ExamRulesForm.vue';
 import GraduationForm from './Pages/Content/Academic/Graduation/GraduationForm.vue';
@@ -151,6 +152,7 @@ const pages = {
     evaluationSystemForm: EvaluationSystemForm,
     seminarProposalForm: SeminarProposalForm,
     academicCalendarForm: AcademicCalendarForm,
+    academicCalendarCategory: AcademicCalendarCategory,
     examForm: ExamForm,
     examRulesForm: ExamRulesForm,
     graduationForm: GraduationForm,
