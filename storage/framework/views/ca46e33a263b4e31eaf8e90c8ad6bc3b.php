@@ -1,29 +1,9 @@
-
-<style>
-  .activity-card-layout {
-    display: grid; 
-    grid-template-columns: 200px 1fr; 
-    gap: 25px; 
-    background: white; 
-    border-radius: 12px; 
-    overflow: hidden; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  }
-  @media (max-width: 768px) {
-    .activity-card-layout {
-      grid-template-columns: 1fr;
-    }
-    .activity-card-layout img {
-      height: 200px !important;
-    }
-  }
-</style>
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kegiatan Mahasiswa - STIM YKPN Yogyakarta</title>
+  <title>Pengumuman - STIM YKPN Yogyakarta</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -118,47 +98,6 @@
       line-height: 1.8;
     }
 
-    .article-body p {
-      margin-bottom: 20px;
-    }
-
-    .target-list {
-      list-style: none;
-      margin-top: 30px;
-    }
-
-    .target-list li {
-      position: relative;
-      padding-left: 40px;
-      margin-bottom: 24px;
-      background: #f8fafc;
-      padding: 24px 24px 24px 60px;
-      border-radius: 12px;
-      border: 1px solid #e2e8f0;
-    }
-    .target-list li::before {
-      content: '';
-      position: absolute;
-      left: 20px;
-      top: 26px;
-      width: 20px;
-      height: 20px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23f18721' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
-
-    .target-list li h4 {
-      font-size: 18px;
-      color: var(--navy-900);
-      margin-bottom: 8px;
-    }
-
-    @media (max-width: 992px) {
-      .academic-layout { grid-template-columns: 1fr; }
-      .academic-sidebar { position: relative; top: 0; }
-    }
-
     /* Search Bar Styling */
     .search-container {
       position: relative;
@@ -217,17 +156,22 @@
     .activity-card:hover img {
       transform: scale(1.05);
     }
+
+    @media (max-width: 992px) {
+      .academic-layout { grid-template-columns: 1fr; }
+      .academic-sidebar { position: relative; top: 0; }
+    }
   </style>
   <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
 </head>
 <body>
 
-  @include('components.navbar')
+  <?php echo $__env->make('components.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
-      <h1 class="page-title animate-on-scroll">Kegiatan Mahasiswa</h1>
-      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: none; margin: 0 auto;">Dokumentasi berbagai aktivitas dan acara yang diselenggarakan oleh mahasiswa STIM YKPN.</p>
+      <h1 class="page-title animate-on-scroll">Pengumuman</h1>
+      <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 800px; margin: 0 auto;">Informasi dan pengumuman terbaru seputar kegiatan kemahasiswaan STIM YKPN.</p>
     </div>
   </header>
 
@@ -235,56 +179,46 @@
     <div class="container academic-layout">
       
       <!-- Sidebar -->
-      
       <aside class="academic-sidebar animate-on-scroll">
         <div class="sidebar-title">Kemahasiswaan</div>
         <ul class="sidebar-menu">
-          <li><a href="/kegiatan-mahasiswa.html" class="active">Kegiatan Mahasiswa</a></li>
+          <li><a href="/kegiatan-mahasiswa.html">Kegiatan Mahasiswa</a></li>
           <li><a href="/ukm.html">UKM</a></li>
           <li><a href="/ppkpt.html">PPKPT</a></li>
-          <li><a href="/pengumuman.html">Pengumuman</a></li>
+          <li><a href="/pengumuman.html" class="active">Pengumuman</a></li>
         </ul>
       </aside>
-
 
       <!-- Main Content -->
       <article class="academic-article animate-on-scroll animate-delay-1">
         <div class="article-header">
-          <h2>Berita & Aktivitas Mahasiswa</h2>
+          <h2>Daftar Pengumuman</h2>
         </div>
         <div class="article-body">
-          
-    <div class="search-container">
-      <input type="text" class="search-input" placeholder="Cari kegiatan..." data-search-target="#activityGrid" data-search-items=".activity-card">
-      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-    </div>
-  
-          
-      <div id="activityGrid" style="display: flex; flex-direction: column; gap: 30px;">
-        @foreach($activities as $activity)
-          <div class="activity-card activity-card-layout">
-            <div style="background: #eee; height: 100%; min-height: 150px;">
-                <img src="{{ !empty($activity->header_image) ? (str_contains($activity->header_image, 'http') ? $activity->header_image : asset('storage/' . $activity->header_image)) : asset('images/lambang-stim.webp') }}" style="width:100%; height:100%; object-fit:cover;" loading="lazy" alt="{{ $activity->title }}">
-            </div>
-            <div style="padding: 20px;">
-              <span style="font-size: 0.8rem; color: var(--accent-orange); font-weight: bold; text-transform: uppercase;">
-                {{ $activity->start_date ? $activity->start_date->format('d M Y') : 'KEGIATAN' }}
-              </span>
-              <h3 style="margin: 10px 0; color: var(--primary-blue);">{{ $activity->title }}</h3>
-              <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">{{ Str::limit(strip_tags($activity->description), 150) }}</p>
-              <a href="#" style="color: var(--primary-blue); font-weight: bold; font-size: 0.9rem;">Selengkapnya →</a>
+          <div class="search-container">
+            <input type="text" class="search-input" placeholder="Cari pengumuman..." data-search-target="#activityGrid" data-search-items=".activity-card">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </div>
+          <div id="activityGrid" style="display: flex; flex-direction: column; gap: 30px;">
+            <div class="activity-card" style="display: grid; grid-template-columns: 200px 1fr; gap: 25px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+              <div style="background: #eee; height: 100%; min-height: 150px;">
+                 <img src="/images/img/berita/pkkmb-2025.jpg" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
+              </div>
+              <div style="padding: 20px;">
+                <span style="font-size: 0.8rem; color: var(--orange-500); font-weight: bold; text-transform: uppercase;">PENGUMUMAN</span>
+                <h3 style="margin: 10px 0; color: var(--navy-900);">Pengumuman Lolos Seleksi Panitia Mahasiswa PKKMB 2025</h3>
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">Selamat kepada mahasiswa yang terpilih menjadi bagian dari panitia Pengenalan Kehidupan Kampus bagi Mahasiswa Baru (PKKMB) STIM YKPN 2025.</p>
+                <a href="#" style="color: var(--blue-500); font-weight: bold; font-size: 0.9rem;">Selengkapnya →</a>
+              </div>
             </div>
           </div>
-        @endforeach
-      </div>
-    
         </div>
       </article>
 
     </div>
   </section>
 
-  @include('components.footer')
+  <?php echo $__env->make('components.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <script src="/js/script.js?v=3.8"></script>
 </body>
@@ -293,3 +227,4 @@
 
 
 
+<?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/pengumuman.blade.php ENDPATH**/ ?>
