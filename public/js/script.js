@@ -365,7 +365,7 @@ function initMobileNav() {
   }
 
   // Close menu on link click
-  const mobileLinks = document.querySelectorAll('.mobile-nav-item:not(.has-submenu)');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-item:not(.has-submenu), .mobile-submenu a');
   mobileLinks.forEach(link => {
     link.addEventListener('click', () => {
       mobileOverlay.classList.remove('active');
