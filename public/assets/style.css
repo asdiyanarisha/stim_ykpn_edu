@@ -3142,3 +3142,15 @@ a.btn.btn-orange:hover {
     position: static;
   }
 }
+
+/* Mobile Clicks Fix */
+@media (max-width: 992px) {
+  .academic-sidebar, .academic-article, .nav-toggle, .mobile-overlay {
+    pointer-events: auto !important;
+  }
+  .academic-sidebar { z-index: 50; position: relative; }
+  .nav-toggle { z-index: 100000 !important; }
+}
+
+.wa-toggle-btn, .wa-popup { pointer-events: auto !important; }
+
