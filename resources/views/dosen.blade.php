@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="/css/style.css?v=3.8">
+  <link rel="stylesheet" href="/css/style.css?v=3.9">
   <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
 </head>
 <body>
@@ -86,7 +86,7 @@
       </div>
 
       <!-- Pagination -->
-      <div class="pagination-container animate-on-scroll">
+      <div class="pagination-container">
         {{ $teachers->appends(request()->query())->links('pagination::bootstrap-4') }}
       </div>
     </div>
