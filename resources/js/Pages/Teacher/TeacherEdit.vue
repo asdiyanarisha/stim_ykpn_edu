@@ -100,8 +100,9 @@
                       </div>
                     </div>
                     <div class="flex-1 space-y-4 w-full">
-                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <AppInput v-model="form.full_name" :error="formErrors.full_name ? formErrors.full_name[0] : ''" label="Nama Lengkap (tanpa gelar)" placeholder="contoh: Budi Santoso" id="full_name" />
+                        <AppInput v-model="form.npp" :error="formErrors.npp ? formErrors.npp[0] : ''" label="NPP" placeholder="contoh: 0812345" id="npp" />
                         <div class="space-y-1">
                           <label for="category_teacher_id" class="block text-sm font-medium text-slate-700">Kategori Dosen</label>
                           <select id="category_teacher_id" v-model="form.category_teacher_id" :class="['block w-full border rounded-xl shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2.5 pl-4 transition-all duration-200', formErrors.category_teacher_id ? 'border-rose-500 bg-rose-50' : 'border-slate-200 bg-white']">
@@ -571,6 +572,7 @@ const handleFotoUpload = (event) => {
 
 const form = reactive({
   full_name: '',
+  npp: '',
   category_teacher_id: null,
   job_title_teacher_id: null,
   front_title: '',
@@ -607,6 +609,7 @@ const removeItem = (key, index) => { form[key].splice(index, 1); };
 // Otomatis hilangkan pesan error saat pengguna mulai mengetik / mengisi data
 watch(form, (newVal) => {
   if (newVal.full_name && formErrors.value.full_name) delete formErrors.value.full_name;
+  if (newVal.npp && formErrors.value.npp) delete formErrors.value.npp;
   if (newVal.category_teacher_id && formErrors.value.category_teacher_id) delete formErrors.value.category_teacher_id;
   if (newVal.job_title_teacher_id && formErrors.value.job_title_teacher_id) delete formErrors.value.job_title_teacher_id;
   if (newVal.email && formErrors.value.email) delete formErrors.value.email;
@@ -669,6 +672,8 @@ const handleSubmit = async () => {
 
   // Validasi Frontend (Sama dengan kriteria Backend)
   if (!form.full_name) { formErrors.value.full_name = ['Nama lengkap wajib diisi.']; hasError = true; }
+  if (!form.npp) { formErrors.value.npp = ['NPP wajib diisi.']; hasError = true; }
+  else if (!/^[0-9]+$/.test(form.npp)) { formErrors.value.npp = ['NPP harus berupa angka.']; hasError = true; }
   if (!form.category_teacher_id) { formErrors.value.category_teacher_id = ['Kategori dosen wajib dipilih.']; hasError = true; }
   if (!form.job_title_teacher_id) { formErrors.value.job_title_teacher_id = ['Jabatan wajib dipilih.']; hasError = true; }
   if (!form.email) { formErrors.value.email = ['Alamat email wajib diisi.']; hasError = true; }
@@ -727,6 +732,7 @@ const handleSubmit = async () => {
 
     // scalar fields
     formData.append('full_name', payload.full_name || '');
+    formData.append('npp', payload.npp || '');
     formData.append('category_teacher_id', payload.category_teacher_id || '');
     formData.append('job_title_teacher_id', payload.job_title_teacher_id || '');
     formData.append('front_title', payload.front_title || '');

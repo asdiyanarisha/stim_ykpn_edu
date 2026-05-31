@@ -109,6 +109,7 @@ class TeacherController extends Controller
                     'category_teacher_id' => $validatedData['category_teacher_id'] ?? null,
                     'job_title_teacher_id' => $validatedData['job_title_teacher_id'] ?? null,
                     'full_name' => $validatedData['full_name'],
+                    'npp' => $validatedData['npp'],
                     'front_title' => $validatedData['front_title'] ?? null,
                     'back_title' => $validatedData['back_title'] ?? null,
                     'birth_date' => $validatedData['birth_date'] ?? null,
@@ -272,7 +273,7 @@ class TeacherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $this->validateTeacherData($request);
+        $validatedData = $this->validateTeacherData($request, $id);
 
         try {
             DB::transaction(function () use ($validatedData, $request, $id) {
@@ -288,6 +289,7 @@ class TeacherController extends Controller
                     'category_teacher_id' => $validatedData['category_teacher_id'] ?? $teacher->category_teacher_id,
                     'job_title_teacher_id' => $validatedData['job_title_teacher_id'] ?? $teacher->job_title_teacher_id,
                     'full_name' => $validatedData['full_name'],
+                    'npp' => $validatedData['npp'],
                     'front_title' => $validatedData['front_title'] ?? null,
                     'back_title' => $validatedData['back_title'] ?? null,
                     'birth_date' => $validatedData['birth_date'] ?? null,
@@ -501,7 +503,7 @@ class TeacherController extends Controller
     /**
      * Helper validasi untuk data dosen
      */
-    private function validateTeacherData(Request $request)
+    private function validateTeacherData(Request $request, $id = null)
     {
         $arrayFields = [
             'education',
@@ -546,6 +548,12 @@ class TeacherController extends Controller
             'category_teacher_id' => 'required|integer',
             'job_title_teacher_id' => 'required|integer',
             'full_name' => 'required|string|max:255',
+            'npp' => [
+                'required',
+                'string',
+                'regex:/^[0-9]+$/',
+                $id ? 'unique:teachers,npp,' . $id : 'unique:teachers,npp',
+            ],
             'front_title' => 'nullable|string|max:50',
             'back_title' => 'nullable|string|max:50',
             'birth_date' => 'nullable|date',

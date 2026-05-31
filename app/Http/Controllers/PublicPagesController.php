@@ -100,7 +100,7 @@ class PublicPagesController extends Controller
             });
         }
         
-        $teachers = $query->with(['category', 'jobTitle'])->paginate(6);
+        $teachers = $query->with(['category', 'jobTitle'])->orderBy('full_name', 'asc')->paginate(6);
         return view('dosen', compact('teachers', 'categories'));
     }
 

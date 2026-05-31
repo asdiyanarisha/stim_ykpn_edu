@@ -14,6 +14,7 @@ class Teacher extends Model
         'category_teacher_id',
         'job_title_teacher_id',
         'full_name',
+        'npp',
         'front_title',
         'back_title',
         'birth_date',
