@@ -2,10 +2,13 @@
 <html lang="id">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beasiswa - STIM YKPN Yogyakarta</title>
-
+  <x-seo-head
+    title="Program Beasiswa — STIM YKPN Yogyakarta"
+    description="Berbagai program beasiswa tersedia di STIM YKPN Yogyakarta untuk mendukung mahasiswa berprestasi dan kurang mampu."
+    :canonicalUrl="url('/beasiswa')"
+  />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link

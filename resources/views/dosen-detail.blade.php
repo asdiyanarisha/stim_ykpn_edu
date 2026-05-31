@@ -1,10 +1,50 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profil {{ $teacher->full_name }} — STIM YKPN Yogyakarta</title>
-  <meta name="description" content="Detail profil akademik {{ $teacher->full_name }} di STIM YKPN Yogyakarta.">
+  @php
+  $personSchema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'ProfilePage',
+    'mainEntity' => [
+      '@type' => 'Person',
+      'name' => ($teacher->front_title ? $teacher->front_title . ' ' : '') . $teacher->full_name . ($teacher->back_title ? ', ' . $teacher->back_title : ''),
+      'givenName' => $teacher->full_name,
+      'honorificPrefix' => $teacher->front_title ?? '',
+      'honorificSuffix' => $teacher->back_title ?? '',
+      'jobTitle' => $teacher->jobTitle->title ?? 'Dosen',
+      'description' => $teacher->personal_description ?? 'Dosen STIM YKPN Yogyakarta',
+      'image' => $teacher->image_url ?: url('/images/default-user.png'),
+      'email' => $teacher->email ?? '',
+      'telephone' => $teacher->phone_number ?? '',
+      'worksFor' => [
+        '@type' => 'EducationalOrganization',
+        '@id' => url('/') . '#organization',
+        'name' => 'STIM YKPN Yogyakarta',
+      ],
+      'url' => url('/dosen/' . $teacher->id),
+    ],
+    'breadcrumb' => [
+      '@type' => 'BreadcrumbList',
+      'itemListElement' => [
+        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Beranda', 'item' => url('/')],
+        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Dosen', 'item' => url('/dosen')],
+        ['@type' => 'ListItem', 'position' => 3, 'name' => $teacher->full_name],
+      ],
+    ],
+  ];
+  $teacherFullName = ($teacher->front_title ? $teacher->front_title . ' ' : '') . $teacher->full_name . ($teacher->back_title ? ', ' . $teacher->back_title : '');
+  @endphp
+  <x-seo-head
+    :title="'Profil ' . $teacherFullName"
+    :description="'Profil akademik ' . $teacherFullName . ', ' . ($teacher->jobTitle->title ?? 'Dosen') . ' STIM YKPN Yogyakarta. ' . Str::limit($teacher->personal_description ?? '', 100)"
+    :ogImage="$teacher->image_url ?: url('/images/img/logo/logo-stim-new.png')"
+    ogType="profile"
+    :canonicalUrl="url('/dosen/' . $teacher->id)"
+    :schemaJson="$personSchema"
+  />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
+
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">

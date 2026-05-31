@@ -1,10 +1,50 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ $news->title }} - STIM YKPN Yogyakarta</title>
-  <meta name="description" content="{{ Str::limit(strip_tags($news->content), 150) }}">
+  @php
+  $articleSchema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'NewsArticle',
+    'headline' => $news->title,
+    'description' => Str::limit(strip_tags($news->content), 160),
+    'image' => $news->url_image ? $news->url_image : url('/images/img/logo/logo-stim-new.png'),
+    'datePublished' => $news->created_at->toIso8601String(),
+    'dateModified' => $news->updated_at->toIso8601String(),
+    'author' => [
+      '@type' => 'Organization',
+      'name' => 'STIM YKPN Yogyakarta',
+      'url' => url('/'),
+    ],
+    'publisher' => [
+      '@type' => 'EducationalOrganization',
+      '@id' => url('/') . '#organization',
+      'name' => 'STIM YKPN Yogyakarta',
+      'logo' => [
+        '@type' => 'ImageObject',
+        'url' => url('/images/img/logo/logo-stim-new.png'),
+      ],
+    ],
+    'mainEntityOfPage' => [
+      '@type' => 'WebPage',
+      '@id' => url('/berita/' . $news->id),
+    ],
+  ];
+  @endphp
+  <x-seo-head
+    :title="$news->title"
+    :description="Str::limit(strip_tags($news->content), 160)"
+    :ogImage="$news->url_image ?: url('/images/img/logo/logo-stim-new.png')"
+    ogType="article"
+    :canonicalUrl="url('/berita/' . $news->id)"
+    :schemaJson="$articleSchema"
+  />
+  <meta property="article:published_time" content="{{ $news->created_at->toIso8601String() }}">
+  <meta property="article:modified_time" content="{{ $news->updated_at->toIso8601String() }}">
+  <meta property="article:section" content="Berita">
+  <meta property="article:publisher" content="{{ url('/') }}">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
+
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -142,7 +182,6 @@
       }
     }
   </style>
-  <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
 </head>
 <body>
 

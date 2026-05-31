@@ -6,6 +6,8 @@ use App\Models\News;
 use App\Models\Teacher;
 use App\Models\CategoryTeacher;
 use App\Http\Controllers\PublicPagesController;
+use App\Http\Controllers\SitemapController;
+
 
 
 /*
@@ -20,6 +22,16 @@ use App\Http\Controllers\PublicPagesController;
 */
 
 Route::get('/', [PublicPagesController::class, 'index']);
+
+// XML Sitemap (SEO) — <loc> otomatis pakai APP_URL dari .env
+Route::get('/sitemap.xml', [SitemapController::class, 'index']);
+
+// robots.txt dinamis — URL sitemap otomatis dari APP_URL di .env
+Route::get('/robots.txt', function () {
+    $content = view('robots')->render();
+    return response($content, 200)->header('Content-Type', 'text/plain');
+});
+
 
 Route::get('/berita/{id}', [PublicPagesController::class, 'newsDetail']);
 

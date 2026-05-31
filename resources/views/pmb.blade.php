@@ -2,10 +2,13 @@
 <html lang="id">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulir Pendaftaran - STIM YKPN</title>
-
+  <x-seo-head
+    title="Penerimaan Mahasiswa Baru (PMB) — STIM YKPN Yogyakarta"
+    description="Daftar sekarang di STIM YKPN Yogyakarta! PMB 2026/2027 dibuka. Program reguler, ekstensi, dan beasiswa tersedia. Terakreditasi Baik Sekali."
+    :canonicalUrl="url('/pmb.html')"
+  />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unit Kegiatan Mahasiswa (UKM) - STIM YKPN Yogyakarta</title>
-  
+  <x-seo-head
+    title="Unit Kegiatan Mahasiswa (UKM) — STIM YKPN Yogyakarta"
+    description="Daftar lengkap Unit Kegiatan Mahasiswa (UKM) di STIM YKPN Yogyakarta. Wadah pengembangan minat, bakat, dan kreativitas mahasiswa."
+    :canonicalUrl="url('/ukm')"
+  />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">

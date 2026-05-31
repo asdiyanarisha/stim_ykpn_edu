@@ -28,30 +28,64 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
 <html lang="id">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STIM YKPN — School of Management Yogyakarta</title>
-  <meta name="description"
-    content="STIM YKPN Yogyakarta — Sekolah Tinggi Ilmu Manajemen terdepan dengan 50+ tahun pengalaman menghasilkan 15.000+ alumni profesional. Terakreditasi Baik Sekali.">
+  @php
+  $homepageSchema = [
+    '@context' => 'https://schema.org',
+    '@graph' => [
+      [
+        '@type' => 'EducationalOrganization',
+        '@id' => url('/') . '#organization',
+        'name' => 'STIM YKPN Yogyakarta',
+        'alternateName' => 'Sekolah Tinggi Ilmu Manajemen YKPN',
+        'url' => url('/'),
+        'logo' => url('/images/img/logo/logo-stim-new.png'),
+        'description' => 'Sekolah Tinggi Ilmu Manajemen terdepan di Yogyakarta dengan 50+ tahun pengalaman menghasilkan 15.000+ alumni profesional. Terakreditasi Baik Sekali oleh BAN-PT.',
+        'foundingDate' => '1976',
+        'address' => [
+          '@type' => 'PostalAddress',
+          'streetAddress' => 'Jl. Palagan Tentara Pelajar No. 73',
+          'addressLocality' => 'Sleman',
+          'addressRegion' => 'Yogyakarta',
+          'addressCountry' => 'ID',
+        ],
+        'telephone' => '+62274-868141',
+        'email' => 'info@stimykpn.ac.id',
+        'sameAs' => [
+          'https://www.instagram.com/stimykpn',
+          'https://www.facebook.com/stimykpn',
+          'https://www.youtube.com/@stimykpn',
+        ],
+        'numberOfStudents' => ['@type' => 'QuantitativeValue', 'value' => 15000],
+        'hasCredential' => ['@type' => 'EducationalOccupationalCredential', 'credentialCategory' => 'Terakreditasi Baik Sekali BAN-PT'],
+      ],
+      [
+        '@type' => 'WebSite',
+        '@id' => url('/') . '#website',
+        'url' => url('/'),
+        'name' => 'STIM YKPN Yogyakarta',
+        'description' => 'Website resmi Sekolah Tinggi Ilmu Manajemen YKPN Yogyakarta',
+        'publisher' => ['@id' => url('/') . '#organization'],
+        'inLanguage' => 'id-ID',
+        'potentialAction' => [
+          '@type' => 'SearchAction',
+          'target' => ['@type' => 'EntryPoint', 'urlTemplate' => url('/berita') . '?search={search_term_string}'],
+          'query-input' => 'required name=search_term_string',
+        ],
+      ],
+    ],
+  ];
+  @endphp
+  <x-seo-head
+    title="STIM YKPN — School of Management Yogyakarta"
+    description="STIM YKPN Yogyakarta — Sekolah Tinggi Ilmu Manajemen terdepan dengan 50+ tahun pengalaman menghasilkan 15.000+ alumni profesional. Terakreditasi Baik Sekali oleh BAN-PT."
+    :ogImage="url('/images/img/logo/logo-stim-new.png')"
+    ogType="website"
+    :canonicalUrl="url('/')"
+    :schemaJson="$homepageSchema"
+  />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="STIM YKPN — School of Management Yogyakarta">
-  <meta property="og:description"
-    content="Sekolah Tinggi Ilmu Manajemen YKPN Yogyakarta — 50+ tahun menghasilkan 15.000+ alumni profesional. Terakreditasi Baik Sekali.">
-  <meta property="og:image" content="/images/img/logo/LOGO STIM YPKN.png">
-  <meta property="og:url" content="https://stimykpn.ac.id">
-  <meta property="og:site_name" content="STIM YKPN Yogyakarta">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="STIM YKPN — School of Management Yogyakarta">
-  <meta name="twitter:description"
-    content="Sekolah Tinggi Ilmu Manajemen YKPN Yogyakarta — 50+ tahun menghasilkan 15.000+ alumni profesional.">
-  <meta name="twitter:image" content="/images/img/logo/LOGO STIM YPKN.png">
+  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -276,7 +310,8 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
               </div>
               @endif
               @if($banner->title)
-              <h1 class="hero-title">{{ $banner->title }}</h1>
+              {{-- Gunakan h2 bukan h1 karena H1 sudah ada di slide pertama statis --}}
+              <h2 class="hero-title" style="font-size: inherit; font-weight: inherit;">{{ $banner->title }}</h2>
               @endif
               @if($banner->description)
               <p class="hero-subtitle">{{ $banner->description }}</p>

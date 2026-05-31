@@ -2,10 +2,13 @@
 <html lang="id">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Biaya Kuliah - STIM YKPN Yogyakarta</title>
-
+  <x-seo-head
+    title="Biaya Kuliah — STIM YKPN Yogyakarta"
+    description="Informasi lengkap biaya kuliah, UKT, dan biaya pendaftaran mahasiswa baru STIM YKPN Yogyakarta 2026/2027. Tersedia beasiswa dan keringanan biaya."
+    :canonicalUrl="url('/biaya-kuliah')"
+  />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link

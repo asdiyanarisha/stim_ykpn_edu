@@ -2,10 +2,13 @@
 <html lang="id">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Program Reguler - STIM YKPN Yogyakarta</title>
-
+  <x-seo-head
+    title="Program Reguler — STIM YKPN Yogyakarta"
+    description="Program kuliah reguler (pagi/siang) di STIM YKPN Yogyakarta untuk S1 Manajemen, S1 Bisnis Digital, dan D3 Manajemen. Terakreditasi Baik Sekali."
+    :canonicalUrl="url('/program-reguler')"
+  />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link

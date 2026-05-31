@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sambutan Ketua - STIM YKPN Yogyakarta</title>
-  <meta name="description" content="Sambutan Ketua STIM YKPN Yogyakarta, Dr. Suparmono, M.Si.">
-  
+  <x-seo-head
+    title="Sambutan Ketua STIM YKPN Yogyakarta"
+    description="Sambutan resmi dari Ketua STIM YKPN Yogyakarta. Selamat datang di kampus manajemen terdepan di Yogyakarta."
+    :canonicalUrl="url('/sambutan-ketua')"
+  />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

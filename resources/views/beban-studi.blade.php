@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beban Studi - STIM YKPN Yogyakarta</title>
-  
+  <x-seo-head
+    title="Beban Studi — STIM YKPN Yogyakarta"
+    description="Informasi beban studi dan jumlah SKS yang harus ditempuh mahasiswa di STIM YKPN Yogyakarta."
+    :canonicalUrl="url('/beban-studi')"
+  />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">

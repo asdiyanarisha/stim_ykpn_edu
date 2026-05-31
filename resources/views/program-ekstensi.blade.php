@@ -2,10 +2,13 @@
 <html lang="id">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Program Ekstensi - STIM YKPN Yogyakarta</title>
-
+  <x-seo-head
+    title="Program Ekstensi (Kelas Karyawan) — STIM YKPN Yogyakarta"
+    description="Program ekstensi khusus karyawan di STIM YKPN Yogyakarta. Kuliah sore-malam, tetap bisa bekerja sambil meningkatkan jenjang pendidikan."
+    :canonicalUrl="url('/program-ekstensi')"
+  />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link

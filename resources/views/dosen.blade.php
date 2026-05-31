@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profil Dosen — STIM YKPN Yogyakarta</title>
-  <meta name="description" content="Kenali para pakar dan akademisi kami yang berdedikasi di STIM YKPN Yogyakarta.">
-  
+  <x-seo-head
+    title="Profil Dosen — STIM YKPN Yogyakarta"
+    description="Kenali para akademisi dan pakar berpengalaman di STIM YKPN Yogyakarta. Seluruh dosen bergelar S2 dan S3 dari universitas terkemuka."
+    :canonicalUrl="url('/dosen')"
+  />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
