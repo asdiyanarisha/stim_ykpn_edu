@@ -164,6 +164,23 @@
       .academic-layout { grid-template-columns: 1fr; }
       .academic-sidebar { position: relative; top: 0; }
     }
+    .activity-card-layout {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 25px;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    @media (max-width: 768px) {
+      .activity-card-layout {
+        grid-template-columns: 1fr;
+      }
+      .activity-card-layout img {
+        height: 200px !important;
+      }
+    }
   </style>
   <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
 </head>
@@ -203,7 +220,7 @@
             <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           </div>
           <div id="activityGrid" style="display: flex; flex-direction: column; gap: 30px;">
-            <div class="activity-card" style="display: grid; grid-template-columns: 200px 1fr; gap: 25px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <div class="activity-card activity-card-layout">
               <div style="background: #eee; height: 100%; min-height: 150px;">
                  <img src="/images/img/berita/pkkmb-2025.jpg" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
               </div>
