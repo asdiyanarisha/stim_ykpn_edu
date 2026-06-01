@@ -159,7 +159,7 @@
         <div class="fasilitas-card animate-on-scroll">
           <div class="fasilitas-img-wrapper">
             <span class="badge">Eksklusif</span>
-            <img src="/images/fasilitas/gedung.png" alt="Gedung Kampus" loading="lazy">
+            <!-- <img src="/images/fasilitas/gedung.png" alt="Gedung Kampus" loading="lazy"> -->
           </div>
           <div class="fasilitas-content">
             <div class="fasilitas-title-wrapper">
@@ -174,7 +174,7 @@
         <div class="fasilitas-card animate-on-scroll animate-delay-1">
           <div class="fasilitas-img-wrapper">
             <span class="badge">Full AC & Multimedia</span>
-            <img src="/images/fasilitas/kelas.png" alt="Ruang Kelas Modern" loading="lazy">
+            <!-- <img src="/images/fasilitas/kelas.png" alt="Ruang Kelas Modern" loading="lazy"> -->
           </div>
           <div class="fasilitas-content">
             <div class="fasilitas-title-wrapper">
@@ -189,7 +189,7 @@
         <div class="fasilitas-card animate-on-scroll animate-delay-2">
           <div class="fasilitas-img-wrapper">
             <span class="badge badge-secondary">High-End PC</span>
-            <img src="/images/fasilitas/lab.png" alt="Laboratorium Komputer" loading="lazy">
+            <!-- <img src="/images/fasilitas/lab.png" alt="Laboratorium Komputer" loading="lazy"> -->
           </div>
           <div class="fasilitas-content">
             <div class="fasilitas-title-wrapper">
@@ -204,7 +204,7 @@
         <div class="fasilitas-card animate-on-scroll">
           <div class="fasilitas-img-wrapper">
             <span class="badge badge-secondary">Akses Gratis</span>
-            <img src="/images/fasilitas/perpus.png" alt="BI Corner & Perpustakaan" loading="lazy">
+            <!-- <img src="/images/fasilitas/perpus.png" alt="BI Corner & Perpustakaan" loading="lazy"> -->
           </div>
           <div class="fasilitas-content">
             <div class="fasilitas-title-wrapper">
@@ -219,7 +219,7 @@
         <div class="fasilitas-card animate-on-scroll animate-delay-1">
           <div class="fasilitas-img-wrapper">
             <span class="badge">Nyaman & Sejuk</span>
-            <img src="/images/fasilitas/masjid.png" alt="Masjid Kampus" loading="lazy">
+            <!-- <img src="/images/fasilitas/masjid.png" alt="Masjid Kampus" loading="lazy"> -->
           </div>
           <div class="fasilitas-content">
             <div class="fasilitas-title-wrapper">
@@ -234,7 +234,7 @@
         <div class="fasilitas-card animate-on-scroll animate-delay-2">
           <div class="fasilitas-img-wrapper">
             <span class="badge badge-secondary">24/7 Wi-Fi</span>
-            <img src="/images/fasilitas/diskusi.png" alt="Area Diskusi Mahasiswa" loading="lazy">
+            <!-- <img src="/images/fasilitas/diskusi.png" alt="Area Diskusi Mahasiswa" loading="lazy"> -->
           </div>
           <div class="fasilitas-content">
             <div class="fasilitas-title-wrapper">
