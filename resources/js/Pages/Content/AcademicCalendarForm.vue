@@ -502,8 +502,8 @@ const filteredActivities = computed(() => {
       item.judul.toLowerCase().includes(searchQuery.value.toLowerCase()) || 
       (item.deskripsi && item.deskripsi.toLowerCase().includes(searchQuery.value.toLowerCase()));
       
-    const matchSemester = !filterSemester.value || item.semester_id === parseInt(filterSemester.value);
-    const matchKategori = !filterKategori.value || item.kategori_id === parseInt(filterKategori.value);
+    const matchSemester = !filterSemester.value || item.semester_id == filterSemester.value;
+    const matchKategori = !filterKategori.value || item.kategori_id == filterKategori.value;
     
     return matchSearch && matchSemester && matchKategori;
   });

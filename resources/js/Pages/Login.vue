@@ -5,7 +5,7 @@
     <div class="sm:mx-auto sm:w-full sm:max-w-md text-center">
       <!-- Logo -->
       <div class="flex justify-center mb-6">
-        <img src="https://stimykpn.ac.id/storage/quill-upload/19827f3a460e91d1ccb121b2a810d720.webp" alt="Logo STIM YKPN" class="h-24 hover:scale-105 transition-transform duration-300">
+        <img :src="'/images/LOGO%20STIM%20YPKN.png'" alt="Logo STIM YKPN" class="h-24 hover:scale-105 transition-transform duration-300">
       </div>
       <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
         Selamat Datang Kembali

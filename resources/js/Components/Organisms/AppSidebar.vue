@@ -6,7 +6,7 @@
     <div class="flex h-16 items-center justify-between px-6 bg-slate-950 shrink-0">
       <a href="/dashboard" class="text-lg font-extrabold text-white flex items-center gap-2.5 tracking-tight">
         <div class="bg-white rounded-lg p-1.5 shadow-md shadow-black/20 flex items-center justify-center">
-          <img src="https://stimykpn.ac.id/storage/quill-upload/19827f3a460e91d1ccb121b2a810d720.webp" alt="Logo STIM YKPN" class="h-7 w-auto">
+          <img :src="'/images/LOGO%20STIM%20YPKN.png'" alt="Logo STIM YKPN" class="h-7 w-auto">
         </div>
         <span>Panel<span class="text-indigo-400 ml-1">Admin</span></span>
       </a>
