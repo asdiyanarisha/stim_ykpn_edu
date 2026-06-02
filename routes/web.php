@@ -465,8 +465,8 @@ Route::get('/video.html', fn() => view('video'));
 Route::get('/informasi-tempat-tinggal', fn() => view('informasi-tempat-tinggal'));
 Route::get('/informasi-tempat-tinggal.html', fn() => view('informasi-tempat-tinggal'));
 
-Route::get('/brosur', fn() => view('brosur'));
-Route::get('/brosur.html', fn() => view('brosur'));
+Route::get('/brosur', [PublicPagesController::class, 'brochure']);
+Route::get('/brosur.html', [PublicPagesController::class, 'brochure']);
 
 Route::get('/unduh', fn() => view('unduh'));
 Route::get('/unduh.html', fn() => view('unduh'));

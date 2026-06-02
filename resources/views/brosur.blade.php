@@ -178,28 +178,45 @@
           <h2>Brosur STIM YKPN</h2>
         </div>
         <div class="article-body">
-          
-      <p style="margin-bottom: 30px;">Unduh brosur resmi STIM YKPN untuk mendapatkan informasi lengkap mengenai program studi, fasilitas, rincian biaya kuliah, dan keunggulan kampus kami.</p>
-      
-      <div style="text-align: center; padding: 40px; background: #f8fafc; border-radius: 16px; border: 1px dashed #cbd5e1; margin-bottom: 30px;">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px;">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="12" y1="18" x2="12" y2="12"></line>
-            <line x1="9" y1="15" x2="15" y2="15"></line>
-        </svg>
-        <h3 style="font-size: 1.25rem; color: var(--navy-900); margin-bottom: 12px;">Brosur PMB STIM YKPN 2026/2027</h3>
-        <p style="color: var(--gray-500); margin-bottom: 24px;">Format: PDF | Ukuran: ~2MB</p>
-        <a href="#" class="btn btn-primary" style="display: inline-flex;">
-          Unduh Brosur
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-        </a>
-      </div>
-
+          @forelse($brochures as $brochure)
+            <div class="brochure-item" style="margin-bottom: 30px; @if(!$loop->last) border-bottom: 1px dashed #cbd5e1; padding-bottom: 30px; @endif">
+              @if($brochure->description)
+                <p style="margin-bottom: 20px;">{{ $brochure->description }}</p>
+              @endif
+              
+              <div style="text-align: center; padding: 40px; background: #f8fafc; border-radius: 16px; border: 1px dashed #cbd5e1; margin-bottom: 30px;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px;">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="12" y1="18" x2="12" y2="12"></line>
+                    <line x1="9" y1="15" x2="15" y2="15"></line>
+                </svg>
+                <h3 style="font-size: 1.25rem; color: var(--navy-900); margin-bottom: 12px;">{{ $brochure->title }}</h3>
+                <p style="color: var(--gray-500); margin-bottom: 24px;">
+                  Format: {{ $brochure->file_path ? strtoupper(pathinfo(parse_url($brochure->file_path, PHP_URL_PATH), PATHINFO_EXTENSION)) : 'PDF' }} 
+                  @if($brochure->file_size)
+                    | Ukuran: {{ $brochure->file_size }}
+                  @endif
+                </p>
+                @if($brochure->file_path)
+                  <a href="{{ $brochure->file_path }}" class="btn btn-primary" style="display: inline-flex;" download target="_blank">
+                    Unduh Brosur
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="7 10 12 15 17 10"></polyline>
+                      <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                  </a>
+                @else
+                  <span style="color: var(--gray-500);">File tidak tersedia</span>
+                @endif
+              </div>
+            </div>
+          @empty
+            <div style="text-align: center; padding: 40px; background: #f8fafc; border-radius: 16px; border: 1px dashed #cbd5e1;">
+              <p style="color: var(--gray-500); margin-bottom: 0;">Belum ada brosur yang tersedia saat ini.</p>
+            </div>
+          @endforelse
         </div>
       </article>
 

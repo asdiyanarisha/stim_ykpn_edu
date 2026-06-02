@@ -16,6 +16,7 @@ use App\Models\Semester;
 use App\Models\Kategori;
 use App\Models\KegiatanAkademik;
 use App\Models\TahunAkademik;
+use App\Models\Brochure;
 
 class PublicPagesController extends Controller
 {
@@ -177,5 +178,11 @@ class PublicPagesController extends Controller
     public function inspectData()
     {
         return CategoryTeacher::all();
+    }
+
+    public function brochure()
+    {
+        $brochures = Brochure::orderBy('created_at', 'desc')->get();
+        return view('brosur', compact('brochures'));
     }
 }
