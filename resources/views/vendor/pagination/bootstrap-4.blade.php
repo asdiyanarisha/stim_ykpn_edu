@@ -60,7 +60,7 @@
     {{-- Page info --}}
     <p class="stim-pagination-info">
         Menampilkan <strong>{{ $paginator->firstItem() }}</strong>–<strong>{{ $paginator->lastItem() }}</strong>
-        dari <strong>{{ $paginator->total() }}</strong> dosen
+        dari <strong>{{ $paginator->total() }}</strong> {{ $noun ?? 'dosen' }}
     </p>
 </nav>
 @endif

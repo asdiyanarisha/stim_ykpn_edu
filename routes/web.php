@@ -474,8 +474,10 @@ Route::get('/unduh.html', fn() => view('unduh'));
 Route::get('/alumni', [PublicPagesController::class, 'alumni']);
 Route::get('/alumni.html', [PublicPagesController::class, 'alumni']);
 
-Route::get('/lowongan-kerja', fn() => view('lowongan-kerja'));
-Route::get('/lowongan-kerja.html', fn() => view('lowongan-kerja'));
+Route::get('/lowongan-kerja', [PublicPagesController::class, 'jobVacancies']);
+Route::get('/lowongan-kerja.html', [PublicPagesController::class, 'jobVacancies']);
+Route::get('/lowongan-kerja/{id}', [PublicPagesController::class, 'jobVacancyDetail']);
+Route::get('/lowongan-kerja/{id}.html', [PublicPagesController::class, 'jobVacancyDetail']);
 
 Route::get('/whatsapp-contact', fn() => view('whatsapp-contact'))->name('whatsapp-contact.index');
 

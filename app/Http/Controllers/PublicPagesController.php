@@ -17,6 +17,7 @@ use App\Models\Kategori;
 use App\Models\KegiatanAkademik;
 use App\Models\TahunAkademik;
 use App\Models\Brochure;
+use App\Models\JobVacancy;
 
 class PublicPagesController extends Controller
 {
@@ -184,5 +185,23 @@ class PublicPagesController extends Controller
     {
         $brochures = Brochure::orderBy('created_at', 'desc')->get();
         return view('brosur', compact('brochures'));
+    }
+
+    public function jobVacancies()
+    {
+        $vacancies = JobVacancy::where('status', 'published')
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+        return view('lowongan-kerja', compact('vacancies'));
+    }
+
+    public function jobVacancyDetail($id)
+    {
+        $vacancy = JobVacancy::findOrFail($id);
+        if ($vacancy->status !== 'published') {
+            abort(404);
+        }
+        $vacancy->increment('views_count');
+        return view('lowongan-kerja-detail', compact('vacancy'));
     }
 }

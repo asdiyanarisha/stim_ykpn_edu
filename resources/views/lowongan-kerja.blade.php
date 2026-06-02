@@ -137,6 +137,20 @@
       margin-bottom: 8px;
     }
 
+    .job-content ul, .job-content ol {
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+    .job-content ul {
+      list-style-type: disc;
+    }
+    .job-content ol {
+      list-style-type: decimal;
+    }
+    .job-content li {
+      margin-bottom: 8px;
+    }
+
     @media (max-width: 992px) {
       .academic-layout { grid-template-columns: 1fr; }
       .academic-sidebar { position: relative; top: 0; }
@@ -182,40 +196,33 @@
       <p style="margin-bottom: 30px;">Pusat Pengembangan Karir (Career Center) STIM YKPN secara rutin memperbarui informasi lowongan pekerjaan dari berbagai mitra strategis kami untuk lulusan STIM YKPN.</p>
       
       <div style="display: flex; flex-direction: column; gap: 20px;">
-          <!-- Job 1 -->
-          <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 25px; transition: all 0.2s ease;">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
-                  <div>
-                      <h3 style="color: var(--primary-blue); font-size: 1.25rem; margin-bottom: 5px;">Management Trainee (MT)</h3>
-                      <div style="font-weight: 600; color: var(--navy-900);">PT Bank Central Asia Tbk</div>
+          @forelse($vacancies as $vacancy)
+              <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 25px; transition: all 0.2s ease; background: #ffffff;">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                      <div>
+                          <h3 style="color: var(--primary-blue); font-size: 1.25rem; font-weight: 700; margin-bottom: 5px;">{{ $vacancy->title }}</h3>
+                          <div style="font-size: 0.85rem; color: var(--gray-500);">
+                              🗓️ Diposting: {{ $vacancy->created_at->translatedFormat('d F Y') }}
+                          </div>
+                      </div>
                   </div>
-                  <span style="background: #e0f2fe; color: #0284c7; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Penuh Waktu</span>
+                  <p style="font-size: 0.95rem; color: #475569; line-height: 1.6; margin-bottom: 20px;">
+                      {{ Str::limit(strip_tags($vacancy->content), 180) }}
+                  </p>
+                  <a href="/lowongan-kerja/{{ $vacancy->id }}" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.85rem; display: inline-block;">Lihat Detail</a>
               </div>
-              <p style="font-size: 0.95rem; color: #444; line-height: 1.6; margin-bottom: 15px;">Program percepatan karir bagi lulusan baru (Fresh Graduate) S1 Manajemen. Bersedia ditempatkan di seluruh wilayah Indonesia.</p>
-              <div style="display: flex; gap: 15px; font-size: 0.85rem; color: var(--gray-500); margin-bottom: 20px;">
-                  <span>📍 Seluruh Indonesia</span>
-                  <span>🗓️ Batas Lamaran: 30 Mei 2026</span>
+          @empty
+              <div style="text-align: center; padding: 40px; background: #f8fafc; border-radius: 16px; border: 1px dashed #cbd5e1;">
+                  <p style="color: var(--gray-500); margin-bottom: 0;">Belum ada lowongan kerja yang tersedia saat ini.</p>
               </div>
-              <a href="#" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.85rem;">Lihat Detail</a>
-          </div>
-
-          <!-- Job 2 -->
-          <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 25px; transition: all 0.2s ease;">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
-                  <div>
-                      <h3 style="color: var(--primary-blue); font-size: 1.25rem; margin-bottom: 5px;">Marketing Executive</h3>
-                      <div style="font-weight: 600; color: var(--navy-900);">PT Astra International Tbk</div>
-                  </div>
-                  <span style="background: #e0f2fe; color: #0284c7; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Penuh Waktu</span>
-              </div>
-              <p style="font-size: 0.95rem; color: #444; line-height: 1.6; margin-bottom: 15px;">Mencari kandidat yang energik dan memiliki kemampuan komunikasi yang baik untuk bergabung dengan tim marketing regional Yogyakarta.</p>
-              <div style="display: flex; gap: 15px; font-size: 0.85rem; color: var(--gray-500); margin-bottom: 20px;">
-                  <span>📍 Yogyakarta</span>
-                  <span>🗓️ Batas Lamaran: 15 Juni 2026</span>
-              </div>
-              <a href="#" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.85rem;">Lihat Detail</a>
-          </div>
+          @endforelse
       </div>
+
+      @if($vacancies->hasPages())
+          <div class="pagination-container">
+              {{ $vacancies->links('vendor.pagination.bootstrap-4', ['noun' => 'lowongan']) }}
+          </div>
+      @endif
 
         </div>
       </article>
