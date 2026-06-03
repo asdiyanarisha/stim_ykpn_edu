@@ -235,20 +235,29 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
       color: #fbb03b !important;
     }
 
-    @media (max-width: 1024px) {
+    @media (max-width: 1024px) and (orientation: portrait) {
       .slider-dots {
         bottom: 10px !important;
         padding: 4px 12px !important;
       }
-      .slide img {
+      
+      /* Slide 1 (Static): Cover */
+      .slide:first-child img {
+        object-fit: cover !important;
+      }
+      
+      /* Slide 2+ (Dynamic): Contain */
+      .slide:not(:first-child) img {
         object-fit: contain !important;
-        background-color: var(--navy-900, #0a1628);
+        background-color: transparent !important;
       }
+      
       .slide.active img {
-        transform: scale(1) !important; /* Disable zoom effect on mobile to prevent cropping text at edges */
+        transform: scale(1) !important;
       }
+      
       .hero {
-        min-height: 85vh !important; /* Slightly shorter on mobile/tablet */
+        min-height: 55vh !important; /* Dikurangi agar tidak menyisakan banyak blank space */
       }
     }
   </style>
