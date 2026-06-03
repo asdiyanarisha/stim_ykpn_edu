@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Pmb;
 use App\Models\PmbStatus;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class PmbAdminController extends Controller
 {
@@ -136,6 +137,99 @@ class PmbAdminController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Gagal mengambil data status PMB: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function export(Request $request)
+    {
+        try {
+            $query = Pmb::query()->with('status');
+
+            if ($request->filled('program_studi') && $request->program_studi !== 'all') {
+                $query->where('program_studi', $request->program_studi);
+            }
+
+            if ($request->filled('pmb_status_id') && $request->pmb_status_id !== 'all') {
+                $query->where('pmb_status_id', $request->pmb_status_id);
+            }
+
+            if ($request->filled('jalur_registrasi') && $request->jalur_registrasi !== 'all') {
+                $query->where('jalur_registrasi', $request->jalur_registrasi);
+            }
+
+            if ($request->filled('start_date')) {
+                $query->whereDate('created_at', '>=', $request->start_date);
+            }
+
+            if ($request->filled('end_date')) {
+                $query->whereDate('created_at', '<=', $request->end_date);
+            }
+
+            $pmbs = $query->orderBy('created_at', 'desc')->get();
+
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+
+            // Set Header Columns
+            $headers = [
+                'ID Pendaftar', 'Nama Lengkap', 'Email', 'No. HP/WA', 'Tempat Lahir', 
+                'Tanggal Lahir', 'Jenis Kelamin', 'Alamat Asal', 'Asal Sekolah', 
+                'Program Studi', 'Sumber Informasi', 'Jalur Registrasi', 'Kode Voucher', 
+                'Status PMB', 'Tanggal Daftar'
+            ];
+
+            foreach ($headers as $colIndex => $headerText) {
+                $colLetter = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($colIndex + 1);
+                $sheet->setCellValue($colLetter . '1', $headerText);
+                $sheet->getStyle($colLetter . '1')->getFont()->setBold(true);
+            }
+
+            // Fill Data Rows
+            $rowNumber = 2;
+            foreach ($pmbs as $pmb) {
+                $sheet->setCellValue('A' . $rowNumber, $pmb->id_pendaftar);
+                $sheet->setCellValue('B' . $rowNumber, $pmb->nama_lengkap);
+                $sheet->setCellValue('C' . $rowNumber, $pmb->email);
+                $sheet->setCellValue('D' . $rowNumber, $pmb->nomor_hp_wa);
+                $sheet->setCellValue('E' . $rowNumber, $pmb->tempat_lahir);
+                $sheet->setCellValue('F' . $rowNumber, $pmb->tanggal_lahir);
+                $sheet->setCellValue('G' . $rowNumber, $pmb->jenis_kelamin);
+                $sheet->setCellValue('H' . $rowNumber, $pmb->alamat_asal);
+                $sheet->setCellValue('I' . $rowNumber, $pmb->asal_sekolah);
+                $sheet->setCellValue('J' . $rowNumber, $pmb->program_studi);
+                $sheet->setCellValue('K' . $rowNumber, $pmb->sumber_informasi);
+                $sheet->setCellValue('L' . $rowNumber, $pmb->jalur_registrasi);
+                $sheet->setCellValue('M' . $rowNumber, $pmb->kode_voucher ?? '-');
+                $sheet->setCellValue('N' . $rowNumber, $pmb->status?->status ?? 'Registrasi Awal');
+                $sheet->setCellValue('O' . $rowNumber, $pmb->created_at->format('Y-m-d H:i:s'));
+                $rowNumber++;
+            }
+
+            // Auto-size columns
+            foreach (range(1, count($headers)) as $colIndex) {
+                $colLetter = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($colIndex);
+                $sheet->getColumnDimension($colLetter)->setAutoSize(true);
+            }
+
+            $writer = new Xlsx($spreadsheet);
+            
+            return response()->stream(
+                function () use ($writer) {
+                    $writer->save('php://output');
+                },
+                200,
+                [
+                    'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                    'Content-Disposition' => 'attachment; filename="data_pendaftar_pmb_' . date('Ymd_His') . '.xlsx"',
+                    'Cache-Control' => 'max-age=0',
+                ]
+            );
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Gagal mengekspor data Excel: ' . $e->getMessage()
             ], 500);
         }
     }

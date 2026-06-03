@@ -314,6 +314,7 @@ Route::middleware('jwt.auth')->group(function () {
     Route::get('/pmbs', [PmbAdminController::class, 'index']);
     Route::post('/pmbs/bulk-delete', [PmbAdminController::class, 'bulkDestroy']);
     Route::get('/pmbs/statuses', [PmbAdminController::class, 'statuses']);
+    Route::get('/pmbs/export', [PmbAdminController::class, 'export']);
     Route::get('/pmbs/{id}', [PmbAdminController::class, 'show']);
     Route::post('/pmbs/{id}', [PmbAdminController::class, 'update']);
     Route::delete('/pmbs/{id}', [PmbAdminController::class, 'destroy']);

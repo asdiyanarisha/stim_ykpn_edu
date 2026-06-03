@@ -42,6 +42,14 @@
           </div>
           
           <div class="flex flex-wrap items-center gap-3">
+            <!-- Export Button -->
+            <AppButton variant="secondary" size="md" @click="openExportModal" class="whitespace-nowrap">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Ekspor Data
+            </AppButton>
+
             <!-- Delete Selection Button -->
             <transition 
               enter-active-class="transition duration-200 ease-out" 
@@ -208,6 +216,101 @@
           </div>
         </div>
 
+        <!-- Custom Export Modal -->
+        <div v-if="showExportModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm transition-opacity">
+          <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden transform transition-all translate-y-0 scale-100">
+            <div class="p-6">
+              <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  Ekspor Data PMB ke Excel
+                </h3>
+                <button @click="closeExportModal" class="text-slate-400 hover:text-slate-600 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+              </div>
+
+              <!-- Filter Fields -->
+              <div class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <!-- Program Studi -->
+                  <div class="flex flex-col gap-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-wider">Program Studi</label>
+                    <select v-model="filterForm.program_studi" class="text-sm border border-slate-200 rounded-xl text-slate-700 focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-4 bg-slate-50 focus:bg-white transition-colors cursor-pointer w-full">
+                      <option value="all">Semua Program Studi</option>
+                      <option value="S1 Bisnis Digital">S1 - Bisnis Digital</option>
+                      <option value="D3 Manajemen">D3 - Manajemen</option>
+                      <option value="S1 Manajemen">S1 - Manajemen</option>
+                      <option value="S1 Manajemen Ekstensi">S1 - Manajemen Ekstensi</option>
+                    </select>
+                  </div>
+
+                  <!-- Jalur Registrasi -->
+                  <div class="flex flex-col gap-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-wider">Jalur Registrasi</label>
+                    <select v-model="filterForm.jalur_registrasi" class="text-sm border border-slate-200 rounded-xl text-slate-700 focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-4 bg-slate-50 focus:bg-white transition-colors cursor-pointer w-full">
+                      <option value="all">Semua Jalur</option>
+                      <option value="Reguler">Reguler</option>
+                      <option value="Alih Jalur">Alih Jalur</option>
+                      <option value="Beasiswa">Beasiswa</option>
+                      <option value="Undangan">Undangan</option>
+                      <option value="Lainnya">Lainnya</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <!-- Status PMB -->
+                  <div class="flex flex-col gap-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-wider">Status PMB</label>
+                    <select v-model="filterForm.pmb_status_id" class="text-sm border border-slate-200 rounded-xl text-slate-700 focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-4 bg-slate-50 focus:bg-white transition-colors cursor-pointer w-full">
+                      <option value="all">Semua Status</option>
+                      <option v-for="statusOpt in statuses" :key="statusOpt.id" :value="statusOpt.id">
+                        {{ statusOpt.status }}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div></div>
+                </div>
+
+                <div class="border-t border-slate-100 pt-3">
+                  <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 block">Rentang Tanggal Pendaftaran</span>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Start Date -->
+                    <div class="flex flex-col gap-1">
+                      <label class="text-xs text-slate-500">Dari Tanggal</label>
+                      <input type="date" v-model="filterForm.start_date" class="text-sm border border-slate-200 rounded-xl text-slate-700 focus:ring-indigo-500 focus:border-indigo-500 py-2 px-4 bg-slate-50 focus:bg-white transition-colors w-full">
+                    </div>
+
+                    <!-- End Date -->
+                    <div class="flex flex-col gap-1">
+                      <label class="text-xs text-slate-500">Sampai Tanggal</label>
+                      <input type="date" v-model="filterForm.end_date" class="text-sm border border-slate-200 rounded-xl text-slate-700 focus:ring-indigo-500 focus:border-indigo-500 py-2 px-4 bg-slate-50 focus:bg-white transition-colors w-full">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="px-6 py-4 bg-slate-50 flex items-center justify-end gap-3 rounded-b-2xl">
+              <button @click="closeExportModal" :disabled="isExporting" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-slate-800 transition-colors cursor-pointer disabled:opacity-50">
+                Batal
+              </button>
+              <button @click="handleExport" :disabled="isExporting" class="px-5 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 active:scale-95 transition-all rounded-xl shadow-sm shadow-indigo-200 disabled:opacity-50 disabled:active:scale-100 flex items-center gap-2">
+                <svg v-if="isExporting" class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                <span v-else>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </span>
+                <span>{{ isExporting ? 'Mengekspor...' : 'Unduh Excel' }}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
       </main>
     </div>
   </div>
@@ -230,6 +333,16 @@ const allPmb = ref([]);
 const pmbLoading = ref(false);
 const statuses = ref([]);
 const updatingStatusId = ref(null);
+
+const showExportModal = ref(false);
+const isExporting = ref(false);
+const filterForm = ref({
+  program_studi: 'all',
+  jalur_registrasi: 'all',
+  pmb_status_id: 'all',
+  start_date: '',
+  end_date: ''
+});
 
 const fetchStatuses = async () => {
   try {
@@ -368,6 +481,66 @@ const nextPage = () => { if (currentPage.value < totalPages.value) currentPage.v
 const toggleSelectAll = (e) => {
   if (e.target.checked) selectedPmb.value = paginatedPmb.value.map(n => n.id);
   else selectedPmb.value = [];
+};
+
+const openExportModal = () => {
+  filterForm.value = {
+    program_studi: 'all',
+    jalur_registrasi: 'all',
+    pmb_status_id: 'all',
+    start_date: '',
+    end_date: ''
+  };
+  showExportModal.value = true;
+};
+
+const closeExportModal = () => {
+  showExportModal.value = false;
+};
+
+const handleExport = async () => {
+  isExporting.value = true;
+  try {
+    const token = getCookie(TOKEN_COOKIE_NAME);
+    const response = await axios.get('/api/pmbs/export', {
+      params: {
+        program_studi: filterForm.value.program_studi,
+        jalur_registrasi: filterForm.value.jalur_registrasi,
+        pmb_status_id: filterForm.value.pmb_status_id,
+        start_date: filterForm.value.start_date,
+        end_date: filterForm.value.end_date
+      },
+      headers: { Authorization: `Bearer ${token}` },
+      responseType: 'blob'
+    });
+
+    const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `data_pendaftar_pmb_${new Date().toISOString().slice(0, 10)}.xlsx`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    showExportModal.value = false;
+    Swal.fire({
+      icon: 'success',
+      title: 'Berhasil!',
+      text: 'Data PMB berhasil diekspor.',
+      timer: 1500,
+      showConfirmButton: false
+    });
+  } catch (error) {
+    console.error('Error exporting PMB:', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Gagal!',
+      text: 'Gagal mengekspor data PMB.'
+    });
+  } finally {
+    isExporting.value = false;
+  }
 };
 
 const showDeleteModal = ref(false);
