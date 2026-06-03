@@ -851,11 +851,14 @@ a.btn.btn-orange:hover {
   opacity: 0;
   transition: opacity 1s ease-in-out, transform 5s linear;
   transform: scale(1.05);
+  pointer-events: none;
 }
 
 .hero-slider .slide.active {
   opacity: 1;
   transform: scale(1);
+  z-index: 1;
+  pointer-events: auto;
 }
 
 .hero-slider .slide img {
@@ -2488,8 +2491,10 @@ a.btn.btn-orange:hover {
   }
 
   .hero-actions .btn {
-    padding: 6px 12px !important;
-    font-size: 0.75rem !important;
+    padding: 8px 16px !important;
+    font-size: 0.85rem !important;
+    height: 44px !important;
+    box-sizing: border-box !important;
   }
 
   .hero-actions .btn svg {
