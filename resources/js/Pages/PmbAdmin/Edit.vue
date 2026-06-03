@@ -87,7 +87,7 @@
                             <option value="S1 Bisnis Digital">S1 - Bisnis Digital</option>
                             <option value="D3 Manajemen">D3 - Manajemen</option>
                             <option value="S1 Manajemen">S1 - Manajemen</option>
-                            <option value="S1 Ekstensi">S1 - Manajemen - Ekstensi (Kelas Karyawan)</option>
+                            <option value="S1 Manajemen Ekstensi">S1 - Manajemen - Ekstensi (Kelas Karyawan)</option>
                         </select>
                     </div>
 

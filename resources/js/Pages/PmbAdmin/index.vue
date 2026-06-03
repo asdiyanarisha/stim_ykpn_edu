@@ -121,7 +121,7 @@
                     </select>
                   </td>
                   <td class="px-6 py-4">
-                    <span class="text-sm text-slate-500">{{ new Date(item.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
+                    <span class="text-sm text-slate-500">{{ formatDateTime(item.created_at) }}</span>
                   </td>
                   <td class="px-6 py-4 text-right">
                     <div class="flex items-center justify-end gap-2">
@@ -416,6 +416,22 @@ const executeDelete = async () => {
   } finally {
     isDeleting.value = false;
   }
+};
+
+const formatDateTime = (dateString) => {
+  if (!dateString) return '-';
+  const date = new Date(dateString);
+  const datePart = date.toLocaleDateString('id-ID', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+  const timePart = date.toLocaleTimeString('id-ID', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  }).replace('.', ':');
+  return `${datePart} ${timePart}`;
 };
 
 onMounted(async () => {

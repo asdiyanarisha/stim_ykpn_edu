@@ -61,21 +61,20 @@ class PmbPublicController extends Controller
         }
 
         try {
-            // Data divalidasi, aman untuk dimasukkan ke database
-            $prefix = date('y') . date('m') . date('d');
-            
-            // Find the last registrant with today's prefix to calculate sequence
-            $lastPmb = Pmb::where('id_pendaftar', 'like', $prefix . '%')
-                ->orderBy('id_pendaftar', 'desc')
+            // Find the last registrant overall to calculate increment sequence
+            $lastPmb = Pmb::whereNotNull('id_pendaftar')
+                ->whereRaw('LENGTH(id_pendaftar) >= 11')
+                ->orderBy('id', 'desc')
                 ->first();
                 
             if ($lastPmb) {
-                $lastSequence = intval(substr($lastPmb->id_pendaftar, 6));
+                $lastSequence = intval(substr($lastPmb->id_pendaftar, -5));
                 $newSequence = $lastSequence + 1;
             } else {
                 $newSequence = 1;
             }
             
+            $prefix = date('y') . date('m') . date('d');
             $idPendaftar = $prefix . str_pad($newSequence, 5, '0', STR_PAD_LEFT);
 
             $validatedData = $validator->validated();

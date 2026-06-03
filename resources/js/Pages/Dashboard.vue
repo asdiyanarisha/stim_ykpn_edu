@@ -148,7 +148,7 @@
                   </div>
                   <div class="flex-1 min-w-0">
                     <p class="text-sm font-semibold text-slate-900 truncate">{{ item.nama_lengkap }}</p>
-                    <p class="text-[11px] text-slate-500">{{ item.program_studi }} · {{ formatDate(item.created_at) }}</p>
+                    <p class="text-[11px] text-slate-500">{{ item.program_studi }} · {{ formatDateTime(item.created_at) }}</p>
                   </div>
                   <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-50 text-indigo-600 whitespace-nowrap">{{ item.jalur_registrasi }}</span>
                 </div>
@@ -306,6 +306,14 @@ function formatDate(dateStr) {
   if (!dateStr) return '';
   const d = new Date(dateStr);
   return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function formatDateTime(dateStr) {
+  if (!dateStr) return '';
+  const date = new Date(dateStr);
+  const datePart = date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+  const timePart = date.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: false }).replace('.', ':');
+  return `${datePart} ${timePart}`;
 }
 
 async function fetchDashboardData() {
