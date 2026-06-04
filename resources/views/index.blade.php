@@ -255,10 +255,6 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
       .slide.active img {
         transform: scale(1) !important;
       }
-      
-      .hero {
-        min-height: 55vh !important; /* Dikurangi agar tidak menyisakan banyak blank space */
-      }
     }
   </style>
 </head>
