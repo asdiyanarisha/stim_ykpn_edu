@@ -79,7 +79,14 @@ check_command zip "sudo apt install zip"
 # Step 2: Install PHP dependencies (production only)
 # ================================================================
 echo -e "\n${CYAN}[2/8] 📦 Install PHP dependencies (production)...${NC}"
-composer install --no-dev --optimize-autoloader --no-interaction --quiet
+# Coba composer install dulu (lebih cepat, pakai lock file)
+# Jika lock file tidak sinkron dengan composer.json, fallback ke composer update
+# --ignore-platform-reqs: abaikan perbedaan ekstensi PHP lokal vs. server hosting
+if ! composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs --quiet 2>/dev/null; then
+    echo -e "  ${YELLOW}⚠️  Lock file tidak kompatibel, menjalankan composer update...${NC}"
+    composer update --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs
+    echo -e "  ${GREEN}✓${NC} composer.lock diperbarui"
+fi
 echo -e "  ${GREEN}✓${NC} Composer dependencies installed"
 
 # ================================================================
