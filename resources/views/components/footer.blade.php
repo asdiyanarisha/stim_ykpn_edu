@@ -118,7 +118,7 @@
           <path d="M9 18l6-6-6-6" />
         </svg>
       </a>
-      <a href="https://wa.me/6285707010333" class="wa-admin-card" target="_blank" rel="noopener noreferrer">
+      <a href="https://wa.me/6282328008787" class="wa-admin-card" target="_blank" rel="noopener noreferrer">
         <div class="wa-admin-avatar">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">

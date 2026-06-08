@@ -95,7 +95,7 @@
   @include('components.footer')
 
   <!-- Script -->
-  <script src="/js/script.js?v=3.8"></script>
+  <script src="/js/script.js?v=3.9"></script>
 </body>
 </html>
 

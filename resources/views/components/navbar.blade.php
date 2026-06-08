@@ -148,6 +148,16 @@
           <li><a href="/lowongan-kerja.html">Lowongan Kerja</a></li>
         </ul>
       </li>
+      <li class="dropdown">
+        <a href="#">Kontak <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6" />
+          </svg></a>
+        <ul class="dropdown-menu">
+          <li><a href="mailto:info@stimykpn.ac.id">info@stimykpn.ac.id</a></li>
+          <li><a href="tel:0274885505">(0274) 885505</a></li>
+        </ul>
+      </li>
     </ul>
 
     <div class="nav-cta">
