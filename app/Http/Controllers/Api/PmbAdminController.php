@@ -15,7 +15,14 @@ class PmbAdminController extends Controller
     public function index(Request $request)
     {
         try {
-            $pmbs = Pmb::with(['status', 'affiliate.user'])->orderBy('created_at', 'desc')->get();
+            $query = Pmb::with(['status', 'affiliate.user'])->orderBy('created_at', 'desc');
+
+            // Filter by affiliate_id untuk tampilan detail per affiliate
+            if ($request->filled('affiliate_id')) {
+                $query->where('affiliate_id', $request->affiliate_id);
+            }
+
+            $pmbs = $query->get();
             return response()->json([
                 'status' => 'success',
                 'data' => $pmbs
@@ -130,7 +137,7 @@ class PmbAdminController extends Controller
     public function statuses()
     {
         try {
-            $statuses = PmbStatus::all();
+            $statuses = PmbStatus::orderBy('order')->orderBy('id')->get();
             return response()->json([
                 'status' => 'success',
                 'data' => $statuses

@@ -186,10 +186,10 @@
                     :key="statusOpt.id" 
                     class="relative flex flex-col"
                   >
-                    <!-- Marker Dot -->
+                    <!-- Marker Dot: aktif jika order status ini <= order status saat ini -->
                     <div 
                       class="absolute -left-[31px] top-0.5 w-3.5 h-3.5 rounded-full border-2 transition-all duration-300"
-                      :class="pmb.pmb_status_id >= statusOpt.id 
+                      :class="currentStatusOrder >= statusOpt.order 
                         ? 'bg-indigo-600 border-white ring-4 ring-indigo-50' 
                         : 'bg-slate-300 border-white ring-4 ring-slate-50'"
                     ></div>
@@ -197,7 +197,7 @@
                     <!-- Text Label -->
                     <span 
                       class="text-sm font-semibold transition-colors duration-300"
-                      :class="pmb.pmb_status_id >= statusOpt.id ? 'text-slate-900' : 'text-slate-400'"
+                      :class="currentStatusOrder >= statusOpt.order ? 'text-slate-900' : 'text-slate-400'"
                     >
                       {{ statusOpt.status }}
                     </span>
@@ -223,7 +223,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import AppSidebar from '../../Components/Organisms/AppSidebar.vue';
@@ -238,6 +238,14 @@ const isUpdatingStatus = ref(false);
 const pmb = ref({});
 const statuses = ref([]);
 const selectedStatusId = ref(null);
+
+// Order status aktif saat ini — digunakan untuk menentukan step mana yang sudah tercapai
+// Menggunakan field `order` agar urutan tampilan bebas dari urutan ID di database.
+const currentStatusOrder = computed(() => {
+  if (!pmb.value?.pmb_status_id || !statuses.value.length) return 0;
+  const found = statuses.value.find(s => s.id === pmb.value.pmb_status_id);
+  return found?.order ?? 0;
+});
 
 const getStatusBadgeClass = (slug) => {
   switch (slug) {
