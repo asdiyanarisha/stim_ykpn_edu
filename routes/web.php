@@ -57,6 +57,23 @@ Route::get('/masterData/teacher/edit/{id}', function ($id) {
     return view('teacher-edit');
 });
 
+// Affiliate Management
+Route::get('/affiliate', function () {
+    return view('affiliate');
+});
+Route::get('/affiliate/create', function () {
+    return view('affiliate-form');
+});
+Route::get('/affiliate/show/{id}', function ($id) {
+    return view('affiliate-show');
+});
+Route::get('/affiliate/edit/{id}', function ($id) {
+    return view('affiliate-edit');
+});
+Route::get('/afiliate', function () {
+    return redirect('/affiliate');
+});
+
 // Kategori Dosen
 Route::get('/masterData/teacher/category', fn() => view('category-teacher'))->name('category-teacher.index');
 Route::get('/masterData/teacher/category/show/{id}', fn() => view('category-teacher-show'))->name('category-teacher.show');

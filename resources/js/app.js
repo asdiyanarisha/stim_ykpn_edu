@@ -9,6 +9,10 @@ import Teacher from './Pages/Teacher/index.vue';
 import TeacherForm from './Pages/Teacher/TeacherForm.vue';
 import TeacherShow from './Pages/Teacher/Show.vue';
 import TeacherEdit from './Pages/Teacher/TeacherEdit.vue';
+import Affiliate from './Pages/Affiliate/index.vue';
+import AffiliateForm from './Pages/Affiliate/Form.vue';
+import AffiliateShow from './Pages/Affiliate/Show.vue';
+import AffiliateEdit from './Pages/Affiliate/Edit.vue';
 import Banner from './Pages/Content/Banner/index.vue';
 import BannerShow from './Pages/Content/Banner/Show.vue';
 import BannerForm from './Pages/Content/Banner/BannerForm.vue';
@@ -120,6 +124,10 @@ const pages = {
     teacherForm: TeacherForm,
     teacherShow: TeacherShow,
     teacherEdit: TeacherEdit,
+    affiliate: Affiliate,
+    affiliateForm: AffiliateForm,
+    affiliateShow: AffiliateShow,
+    affiliateEdit: AffiliateEdit,
     banner: Banner,
     bannerShow: BannerShow,
     bannerForm: BannerForm,

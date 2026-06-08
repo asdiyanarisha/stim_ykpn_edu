@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TeacherController;
+use App\Http\Controllers\Api\AffiliateController;
 use App\Http\Controllers\Api\ContentBannerController;
 use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\JobVacancyController;
@@ -105,6 +106,14 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/teachers', [TeacherController::class, 'store']);
     Route::post('/teachers/{id}', [TeacherController::class, 'update']);
     Route::delete('/teachers/{id}', [TeacherController::class, 'destroy']);
+
+    // Affiliate Management
+    Route::get('/affiliates', [AffiliateController::class, 'index']);
+    Route::get('/affiliates/{id}', [AffiliateController::class, 'show']);
+    Route::post('/affiliates', [AffiliateController::class, 'store']);
+    Route::post('/affiliates/bulk-delete', [AffiliateController::class, 'bulkDestroy']);
+    Route::post('/affiliates/{id}', [AffiliateController::class, 'update']);
+    Route::delete('/affiliates/{id}', [AffiliateController::class, 'destroy']);
 
     // Content Management - Banner
     Route::get('/banners', [ContentBannerController::class, 'index']);
