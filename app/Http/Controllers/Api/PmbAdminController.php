@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Pmb;
 use App\Models\PmbStatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -14,7 +15,7 @@ class PmbAdminController extends Controller
     public function index(Request $request)
     {
         try {
-            $pmbs = Pmb::with('status')->orderBy('created_at', 'desc')->get();
+            $pmbs = Pmb::with(['status', 'affiliate.user'])->orderBy('created_at', 'desc')->get();
             return response()->json([
                 'status' => 'success',
                 'data' => $pmbs
@@ -30,7 +31,7 @@ class PmbAdminController extends Controller
     public function show($id)
     {
         try {
-            $pmb = Pmb::with('status')->findOrFail($id);
+            $pmb = Pmb::with(['status', 'affiliate.user'])->findOrFail($id);
             return response()->json([
                 'status' => 'success',
                 'data' => $pmb
@@ -59,6 +60,7 @@ class PmbAdminController extends Controller
             'sumber_informasi' => 'required|string|max:255',
             'jalur_registrasi' => 'required|string|max:255',
             'kode_voucher' => 'nullable|string|max:255',
+            'affiliate_id' => 'nullable|exists:affiliates,id',
         ]);
 
         if ($validator->fails()) {
@@ -144,7 +146,7 @@ class PmbAdminController extends Controller
     public function export(Request $request)
     {
         try {
-            $query = Pmb::query()->with('status');
+            $query = Pmb::query()->with(['status', 'affiliate.user']);
 
             if ($request->filled('program_studi') && $request->program_studi !== 'all') {
                 $query->where('program_studi', $request->program_studi);
@@ -176,7 +178,7 @@ class PmbAdminController extends Controller
                 'ID Pendaftar', 'Nama Lengkap', 'Email', 'No. HP/WA', 'Tempat Lahir', 
                 'Tanggal Lahir', 'Jenis Kelamin', 'Alamat Asal', 'Asal Sekolah', 
                 'Program Studi', 'Sumber Informasi', 'Jalur Registrasi', 'Kode Voucher', 
-                'Status PMB', 'Tanggal Daftar'
+                'Status PMB', 'Referral Affiliate', 'Tanggal Daftar'
             ];
 
             foreach ($headers as $colIndex => $headerText) {
@@ -202,7 +204,8 @@ class PmbAdminController extends Controller
                 $sheet->setCellValue('L' . $rowNumber, $pmb->jalur_registrasi);
                 $sheet->setCellValue('M' . $rowNumber, $pmb->kode_voucher ?? '-');
                 $sheet->setCellValue('N' . $rowNumber, $pmb->status?->status ?? 'Registrasi Awal');
-                $sheet->setCellValue('O' . $rowNumber, $pmb->created_at->format('Y-m-d H:i:s'));
+                $sheet->setCellValue('O' . $rowNumber, $pmb->affiliate ? ($pmb->affiliate->name . ' (' . ($pmb->affiliate->user?->name ?? '') . ')') : '-');
+                $sheet->setCellValue('P' . $rowNumber, $pmb->created_at->format('Y-m-d H:i:s'));
                 $rowNumber++;
             }
 

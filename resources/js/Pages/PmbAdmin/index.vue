@@ -81,6 +81,7 @@
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Pendaftar</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Program Studi</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Jalur Registrasi</th>
+                  <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Referral</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Tgl Daftar</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">Aksi</th>
@@ -114,6 +115,12 @@
                     <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600 border border-slate-200">
                         {{ item.jalur_registrasi }}
                     </span>
+                  </td>
+                  <td class="px-6 py-4">
+                    <span v-if="item.affiliate" class="text-sm text-slate-700 font-semibold text-indigo-600">
+                        {{ item.affiliate.name }}
+                    </span>
+                    <span v-else class="text-slate-400 text-xs italic">-</span>
                   </td>
                   <td class="px-6 py-4">
                     <select 

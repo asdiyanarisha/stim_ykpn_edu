@@ -134,6 +134,16 @@
                     </div>
 
                     <div class="space-y-1">
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Referral Affiliate</p>
+                        <p class="text-slate-900 font-medium">
+                            <span v-if="pmb.affiliate" class="px-2.5 py-1 bg-indigo-50 text-indigo-700 font-semibold rounded-lg border border-indigo-100">
+                                {{ pmb.affiliate.name }} ({{ pmb.affiliate.user?.name }})
+                            </span>
+                            <span v-else class="text-slate-400 italic">Tidak ada</span>
+                        </p>
+                    </div>
+
+                    <div class="space-y-1">
                         <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tanggal Pendaftaran</p>
                         <p class="text-slate-900 font-medium">{{ formatDateFull(pmb.created_at) }}</p>
                     </div>

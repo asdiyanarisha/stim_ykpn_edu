@@ -26,10 +26,16 @@ class Pmb extends Model
         'sumber_informasi',
         'jalur_registrasi',
         'kode_voucher',
+        'affiliate_id',
     ];
 
     public function status()
     {
         return $this->belongsTo(PmbStatus::class, 'pmb_status_id');
+    }
+
+    public function affiliate()
+    {
+        return $this->belongsTo(Affiliate::class);
     }
 }

@@ -164,9 +164,20 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+
+const affiliateUsername = ref('');
+
+onMounted(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const affiliateParam = urlParams.get('affiliate');
+  if (affiliateParam) {
+    localStorage.setItem('referred_by_affiliate', affiliateParam);
+  }
+  affiliateUsername.value = localStorage.getItem('referred_by_affiliate') || '';
+});
 
 const form = ref({
   nama_lengkap: '',
@@ -272,7 +283,10 @@ const submitForm = async () => {
   isSubmitting.value = true;
 
   try {
-    const payload = { ...form.value };
+    const payload = { 
+      ...form.value,
+      affiliate: affiliateUsername.value || null
+    };
     if (!payload.kode_voucher) {
         payload.kode_voucher = null; // Matches old behavior
     }

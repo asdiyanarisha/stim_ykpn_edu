@@ -129,6 +129,16 @@
                     </div>
 
                     <div class="space-y-1">
+                        <label class="text-sm font-bold text-slate-700 block mb-1">Referral Affiliate</label>
+                        <select v-model="form.affiliate_id" class="w-full text-sm border border-slate-200 rounded-xl text-slate-700 focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-4 bg-slate-50 focus:bg-white transition-colors">
+                            <option :value="null">Tidak ada referral</option>
+                            <option v-for="aff in affiliates" :key="aff.id" :value="aff.id">
+                                {{ aff.name }} ({{ aff.username }})
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-1">
                         <label class="text-sm font-bold text-slate-700 block mb-1">Status PMB <span class="text-rose-500">*</span></label>
                         <select v-model="form.pmb_status_id" class="w-full text-sm border border-slate-200 rounded-xl text-slate-700 focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-4 bg-slate-50 focus:bg-white transition-colors" required>
                             <option v-for="statusOpt in statuses" :key="statusOpt.id" :value="statusOpt.id">
@@ -173,6 +183,7 @@ const isAuthenticated = ref(false);
 const isLoading = ref(false);
 const isSaving = ref(false);
 const statuses = ref([]);
+const affiliates = ref([]);
 
 const form = ref({
     id: null,
@@ -188,10 +199,25 @@ const form = ref({
     program_studi: '',
     sumber_informasi: '',
     jalur_registrasi: '',
-    kode_voucher: ''
+    kode_voucher: '',
+    affiliate_id: null
 });
 
 const pmbId = ref(null);
+
+const fetchAffiliates = async () => {
+  try {
+    const token = getCookie(TOKEN_COOKIE_NAME);
+    const response = await axios.get('/api/affiliates', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (response.data.status === 'success') {
+      affiliates.value = response.data.data;
+    }
+  } catch (error) {
+    console.error('Error fetching affiliates:', error);
+  }
+};
 
 const fetchStatuses = async () => {
   try {
@@ -297,6 +323,7 @@ onMounted(async () => {
     });
     isAuthenticated.value = true;
     await fetchStatuses();
+    await fetchAffiliates();
     fetchPmbDetail();
   } catch (error) {
     deleteCookie(TOKEN_COOKIE_NAME);

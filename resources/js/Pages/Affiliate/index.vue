@@ -86,6 +86,12 @@
                   </td>
                   <td class="px-6 py-4 text-sm text-slate-600">{{ affiliate.city }}</td>
                   <td class="px-6 py-4 text-right flex items-center justify-end gap-2">
+                    <button @click="copyReferralLink(affiliate.username)" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-emerald-600 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors" title="Salin Link PMB Affiliate">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                      </svg>
+                      Salin Link PMB
+                    </button>
                     <a :href="`/affiliate/show/${affiliate.id}`" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors">
                       Detail
                     </a>
@@ -168,6 +174,7 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import AppSidebar from '../../Components/Organisms/AppSidebar.vue';
 import AppNavbar from '../../Components/Organisms/AppNavbar.vue';
 import AppButton from '../../Components/Atoms/AppButton.vue';
@@ -222,6 +229,29 @@ const fetchAffiliates = async (token) => {
     headers: { Authorization: `Bearer ${token}` },
   });
   allAffiliates.value = response?.data?.data ?? [];
+};
+
+const copyReferralLink = (username) => {
+  const link = `${window.location.origin}/pmb.html?affiliate=${username}`;
+  navigator.clipboard.writeText(link).then(() => {
+    Swal.fire({
+      icon: 'success',
+      title: 'Link Referral Berhasil Disalin!',
+      text: link,
+      timer: 2000,
+      showConfirmButton: false,
+      toast: true,
+      position: 'top-end'
+    });
+  }).catch(err => {
+    console.error('Failed to copy link: ', err);
+    Swal.fire({
+      icon: 'error',
+      title: 'Gagal Menyalin Link',
+      text: 'Silakan salin secara manual: ' + link,
+      confirmButtonColor: '#d33'
+    });
+  });
 };
 
 const showDeleteModal = ref(false);

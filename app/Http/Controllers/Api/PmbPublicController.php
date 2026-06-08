@@ -50,6 +50,7 @@ class PmbPublicController extends Controller
             'sumber_informasi' => 'required|string|max:255',
             'jalur_registrasi' => 'required|string|max:255',
             'kode_voucher' => 'nullable|string|max:255',
+            'affiliate' => 'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -78,6 +79,25 @@ class PmbPublicController extends Controller
             $idPendaftar = $prefix . str_pad($newSequence, 5, '0', STR_PAD_LEFT);
 
             $validatedData = $validator->validated();
+            
+            // Resolve affiliate_id from affiliate username
+            $affiliateId = null;
+            if ($request->filled('affiliate')) {
+                $user = \Illuminate\Support\Facades\DB::table('users')
+                    ->where('role_id', 3)
+                    ->where('name', $request->input('affiliate'))
+                    ->first();
+                if ($user) {
+                    $affiliate = \Illuminate\Support\Facades\DB::table('affiliates')
+                        ->where('user_id', $user->id)
+                        ->first();
+                    if ($affiliate) {
+                        $affiliateId = $affiliate->id;
+                    }
+                }
+            }
+
+            $validatedData['affiliate_id'] = $affiliateId;
             $validatedData['pmb_status_id'] = 7; // Default status: Sedang mengirim email
             $validatedData['id_pendaftar'] = $idPendaftar;
             

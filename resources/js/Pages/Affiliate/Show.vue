@@ -103,7 +103,21 @@
 
                 <div class="md:col-span-2">
                   <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Alamat Lengkap</label>
-                  <p class="text-sm font-medium text-slate-700 bg-slate-50 p-4 rounded-2xl border border-slate-100 leading-relaxed">{{ affiliate.address }}</p>
+                  <p class="text-sm font-medium text-slate-700 bg-slate-50 p-4 rounded-2xl border border-slate-100 leading-relaxed mb-4">{{ affiliate.address }}</p>
+                </div>
+
+                <!-- Referral Link Section -->
+                <div class="md:col-span-2 p-5 bg-emerald-50/50 rounded-2xl border border-emerald-100/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div class="space-y-1">
+                    <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">Link Pendaftaran PMB (Referral Affiliate)</span>
+                    <p class="text-sm font-semibold text-slate-700 break-all select-all">{{ getReferralLink(affiliate.username) }}</p>
+                  </div>
+                  <AppButton type="button" variant="primary" size="md" class="bg-emerald-600 hover:bg-emerald-700 shadow-emerald-200 border-emerald-600 shrink-0 text-white" @click="copyReferralLink(affiliate.username)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                    </svg>
+                    Salin Link PMB
+                  </AppButton>
                 </div>
               </div>
             </div>
@@ -158,6 +172,33 @@ const affiliateId = ref(null);
 
 const goBack = () => {
   window.location.href = '/affiliate';
+};
+
+const getReferralLink = (username) => {
+  return `${window.location.origin}/pmb.html?affiliate=${username}`;
+};
+
+const copyReferralLink = (username) => {
+  const link = getReferralLink(username);
+  navigator.clipboard.writeText(link).then(() => {
+    Swal.fire({
+      icon: 'success',
+      title: 'Link Referral Berhasil Disalin!',
+      text: link,
+      timer: 2000,
+      showConfirmButton: false,
+      toast: true,
+      position: 'top-end'
+    });
+  }).catch(err => {
+    console.error('Failed to copy link: ', err);
+    Swal.fire({
+      icon: 'error',
+      title: 'Gagal Menyalin Link',
+      text: 'Silakan salin secara manual: ' + link,
+      confirmButtonColor: '#d33'
+    });
+  });
 };
 
 const fetchAffiliateData = async () => {
