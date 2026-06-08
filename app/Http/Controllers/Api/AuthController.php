@@ -45,7 +45,7 @@ class AuthController extends Controller
         $password = $request->input('password');
 
         // Cek apakah username ada di database
-        $user = User::where('name', $username)->first();
+        $user = User::with('role')->where('name', $username)->first();
 
         if (!$user) {
             return response()->json([
@@ -54,6 +54,16 @@ class AuthController extends Controller
                 'message' => 'Login gagal. Username tidak ditemukan.',
                 'data'    => null,
             ], 401);
+        }
+
+        // Cek apakah user memiliki role administrator
+        if (!$user->role || $user->role->name !== 'administrator') {
+            return response()->json([
+                'status'  => 'error',
+                'code'    => 403,
+                'message' => 'Login gagal. Hanya administrator yang dapat mengakses dashboard.',
+                'data'    => null,
+            ], 403);
         }
 
         // Cek apakah password cocok
