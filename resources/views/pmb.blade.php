@@ -17,7 +17,7 @@
     rel="stylesheet">
 
   <!-- Base Styles -->
-  <link rel="stylesheet" href="/css/style.css?v=3.8">
+  <link rel="stylesheet" href="/css/style.css?v=3.9">
   <!-- Flatpickr CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
@@ -485,7 +485,7 @@
   @include('components.footer')
 
   <!-- Script -->
-  <script src="/js/script.js?v=3.8"></script>
+  <script src="/js/script.js?v=3.9"></script>
   <!-- Flatpickr JS -->
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <!-- SweetAlert2 -->

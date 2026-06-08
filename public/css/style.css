@@ -642,6 +642,8 @@ a.btn.btn-orange:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 1400px;
+  gap: 20px;
 }
 
 .navbar-brand {
