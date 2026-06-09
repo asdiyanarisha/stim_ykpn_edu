@@ -1,5 +1,5 @@
 <template>
-  <div class="form-page-container">
+  <div class="form-page-container pmb-form-enter">
     <!-- Full Page Loader Overlay -->
     <div v-if="isSubmitting" class="page-loader-overlay">
       <div class="spinner"></div>
@@ -398,6 +398,22 @@ const submitForm = async () => {
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+/* Fade-in animation saat Vue component menggantikan skeleton */
+.pmb-form-enter {
+  animation: pmbFadeIn 0.35s ease-out both;
+}
+
+@keyframes pmbFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .error-text {

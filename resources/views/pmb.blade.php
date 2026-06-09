@@ -453,6 +453,93 @@
     .wa-floating-container {
       display: none !important;
     }
+
+    /* ==============================================
+       SKELETON LOADING STYLES
+       ============================================== */
+    .skeleton-form-card {
+      max-width: 900px;
+      margin: -60px auto 100px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .skeleton-card-inner {
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+      padding: 60px;
+      border-top: 6px solid var(--orange-500);
+    }
+
+    .skeleton-block {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 8px;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .skeleton-title {
+      height: 36px;
+      width: 280px;
+      margin: 0 auto 48px;
+    }
+
+    .skeleton-banner {
+      height: 64px;
+      width: 100%;
+      margin-bottom: 32px;
+      border-radius: 12px;
+    }
+
+    .skeleton-row {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .skeleton-label {
+      height: 14px;
+      width: 120px;
+      margin-bottom: 8px;
+    }
+
+    .skeleton-input {
+      height: 52px;
+      width: 100%;
+    }
+
+    .skeleton-textarea {
+      height: 120px;
+      width: 100%;
+    }
+
+    .skeleton-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .skeleton-btn {
+      height: 56px;
+      width: 100%;
+      margin-top: 16px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #f18721aa 25%, #f1872166 50%, #f18721aa 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+
+    @media (max-width: 768px) {
+      .skeleton-row { flex-direction: column; }
+      .skeleton-card-inner { padding: 40px 24px; }
+    }
   </style>
   @vite(['resources/js/app.js'])
   <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
@@ -470,7 +557,7 @@
   <!-- ============================================
        PAGE HEADER
        ============================================ -->
-  <header class="page-header">
+  <header class="page-header" style="padding-bottom: 120px;">
     <div class="container">
       <h1 class="page-title animate-on-scroll">Pendaftaran PMB</h1>
       <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">
@@ -480,7 +567,97 @@
   </header>
 
   <!-- FORM SECTION (VUE) -->
-  <div id="app" data-page="pmbFrontendForm"></div>
+  <div id="app" data-page="pmbFrontendForm">
+    <!-- Skeleton placeholder: ditampilkan sebelum Vue mount, otomatis tergantikan -->
+    <div class="skeleton-form-card" id="pmb-skeleton">
+      <div class="skeleton-card-inner">
+        <!-- Title skeleton -->
+        <div class="skeleton-block skeleton-title"></div>
+
+        <!-- Helpdesk banner skeleton -->
+        <div class="skeleton-block skeleton-banner"></div>
+
+        <!-- Row 1: Nama Lengkap -->
+        <div class="skeleton-row">
+          <div class="skeleton-col">
+            <div class="skeleton-block skeleton-label"></div>
+            <div class="skeleton-block skeleton-input"></div>
+          </div>
+        </div>
+
+        <!-- Row 2: Email + HP -->
+        <div class="skeleton-row">
+          <div class="skeleton-col">
+            <div class="skeleton-block skeleton-label"></div>
+            <div class="skeleton-block skeleton-input"></div>
+          </div>
+          <div class="skeleton-col">
+            <div class="skeleton-block skeleton-label"></div>
+            <div class="skeleton-block skeleton-input"></div>
+          </div>
+        </div>
+
+        <!-- Row 3: Tempat Lahir + Tanggal + Jenis Kelamin -->
+        <div class="skeleton-row">
+          <div class="skeleton-col">
+            <div class="skeleton-block skeleton-label"></div>
+            <div class="skeleton-block skeleton-input"></div>
+          </div>
+          <div class="skeleton-col">
+            <div class="skeleton-block skeleton-label"></div>
+            <div class="skeleton-block skeleton-input"></div>
+          </div>
+          <div class="skeleton-col">
+            <div class="skeleton-block skeleton-label"></div>
+            <div class="skeleton-block skeleton-input"></div>
+          </div>
+        </div>
+
+        <!-- Row 4: Alamat -->
+        <div class="skeleton-row">
+          <div class="skeleton-col">
+            <div class="skeleton-block skeleton-label"></div>
+            <div class="skeleton-block skeleton-textarea"></div>
+          </div>
+        </div>
+
+        <!-- Row 5: Sekolah + Prodi -->
+        <div class="skeleton-row">
+          <div class="skeleton-col">
+            <div class="skeleton-block skeleton-label"></div>
+            <div class="skeleton-block skeleton-input"></div>
+          </div>
+          <div class="skeleton-col">
+            <div class="skeleton-block skeleton-label"></div>
+            <div class="skeleton-block skeleton-input"></div>
+          </div>
+        </div>
+
+        <!-- Row 6: Sumber Info + Jalur -->
+        <div class="skeleton-row">
+          <div class="skeleton-col">
+            <div class="skeleton-block skeleton-label"></div>
+            <div class="skeleton-block skeleton-input"></div>
+          </div>
+          <div class="skeleton-col">
+            <div class="skeleton-block skeleton-label"></div>
+            <div class="skeleton-block skeleton-input"></div>
+          </div>
+        </div>
+
+        <!-- Row 7: Voucher -->
+        <div class="skeleton-row">
+          <div class="skeleton-col">
+            <div class="skeleton-block skeleton-label"></div>
+            <div class="skeleton-block skeleton-input"></div>
+          </div>
+        </div>
+
+        <!-- Submit button skeleton -->
+        <div class="skeleton-btn"></div>
+      </div>
+    </div>
+  </div>
 
   @include('components.footer')
 
