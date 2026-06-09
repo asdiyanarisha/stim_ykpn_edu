@@ -8,7 +8,7 @@
     </a>
 
     <ul class="nav-links" id="navLinks">
-      <li><a href="/" class="active">Beranda</a></li>
+      <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}">Beranda</a></li>
       <li class="dropdown">
         <a href="#">Profil <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

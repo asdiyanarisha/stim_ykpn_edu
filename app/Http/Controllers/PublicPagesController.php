@@ -204,4 +204,23 @@ class PublicPagesController extends Controller
         $vacancy->increment('views_count');
         return view('lowongan-kerja-detail', compact('vacancy'));
     }
+    public function programDetail($slug)
+    {
+        // Simple mapping from slug to title
+        $slugToName = [
+            's1-bisnis-digital' => 'S1 Bisnis Digital',
+            's1-manajemen' => 'S1 Manajemen',
+            'd3-manajemen' => 'D3 Manajemen',
+        ];
+
+        $name = $slugToName[$slug] ?? str_replace('-', ' ', $slug);
+        
+        // Fetch from DB if available (optional enhancement)
+        $program = \App\Models\ProgramStudy::where('name', 'like', "%{$name}%")->first();
+        
+        $programTitle = strtoupper($name);
+
+        // Make sure program-detail.blade.php exists (we will rename/copy it next)
+        return view('program-detail', compact('program', 'programTitle', 'slug'));
+    }
 }

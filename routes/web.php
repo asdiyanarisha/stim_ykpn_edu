@@ -385,7 +385,7 @@ Route::get('/spmi', fn() => view('spmi'));
 Route::get('/spmi.html', fn() => view('spmi'));
 
 // Academic Program Study Sub-Pages (Modular Blade)
-Route::get('/program/s1-manajemen', fn() => view('program-s1-manajemen'));
+Route::get('/program/{slug}', [PublicPagesController::class, 'programDetail']);
 Route::get('/program/s1-manajemen.html', fn() => view('program-s1-manajemen'));
 
 Route::get('/sasaran-pendidikan', fn() => view('sasaran-pendidikan'));
