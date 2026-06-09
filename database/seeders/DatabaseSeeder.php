@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             TahunAkademikSeeder::class,
             SemesterSeeder::class,
             KategoriSeeder::class,
+            ProgramStudyProfileSeeder::class,
         ]);
     }
 }

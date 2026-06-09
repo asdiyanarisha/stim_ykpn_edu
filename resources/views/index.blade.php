@@ -402,61 +402,35 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         </p>
       </div>
 
+      @php
+        $programImages = [
+            's1-bisnis-digital' => 'images/STIMYK/optimized_STIMYK-300.jpg',
+            's1-manajemen'      => 'images/STIMYK/optimized_STIMYK-290.jpg',
+            'd3-manajemen'      => 'images/STIMYK/optimized_STIMYK-378.jpg'
+        ];
+      @endphp
       <div class="programs-grid">
-          <!-- Program 1 -->
-          <div class="program-card animate-on-scroll animate-delay-1">
+        @foreach ($programs as $program)
+          @php
+            $imagePath = $program->image_banner ?: asset($programImages[$program->slug] ?? 'images/STIMYK/optimized_STIMYK-290.jpg');
+          @endphp
+          <div class="program-card animate-on-scroll animate-delay-{{ $loop->iteration }}">
             <div class="program-card-image">
-              <img src="{{ asset('images/STIMYK/optimized_STIMYK-300.jpg') }}" alt="S1 Bisnis Digital" loading="lazy" style="object-fit: cover;">
-              <span class="badge">TERAKREDITASI BAIK</span>
+              <img src="{{ $imagePath }}" alt="{{ $program->name }}" loading="lazy" style="object-fit: cover;">
+              @if($program->accreditation)
+                <span class="badge">TERAKREDITASI {{ strtoupper($program->accreditation) }}</span>
+              @endif
             </div>
             <div class="program-card-body">
-              <h3>S1 Bisnis Digital</h3>
-              <p>
-                Program sarjana 4 tahun yang berfokus pada inovasi teknologi, manajemen e-commerce, startup, dan strategi
-                bisnis di era digital.
-              </p>
-              <a href="/program/s1-bisnis-digital" class="program-link">
-                Selengkapnya &rarr;
-              </a>
-            </div>
-          </div>
-  
-          <!-- Program 2 -->
-          <div class="program-card animate-on-scroll animate-delay-2">
-            <div class="program-card-image">
-              <img src="{{ asset('images/STIMYK/optimized_STIMYK-290.jpg') }}" alt="S1 Manajemen" loading="lazy" style="object-fit: cover;">
-              <span class="badge">TERAKREDITASI BAIK SEKALI</span>
-            </div>
-            <div class="program-card-body">
-              <h3>S1 Manajemen</h3>
-              <p>
-                Program sarjana 4 tahun yang membekali mahasiswa dengan pengetahuan manajemen bisnis,
-                keuangan, pemasaran, dan SDM untuk menjadi pemimpin profesional.
-              </p>
-              <a href="/program/s1-manajemen" class="program-link">
-                Selengkapnya &rarr;
-              </a>
-            </div>
-          </div>
-  
-          <!-- Program 3 -->
-          <div class="program-card animate-on-scroll animate-delay-3">
-            <div class="program-card-image">
-              <img src="{{ asset('images/STIMYK/optimized_STIMYK-378.jpg') }}" alt="D3 Manajemen" loading="lazy" style="object-fit: cover;">
-              <span class="badge">TERAKREDITASI BAIK SEKALI</span>
-            </div>
-            <div class="program-card-body">
-              <h3>D3 Manajemen</h3>
-              <p>
-                Program diploma 3 tahun yang fokus pada keterampilan praktis manajemen bisnis,
-                siap kerja dengan sertifikasi kompetensi profesional.
-              </p>
-              <a href="/program/d3-manajemen" class="program-link">
+              <h3>{{ $program->name }}</h3>
+              <p>{{ $program->tagline }}</p>
+              <a href="/program/{{ $program->slug }}" class="program-link">
                 Selengkapnya
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-left: 4px;"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
               </a>
             </div>
           </div>
+        @endforeach
       </div>
     </div>
   </section>

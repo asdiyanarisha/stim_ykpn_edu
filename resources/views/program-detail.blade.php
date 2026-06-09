@@ -216,7 +216,7 @@
       font-size: 18px;
       line-height: 1.8;
     }
-    
+
     .prose p { margin-bottom: 24px; }
 
     /* ============================================
@@ -449,7 +449,7 @@
 
   <!-- 3. MAIN CONTENT -->
   <div class="container content-layout">
-    
+
     <!-- Deskripsi & Konsentrasi -->
     <article class="article-block animate-on-scroll">
       <h2 class="section-title">Mengapa {{ $programTitle }} STIM YKPN?</h2>

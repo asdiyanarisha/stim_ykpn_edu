@@ -88,6 +88,12 @@ Route::prefix('auth')->group(function () {
 Route::post('/pmb/register', [PmbPublicController::class, 'store']);
 
 // ======================================================================
+// Public Program Studies (untuk halaman /program/{slug} di frontend)
+// ======================================================================
+Route::get('/public/program-studies', [ProgramStudyController::class, 'index']);
+Route::get('/public/program-studies/{identifier}', [ProgramStudyController::class, 'show']);
+
+// ======================================================================
 // Protected Routes (memerlukan JWT token yang valid)
 // ======================================================================
 Route::middleware('jwt.auth')->group(function () {

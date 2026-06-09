@@ -18,6 +18,7 @@ use App\Models\KegiatanAkademik;
 use App\Models\TahunAkademik;
 use App\Models\Brochure;
 use App\Models\JobVacancy;
+use App\Models\ProgramStudy;
 
 class PublicPagesController extends Controller
 {
@@ -26,7 +27,8 @@ class PublicPagesController extends Controller
         $banners = ContentBanner::orderBy('created_at', 'desc')->get();
         $latest_news = News::where('status', 'published')->orderBy('created_at', 'desc')->take(3)->get();
         $alumnis = TestimonyAlumni::all();
-        return view('index', compact('banners', 'latest_news', 'alumnis'));
+        $programs = ProgramStudy::where('is_active', true)->orderBy('order')->get();
+        return view('index', compact('banners', 'latest_news', 'alumnis', 'programs'));
     }
 
     public function newsDetail($id)
@@ -80,7 +82,7 @@ class PublicPagesController extends Controller
     {
         $categories = CategoryTeacher::all();
         $query = Teacher::query();
-        
+
         if ($request->has('category') && $request->category != 'all') {
             $query->whereHas('category', function($q) use ($request) {
                 $q->where('slug', $request->category);
@@ -101,7 +103,7 @@ class PublicPagesController extends Controller
                   });
             });
         }
-        
+
         $teachers = $query->with(['category', 'jobTitle'])->orderBy('full_name', 'asc')->paginate(6);
         return view('dosen', compact('teachers', 'categories'));
     }
@@ -109,8 +111,8 @@ class PublicPagesController extends Controller
     public function teacherDetail($id)
     {
         $teacher = Teacher::with([
-            'category', 
-            'jobTitle', 
+            'category',
+            'jobTitle',
             'education',
             'professional_positions',
             'research_areas',
@@ -132,7 +134,7 @@ class PublicPagesController extends Controller
                   ->orWhere('slug', 'like', '%pimpinan%');
             })
             ->get();
-            
+
         // Sort pimpinans: "Ketua" first, then the rest.
         $pimpinans = $pimpinans->sortBy(function($p) {
             $title = $p->jobTitle ? strtolower($p->jobTitle->title) : '';
@@ -204,23 +206,18 @@ class PublicPagesController extends Controller
         $vacancy->increment('views_count');
         return view('lowongan-kerja-detail', compact('vacancy'));
     }
+
     public function programDetail($slug)
     {
-        // Simple mapping from slug to title
-        $slugToName = [
-            's1-bisnis-digital' => 'S1 Bisnis Digital',
-            's1-manajemen' => 'S1 Manajemen',
-            'd3-manajemen' => 'D3 Manajemen',
-        ];
+        if (str_ends_with($slug, '.html')) {
+            $slug = substr($slug, 0, -5);
+        }
 
-        $name = $slugToName[$slug] ?? str_replace('-', ' ', $slug);
-        
-        // Fetch from DB if available (optional enhancement)
-        $program = \App\Models\ProgramStudy::where('name', 'like', "%{$name}%")->first();
-        
-        $programTitle = strtoupper($name);
+        $program = ProgramStudy::with(['concentrations', 'careers'])
+            ->where('slug', $slug)
+            ->where('is_active', true)
+            ->firstOrFail();
 
-        // Make sure program-detail.blade.php exists (we will rename/copy it next)
-        return view('program-detail', compact('program', 'programTitle', 'slug'));
+        return view('program-detail', compact('program'));
     }
 }
