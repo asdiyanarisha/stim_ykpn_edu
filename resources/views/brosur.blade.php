@@ -199,7 +199,7 @@
                   @endif
                 </p>
                 @if($brochure->file_path)
-                  <a href="{{ $brochure->file_path }}" class="btn btn-primary" style="display: inline-flex;" download target="_blank">
+                  <a href="{{ $brochure->file_path }}" class="btn btn-primary" style="display: inline-flex;" download target="_blank" onclick="gtag('event', 'download_brosur')">
                     Unduh Brosur
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>

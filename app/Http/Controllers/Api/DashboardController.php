@@ -73,6 +73,59 @@ class DashboardController extends Controller
                 ->orderByDesc('total')
                 ->get();
 
+            // Google Analytics Data (3 Bulan Terakhir)
+            $gaData = [
+                'active_users' => 0,
+                'bounce_rate' => 0,
+                'avg_session_duration' => '0m 0s',
+                'note' => 'Belum ada data (Situs masih baru atau tidak ada pengunjung 3 bulan terakhir)',
+                'events' => [
+                    'click_pmb' => 0,
+                    'download_brosur' => 0,
+                    'click_whatsapp' => 0,
+                    'click_kalender_akademik' => 0,
+                ],
+                'referrers' => []
+            ];
+
+            try {
+                $metrics = \Spatie\Analytics\Facades\Analytics::get(
+                    \Spatie\Analytics\Period::days(90),
+                    ['activeUsers', 'bounceRate', 'averageSessionDuration']
+                );
+
+                if (count($metrics) > 0) {
+                    $firstRow = $metrics[0];
+                    $gaData['active_users'] = $firstRow['activeUsers'] ?? 0;
+                    $gaData['bounce_rate'] = round(($firstRow['bounceRate'] ?? 0) * 100, 2);
+                    
+                    $seconds = (int) ($firstRow['averageSessionDuration'] ?? 0);
+                    $m = floor($seconds / 60);
+                    $s = $seconds % 60;
+                    $gaData['avg_session_duration'] = "{$m}m {$s}s";
+                    $gaData['note'] = 'Data riil 3 bulan terakhir dari Google Analytics';
+                }
+
+                // Fetch Custom Events
+                $eventMetrics = \Spatie\Analytics\Facades\Analytics::get(
+                    \Spatie\Analytics\Period::days(90),
+                    ['eventCount'],
+                    ['eventName']
+                );
+
+                foreach ($eventMetrics as $event) {
+                    if (isset($gaData['events'][$event['eventName']])) {
+                        $gaData['events'][$event['eventName']] = (int) $event['eventCount'];
+                    }
+                }
+
+                // Fetch Top Referrers
+                $gaData['referrers'] = \Spatie\Analytics\Facades\Analytics::fetchTopReferrers(\Spatie\Analytics\Period::days(90), 5);
+
+            } catch (\Exception $e) {
+                $gaData['note'] = 'Menunggu data masuk atau error API: ' . $e->getMessage();
+            }
+
             return response()->json([
                 'status' => 'success',
                 'data' => [
@@ -96,6 +149,7 @@ class DashboardController extends Controller
                     'recent_pmb' => $recentPmb,
                     'pmb_by_program' => $pmbByProgram,
                     'filter_end_date' => $endDate->toDateString(),
+                    'google_analytics' => $gaData,
                 ],
             ], 200);
         } catch (\Exception $e) {
