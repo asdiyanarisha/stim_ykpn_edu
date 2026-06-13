@@ -8,7 +8,7 @@
     </a>
 
     <ul class="nav-links" id="navLinks">
-      <li><a href="/" class="active">Beranda</a></li>
+      <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}">Beranda</a></li>
       <li class="dropdown">
         <a href="#">Profil <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -48,7 +48,7 @@
               <li><a href="/sanksi-akademik.html">Sanksi Akademik</a></li>
             </ul>
           </li>
-          <li><a href="/kalender-akademik.html">Kalender Akademik</a></li>
+          <li><a href="/kalender-akademik.html" onclick="gtag('event', 'click_kalender_akademik')">Kalender Akademik</a></li>
           <li class="dropdown-submenu">
             <a href="#">Ketentuan Perkuliahan <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <a href="/kegiatan-akademik.html">Kegiatan Akademik</a>
           <a href="/dosen-pembimbing.html">Dosen Pembimbing</a>
           <a href="/sanksi-akademik.html">Sanksi Akademik</a>
-          <a href="/kalender-akademik.html">Kalender Akademik</a>
+          <a href="/kalender-akademik.html" onclick="gtag('event', 'click_kalender_akademik')">Kalender Akademik</a>
           <a href="https://stimykpn.ecampuz.com/">E-Campuz</a>
           <a href="/perpustakaan.html">Perpustakaan</a>
         </div>

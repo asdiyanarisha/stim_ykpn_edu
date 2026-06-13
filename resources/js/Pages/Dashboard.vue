@@ -156,6 +156,110 @@
             </div>
           </div>
 
+          <!-- Google Analytics Widget -->
+          <div class="mb-8">
+            <h2 class="text-lg font-bold text-slate-900 mb-4">Trafik Website (Google Analytics)</h2>
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 relative overflow-hidden">
+              <div class="absolute right-0 top-0 w-32 h-32 bg-indigo-50 rounded-bl-full -z-0"></div>
+              
+              <div v-if="googleAnalytics.note" class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amber-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <div class="text-sm text-amber-800">
+                  <p class="font-bold">Mode Simulasi Aktif</p>
+                  <p>{{ googleAnalytics.note }}</p>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+                <div class="flex items-center gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                  <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                  </div>
+                  <div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Pengunjung Aktif</p>
+                    <p class="text-2xl font-bold text-slate-900">{{ googleAnalytics.active_users }}</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                  <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                  </div>
+                  <div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Bounce Rate</p>
+                    <p class="text-2xl font-bold text-slate-900">{{ googleAnalytics.bounce_rate }}%</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                  <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  </div>
+                  <div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Rata-rata Sesi</p>
+                    <p class="text-2xl font-bold text-slate-900">{{ googleAnalytics.avg_session_duration }}</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                  <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" /></svg>
+                  </div>
+                  <div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Klik PMB</p>
+                    <p class="text-2xl font-bold text-slate-900">{{ googleAnalytics.events?.click_pmb ?? 0 }}</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                  <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                  </div>
+                  <div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Unduh Brosur</p>
+                    <p class="text-2xl font-bold text-slate-900">{{ googleAnalytics.events?.download_brosur ?? 0 }}</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                  <div class="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                  </div>
+                  <div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Klik WhatsApp</p>
+                    <p class="text-2xl font-bold text-slate-900">{{ googleAnalytics.events?.click_whatsapp ?? 0 }}</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                  <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                  </div>
+                  <div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Klik Kalender Akademik</p>
+                    <p class="text-2xl font-bold text-slate-900">{{ googleAnalytics.events?.click_kalender_akademik ?? 0 }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Referrers List -->
+              <div class="mt-6 border-t border-slate-100 pt-6">
+                <h3 class="text-sm font-bold text-slate-900 mb-4">Top 5 Sumber Pengunjung</h3>
+                
+                <ul v-if="googleAnalytics.referrers && googleAnalytics.referrers.length > 0" class="space-y-3">
+                  <li v-for="(ref, i) in googleAnalytics.referrers" :key="i" class="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-slate-100">
+                    <span class="text-sm font-medium text-slate-700">{{ ref.url }}</span>
+                    <span class="text-xs font-bold bg-indigo-100 text-indigo-600 px-2 py-1 rounded-full">{{ ref.pageViews }} visits</span>
+                  </li>
+                </ul>
+                
+                <div v-else class="text-center p-6 border border-dashed border-slate-200 rounded-xl bg-slate-50">
+                  <p class="text-sm text-slate-500 font-medium">Belum ada data pengunjung saat ini.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
           <!-- Bottom Grid -->
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <!-- Kemahasiswaan -->
@@ -285,6 +389,14 @@ const stats = computed(() => dashboardData.value?.stat_cards ?? {
 });
 const recentNews = computed(() => dashboardData.value?.recent_news ?? []);
 const recentPmb = computed(() => dashboardData.value?.recent_pmb ?? []);
+const googleAnalytics = computed(() => dashboardData.value?.google_analytics ?? {
+  active_users: 0,
+  bounce_rate: 0,
+  avg_session_duration: '0s',
+  note: '',
+  events: { click_pmb: 0, download_brosur: 0, click_whatsapp: 0, click_kalender_akademik: 0 },
+  referrers: []
+});
 const studentStats = computed(() => {
   const k = dashboardData.value?.kemahasiswaan ?? {};
   return [

@@ -18,7 +18,7 @@
         <div class="contact-info">
           <a href="tel:0274885505">📞 (0274) 885505</a>
           <a href="mailto:info@stimykpn.ac.id">✉️ info@stimykpn.ac.id</a>
-          <a href="https://wa.me/6285707010333">💬 0857-0701-0333 (PMB)</a>
+          <a href="https://wa.me/6285707010333" onclick="gtag('event', 'click_whatsapp')">💬 0857-0701-0333 (PMB)</a>
         </div>
       </div>
 
@@ -101,7 +101,7 @@
     </div>
     <div class="wa-popup-body">
       <p class="wa-greeting">Halo! Ada yang bisa kami bantu? Pilih layanan admin di bawah ini:</p>
-      <a href="https://wa.me/6285707010333" class="wa-admin-card" target="_blank" rel="noopener noreferrer">
+      <a href="https://wa.me/6285707010333" class="wa-admin-card" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'click_whatsapp')">
         <div class="wa-admin-avatar">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
@@ -118,7 +118,7 @@
           <path d="M9 18l6-6-6-6" />
         </svg>
       </a>
-      <a href="https://wa.me/6282328008787" class="wa-admin-card" target="_blank" rel="noopener noreferrer">
+      <a href="https://wa.me/6282328008787" class="wa-admin-card" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'click_whatsapp')">
         <div class="wa-admin-avatar">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
@@ -158,3 +158,46 @@
     <div class="video-iframe-wrapper"></div>
   </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Track PMB clicks
+    const pmbLinks = document.querySelectorAll('a[href*="/pmb"]');
+    pmbLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if(typeof gtag !== 'undefined') {
+                gtag('event', 'click_pmb', {
+                    'event_category': 'Engagement',
+                    'event_label': 'Daftar PMB'
+                });
+            }
+        });
+    });
+
+    // Track Brosur clicks
+    const brosurLinks = document.querySelectorAll('a[href*="/brosur"]');
+    brosurLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if(typeof gtag !== 'undefined') {
+                gtag('event', 'download_brosur', {
+                    'event_category': 'Engagement',
+                    'event_label': 'Unduh Brosur'
+                });
+            }
+        });
+    });
+
+    // Track WhatsApp clicks
+    const waLinks = document.querySelectorAll('a[href*="wa.me"]');
+    waLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if(typeof gtag !== 'undefined') {
+                gtag('event', 'click_whatsapp', {
+                    'event_category': 'Contact',
+                    'event_label': this.href
+                });
+            }
+        });
+    });
+});
+</script>

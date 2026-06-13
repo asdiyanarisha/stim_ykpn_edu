@@ -290,7 +290,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
                 kompetensi terakui.
               </p>
               <div class="hero-actions" style="width: 100%;">
-                <a href="/pmb.html" class="btn btn-orange btn-pulse">
+                <a href="/pmb.html" class="btn btn-orange btn-pulse" onclick="gtag('event', 'click_pmb')">
                   DAFTAR PMB
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
                 </a>
@@ -594,7 +594,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
           </div>
 
           <div class="pmb-actions">
-            <a href="/pmb.html" class="btn btn-orange btn-pulse">
+            <a href="/pmb.html" class="btn btn-orange btn-pulse" onclick="gtag('event', 'click_pmb')">
               Daftar PMB
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                 stroke-linecap="round" stroke-linejoin="round">
