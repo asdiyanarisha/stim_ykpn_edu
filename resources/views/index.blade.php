@@ -270,7 +270,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
     <div class="hero-slider" id="heroSlider">
       <!-- Slide 1: Static Content -->
       <div class="slide active">
-        <img src="/images/banner_slide_1.jpeg" alt="STIM YKPN Campus 1" loading="eager">
+        <img src="/images/Banner1.jpeg" alt="STIM YKPN Campus 1" loading="eager">
         <div class="hero-overlay"></div>
         <div style="position: absolute; inset: 0; display: flex; align-items: center; z-index: 2;">
           <div class="container">
