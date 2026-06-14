@@ -178,6 +178,59 @@ bash deploy.sh --fresh
 
 ---
 
+### 💾 Backup Database
+
+Script `backup-db.sh` membaca konfigurasi database langsung dari file `.env` dan melakukan backup menggunakan `mysqldump`.
+
+#### Quick Start
+```bash
+# Backup standar (kompresi gzip, disimpan di storage/backups/database/)
+./backup-db.sh
+```
+
+#### Opsi yang Tersedia
+```bash
+# Custom direktori backup
+./backup-db.sh --dir /path/to/backup
+
+# Simpan backup selama 14 hari (default: 7 hari)
+./backup-db.sh --keep 14
+
+# Tanpa kompresi gzip
+./backup-db.sh --no-compress
+
+# Gunakan file .env yang berbeda
+./backup-db.sh --env /path/to/.env
+
+# Tampilkan bantuan
+./backup-db.sh --help
+```
+
+#### Hasil Backup
+- File tersimpan di `storage/backups/database/`
+- Format nama: `stim_ykpn_YYYY-MM-DD_HH-MM-SS.sql.gz`
+- Backup lama otomatis dihapus sesuai retensi (default 7 hari)
+
+#### Backup Otomatis (Cron Job)
+Untuk menjalankan backup secara otomatis setiap hari pukul 02:00 pagi:
+```bash
+# Tambahkan ke crontab (jalankan: crontab -e)
+0 2 * * * /path/to/project/backup-db.sh >> /path/to/project/storage/logs/backup.log 2>&1
+```
+
+#### Restore Database
+```bash
+# Restore dari file terkompresi (.gz)
+gunzip < storage/backups/database/stim_ykpn_2024-01-01_02-00-00.sql.gz | mysql -u DB_USERNAME -p DB_DATABASE
+
+# Restore dari file SQL biasa
+mysql -u DB_USERNAME -p DB_DATABASE < storage/backups/database/stim_ykpn_2024-01-01_02-00-00.sql
+```
+
+> ⚠️ **Pastikan `mysqldump` sudah terinstall.** Di Ubuntu/Debian: `sudo apt install mysql-client`
+
+---
+
 ### 🌐 Opsi 4: Deploy ke Shared Hosting (cPanel — TANPA Composer & NPM)
 
 > ⚠️ **Khusus untuk shared hosting yang HANYA memiliki File Manager cPanel, tanpa akses SSH, Composer, atau NPM.**
