@@ -87,7 +87,7 @@
                 kompetensi terakui.
               </p>
               <div class="hero-actions">
-                <a href="/pmb.html" class="btn btn-orange btn-pulse" onclick="gtag('event', 'click_pmb')">
+                <a href="/pendaftaran-pmb" class="btn btn-orange btn-pulse" onclick="gtag('event', 'click_pmb')">
                   DAFTAR PMB
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
                 </a>
@@ -365,7 +365,7 @@
           </div>
 
           <div class="pmb-actions">
-            <a href="/pmb.html" class="btn btn-orange btn-pulse" onclick="gtag('event', 'click_pmb')">
+            <a href="/pendaftaran-pmb" class="btn btn-orange btn-pulse" onclick="gtag('event', 'click_pmb')">
               Daftar PMB
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -373,7 +373,7 @@
                 <path d="m12 5 7 7-7 7" />
               </svg>
             </a>
-            <a href="/biaya-kuliah.html" class="btn btn-outline">
+            <a href="/biaya-kuliah" class="btn btn-outline">
               Lihat Biaya Kuliah
             </a>
           </div>

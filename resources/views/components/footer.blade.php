@@ -36,7 +36,7 @@
       <div class="footer-col">
         <h4>Pendaftaran</h4>
         <ul>
-          <li><a href="/pmb">Daftar Online</a></li>
+          <li><a href="/pendaftaran-pmb">Daftar Online</a></li>
           <li><a href="/biaya-kuliah">Biaya Kuliah</a></li>
           <li><a href="/program-reguler">Program Reguler</a></li>
           <li><a href="/program-ekstensi">Program Ekstensi</a></li>

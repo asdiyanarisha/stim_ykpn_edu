@@ -78,12 +78,12 @@
         </ul>
       </li>
       <li class="dropdown">
-        <a href="/pmb">PMB <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        <a href="/pendaftaran-pmb">PMB <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="m6 9 6 6 6-6" />
           </svg></a>
         <ul class="dropdown-menu">
-          <li><a href="/pmb">Pendaftaran</a></li>
+          <li><a href="/pendaftaran-pmb">Pendaftaran</a></li>
           <li><a href="/biaya-kuliah">Biaya Kuliah</a></li>
           <li><a href="/beasiswa">Beasiswa</a></li>
           <li><a href="/program-reguler">Program Reguler</a></li>
@@ -179,7 +179,7 @@
         </div>
       </div>
 
-      <a href="/pmb" class="btn btn-orange btn-pulse" id="navCtaBtn">Daftar PMB</a>
+      <a href="/pendaftaran-pmb" class="btn btn-orange btn-pulse" id="navCtaBtn">Daftar PMB</a>
       <div class="nav-toggle" id="navToggle">
         <span></span>
         <span></span>
@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="mobile-menu-body">
     <nav class="mobile-nav-list">
       <!-- Prominent CTA for PMB -->
-      <a href="/pmb" class="mobile-nav-item primary-cta">
+      <a href="/pendaftaran-pmb" class="mobile-nav-item primary-cta">
         Daftar PMB
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
       </a>
@@ -452,7 +452,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
         </div>
         <div class="mobile-submenu">
-          <a href="/pmb">Informasi Pendaftaran</a>
+          <a href="/pendaftaran-pmb">Informasi Pendaftaran</a>
           <a href="/biaya-kuliah">Biaya Kuliah</a>
           <a href="/beasiswa">Beasiswa</a>
           <a href="/program-reguler">Program Reguler</a>

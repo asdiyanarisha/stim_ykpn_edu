@@ -164,7 +164,7 @@
       <aside class="academic-sidebar animate-on-scroll">
         <div class="sidebar-title">PMB</div>
         <ul class="sidebar-menu">
-          <li><a href="/pmb">Pendaftaran</a></li>
+          <li><a href="/pendaftaran-pmb">Pendaftaran</a></li>
           <li><a href="/biaya-kuliah">Biaya Kuliah</a></li>
           <li><a href="/beasiswa" class="active">Beasiswa</a></li>
           <li><a href="/program-reguler">Program Reguler</a></li>
