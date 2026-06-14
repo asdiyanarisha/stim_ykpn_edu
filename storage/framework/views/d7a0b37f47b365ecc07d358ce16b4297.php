@@ -22,13 +22,8 @@
     'seminar-proposal', 'ketentuan-ujian', 'logo', 'sambutan-ketua', 'pimpinan', 'visi-misi',
     'unduh', 'program', 'program/*'
   ];
-  $isPublicPage = false;
-  foreach ($publicRoutes as $route) {
-      if (request()->is($route)) {
-          $isPublicPage = true;
-          break;
-      }
-  }
+  
+  $isPublicPage = request()->is(...$publicRoutes);
 ?>
 
 <?php if($isPublicPage): ?>

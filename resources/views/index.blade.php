@@ -69,16 +69,16 @@
       <div class="slide active">
         <img src="/images/Banner1.webp" alt="STIM YKPN Campus 1" loading="eager">
         <div class="hero-overlay"></div>
-        <div style="position: absolute; inset: 0; display: flex; align-items: center; z-index: 2;">
-          <div class="container">
+        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; width: 100%; z-index: 2;">
+          <div class="container" style="display: flex; justify-content: center; width: 100%;">
             <div class="hero-content">
-              <div class="hero-badge" style="display: inline-flex; align-items: center; gap: 8px;">
+              <div class="hero-badge">
                 <span class="badge-dot"></span>
-                <span style="display: inline-block; transform: translateY(-1px);">Pendaftaran 2026/2027 Dibuka</span>
+                <span>Pendaftaran 2026/2027 Dibuka</span>
               </div>
               <h1 class="hero-title" style="line-height: 1.3;">
                 Membangun<br>
-                <span style="color: #2563eb; text-shadow: 0 4px 30px rgba(0,0,0,0.8);">Pemimpin</span> <span style="color: #f59e0b; text-shadow: 0 4px 30px rgba(0,0,0,0.8);">Bisnis</span><br>
+                <span><span style="color: #2563eb; text-shadow: 0 4px 30px rgba(0,0,0,0.8); -webkit-text-fill-color: #2563eb;">Pemimpin</span> <span style="color: #f59e0b; text-shadow: 0 4px 30px rgba(0,0,0,0.8); -webkit-text-fill-color: #f59e0b;">Bisnis</span></span><br>
                 Masa Depan
               </h1>
               <p class="hero-subtitle">
@@ -86,7 +86,7 @@
                 siap bersaing di dunia bisnis global dengan sertifikasi<br>
                 kompetensi terakui.
               </p>
-              <div class="hero-actions" style="width: 100%;">
+              <div class="hero-actions">
                 <a href="/pmb.html" class="btn btn-orange btn-pulse" onclick="gtag('event', 'click_pmb')">
                   DAFTAR PMB
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
@@ -96,7 +96,7 @@
                   Virtual Tour
                 </a>
               </div>
-              <div class="hero-stats" style="width: 100%;">
+              <div class="hero-stats">
                 <div class="hero-stat"><div class="stat-number" data-count="50">0</div><div class="stat-label">Tahun Berdiri</div></div>
                 <div class="hero-stat"><div class="stat-number" data-count="15000" data-suffix="+">0</div><div class="stat-label">Alumni Profesional</div></div>
                 <div class="hero-stat"><div class="stat-number" data-count="4" data-suffix="">0</div><div class="stat-label">Sertifikasi Profesi</div></div>
@@ -155,7 +155,7 @@
       </div>
       @endif
 
-      <div class="slider-dots" id="heroSliderDots" style="bottom: 100px;">
+      <div class="slider-dots" id="heroSliderDots">
         <button class="dot active" data-index="0" aria-label="Slide 1"></button>
         @foreach ($banners as $index => $banner)
           <button class="dot" data-index="{{ $index + 1 }}" aria-label="Slide {{ $index + 2 }}"></button>
@@ -180,10 +180,10 @@
     <div class="hero-decor hero-decor-2"></div>
     <div class="hero-decor hero-decor-3"></div>
 
-    <div class="scroll-indicator">
-      <div class="mouse"></div>
-      Scroll
-    </div>
+      <div class="scroll-indicator">
+        <div class="mouse"></div>
+        <span style="font-size: 0.75rem; letter-spacing: 2px;">SCROLL</span>
+      </div>
   </section>
 
   <!-- ============================================

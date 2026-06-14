@@ -4024,7 +4024,7 @@ a.btn.btn-orange:hover {
 }
 
 .slider-dots {
-  bottom: 110px !important;
+  bottom: 95px !important;
   background: rgba(0, 0, 0, 0.2);
   padding: 12px 24px;
   border-radius: 50px;
@@ -4085,6 +4085,7 @@ a.btn.btn-orange:hover {
 .hero-content {
   z-index: 5;
   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  margin-top: -80px;
 }
 
 .hero-title .highlight {
