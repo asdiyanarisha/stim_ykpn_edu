@@ -1,25 +1,21 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+@extends('layouts.public')
+
+@section('seo')
   <x-seo-head
     title="Visi, Misi & Tujuan — STIM YKPN Yogyakarta"
     description="Visi, misi, dan tujuan institusi STIM YKPN Yogyakarta sebagai sekolah tinggi manajemen terkemuka yang menghasilkan lulusan profesional."
     :canonicalUrl="url('/visi-misi')"
   />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
+@endsection
 
+@push('styles')
   <style>
 body { background: #f8fafc; }
 
 /* === HERO === */
 .vm-hero {
   position: relative;
-  background: #0a1628 url('/images/hero-bg.png') center/cover no-repeat;
+  background: #0a1628 url('/images/hero-bg.webp') center/cover no-repeat;
   min-height: 380px;
   display: flex;
   align-items: center;
@@ -249,12 +245,9 @@ body { background: #f8fafc; }
   .misi-box-number { font-size: 48px; }
 }
   </style>
-  <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
-</head>
-<body>
+@endpush
 
-  @include('components.navbar')
-
+@section('content')
 <!-- ===== HERO ===== -->
 <div class="vm-hero">
   <div class="container vm-hero-content animate-on-scroll">
@@ -330,12 +323,4 @@ body { background: #f8fafc; }
     </div>
   </div>
 </section>
-
-  @include('components.footer')
-
-  <!-- Script -->
-  <script src="/js/script.js?v=3.9"></script>
-</body>
-</html>
-
-
+@endsection

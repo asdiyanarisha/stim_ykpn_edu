@@ -1,35 +1,6 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  @php
-  $articleSchema = [
-    '@context' => 'https://schema.org',
-    '@type' => 'NewsArticle',
-    'headline' => $news->title,
-    'description' => Str::limit(strip_tags($news->content), 160),
-    'image' => $news->url_image ? $news->url_image : url('/images/img/logo/logo-stim-new.png'),
-    'datePublished' => $news->created_at->toIso8601String(),
-    'dateModified' => $news->updated_at->toIso8601String(),
-    'author' => [
-      '@type' => 'Organization',
-      'name' => 'STIM YKPN Yogyakarta',
-      'url' => url('/'),
-    ],
-    'publisher' => [
-      '@type' => 'EducationalOrganization',
-      '@id' => url('/') . '#organization',
-      'name' => 'STIM YKPN Yogyakarta',
-      'logo' => [
-        '@type' => 'ImageObject',
-        'url' => url('/images/img/logo/logo-stim-new.png'),
-      ],
-    ],
-    'mainEntityOfPage' => [
-      '@type' => 'WebPage',
-      '@id' => url('/berita/' . $news->id),
-    ],
-  ];
-  @endphp
+@extends('layouts.public')
+
+@section('seo')
   <x-seo-head
     :title="$news->title"
     :description="Str::limit(strip_tags($news->content), 160)"
@@ -38,22 +9,9 @@
     :canonicalUrl="url('/berita/' . $news->id)"
     :schemaJson="$articleSchema"
   />
-  <meta property="article:published_time" content="{{ $news->created_at->toIso8601String() }}">
-  <meta property="article:modified_time" content="{{ $news->updated_at->toIso8601String() }}">
-  <meta property="article:section" content="Berita">
-  <meta property="article:publisher" content="{{ url('/') }}">
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
+@endsection
 
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
-
-  <!-- Base Styles -->
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
-
+@push('styles')
   <style>
     body {
       background-color: #f4f7f9;
@@ -182,12 +140,10 @@
       }
     }
   </style>
-</head>
-<body>
+@endpush
 
-  @include('components.navbar')
-
-  <!-- ============================================
+@section('content')
+<!-- ============================================
        NEWS DETAIL SECTION
        ============================================ -->
   <section class="news-detail-section">
@@ -244,12 +200,4 @@
 
     </div>
   </section>
-
-  @include('components.footer')
-
-  <!-- Script -->
-  <script src="/js/script.js?v=3.9"></script>
-</body>
-</html>
-
-
+@endsection

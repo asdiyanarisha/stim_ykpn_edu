@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+@extends('layouts.public')
+
+@section('seo')
   <x-seo-head
     title="Jurnal Pengabdian Masyarakat Dosen — STIM YKPN Yogyakarta"
     description="Publikasi pengabdian masyarakat dosen STIM YKPN Yogyakarta sebagai wujud tri dharma perguruan tinggi."
     :canonicalUrl="url('/jurnal-pengabdian')"
   />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
+@endsection
 
+@push('styles')
   <style>
     body { background-color: #f8fafc; }
 
@@ -110,13 +106,10 @@
       .academic-sidebar { position: relative; top: 0; }
     }
   </style>
-  <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
-</head>
-<body>
+@endpush
 
-  @include('components.navbar')
-
-  <header class="page-header">
+@section('content')
+<header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
       <h1 class="page-title animate-on-scroll">Jurnal Pengabdian Dosen</h1>
       <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: none; margin: 0 auto;">Dokumentasi kegiatan pengabdian masyarakat oleh civitas akademika STIM YKPN.</p>
@@ -132,8 +125,8 @@
         <ul class="sidebar-menu">
           <li><a href="https://journal.stimykpn.ac.id/index.php/tb" target="_blank" rel="noopener noreferrer">Jurnal Telaah Bisnis</a></li>
           <li><a href="https://journal.stimykpn.ac.id/index.php/cb" target="_blank" rel="noopener noreferrer">Jurnal Cakrawangsa Bisnis</a></li>
-          <li><a href="/jurnal-penelitian.html">Penelitian Dosen</a></li>
-          <li><a href="/jurnal-pengabdian.html" class="active">Pengabdian Dosen</a></li>
+          <li><a href="/jurnal-penelitian">Penelitian Dosen</a></li>
+          <li><a href="/jurnal-pengabdian" class="active">Pengabdian Dosen</a></li>
         </ul>
       </aside>
 
@@ -225,9 +218,4 @@
 
     </div>
   </section>
-
-  @include('components.footer')
-
-  <script src="/js/script.js?v=3.9"></script>
-</body>
-</html>
+@endsection

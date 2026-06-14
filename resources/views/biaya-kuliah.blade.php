@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
+@extends('layouts.public')
 
-<head>
+@section('seo')
   <x-seo-head
     title="Biaya Kuliah — STIM YKPN Yogyakarta"
     description="Informasi lengkap biaya kuliah, UKT, dan biaya pendaftaran mahasiswa baru STIM YKPN Yogyakarta 2026/2027. Tersedia beasiswa dan keringanan biaya."
     :canonicalUrl="url('/biaya-kuliah')"
   />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
+@endsection
 
+@push('styles')
   <style>
     body {
       background-color: #f8fafc;
@@ -153,15 +146,10 @@
       }
     }
   </style>
-  <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
-</head>
+@endpush
 
-<body>
-
-  <!-- NAVBAR -->
-  @include('components.navbar')
-
-  <header class="page-header">
+@section('content')
+<header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
       <h1 class="page-title animate-on-scroll">Biaya Kuliah</h1>
       <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">Informasi
@@ -177,12 +165,12 @@
       <aside class="academic-sidebar animate-on-scroll">
         <div class="sidebar-title">PMB</div>
         <ul class="sidebar-menu">
-          <li><a href="/pmb.html">Pendaftaran</a></li>
-          <li><a href="/biaya-kuliah.html" class="active">Biaya Kuliah</a></li>
-          <li><a href="/beasiswa.html">Beasiswa</a></li>
-          <li><a href="/program-reguler.html">Program Reguler</a></li>
-          <li><a href="/program-ekstensi.html">Program Ekstensi</a></li>
-          <li><a href="/pengumuman-diterima.html">Pengumuman Diterima</a></li>
+          <li><a href="/pmb">Pendaftaran</a></li>
+          <li><a href="/biaya-kuliah" class="active">Biaya Kuliah</a></li>
+          <li><a href="/beasiswa">Beasiswa</a></li>
+          <li><a href="/program-reguler">Program Reguler</a></li>
+          <li><a href="/program-ekstensi">Program Ekstensi</a></li>
+          <li><a href="/pengumuman-diterima">Pengumuman Diterima</a></li>
         </ul>
       </aside>
 
@@ -254,7 +242,7 @@
         <!-- Special Offer Banner -->
         <div
           style="background: linear-gradient(135deg, var(--blue-500), var(--navy-800)); border-radius: 12px; padding: 30px; color: white; text-align: center; box-shadow: 0 10px 25px rgba(10, 37, 88, 0.2);">
-          <a href="/pmb.html" class="btn btn-primary"
+          <a href="/pmb" class="btn btn-primary"
             style="background: var(--orange-500); border: none; padding: 12px 30px; font-size: 1.1rem; border-radius: 8px; text-decoration: none; color: white; font-weight: 600; display: inline-block; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(239, 124, 0, 0.3);">Daftar
             Sekarang</a>
         </div>
@@ -264,15 +252,4 @@
 
   </div>
 </section>
-
-@include('components.footer')
-
-<script src="/js/script.js?v=3.9"></script>
-
-</body>
-
-</html>
-
-
-
-
+@endsection

@@ -1,26 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
+@extends('layouts.public')
 
-<head>
+@section('seo')
   <x-seo-head
     title="Penerimaan Mahasiswa Baru (PMB) — STIM YKPN Yogyakarta"
     description="Daftar sekarang di STIM YKPN Yogyakarta! PMB 2026/2027 dibuka. Program reguler, ekstensi, dan beasiswa tersedia. Terakreditasi Baik Sekali."
-    :canonicalUrl="url('/pmb.html')"
+    :canonicalUrl="url('/pmb')"
   />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap"
-    rel="stylesheet">
+@endsection
 
-  <!-- Base Styles -->
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
-  <!-- Flatpickr CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
+@push('styles')
   <style>
     /* ==============================================
        CLEAN FORM WITH MODERN ORNAMENTS
@@ -541,20 +529,10 @@
       .skeleton-card-inner { padding: 40px 24px; }
     }
   </style>
-  @vite(['resources/js/app.js'])
-  <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
-</head>
+@endpush
 
-<body>
-
-  <!-- Background Ornaments -->
-  <div class="decor-blob decor-1"></div>
-  <div class="decor-blob decor-2"></div>
-
-  <!-- NAVBAR -->
-  @include('components.navbar')
-
-  <!-- ============================================
+@section('content')
+<!-- ============================================
        PAGE HEADER
        ============================================ -->
   <header class="page-header" style="padding-bottom: 120px;">
@@ -658,22 +636,12 @@
       </div>
     </div>
   </div>
+@endsection
 
-  @include('components.footer')
-
-  <!-- Script -->
-  <script src="/js/script.js?v=3.9"></script>
-  <!-- Flatpickr JS -->
+@push('scripts')
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     // Vite client is injected, but we don't need the inline manual submission anymore
   </script>
-</body>
-
-</html>
-
-
-
-
+@endpush

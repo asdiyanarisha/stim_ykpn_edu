@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
+@extends('layouts.public')
 
-<head>
+@section('seo')
   <x-seo-head
     title="Program Reguler — STIM YKPN Yogyakarta"
     description="Program kuliah reguler (pagi/siang) di STIM YKPN Yogyakarta untuk S1 Manajemen, S1 Bisnis Digital, dan D3 Manajemen. Terakreditasi Baik Sekali."
     :canonicalUrl="url('/program-reguler')"
   />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
+@endsection
 
+@push('styles')
   <style>
     body {
       background-color: #f8fafc;
@@ -153,15 +146,10 @@
       }
     }
   </style>
-  <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
-</head>
+@endpush
 
-<body>
-
-  <!-- NAVBAR -->
-  @include('components.navbar')
-
-  <header class="page-header">
+@section('content')
+<header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
       <h1 class="page-title animate-on-scroll">Program Reguler</h1>
       <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">Informasi
@@ -176,12 +164,12 @@
       <aside class="academic-sidebar animate-on-scroll">
         <div class="sidebar-title">PMB</div>
         <ul class="sidebar-menu">
-          <li><a href="/pmb.html">Pendaftaran</a></li>
-          <li><a href="/biaya-kuliah.html">Biaya Kuliah</a></li>
-          <li><a href="/beasiswa.html">Beasiswa</a></li>
-          <li><a href="/program-reguler.html" class="active">Program Reguler</a></li>
-          <li><a href="/program-ekstensi.html">Program Ekstensi</a></li>
-          <li><a href="/pengumuman-diterima.html">Pengumuman Diterima</a></li>
+          <li><a href="/pmb">Pendaftaran</a></li>
+          <li><a href="/biaya-kuliah">Biaya Kuliah</a></li>
+          <li><a href="/beasiswa">Beasiswa</a></li>
+          <li><a href="/program-reguler" class="active">Program Reguler</a></li>
+          <li><a href="/program-ekstensi">Program Ekstensi</a></li>
+          <li><a href="/pengumuman-diterima">Pengumuman Diterima</a></li>
         </ul>
       </aside>
 
@@ -222,22 +210,11 @@
             </ul>
           </div>
 
-          <a href="/pmb.html" class="btn btn-orange" style="margin-top: 20px; display: inline-block;">Daftar Sekarang</a>
+          <a href="/pmb" class="btn btn-orange" style="margin-top: 20px; display: inline-block;">Daftar Sekarang</a>
 
         </div>
       </article>
 
     </div>
   </section>
-
-  @include('components.footer')
-
-  <script src="/js/script.js?v=3.9"></script>
-
-</body>
-
-</html>
-
-
-
-
+@endsection

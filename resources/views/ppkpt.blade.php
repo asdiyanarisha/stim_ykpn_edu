@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+@extends('layouts.public')
+
+@section('seo')
   <x-seo-head
     title="PPKPT — STIM YKPN Yogyakarta"
     description="Program Pengenalan Kehidupan Perguruan Tinggi (PPKPT) bagi mahasiswa baru STIM YKPN Yogyakarta."
     :canonicalUrl="url('/ppkpt')"
   />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
+@endsection
 
+@push('styles')
   <style>
     body { background-color: #f8fafc; }
 
@@ -110,13 +106,10 @@
       .academic-sidebar { position: relative; top: 0; }
     }
   </style>
-  <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
-</head>
-<body>
+@endpush
 
-  @include('components.navbar')
-
-  <header class="page-header">
+@section('content')
+<header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
       <h1 class="page-title animate-on-scroll">PPKPT</h1>
       <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 800px; margin: 0 auto;">Pencegahan dan Penanganan Kekerasan Seksual & Perundungan STIM YKPN.</p>
@@ -130,10 +123,10 @@
       <aside class="academic-sidebar animate-on-scroll">
         <div class="sidebar-title">Kemahasiswaan</div>
         <ul class="sidebar-menu">
-          <li><a href="/kegiatan-mahasiswa.html">Kegiatan Mahasiswa</a></li>
-          <li><a href="/ukm.html">UKM</a></li>
-          <li><a href="/ppkpt.html" class="active">PPKPT</a></li>
-          <li><a href="/pengumuman.html">Pengumuman</a></li>
+          <li><a href="/kegiatan-mahasiswa">Kegiatan Mahasiswa</a></li>
+          <li><a href="/ukm">UKM</a></li>
+          <li><a href="/ppkpt" class="active">PPKPT</a></li>
+          <li><a href="/pengumuman">Pengumuman</a></li>
         </ul>
       </aside>
 
@@ -162,13 +155,4 @@
 
     </div>
   </section>
-
-  @include('components.footer')
-
-  <script src="/js/script.js?v=3.9"></script>
-</body>
-</html>
-
-
-
-
+@endsection

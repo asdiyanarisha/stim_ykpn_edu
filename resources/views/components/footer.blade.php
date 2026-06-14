@@ -25,35 +25,35 @@
       <div class="footer-col">
         <h4>Our Campus</h4>
         <ul>
-          <li><a href="/sambutan-ketua.html">Sambutan Ketua</a></li>
-          <li><a href="/profil.html">Profil STIM YKPN</a></li>
-          <li><a href="/visi-misi.html">Visi & Misi</a></li>
-          <li><a href="/dosen.html">Dosen</a></li>
-          <li><a href="/fasilitas.html">Fasilitas</a></li>
+          <li><a href="/sambutan-ketua">Sambutan Ketua</a></li>
+          <li><a href="/profil">Profil STIM YKPN</a></li>
+          <li><a href="/visi-misi">Visi & Misi</a></li>
+          <li><a href="/dosen">Dosen</a></li>
+          <li><a href="/fasilitas">Fasilitas</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Pendaftaran</h4>
         <ul>
-          <li><a href="/pmb.html">Daftar Online</a></li>
-          <li><a href="/biaya-kuliah.html">Biaya Kuliah</a></li>
-          <li><a href="/program-reguler.html">Program Reguler</a></li>
-          <li><a href="/program-ekstensi.html">Program Ekstensi</a></li>
-          <li><a href="/beasiswa.html">Beasiswa</a></li>
+          <li><a href="/pmb">Daftar Online</a></li>
+          <li><a href="/biaya-kuliah">Biaya Kuliah</a></li>
+          <li><a href="/program-reguler">Program Reguler</a></li>
+          <li><a href="/program-ekstensi">Program Ekstensi</a></li>
+          <li><a href="/beasiswa">Beasiswa</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Akademik</h4>
         <ul>
-          <li><a href="/sasaran-pendidikan.html">S1 Manajemen</a></li>
-          <li><a href="/sasaran-pendidikan.html">S1 Bisnis Digital</a></li>
-          <li><a href="/sasaran-pendidikan.html">D3 Manajemen</a></li>
-          <li><a href="/kalender-akademik.html">Kalender Akademik</a></li>
+          <li><a href="/sasaran-pendidikan">S1 Manajemen</a></li>
+          <li><a href="/sasaran-pendidikan">S1 Bisnis Digital</a></li>
+          <li><a href="/sasaran-pendidikan">D3 Manajemen</a></li>
+          <li><a href="/kalender-akademik">Kalender Akademik</a></li>
           <li><a href="https://stimykpn.ecampuz.com/" target="_blank" rel="noopener noreferrer">E-Campuz Portal</a>
           </li>
-          <li><a href="/perpustakaan.html">Perpustakaan</a></li>
+          <li><a href="/perpustakaan">Perpustakaan</a></li>
         </ul>
       </div>
     </div>

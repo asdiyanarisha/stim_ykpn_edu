@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+@extends('layouts.public')
+
+@section('seo')
   <x-seo-head
     title="{{ $vacancy->title }} — STIM YKPN Yogyakarta"
     description="{{ Str::limit(strip_tags($vacancy->content), 160) }}"
@@ -8,22 +8,9 @@
     ogType="article"
     canonicalUrl="{{ url('/lowongan-kerja/' . $vacancy->id) }}"
   />
-  <meta property="article:published_time" content="{{ $vacancy->created_at->toIso8601String() }}">
-  <meta property="article:modified_time" content="{{ $vacancy->updated_at->toIso8601String() }}">
-  <meta property="article:section" content="Lowongan Kerja">
-  <meta property="article:publisher" content="{{ url('/') }}">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
+@endsection
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
-
-  <!-- Base Styles -->
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
-
+@push('styles')
   <style>
     body {
       background-color: #f4f7f9;
@@ -166,16 +153,13 @@
       }
     }
   </style>
-  <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
-</head>
-<body>
+@endpush
 
-  @include('components.navbar')
-
-  <section class="news-detail-section">
+@section('content')
+<section class="news-detail-section">
     <div class="container">
       
-      <a href="/lowongan-kerja.html" class="back-to-home">
+      <a href="/lowongan-kerja" class="back-to-home">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="m12 19-7-7 7-7M5 12h14"/>
         </svg>
@@ -226,9 +210,4 @@
 
     </div>
   </section>
-
-  @include('components.footer')
-
-  <script src="/js/script.js?v=3.9"></script>
-</body>
-</html>
+@endsection

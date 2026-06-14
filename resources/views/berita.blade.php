@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+@extends('layouts.public')
+
+@section('seo')
   <x-seo-head
     title="Berita & Kegiatan Kampus — STIM YKPN Yogyakarta"
     description="Berita terbaru, kegiatan kampus, prestasi, dan pengumuman seputar STIM YKPN Yogyakarta."
     :canonicalUrl="url('/berita')"
   />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+@endsection
 
+@push('styles')
   <style>
     body { background-color: #f8fafc; }
 
@@ -156,13 +151,10 @@
       }
     }
   </style>
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
-</head>
-<body>
+@endpush
 
-  @include('components.navbar')
-
-  <main>
+@section('content')
+<main>
     <!-- Page Header -->
     <header class="page-header">
       <div class="container" style="position:relative; z-index:2;">
@@ -199,7 +191,7 @@
           @forelse($newsList as $news_item)
           <article class="news-card">
             <div class="news-card-image">
-              <img loading="lazy" src="{{ $news_item->url_image ?? '/images/hero-bg.png' }}" alt="{{ $news_item->title }}">
+              <img loading="lazy" src="{{ $news_item->url_image ?? '/images/hero-bg.webp' }}" alt="{{ $news_item->title }}">
               <span class="date-badge">{{ $news_item->created_at->format('d M Y') }}</span>
             </div>
             <div class="news-card-body">
@@ -231,10 +223,9 @@
     </section>
 
   </main>
+@endsection
 
-  @include('components.footer')
-
-  <script src="/js/script.js?v=3.9"></script>
+@push('scripts')
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const searchInput = document.getElementById('newsSearchInput');
@@ -287,8 +278,4 @@
       sortFilter.addEventListener('change', updateFilters);
     });
   </script>
-</body>
-</html>
-
-
-
+@endpush

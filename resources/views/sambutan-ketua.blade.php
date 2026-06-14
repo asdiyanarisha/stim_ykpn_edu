@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+@extends('layouts.public')
+
+@section('seo')
   <x-seo-head
     title="Sambutan Ketua STIM YKPN Yogyakarta"
     description="Sambutan resmi dari Ketua STIM YKPN Yogyakarta. Selamat datang di kampus manajemen terdepan di Yogyakarta."
     :canonicalUrl="url('/sambutan-ketua')"
   />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
+@endsection
 
-  <!-- Base Styles -->
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
-
+@push('styles')
   <style>
     /* ==============================================
        CLEAN & SAFE CARD LAYOUT FOR CHAIRMAN
@@ -163,13 +156,10 @@
       }
     }
   </style>
-  <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
-</head>
-<body>
+@endpush
 
-  @include('components.navbar')
-
-  <!-- ============================================
+@section('content')
+<!-- ============================================
        PAGE HEADER
        ============================================ -->
   <header class="page-header">
@@ -239,12 +229,4 @@
 
     </div>
   </section>
-
-  @include('components.footer')
-
-  <!-- Script -->
-  <script src="/js/script.js?v=3.9"></script>
-</body>
-</html>
-
-
+@endsection

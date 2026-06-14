@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+@extends('layouts.public')
+
+@section('seo')
   <x-seo-head
     title="Seminar Proposal Skripsi — STIM YKPN Yogyakarta"
     description="Panduan dan ketentuan seminar proposal skripsi mahasiswa STIM YKPN Yogyakarta."
     :canonicalUrl="url('/seminar-proposal')"
   />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
+@endsection
 
+@push('styles')
   <style>
     body { background-color: #f8fafc; }
 
@@ -142,13 +138,10 @@
       .academic-sidebar { position: relative; top: 0; }
     }
   </style>
-  <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
-</head>
-<body>
+@endpush
 
-  @include('components.navbar')
-
-  <header class="page-header">
+@section('content')
+<header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
       <h1 class="page-title animate-on-scroll">Seminar Proposal Dan Pendadaran</h1>
       <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">Tahapan akhir penyelesaian masa studi bagi mahasiswa program sarjana dan diploma.</p>
@@ -162,10 +155,10 @@
       <aside class="academic-sidebar animate-on-scroll">
         <div class="sidebar-title">Ketentuan Perkuliahan</div>
         <ul class="sidebar-menu">
-          <li><a href="/kehadiran-kuliah.html">Kehadiran Kuliah</a></li>
-          <li><a href="/tata-tertib-kuliah.html">Tata Tertib Kuliah</a></li>
-          <li><a href="/jumlah-kehadiran.html">Jumlah Kehadiran</a></li>
-          <li><a href="/seminar-proposal.html" class="active">Seminar Proposal Dan Pendadaran</a></li>
+          <li><a href="/kehadiran-kuliah">Kehadiran Kuliah</a></li>
+          <li><a href="/tata-tertib-kuliah">Tata Tertib Kuliah</a></li>
+          <li><a href="/jumlah-kehadiran">Jumlah Kehadiran</a></li>
+          <li><a href="/seminar-proposal" class="active">Seminar Proposal Dan Pendadaran</a></li>
         </ul>
       </aside>
 
@@ -198,15 +191,4 @@
 
     </div>
   </section>
-
-  @include('components.footer')
-
-  <script src="/js/script.js?v=3.9"></script>
-</body>
-</html>
-
-
-
-
-
-
+@endsection

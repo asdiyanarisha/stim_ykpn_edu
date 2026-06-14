@@ -1,34 +1,6 @@
-<?php
-$source_dir = '/home/xau/rasabaik/beban-studi/assets';
-$dest_dir = '/home/xau/rasabaik/stim_ykpn_edu/public/images';
+@extends('layouts.public')
 
-if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_dir . '/hero-bg.png'))) {
-    function copy_folder_recursive($src, $dst) {
-        if (!is_dir($dst)) {
-            @mkdir($dst, 0755, true);
-        }
-        $dir = @opendir($src);
-        if ($dir) {
-            while (false !== ($file = readdir($dir))) {
-                if ($file !== '.' && $file !== '..') {
-                    if (is_dir($src . '/' . $file)) {
-                        copy_folder_recursive($src . '/' . $file, $dst . '/' . $file);
-                    } else {
-                        @copy($src . '/' . $file, $dst . '/' . $file);
-                    }
-                }
-            }
-            closedir($dir);
-        }
-    }
-    copy_folder_recursive($source_dir, $dest_dir);
-}
-?>
-<!DOCTYPE html>
-<html lang="id">
-
-<head>
-  @php
+@php
   $homepageSchema = [
     '@context' => 'https://schema.org',
     '@graph' => [
@@ -38,7 +10,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         'name' => 'STIM YKPN Yogyakarta',
         'alternateName' => 'Sekolah Tinggi Ilmu Manajemen YKPN',
         'url' => url('/'),
-        'logo' => url('/images/img/logo/logo-stim-new.png'),
+        'logo' => url('/images/img/logo/logo-stim-new.webp'),
         'description' => 'Sekolah Tinggi Ilmu Manajemen terdepan di Yogyakarta dengan 50+ tahun pengalaman menghasilkan 15.000+ alumni profesional. Terakreditasi Baik Sekali oleh BAN-PT.',
         'foundingDate' => '1976',
         'address' => [
@@ -74,203 +46,28 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
       ],
     ],
   ];
-  @endphp
+@endphp
+
+@section('meta')
   <x-seo-head
     title="STIM YKPN — School of Management Yogyakarta"
     description="STIM YKPN Yogyakarta — Sekolah Tinggi Ilmu Manajemen terdepan dengan 50+ tahun pengalaman menghasilkan 15.000+ alumni profesional. Terakreditasi Baik Sekali oleh BAN-PT."
-    :ogImage="url('/images/img/logo/logo-stim-new.png')"
+    :ogImage="url('/images/img/logo/logo-stim-new.webp')"
     ogType="website"
     :canonicalUrl="url('/')"
     :schemaJson="$homepageSchema"
   />
+@endsection
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap"
-    rel="stylesheet">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
-  
-  <style>
-    /* Visual Improvements from Index 3 */
-    @media (max-width: 768px) {
-      .hero .container {
-        top: 0 !important;
-        height: 100% !important;
-      }
-    }
 
-    .hero-overlay {
-      display: none !important;
-      /* Remove dark overlay */
-    }
-
-    .slider-btn {
-      background: rgba(255, 255, 255, 0.1) !important;
-      border: 1px solid rgba(255, 255, 255, 0.2) !important;
-      backdrop-filter: blur(10px);
-      width: 60px !important;
-      height: 60px !important;
-      opacity: 0;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    }
-
-    .hero-slider:hover .slider-btn {
-      opacity: 1;
-    }
-
-    .slider-btn:hover {
-      background: rgba(255, 255, 255, 0.3) !important;
-      transform: translateY(-50%) scale(1.1) !important;
-    }
-
-    .slider-dots,
-    .scroll-indicator {
-      position: absolute !important;
-      left: 0 !important;
-      right: 0 !important;
-      margin: 0 auto !important;
-      width: max-content !important;
-      transform: none !important;
-      z-index: 10;
-    }
-
-    .slider-dots {
-      bottom: 110px !important;
-      background: rgba(0, 0, 0, 0.2);
-      padding: 12px 24px;
-      border-radius: 50px;
-      backdrop-filter: blur(10px);
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
-    }
-
-    .slider-dots .dot {
-      width: 10px !important;
-      height: 10px !important;
-      margin: 0 8px !important;
-      border-radius: 50% !important;
-      background: rgba(255, 255, 255, 0.4) !important;
-      transition: all 0.3s ease !important;
-    }
-
-    .slider-dots .dot.active {
-      background: #ffffff !important;
-      transform: scale(1.3) !important;
-    }
-
-    .hero-slider::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      box-shadow: none;
-      /* Removed vignette */
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .slide img {
-      filter: brightness(1.05) contrast(1.05) saturate(1.1);
-      transform: scale(1.01);
-      transition: transform 8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      transform-origin: 50% 50%;
-    }
-
-    .slide.active img {
-      transform: scale(1.08);
-      /* Slow Cinematic Ken Burns Zoom */
-    }
-
-    .hero-decor {
-      animation: floatOrbs 12s ease-in-out infinite alternate !important;
-      opacity: 0.6 !important;
-      filter: blur(60px) !important;
-    }
-
-    @keyframes floatOrbs {
-      0% {
-        transform: translate(0, 0) scale(1);
-      }
-
-      100% {
-        transform: translate(40px, -40px) scale(1.3);
-      }
-    }
-
-    .hero-content {
-      z-index: 5;
-      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-      /* Universal shadow for readability on any photo */
-    }
-
-    /* Specific readability fix ONLY for Slide 1 removed per user request */
-
-    .hero-title .highlight {
-      background: rgba(255, 255, 255, 0.1) !important;
-      padding: 4px 16px;
-      border-radius: 16px;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      display: inline-block;
-      margin: 8px 0;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .hero-title .highlight .blue {
-      color: #3b82f6 !important;
-    }
-
-    .hero-title .highlight .orange {
-      color: #fbb03b !important;
-    }
-
-    @media (max-width: 1024px) and (orientation: portrait) {
-      .slider-dots {
-        bottom: 10px !important;
-        padding: 4px 12px !important;
-      }
-      
-      /* Slide 1 (Static): Cover */
-      .slide:first-child img {
-        object-fit: cover !important;
-      }
-      
-      /* Slide 2+ (Dynamic): Contain */
-      .slide:not(:first-child) img {
-        object-fit: contain !important;
-        background-color: transparent !important;
-      }
-      
-      .slide.active img {
-        transform: scale(1) !important;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  @include('components.navbar')
-
-  <!-- ============================================
-       SECTION 2: HERO
-       ============================================ -->
+@section('content')
   <section class="hero" id="beranda">
     <div class="hero-slider" id="heroSlider">
       <!-- Slide 1: Static Content -->
       <div class="slide active">
-        <img src="/images/Banner1.jpeg" alt="STIM YKPN Campus 1" loading="eager">
+        <img src="/images/Banner1.webp" alt="STIM YKPN Campus 1" loading="eager">
         <div class="hero-overlay"></div>
         <div style="position: absolute; inset: 0; display: flex; align-items: center; z-index: 2;">
           <div class="container">
@@ -353,7 +150,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         <div class="hero-overlay"></div>
       </div>
       <div class="slide">
-        <img src="/images/hero_bg.png" alt="STIM YKPN Campus 3" loading="lazy">
+        <img src="/images/hero-bg.webp" alt="STIM YKPN Campus 3" loading="lazy">
         <div class="hero-overlay"></div>
       </div>
       @endif
@@ -602,7 +399,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
         @forelse ($latest_news as $news_item)
         <article class="news-card animate-on-scroll animate-delay-{{ $loop->iteration }}">
           <div class="news-card-image">
-            <img src="{{ $news_item->url_image ?? '/images/hero-bg.png' }}" alt="{{ $news_item->title }}">
+            <img src="{{ $news_item->url_image ?? '/images/hero-bg.webp' }}" alt="{{ $news_item->title }}">
             <span class="date-badge">{{ $news_item->created_at->format('d M Y') }}</span>
           </div>
           <div class="news-card-body">
@@ -696,7 +493,7 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
        ============================================ -->
   <section class="campus-tour" id="campus-tour">
     <div class="campus-tour-bg">
-      <img src="{{ asset('images/STIMYK/optimized_STIMYK-324.jpg') }}" alt="STIM YKPN Campus Aerial View" style="object-fit: cover;">
+      <img src="{{ asset('images/STIMYK/optimized_STIMYK-324.webp') }}" alt="STIM YKPN Campus Aerial View" style="object-fit: cover;">
     </div>
     <div class="container">
       <div class="play-button" id="playButton" role="button" aria-label="Play campus tour video">
@@ -752,12 +549,25 @@ if (file_exists($source_dir) && (!file_exists($dest_dir) || !file_exists($dest_d
     </div>
   </section>
 
-  @include('components.footer')
+@endsection
 
-  <!-- Script -->
-  <script src="/js/script.js?v=3.9"></script>
-</body>
-
-</html>
-
+@push('scripts')
+<script>
+    window.dynamicTestimonials = {!! json_encode($alumnis->map(function($a) {
+        $words = explode(' ', $a->name);
+        $initials = '';
+        foreach(array_slice($words, 0, 2) as $w) {
+            $initials .= strtoupper(substr($w, 0, 1));
+        }
+        return [
+            'text' => $a->testimony,
+            'name' => $a->name,
+            'role' => '',
+            'company' => '',
+            'initials' => $initials,
+            'image' => $a->image ? (str_contains($a->image, 'http') ? $a->image : asset('storage/' . $a->image)) : null
+        ];
+    })) !!};
+  </script>
+@endpush
 

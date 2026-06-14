@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+@extends('layouts.public')
+
+@section('seo')
   <x-seo-head
     title="Informasi Tempat Tinggal Mahasiswa — STIM YKPN Yogyakarta"
     description="Panduan mencari tempat tinggal dan kos-kosan bagi mahasiswa baru STIM YKPN Yogyakarta di sekitar kampus."
     :canonicalUrl="url('/informasi-tempat-tinggal')"
   />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
+@endsection
 
+@push('styles')
   <style>
     body { background-color: #f8fafc; }
 
@@ -142,13 +138,10 @@
       .academic-sidebar { position: relative; top: 0; }
     }
   </style>
-  <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
-</head>
-<body>
+@endpush
 
-  @include('components.navbar')
-
-  <header class="page-header">
+@section('content')
+<header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
       <h1 class="page-title animate-on-scroll">Informasi Tempat Tinggal</h1>
       <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">Panduan dan informasi mengenai pilihan tempat tinggal (kost) bagi mahasiswa STIM YKPN.</p>
@@ -163,8 +156,8 @@
       <aside class="academic-sidebar animate-on-scroll">
         <div class="sidebar-title">Campus Life</div>
         <ul class="sidebar-menu">
-          <li><a href="/video.html">Video</a></li>
-          <li><a href="/informasi-tempat-tinggal.html" class="active">Informasi Tempat Tinggal</a></li>
+          <li><a href="/video">Video</a></li>
+          <li><a href="/informasi-tempat-tinggal" class="active">Informasi Tempat Tinggal</a></li>
         </ul>
       </aside>
 
@@ -205,15 +198,4 @@
 
     </div>
   </section>
-
-  @include('components.footer')
-
-  <script src="/js/script.js?v=3.9"></script>
-</body>
-</html>
-
-
-
-
-
-
+@endsection

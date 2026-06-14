@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+@extends('layouts.public')
+
+@section('seo')
   <x-seo-head
     title="Kalender Akademik — STIM YKPN Yogyakarta"
     description="Kalender akademik resmi STIM YKPN Yogyakarta: jadwal kuliah, UTS, UAS, libur akademik, dan kegiatan penting kampus."
     :canonicalUrl="url('/kalender-akademik')"
   />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
+@endsection
 
+@push('styles')
   <style>
     body { background-color: #f8fafc; }
 
@@ -201,13 +195,10 @@
       }
     }
   </style>
-  <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
-</head>
-<body>
+@endpush
 
-  @include('components.navbar')
-
-  <header class="page-header">
+@section('content')
+<header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
       <h1 class="page-title animate-on-scroll">Kalender Akademik {{ $activeYear ? $activeYear->label : '' }}</h1>
       <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">
@@ -344,9 +335,26 @@
 
     </div>
   </section>
+@endsection
 
-  @include('components.footer')
-
-  <script src="/js/script.js?v=3.9"></script>
-</body>
-</html>
+@push('scripts')
+  <script>
+          function switchTab(targetKode) {
+            // Deactivate all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+              btn.classList.remove('active');
+            });
+            // Hide all tables
+            document.querySelectorAll('.table-responsive').forEach(tbl => {
+              tbl.style.display = 'none';
+            });
+            
+            // Activate selection
+            const targetBtn = document.getElementById('btn-' + targetKode);
+            const targetTable = document.getElementById('table-' + targetKode);
+            
+            if (targetBtn) targetBtn.classList.add('active');
+            if (targetTable) targetTable.style.display = 'block';
+          }
+        </script>
+@endpush
