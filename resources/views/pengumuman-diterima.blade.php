@@ -164,7 +164,7 @@
       <aside class="academic-sidebar animate-on-scroll">
         <div class="sidebar-title">PMB</div>
         <ul class="sidebar-menu">
-          <li><a href="/pmb">Pendaftaran</a></li>
+          <li><a href="/pendaftaran-pmb">Pendaftaran</a></li>
           <li><a href="/biaya-kuliah">Biaya Kuliah</a></li>
           <li><a href="/beasiswa">Beasiswa</a></li>
           <li><a href="/program-reguler">Program Reguler</a></li>
@@ -194,7 +194,7 @@
             <p style="color: #666; max-width: 500px; margin: 0 auto 25px; line-height: 1.6;">Saat ini belum ada data
               pengumuman hasil seleksi mahasiswa baru yang diterbitkan. Silakan pantau terus halaman ini atau cek status
               pendaftaran melalui portal PMB.</p>
-            <a href="/pmb" class="btn btn-outline" style="display: inline-block;">Cek Portal PMB</a>
+            <a href="/pendaftaran-pmb" class="btn btn-outline" style="display: inline-block;">Cek Portal PMB</a>
           </div>
 
         </div>

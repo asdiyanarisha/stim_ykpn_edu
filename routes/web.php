@@ -449,7 +449,10 @@ Route::get('/pmb/show/{id}', fn() => view('pmb-admin-show'))->name('pmb.admin.sh
 Route::get('/pmb/edit/{id}', fn() => view('pmb-admin-edit'))->name('pmb.admin.edit');
 
 // Newly Migrated PMB Landing Pages
-Route::get('/pmb', fn() => view('pmb'));
+Route::get('/pmb.html', function () {
+    return redirect('/pendaftaran-pmb', 301);
+});
+Route::get('/pendaftaran-pmb', fn() => view('pmb'));
 
 Route::get('/biaya-kuliah', fn() => view('biaya-kuliah'));
 Route::get('/biaya-kuliah', fn() => view('biaya-kuliah'));

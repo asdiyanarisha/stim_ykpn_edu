@@ -164,7 +164,7 @@
       <aside class="academic-sidebar animate-on-scroll">
         <div class="sidebar-title">PMB</div>
         <ul class="sidebar-menu">
-          <li><a href="/pmb">Pendaftaran</a></li>
+          <li><a href="/pendaftaran-pmb">Pendaftaran</a></li>
           <li><a href="/biaya-kuliah">Biaya Kuliah</a></li>
           <li><a href="/beasiswa">Beasiswa</a></li>
           <li><a href="/program-reguler">Program Reguler</a></li>
@@ -212,7 +212,7 @@
               dua semester.</p>
           </div>
 
-          <a href="/pmb" class="btn btn-orange" style="margin-top: 30px; display: inline-block;">Daftar Sekarang</a>
+          <a href="/pendaftaran-pmb" class="btn btn-orange" style="margin-top: 30px; display: inline-block;">Daftar Sekarang</a>
 
         </div>
       </article>

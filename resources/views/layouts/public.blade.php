@@ -15,7 +15,7 @@
 <body>
 @php
   $publicRoutes = [
-    '/', 'berita', 'berita/*', 'dosen', 'profil', 'pmb', 'fasilitas', 'prestasi', 'spmi',
+    '/', 'berita', 'berita/*', 'dosen', 'profil', 'pendaftaran-pmb', 'fasilitas', 'prestasi', 'spmi',
     'sasaran-pendidikan', 'cara-mencapai-sasaran', 'beban-studi', 'sks',
     'jenjang-studi', 'kegiatan-akademik', 'dosen-pembimbing', 'sanksi-akademik',
     'kalender-akademik', 'kehadiran-kuliah', 'tata-tertib-kuliah', 'jumlah-kehadiran',

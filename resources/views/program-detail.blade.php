@@ -543,7 +543,7 @@
     <div class="cta-banner animate-on-scroll">
       <h2>Siap Menjadi Pemimpin Bisnis Masa Depan?</h2>
       <p>Bergabunglah dengan ribuan alumni sukses STIM YKPN Yogyakarta. Kuota pendaftaran terbatas!</p>
-      <a href="/pmb" class="cta-btn">Daftar Sekarang (PMB)</a>
+      <a href="/pendaftaran-pmb" class="cta-btn">Daftar Sekarang (PMB)</a>
     </div>
 
   </div>

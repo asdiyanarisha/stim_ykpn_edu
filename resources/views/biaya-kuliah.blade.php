@@ -165,7 +165,7 @@
       <aside class="academic-sidebar animate-on-scroll">
         <div class="sidebar-title">PMB</div>
         <ul class="sidebar-menu">
-          <li><a href="/pmb">Pendaftaran</a></li>
+          <li><a href="/pendaftaran-pmb">Pendaftaran</a></li>
           <li><a href="/biaya-kuliah" class="active">Biaya Kuliah</a></li>
           <li><a href="/beasiswa">Beasiswa</a></li>
           <li><a href="/program-reguler">Program Reguler</a></li>
@@ -242,7 +242,7 @@
         <!-- Special Offer Banner -->
         <div
           style="background: linear-gradient(135deg, var(--blue-500), var(--navy-800)); border-radius: 12px; padding: 30px; color: white; text-align: center; box-shadow: 0 10px 25px rgba(10, 37, 88, 0.2);">
-          <a href="/pmb" class="btn btn-primary"
+          <a href="/pendaftaran-pmb" class="btn btn-primary"
             style="background: var(--orange-500); border: none; padding: 12px 30px; font-size: 1.1rem; border-radius: 8px; text-decoration: none; color: white; font-weight: 600; display: inline-block; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(239, 124, 0, 0.3);">Daftar
             Sekarang</a>
         </div>
