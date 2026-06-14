@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+@extends('layouts.public')
+
+@section('seo')
   <x-seo-head
     title="{{ $programTitle }} — STIM YKPN Yogyakarta"
     description="Program Studi {{ $programTitle }} STIM YKPN Yogyakarta terakreditasi Baik Sekali. Siap mencetak pemimpin bisnis dan manajer masa depan."
     :canonicalUrl="url('/program/' . $slug)"
   />
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=3.8">
+@endsection
 
+@push('styles')
   <style>
     body { background-color: #f8fafc; overflow-x: hidden; }
 
@@ -401,12 +398,10 @@
       .cta-banner h2 { font-size: 28px; }
     }
   </style>
-</head>
-<body>
+@endpush
 
-  @include('components.navbar')
-
-  <!-- 1. HERO SECTION -->
+@section('content')
+<!-- 1. HERO SECTION -->
   <header class="program-hero">
     <div class="program-hero-bg"></div>
     <div class="container">
@@ -548,13 +543,8 @@
     <div class="cta-banner animate-on-scroll">
       <h2>Siap Menjadi Pemimpin Bisnis Masa Depan?</h2>
       <p>Bergabunglah dengan ribuan alumni sukses STIM YKPN Yogyakarta. Kuota pendaftaran terbatas!</p>
-      <a href="/pmb.html" class="cta-btn">Daftar Sekarang (PMB)</a>
+      <a href="/pmb" class="cta-btn">Daftar Sekarang (PMB)</a>
     </div>
 
   </div>
-
-  @include('components.footer')
-
-  <script src="/js/script.js?v=3.8"></script>
-</body>
-</html>
+@endsection

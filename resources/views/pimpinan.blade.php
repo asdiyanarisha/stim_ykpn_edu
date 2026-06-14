@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+@extends('layouts.public')
+
+@section('seo')
   <x-seo-head
     title="Pimpinan STIM YKPN Yogyakarta"
     description="Profil para pimpinan dan struktural STIM YKPN Yogyakarta yang berpengalaman dalam memimpin institusi pendidikan tinggi manajemen."
     :canonicalUrl="url('/pimpinan')"
   />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
+@endsection
 
+@push('styles')
   <style>
     /* Executive Academic Styles */
     body { background-color: #ffffff; }
@@ -176,13 +172,10 @@
       }
     }
   </style>
-  <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
-</head>
-<body>
+@endpush
 
-  @include('components.navbar')
-
-  <header class="page-header">
+@section('content')
+<header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
       <h1 class="page-title animate-on-scroll">Pimpinan STIM YKPN</h1>
       <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">
@@ -247,13 +240,4 @@
       </div>
     </div>
   </section>
-
-  @include('components.footer')
-
-  <script src="/js/script.js?v=3.9"></script>
-</body>
-</html>
-
-
-
-
+@endsection

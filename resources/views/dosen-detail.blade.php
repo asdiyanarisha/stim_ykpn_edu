@@ -1,39 +1,6 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  @php
-  $personSchema = [
-    '@context' => 'https://schema.org',
-    '@type' => 'ProfilePage',
-    'mainEntity' => [
-      '@type' => 'Person',
-      'name' => ($teacher->front_title ? $teacher->front_title . ' ' : '') . $teacher->full_name . ($teacher->back_title ? ', ' . $teacher->back_title : ''),
-      'givenName' => $teacher->full_name,
-      'honorificPrefix' => $teacher->front_title ?? '',
-      'honorificSuffix' => $teacher->back_title ?? '',
-      'jobTitle' => $teacher->jobTitle->title ?? 'Dosen',
-      'description' => $teacher->personal_description ?? 'Dosen STIM YKPN Yogyakarta',
-      'image' => $teacher->image_url ?: url('/images/default-user.png'),
-      'email' => $teacher->email ?? '',
-      'telephone' => $teacher->phone_number ?? '',
-      'worksFor' => [
-        '@type' => 'EducationalOrganization',
-        '@id' => url('/') . '#organization',
-        'name' => 'STIM YKPN Yogyakarta',
-      ],
-      'url' => url('/dosen/' . $teacher->id),
-    ],
-    'breadcrumb' => [
-      '@type' => 'BreadcrumbList',
-      'itemListElement' => [
-        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Beranda', 'item' => url('/')],
-        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Dosen', 'item' => url('/dosen')],
-        ['@type' => 'ListItem', 'position' => 3, 'name' => $teacher->full_name],
-      ],
-    ],
-  ];
-  $teacherFullName = ($teacher->front_title ? $teacher->front_title . ' ' : '') . $teacher->full_name . ($teacher->back_title ? ', ' . $teacher->back_title : '');
-  @endphp
+@extends('layouts.public')
+
+@section('seo')
   <x-seo-head
     :title="'Profil ' . $teacherFullName"
     :description="'Profil akademik ' . $teacherFullName . ', ' . ($teacher->jobTitle->title ?? 'Dosen') . ' STIM YKPN Yogyakarta. ' . Str::limit($teacher->personal_description ?? '', 100)"
@@ -42,24 +9,10 @@
     :canonicalUrl="url('/dosen/' . $teacher->id)"
     :schemaJson="$personSchema"
   />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
+@endsection
 
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
-  <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
-</head>
-<body>
-
-  @include('components.navbar')
-
-  <!-- ============================================
+@section('content')
+<!-- ============================================
        PAGE HEADER
        ============================================ -->
   <header class="page-header">
@@ -239,12 +192,4 @@
       </div>
     </div>
   </section>
-
-  @include('components.footer')
-
-  <!-- Script -->
-  <script src="/js/script.js?v=3.9"></script>
-</body>
-</html>
-
-
+@endsection

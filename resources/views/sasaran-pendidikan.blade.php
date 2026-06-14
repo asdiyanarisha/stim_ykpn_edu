@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+@extends('layouts.public')
+
+@section('seo')
   <x-seo-head
     title="Sasaran Pendidikan — STIM YKPN Yogyakarta"
     description="Sasaran dan tujuan pendidikan Program Studi di STIM YKPN Yogyakarta sesuai standar nasional pendidikan tinggi."
     :canonicalUrl="url('/sasaran-pendidikan')"
   />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/img/logo/logo-stim-new.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=3.9">
+@endsection
 
+@push('styles')
   <style>
     body { background-color: #f8fafc; }
 
@@ -142,13 +138,10 @@
       .academic-sidebar { position: relative; top: 0; }
     }
   </style>
-  <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
-</head>
-<body>
+@endpush
 
-  @include('components.navbar')
-
-  <header class="page-header">
+@section('content')
+<header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
       <h1 class="page-title animate-on-scroll">Sasaran Pendidikan</h1>
       <p class="page-subtitle animate-on-scroll animate-delay-1" style="max-width: 600px; margin: 0 auto;">
@@ -164,14 +157,14 @@
       <aside class="academic-sidebar animate-on-scroll">
         <div class="sidebar-title">Program Pendidikan</div>
         <ul class="sidebar-menu">
-          <li><a href="/sasaran-pendidikan.html" class="active">Sasaran Pendidikan</a></li>
-          <li><a href="/cara-mencapai-sasaran.html">Cara Mencapai Sasaran</a></li>
-          <li><a href="/beban-studi.html">Beban Studi</a></li>
-          <li><a href="/sks.html">Sistem Kredit Semester (SKS)</a></li>
-          <li><a href="/jenjang-studi.html">Jenjang Studi Dan Masa Studi</a></li>
-          <li><a href="/kegiatan-akademik.html">Kegiatan Academic</a></li>
-          <li><a href="/dosen-pembimbing.html">Dosen Pembimbing</a></li>
-          <li><a href="/sanksi-akademik.html">Sanksi Akademik</a></li>
+          <li><a href="/sasaran-pendidikan" class="active">Sasaran Pendidikan</a></li>
+          <li><a href="/cara-mencapai-sasaran">Cara Mencapai Sasaran</a></li>
+          <li><a href="/beban-studi">Beban Studi</a></li>
+          <li><a href="/sks">Sistem Kredit Semester (SKS)</a></li>
+          <li><a href="/jenjang-studi">Jenjang Studi Dan Masa Studi</a></li>
+          <li><a href="/kegiatan-akademik">Kegiatan Academic</a></li>
+          <li><a href="/dosen-pembimbing">Dosen Pembimbing</a></li>
+          <li><a href="/sanksi-akademik">Sanksi Akademik</a></li>
         </ul>
       </aside>
 
@@ -211,15 +204,4 @@
 
     </div>
   </section>
-
-  @include('components.footer')
-
-  <script src="/js/script.js?v=3.9"></script>
-</body>
-</html>
-
-
-
-
-
-
+@endsection

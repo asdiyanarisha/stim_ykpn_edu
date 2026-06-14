@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="icon" type="image/png" href="/images/img/logo/LOGO STIM YPKN.png">
+@extends('layouts.public')
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pendaftaran Mahasiswa Baru</title>
-    <style>
+@push('styles')
+  <style>
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: #f4f6f8;
@@ -89,9 +84,10 @@
             color: #c2410c;
         }
     </style>
-</head>
-<body>
-    <div class="email-wrapper">
+@endpush
+
+@section('content')
+<div class="email-wrapper">
         <div class="email-content">
             <!-- Greeting -->
             <div class="greeting">
@@ -153,5 +149,4 @@
             </p>
         </div>
     </div>
-</body>
-</html>
+@endsection
