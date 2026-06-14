@@ -218,6 +218,8 @@ class PublicPagesController extends Controller
             ->where('is_active', true)
             ->firstOrFail();
 
-        return view('program-detail', compact('program'));
+        $programTitle = $program->name;
+
+        return view('program-detail', compact('program', 'programTitle', 'slug'));
     }
 }
