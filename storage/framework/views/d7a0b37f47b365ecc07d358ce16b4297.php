@@ -13,14 +13,35 @@
   <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
 <body>
+<?php
+  $publicRoutes = [
+    '/', 'berita', 'berita/*', 'dosen', 'profil', 'pmb', 'fasilitas', 'prestasi', 'spmi',
+    'sasaran-pendidikan', 'cara-mencapai-sasaran', 'beban-studi', 'sks',
+    'jenjang-studi', 'kegiatan-akademik', 'dosen-pembimbing', 'sanksi-akademik',
+    'kalender-akademik', 'kehadiran-kuliah', 'tata-tertib-kuliah', 'jumlah-kehadiran',
+    'seminar-proposal', 'ketentuan-ujian', 'logo', 'sambutan-ketua', 'pimpinan', 'visi-misi',
+    'unduh', 'program', 'program/*'
+  ];
+  $isPublicPage = false;
+  foreach ($publicRoutes as $route) {
+      if (request()->is($route)) {
+          $isPublicPage = true;
+          break;
+      }
+  }
+?>
 
+<?php if($isPublicPage): ?>
   <?php echo $__env->make('components.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php endif; ?>
 
-  <?php echo $__env->yieldContent('content'); ?>
+<?php echo $__env->yieldContent('content'); ?>
 
+<?php if($isPublicPage): ?>
   <?php echo $__env->make('components.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php endif; ?>
 
-  <?php echo $__env->yieldPushContent('scripts'); ?>
+<?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
 <?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/layouts/public.blade.php ENDPATH**/ ?>
