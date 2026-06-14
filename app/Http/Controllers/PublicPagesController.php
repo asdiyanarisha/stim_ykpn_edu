@@ -38,7 +38,30 @@ class PublicPagesController extends Controller
             abort(404);
         }
         $news->increment('views_count');
-        return view('berita-detail', compact('news'));
+
+        $articleSchema = [
+            '@context'      => 'https://schema.org',
+            '@type'         => 'NewsArticle',
+            'headline'      => $news->title,
+            'datePublished' => $news->created_at->toIso8601String(),
+            'dateModified'  => $news->updated_at->toIso8601String(),
+            'image'         => $news->url_image ?: url('/images/img/logo/logo-stim-new.png'),
+            'author'        => [
+                '@type' => 'Organization',
+                'name'  => 'STIM YKPN',
+            ],
+            'publisher'     => [
+                '@type' => 'Organization',
+                'name'  => 'STIM YKPN',
+                'logo'  => [
+                    '@type' => 'ImageObject',
+                    'url'   => url('/images/img/logo/logo-stim-new.png'),
+                ],
+            ],
+            'mainEntityOfPage' => url('/berita/' . $news->id),
+        ];
+
+        return view('berita-detail', compact('news', 'articleSchema'));
     }
 
     public function newsList(Request $request)
