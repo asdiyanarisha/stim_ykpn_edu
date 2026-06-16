@@ -4085,7 +4085,7 @@ a.btn.btn-orange:hover {
 .hero-content {
   z-index: 5;
   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-  margin-top: -80px;
+  margin-top: 0;
 }
 
 .hero-title .highlight {
