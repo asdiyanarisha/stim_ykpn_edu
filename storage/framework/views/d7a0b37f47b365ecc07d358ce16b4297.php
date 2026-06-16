@@ -20,7 +20,10 @@
     'jenjang-studi', 'kegiatan-akademik', 'dosen-pembimbing', 'sanksi-akademik',
     'kalender-akademik', 'kehadiran-kuliah', 'tata-tertib-kuliah', 'jumlah-kehadiran',
     'seminar-proposal', 'ketentuan-ujian', 'logo', 'sambutan-ketua', 'pimpinan', 'visi-misi',
-    'unduh', 'program', 'program/*'
+    'unduh', 'program', 'program/*', 'biaya-kuliah', 'beasiswa', 'program-reguler',
+    'program-ekstensi', 'pengumuman-diterima', 'kegiatan-mahasiswa', 'ukm', 'ppkpt',
+    'pengumuman', 'video', 'informasi-tempat-tinggal', 'brosur', 'alumni', 'lowongan-kerja',
+    'lowongan-kerja/*', 'whatsapp-contact', 'jurnal-penelitian', 'jurnal-pengabdian', 'perpustakaan'
   ];
   
   $isPublicPage = request()->is(...$publicRoutes);

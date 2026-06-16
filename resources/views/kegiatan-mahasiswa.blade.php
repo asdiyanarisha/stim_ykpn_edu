@@ -10,24 +10,161 @@
 
 @push('styles')
   <style>
-  .activity-card-layout {
-    display: grid; 
-    grid-template-columns: 200px 1fr; 
-    gap: 25px; 
-    background: white; 
-    border-radius: 12px; 
-    overflow: hidden; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  }
-  @media (max-width: 768px) {
+    body { background-color: #f8fafc; }
+
+    .academic-content-section {
+      padding: 80px 0;
+    }
+
+    .academic-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* Sidebar Navigation */
+    .academic-sidebar {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+      position: sticky;
+      top: 100px;
+    }
+
+    .sidebar-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0 24px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      margin-bottom: 12px;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar-menu li a {
+      display: block;
+      padding: 12px 24px;
+      color: #0f172a;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+      text-decoration: none;
+    }
+
+    .sidebar-menu li a:hover {
+      background: #f8fafc;
+      color: #f97316;
+    }
+
+    .sidebar-menu li a.active {
+      color: #f97316;
+      background: rgba(241, 135, 33, 0.05);
+      border-left-color: #f97316;
+    }
+
+    /* Main Article */
+    .academic-article {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 50px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      border: 1px solid #e2e8f0;
+    }
+
+    .article-header {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px dashed #cbd5e1;
+    }
+
+    .article-header h2 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0;
+    }
+
+    .article-body {
+      color: #475569;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 992px) {
+      .academic-layout { grid-template-columns: 1fr; }
+      .academic-sidebar { position: relative; top: 0; }
+    }
+
+    /* Search Bar Styling */
+    .search-container {
+      position: relative;
+      margin-bottom: 40px;
+      max-width: 600px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 16px 20px 16px 50px;
+      font-size: 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      outline: none;
+      transition: all 0.3s ease;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    .search-input:focus {
+      border-color: #f97316;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(241, 135, 33, 0.1);
+    }
+
+    .search-icon-local {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      pointer-events: none;
+      transition: color 0.3s ease;
+    }
+
+    .search-input:focus ~ .search-icon-local {
+      color: #f97316;
+    }
+
+    /* Activity Card Styling */
     .activity-card-layout {
-      grid-template-columns: 1fr;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 25px;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     }
-    .activity-card-layout img {
-      height: 200px !important;
+    @media (max-width: 768px) {
+      .activity-card-layout {
+        grid-template-columns: 1fr;
+      }
+      .activity-card-layout img {
+        height: 200px !important;
+      }
     }
-  }
-</style>
+  </style>
 @endpush
 
 @section('content')
@@ -63,7 +200,7 @@
           
     <div class="search-container">
       <input type="text" class="search-input" placeholder="Cari kegiatan..." data-search-target="#activityGrid" data-search-items=".activity-card">
-      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <svg class="search-icon-local" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
     </div>
   
           
@@ -74,12 +211,12 @@
                 <img src="{{ !empty($activity->header_image) ? (str_contains($activity->header_image, 'http') ? $activity->header_image : asset('storage/' . $activity->header_image)) : asset('images/lambang-stim.webp') }}" style="width:100%; height:100%; object-fit:cover;" loading="lazy" alt="{{ $activity->title }}">
             </div>
             <div style="padding: 20px;">
-              <span style="font-size: 0.8rem; color: var(--accent-orange); font-weight: bold; text-transform: uppercase;">
+              <span style="font-size: 0.8rem; color: #f97316; font-weight: bold; text-transform: uppercase;">
                 {{ $activity->start_date ? $activity->start_date->format('d M Y') : 'KEGIATAN' }}
               </span>
-              <h3 style="margin: 10px 0; color: var(--primary-blue);">{{ $activity->title }}</h3>
-              <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">{{ Str::limit(strip_tags($activity->description), 150) }}</p>
-              <a href="#" style="color: var(--primary-blue); font-weight: bold; font-size: 0.9rem;">Selengkapnya →</a>
+              <h3 style="margin: 10px 0; color: #0f172a; font-size: 1.25rem;">{{ $activity->title }}</h3>
+              <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px; line-height: 1.6;">{{ Str::limit(strip_tags($activity->description), 150) }}</p>
+              <a href="#" style="color: #0f172a; font-weight: bold; font-size: 0.9rem; text-decoration: none;">Selengkapnya &rarr;</a>
             </div>
           </div>
         @endforeach

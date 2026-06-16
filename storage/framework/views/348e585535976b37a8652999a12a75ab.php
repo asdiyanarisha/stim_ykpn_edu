@@ -1,14 +1,27 @@
-@extends('layouts.public')
+<?php $__env->startSection('seo'); ?>
+  <?php if (isset($component)) { $__componentOriginal4232ba5ed77147a6b6573253fafb715d = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal4232ba5ed77147a6b6573253fafb715d = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.seo-head','data' => ['title' => 'Visi, Misi & Tujuan — STIM YKPN Yogyakarta','description' => 'Visi, misi, dan tujuan institusi STIM YKPN Yogyakarta sebagai sekolah tinggi manajemen terkemuka yang menghasilkan lulusan profesional.','canonicalUrl' => url('/visi-misi')]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('seo-head'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['title' => 'Visi, Misi & Tujuan — STIM YKPN Yogyakarta','description' => 'Visi, misi, dan tujuan institusi STIM YKPN Yogyakarta sebagai sekolah tinggi manajemen terkemuka yang menghasilkan lulusan profesional.','canonicalUrl' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(url('/visi-misi'))]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal4232ba5ed77147a6b6573253fafb715d)): ?>
+<?php $attributes = $__attributesOriginal4232ba5ed77147a6b6573253fafb715d; ?>
+<?php unset($__attributesOriginal4232ba5ed77147a6b6573253fafb715d); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal4232ba5ed77147a6b6573253fafb715d)): ?>
+<?php $component = $__componentOriginal4232ba5ed77147a6b6573253fafb715d; ?>
+<?php unset($__componentOriginal4232ba5ed77147a6b6573253fafb715d); ?>
+<?php endif; ?>
+<?php $__env->stopSection(); ?>
 
-@section('seo')
-  <x-seo-head
-    title="Visi, Misi & Tujuan — STIM YKPN Yogyakarta"
-    description="Visi, misi, dan tujuan institusi STIM YKPN Yogyakarta sebagai sekolah tinggi manajemen terkemuka yang menghasilkan lulusan profesional."
-    :canonicalUrl="url('/visi-misi')"
-  />
-@endsection
-
-@push('styles')
+<?php $__env->startPush('styles'); ?>
   <style>
 body { background: #f8fafc; }
 
@@ -246,9 +259,9 @@ body { background: #f8fafc; }
   .misi-box-number { font-size: 48px; }
 }
   </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- ===== HERO ===== -->
 <div class="vm-hero">
   <div class="container vm-hero-content animate-on-scroll">
@@ -324,4 +337,6 @@ body { background: #f8fafc; }
     </div>
   </div>
 </section>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.public', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/visi-misi.blade.php ENDPATH**/ ?>

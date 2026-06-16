@@ -2,7 +2,7 @@
 
 @section('seo')
   <x-seo-head
-    title="Pengumuman Resmi — STIM YKPN Yogyakarta"
+    title="Pengumuman Resmi â€” STIM YKPN Yogyakarta"
     description="Pengumuman resmi akademik dan kemahasiswaan dari STIM YKPN Yogyakarta."
     :canonicalUrl="url('/pengumuman')"
   />
@@ -97,6 +97,54 @@
       line-height: 1.8;
     }
 
+    .article-body p {
+      margin-bottom: 20px;
+    }
+
+    .target-list {
+      list-style: none;
+      margin-top: 30px;
+    }
+
+    .target-list li {
+      position: relative;
+      padding-left: 40px;
+      margin-bottom: 24px;
+      background: #f8fafc;
+      padding: 24px 24px 24px 60px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .target-list li::before {
+      content: 'âœ“';
+      position: absolute;
+      left: 20px;
+      top: 24px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      width: 28px;
+      height: 28px;
+      background: var(--navy-900);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .target-list li h4 {
+      font-size: 18px;
+      color: var(--navy-900);
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 992px) {
+      .academic-layout { grid-template-columns: 1fr; }
+      .academic-sidebar { position: relative; top: 0; }
+    }
+
     /* Search Bar Styling */
     .search-container {
       position: relative;
@@ -156,10 +204,6 @@
       transform: scale(1.05);
     }
 
-    @media (max-width: 992px) {
-      .academic-layout { grid-template-columns: 1fr; }
-      .academic-sidebar { position: relative; top: 0; }
-    }
     .activity-card-layout {
       display: grid;
       grid-template-columns: 200px 1fr;
@@ -221,7 +265,7 @@
                 <span style="font-size: 0.8rem; color: var(--orange-500); font-weight: bold; text-transform: uppercase;">PENGUMUMAN</span>
                 <h3 style="margin: 10px 0; color: var(--navy-900);">Pengumuman Lolos Seleksi Panitia Mahasiswa PKKMB 2025</h3>
                 <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">Selamat kepada mahasiswa yang terpilih menjadi bagian dari panitia Pengenalan Kehidupan Kampus bagi Mahasiswa Baru (PKKMB) STIM YKPN 2025.</p>
-                <a href="#" style="color: var(--blue-500); font-weight: bold; font-size: 0.9rem;">Selengkapnya →</a>
+                <a href="#" style="color: var(--blue-500); font-weight: bold; font-size: 0.9rem;">Selengkapnya &rarr;</a>
               </div>
             </div>
           </div>
@@ -231,3 +275,4 @@
     </div>
   </section>
 @endsection
+
