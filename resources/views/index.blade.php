@@ -1,6 +1,7 @@
 @extends('layouts.public')
 
 @php
+  $pmbSite = rtrim(config('app.pmb_site_url', 'http://localhost:8001'), '/');
   $homepageSchema = [
     '@context' => 'https://schema.org',
     '@graph' => [
@@ -87,7 +88,7 @@
                 kompetensi terakui.
               </p>
               <div class="hero-actions">
-                <a href="/pendaftaran-pmb" class="btn btn-orange btn-pulse" onclick="gtag('event', 'click_pmb')">
+                <a href="{{ $pmbSite }}/" class="btn btn-orange btn-pulse" onclick="gtag('event', 'click_pmb')">
                   DAFTAR PMB
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
                 </a>
@@ -365,7 +366,7 @@
           </div>
 
           <div class="pmb-actions">
-            <a href="/pendaftaran-pmb" class="btn btn-orange btn-pulse" onclick="gtag('event', 'click_pmb')">
+            <a href="{{ $pmbSite }}/" class="btn btn-orange btn-pulse" onclick="gtag('event', 'click_pmb')">
               Daftar PMB
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -373,7 +374,7 @@
                 <path d="m12 5 7 7-7 7" />
               </svg>
             </a>
-            <a href="/biaya-kuliah" class="btn btn-outline">
+            <a href="{{ $pmbSite }}/biaya-kuliah" class="btn btn-outline">
               Lihat Biaya Kuliah
             </a>
           </div>

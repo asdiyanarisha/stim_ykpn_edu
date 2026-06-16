@@ -57,6 +57,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'pmb_site_url' => env('PMB_SITE_URL', 'http://localhost:8001'),
+
     'asset_url' => env('ASSET_URL'),
 
     /*

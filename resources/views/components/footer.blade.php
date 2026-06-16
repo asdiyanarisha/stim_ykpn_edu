@@ -1,3 +1,6 @@
+@php
+  $pmbSite = rtrim(config('app.pmb_site_url', 'http://localhost:8001'), '/');
+@endphp
 <!-- ============================================
      SECTION 10: FOOTER (Reusable Component)
      ============================================ -->
@@ -36,11 +39,11 @@
       <div class="footer-col">
         <h4>Pendaftaran</h4>
         <ul>
-          <li><a href="/pendaftaran-pmb">Daftar Online</a></li>
-          <li><a href="/biaya-kuliah">Biaya Kuliah</a></li>
-          <li><a href="/program-reguler">Program Reguler</a></li>
-          <li><a href="/program-ekstensi">Program Ekstensi</a></li>
-          <li><a href="/beasiswa">Beasiswa</a></li>
+          <li><a href="{{ $pmbSite }}/">Daftar Online</a></li>
+          <li><a href="{{ $pmbSite }}/biaya-kuliah">Biaya Kuliah</a></li>
+          <li><a href="{{ $pmbSite }}/program-reguler">Program Reguler</a></li>
+          <li><a href="{{ $pmbSite }}/program-ekstensi">Program Ekstensi</a></li>
+          <li><a href="{{ $pmbSite }}/beasiswa">Beasiswa</a></li>
         </ul>
       </div>
 

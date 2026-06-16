@@ -19,7 +19,12 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => array_values(array_filter(array_map(function ($url) {
+        return $url ? rtrim($url, '/') : null;
+    }, [
+        env('APP_URL'),
+        env('PMB_SITE_URL'),
+    ]))),
 
     'allowed_origins_patterns' => [],
 

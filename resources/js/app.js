@@ -1,229 +1,163 @@
 import './bootstrap';
-import { createApp, h } from 'vue';
+import { createApp, h, defineAsyncComponent } from 'vue';
 
-// Import Pages
-import Dashboard from './Pages/Dashboard.vue';
-import Login from './Pages/Login.vue';
-import Unauthenticated from './Pages/Unauthenticated.vue';
-import Teacher from './Pages/Teacher/index.vue';
-import TeacherForm from './Pages/Teacher/TeacherForm.vue';
-import TeacherShow from './Pages/Teacher/Show.vue';
-import TeacherEdit from './Pages/Teacher/TeacherEdit.vue';
-import Affiliate from './Pages/Affiliate/index.vue';
-import AffiliateForm from './Pages/Affiliate/Form.vue';
-import AffiliateShow from './Pages/Affiliate/Show.vue';
-import AffiliateEdit from './Pages/Affiliate/Edit.vue';
-import Banner from './Pages/Content/Banner/index.vue';
-import BannerShow from './Pages/Content/Banner/Show.vue';
-import BannerForm from './Pages/Content/Banner/BannerForm.vue';
-import BannerEdit from './Pages/Content/Banner/BannerEdit.vue';
-import News from './Pages/Content/News/index.vue';
-import NewsForm from './Pages/Content/News/NewsForm.vue';
-import NewsShow from './Pages/Content/News/Show.vue';
-import JobVacancy from './Pages/Content/JobVacancy/index.vue';
-import JobVacancyForm from './Pages/Content/JobVacancy/JobVacancyForm.vue';
-import CertificationLogo from './Pages/Content/CertificationLogo/index.vue';
-import CertificationLogoForm from './Pages/Content/CertificationLogo/CertificationLogoForm.vue';
-import GreetingChiefForm from './Pages/Content/GreetingChief/GreetingChiefForm.vue';
-import CoreValueForm from './Pages/Content/CoreValue/CoreValueForm.vue';
-import HistoryForm from './Pages/Content/History/HistoryForm.vue';
-import LogoSymbolForm from './Pages/Content/LogoSymbol/LogoSymbolForm.vue';
-import FacilityForm from './Pages/Content/Facility/FacilityForm.vue';
-import SpmiAkreditasiForm from './Pages/Content/SpmiAkreditasi/SpmiAkreditasiForm.vue';
-import AcademicGoalForm from './Pages/Content/Academic/AcademicGoalForm.vue';
-import AcademicGoalAchieveForm from './Pages/Content/Academic/AcademicGoalAchieveForm.vue';
-import StudyLoadForm from './Pages/Content/Academic/StudyLoadForm.vue';
-import SksForm from './Pages/Content/Academic/SksForm.vue';
-import LevelPeriodStudyForm from './Pages/Content/Academic/LevelPeriodStudyForm.vue';
-import AcademicActivityForm from './Pages/Content/Academic/AcademicActivityForm.vue';
-import AcademicAdvisorForm from './Pages/Content/Academic/AcademicAdvisorForm.vue';
-import AcademicSanctionForm from './Pages/Content/Academic/AcademicSanctionForm.vue';
-import AttendanceLectureForm from './Pages/Content/Academic/AttendanceLectureForm.vue';
-import CodeConductForm from './Pages/Content/Academic/CodeConductForm.vue';
-import ClassCapacityForm from './Pages/Content/Academic/ClassCapacityForm.vue';
-import AttendanceCountForm from './Pages/Content/Academic/AttendanceCountForm.vue';
-import EvaluationSystemForm from './Pages/Content/Academic/EvaluationSystemForm.vue';
-import SeminarProposalForm from './Pages/Content/Academic/SeminarProposalForm.vue';
-import AcademicCalendarForm from './Pages/Content/AcademicCalendarForm.vue';
-import AcademicCalendarCategory from './Pages/Content/AcademicCalendarCategory/index.vue';
-import ExamForm from './Pages/Content/Academic/Graduation/ExamForm.vue';
-import ExamRulesForm from './Pages/Content/Academic/Graduation/ExamRulesForm.vue';
-import GraduationForm from './Pages/Content/Academic/Graduation/GraduationForm.vue';
-import YudisiumForm from './Pages/Content/Academic/Graduation/YudisiumForm.vue';
-import GraduationAnnouncementForm from './Pages/Content/Academic/Graduation/GraduationAnnouncementForm.vue';
-import LibraryForm from './Pages/Content/Academic/LibraryForm.vue';
-import AchievementIndex from './Pages/Content/Achievement/index.vue';
-import AchievementForm from './Pages/Content/Achievement/AchievementForm.vue';
-import AchievementEdit from './Pages/Content/Achievement/AchievementEdit.vue';
-import AchievementShow from './Pages/Content/Achievement/Show.vue';
-import JournalIndex from './Pages/Research/Journal/index.vue';
-import JournalForm from './Pages/Research/Journal/Form.vue';
-import JournalShow from './Pages/Research/Journal/Show.vue';
-import StudentActivity from './Pages/Student/Activity/index.vue';
-import StudentActivityForm from './Pages/Student/Activity/Form.vue';
-import StudentActivityShow from './Pages/Student/Activity/Show.vue';
-import StudentUkm from './Pages/Student/Ukm/index.vue';
-import StudentUkmForm from './Pages/Student/Ukm/Form.vue';
-import StudentUkmShow from './Pages/Student/Ukm/Show.vue';
-import StudentTestimony from './Pages/Student/Testimony/index.vue';
-import StudentTestimonyForm from './Pages/Student/Testimony/Form.vue';
-import StudentTestimonyShow from './Pages/Student/Testimony/Show.vue';
-import CampusLiveVideoIndex from './Pages/CampusLife/Video/index.vue';
-import CampusLiveVideoForm from './Pages/CampusLife/Video/Form.vue';
-import CampusLiveVideoShow from './Pages/CampusLife/Video/Show.vue';
-import LodgingInformationForm from './Pages/CampusLife/LodgingInformationForm.vue';
-import PmbScholarshipForm from './Pages/Pmb/ScholarshipForm.vue';
-import PmbProgramExcellenceForm from './Pages/Pmb/ProgramExcellenceForm.vue';
-import PmbProgramRegulerForm from './Pages/Pmb/ProgramRegulerForm.vue';
-import PmbProgramExtensiForm from './Pages/Pmb/ProgramExtensiForm.vue';
-import Role from './Pages/Role/index.vue';
-import RoleForm from './Pages/Role/RoleForm.vue';
-import User from './Pages/User/index.vue';
-import UserForm from './Pages/User/UserForm.vue';
-import UserShow from './Pages/User/Show.vue';
-import Brochure from './Pages/Brochure/index.vue';
-import BrochureForm from './Pages/Brochure/BrochureForm.vue';
-import BrochureShow from './Pages/Brochure/Show.vue';
-import PublicFiles from './Pages/PublicFiles/index.vue';
-import PublicFilesForm from './Pages/PublicFiles/PublicFilesForm.vue';
-import PublicFilesShow from './Pages/PublicFiles/Show.vue';
-import Voucher from './Pages/Voucher/index.vue';
-import VoucherForm from './Pages/Voucher/VoucherForm.vue';
-import VoucherShow from './Pages/Voucher/Show.vue';
-import AcademicSchoolYear from './Pages/AcademicYear/index.vue';
-import AcademicSchoolYearForm from './Pages/AcademicYear/SchoolYearForm.vue';
-import AcademicSchoolYearShow from './Pages/AcademicYear/Show.vue';
-import ProgramStudy from './Pages/ProgramStudy/index.vue';
-import ProgramStudyForm from './Pages/ProgramStudy/ProgramStudyForm.vue';
-import ProgramStudyShow from './Pages/ProgramStudy/Show.vue';
-import PaymentSettingForm from './Pages/PaymentSetting/PaymentSettingForm.vue';
-import UserSetting from './Pages/Setting/UserSetting.vue';
-import CategoryTeacher from './Pages/Teacher/CategoryTeacher/index.vue';
-import CategoryTeacherShow from './Pages/Teacher/CategoryTeacher/Show.vue';
-import JobTitle from './Pages/MasterData/JobTitle/index.vue';
-import JobTitleShow from './Pages/MasterData/JobTitle/Show.vue';
-import PmbAdminIndex from './Pages/PmbAdmin/index.vue';
-import PmbAdminShow from './Pages/PmbAdmin/Show.vue';
-import PmbAdminEdit from './Pages/PmbAdmin/Edit.vue';
-import WhatsappContact from './Pages/WhatsappContact/index.vue';
-import PmbFrontendForm from './Pages/Frontend/PmbForm.vue';
-
-// Import Global Components
-import AppSidebar from './Components/Organisms/AppSidebar.vue';
-import AppNavbar from './Components/Organisms/AppNavbar.vue';
-import StatCard from './Components/Molecules/StatCard.vue';
-import AppButton from './Components/Atoms/AppButton.vue';
-import AppInput from './Components/Atoms/AppInput.vue';
-
-// Page registry — mapping data-page attribute to Vue component
+// ─── Lazy-loaded Page Registry ────────────────────────────────────────────────
+// Each component is only downloaded by the browser when the matching
+// data-page attribute is found on the #app element.
 const pages = {
-    dashboard: Dashboard,
-    login: Login,
-    unauthenticated: Unauthenticated,
-    teacher: Teacher,
-    teacherForm: TeacherForm,
-    teacherShow: TeacherShow,
-    teacherEdit: TeacherEdit,
-    affiliate: Affiliate,
-    affiliateForm: AffiliateForm,
-    affiliateShow: AffiliateShow,
-    affiliateEdit: AffiliateEdit,
-    banner: Banner,
-    bannerShow: BannerShow,
-    bannerForm: BannerForm,
-    bannerEdit: BannerEdit,
-    news: News,
-    newsForm: NewsForm,
-    newsShow: NewsShow,
-    jobVacancies: JobVacancy,
-    jobVacancyForm: JobVacancyForm,
-    certificationLogos: CertificationLogo,
-    certificationLogoForm: CertificationLogoForm,
-    greetingChiefForm: GreetingChiefForm,
-    coreValueForm: CoreValueForm,
-    historyForm: HistoryForm,
-    logoSymbolForm: LogoSymbolForm,
-    facilityForm: FacilityForm,
-    spmiAkreditasiForm: SpmiAkreditasiForm,
-    academicGoalForm: AcademicGoalForm,
-    academicGoalAchieveForm: AcademicGoalAchieveForm,
-    studyLoadForm: StudyLoadForm,
-    sksForm: SksForm,
-    levelPeriodStudyForm: LevelPeriodStudyForm,
-    academicActivitiesForm: AcademicActivityForm,
-    academicAdvisorForm: AcademicAdvisorForm,
-    academicSanctionForm: AcademicSanctionForm,
-    attendanceLectureForm: AttendanceLectureForm,
-    codeConductForm: CodeConductForm,
-    classCapacityForm: ClassCapacityForm,
-    attendanceCountForm: AttendanceCountForm,
-    evaluationSystemForm: EvaluationSystemForm,
-    seminarProposalForm: SeminarProposalForm,
-    academicCalendarForm: AcademicCalendarForm,
-    academicCalendarCategory: AcademicCalendarCategory,
-    examForm: ExamForm,
-    examRulesForm: ExamRulesForm,
-    graduationForm: GraduationForm,
-    yudisiumForm: YudisiumForm,
-    graduationAnnouncementForm: GraduationAnnouncementForm,
-    academicLibraryForm: LibraryForm,
-    achievementIndex: AchievementIndex,
-    achievementForm: AchievementForm,
-    achievementEdit: AchievementEdit,
-    achievementShow: AchievementShow,
-    journal: JournalIndex,
-    journalForm: JournalForm,
-    journalShow: JournalShow,
-    studentActivity: StudentActivity,
-    studentActivityForm: StudentActivityForm,
-    studentActivityShow: StudentActivityShow,
-    studentUkm: StudentUkm,
-    studentUkmForm: StudentUkmForm,
-    studentUkmShow: StudentUkmShow,
-    studentTestimony: StudentTestimony,
-    studentTestimonyForm: StudentTestimonyForm,
-    studentTestimonyShow: StudentTestimonyShow,
-    campusLiveVideo: CampusLiveVideoIndex,
-    campusLiveVideoForm: CampusLiveVideoForm,
-    campusLiveVideoShow: CampusLiveVideoShow,
-    lodgingInformationForm: LodgingInformationForm,
-    pmbScholarshipForm: PmbScholarshipForm,
-    pmbProgramExcellenceForm: PmbProgramExcellenceForm,
-    pmbProgramRegulerForm: PmbProgramRegulerForm,
-    pmbProgramExtensiForm: PmbProgramExtensiForm,
-    role: Role,
-    roleForm: RoleForm,
-    user: User,
-    userForm: UserForm,
-    userShow: UserShow,
-    brochure: Brochure,
-    brochureForm: BrochureForm,
-    brochureShow: BrochureShow,
-    publicFiles: PublicFiles,
-    publicFilesForm: PublicFilesForm,
-    publicFilesShow: PublicFilesShow,
-    voucher: Voucher,
-    voucherForm: VoucherForm,
-    voucherShow: VoucherShow,
-    academicSchoolYear: AcademicSchoolYear,
-    academicSchoolYearForm: AcademicSchoolYearForm,
-    academicSchoolYearShow: AcademicSchoolYearShow,
-    programStudy: ProgramStudy,
-    programStudyForm: ProgramStudyForm,
-    programStudyShow: ProgramStudyShow,
-    paymentSettingForm: PaymentSettingForm,
-    userSetting: UserSetting,
-    categoryTeacher: CategoryTeacher,
-    categoryTeacherShow: CategoryTeacherShow,
-    jobTitle: JobTitle,
-    jobTitleShow: JobTitleShow,
-    pmbAdmin: PmbAdminIndex,
-    pmbAdminShow: PmbAdminShow,
-    pmbAdminEdit: PmbAdminEdit,
-    whatsappContact: WhatsappContact,
-    pmbFrontendForm: PmbFrontendForm,
+    // Auth / Core
+    dashboard:                    defineAsyncComponent(() => import('./Pages/Dashboard.vue')),
+    login:                        defineAsyncComponent(() => import('./Pages/Login.vue')),
+    unauthenticated:              defineAsyncComponent(() => import('./Pages/Unauthenticated.vue')),
+
+    // Teacher
+    teacher:                      defineAsyncComponent(() => import('./Pages/Teacher/index.vue')),
+    teacherForm:                  defineAsyncComponent(() => import('./Pages/Teacher/TeacherForm.vue')),
+    teacherShow:                  defineAsyncComponent(() => import('./Pages/Teacher/Show.vue')),
+    teacherEdit:                  defineAsyncComponent(() => import('./Pages/Teacher/TeacherEdit.vue')),
+    categoryTeacher:              defineAsyncComponent(() => import('./Pages/Teacher/CategoryTeacher/index.vue')),
+    categoryTeacherShow:          defineAsyncComponent(() => import('./Pages/Teacher/CategoryTeacher/Show.vue')),
+
+    // Affiliate
+    affiliate:                    defineAsyncComponent(() => import('./Pages/Affiliate/index.vue')),
+    affiliateForm:                defineAsyncComponent(() => import('./Pages/Affiliate/Form.vue')),
+    affiliateShow:                defineAsyncComponent(() => import('./Pages/Affiliate/Show.vue')),
+    affiliateEdit:                defineAsyncComponent(() => import('./Pages/Affiliate/Edit.vue')),
+
+    // Content — Banner
+    banner:                       defineAsyncComponent(() => import('./Pages/Content/Banner/index.vue')),
+    bannerShow:                   defineAsyncComponent(() => import('./Pages/Content/Banner/Show.vue')),
+    bannerForm:                   defineAsyncComponent(() => import('./Pages/Content/Banner/BannerForm.vue')),
+    bannerEdit:                   defineAsyncComponent(() => import('./Pages/Content/Banner/BannerEdit.vue')),
+
+    // Content — News
+    news:                         defineAsyncComponent(() => import('./Pages/Content/News/index.vue')),
+    newsForm:                     defineAsyncComponent(() => import('./Pages/Content/News/NewsForm.vue')),
+    newsShow:                     defineAsyncComponent(() => import('./Pages/Content/News/Show.vue')),
+
+    // Content — Misc
+    jobVacancies:                 defineAsyncComponent(() => import('./Pages/Content/JobVacancy/index.vue')),
+    jobVacancyForm:               defineAsyncComponent(() => import('./Pages/Content/JobVacancy/JobVacancyForm.vue')),
+    certificationLogos:           defineAsyncComponent(() => import('./Pages/Content/CertificationLogo/index.vue')),
+    certificationLogoForm:        defineAsyncComponent(() => import('./Pages/Content/CertificationLogo/CertificationLogoForm.vue')),
+    greetingChiefForm:            defineAsyncComponent(() => import('./Pages/Content/GreetingChief/GreetingChiefForm.vue')),
+    coreValueForm:                defineAsyncComponent(() => import('./Pages/Content/CoreValue/CoreValueForm.vue')),
+    historyForm:                  defineAsyncComponent(() => import('./Pages/Content/History/HistoryForm.vue')),
+    logoSymbolForm:               defineAsyncComponent(() => import('./Pages/Content/LogoSymbol/LogoSymbolForm.vue')),
+    facilityForm:                 defineAsyncComponent(() => import('./Pages/Content/Facility/FacilityForm.vue')),
+    spmiAkreditasiForm:           defineAsyncComponent(() => import('./Pages/Content/SpmiAkreditasi/SpmiAkreditasiForm.vue')),
+
+    // Content — Academic
+    academicGoalForm:             defineAsyncComponent(() => import('./Pages/Content/Academic/AcademicGoalForm.vue')),
+    academicGoalAchieveForm:      defineAsyncComponent(() => import('./Pages/Content/Academic/AcademicGoalAchieveForm.vue')),
+    studyLoadForm:                defineAsyncComponent(() => import('./Pages/Content/Academic/StudyLoadForm.vue')),
+    sksForm:                      defineAsyncComponent(() => import('./Pages/Content/Academic/SksForm.vue')),
+    levelPeriodStudyForm:         defineAsyncComponent(() => import('./Pages/Content/Academic/LevelPeriodStudyForm.vue')),
+    academicActivitiesForm:       defineAsyncComponent(() => import('./Pages/Content/Academic/AcademicActivityForm.vue')),
+    academicAdvisorForm:          defineAsyncComponent(() => import('./Pages/Content/Academic/AcademicAdvisorForm.vue')),
+    academicSanctionForm:         defineAsyncComponent(() => import('./Pages/Content/Academic/AcademicSanctionForm.vue')),
+    attendanceLectureForm:        defineAsyncComponent(() => import('./Pages/Content/Academic/AttendanceLectureForm.vue')),
+    codeConductForm:              defineAsyncComponent(() => import('./Pages/Content/Academic/CodeConductForm.vue')),
+    classCapacityForm:            defineAsyncComponent(() => import('./Pages/Content/Academic/ClassCapacityForm.vue')),
+    attendanceCountForm:          defineAsyncComponent(() => import('./Pages/Content/Academic/AttendanceCountForm.vue')),
+    evaluationSystemForm:         defineAsyncComponent(() => import('./Pages/Content/Academic/EvaluationSystemForm.vue')),
+    seminarProposalForm:          defineAsyncComponent(() => import('./Pages/Content/Academic/SeminarProposalForm.vue')),
+    academicCalendarForm:         defineAsyncComponent(() => import('./Pages/Content/AcademicCalendarForm.vue')),
+    academicCalendarCategory:     defineAsyncComponent(() => import('./Pages/Content/AcademicCalendarCategory/index.vue')),
+    academicLibraryForm:          defineAsyncComponent(() => import('./Pages/Content/Academic/LibraryForm.vue')),
+
+    // Content — Academic Graduation
+    examForm:                     defineAsyncComponent(() => import('./Pages/Content/Academic/Graduation/ExamForm.vue')),
+    examRulesForm:                defineAsyncComponent(() => import('./Pages/Content/Academic/Graduation/ExamRulesForm.vue')),
+    graduationForm:               defineAsyncComponent(() => import('./Pages/Content/Academic/Graduation/GraduationForm.vue')),
+    yudisiumForm:                 defineAsyncComponent(() => import('./Pages/Content/Academic/Graduation/YudisiumForm.vue')),
+    graduationAnnouncementForm:   defineAsyncComponent(() => import('./Pages/Content/Academic/Graduation/GraduationAnnouncementForm.vue')),
+
+    // Content — Achievement
+    achievementIndex:             defineAsyncComponent(() => import('./Pages/Content/Achievement/index.vue')),
+    achievementForm:              defineAsyncComponent(() => import('./Pages/Content/Achievement/AchievementForm.vue')),
+    achievementEdit:              defineAsyncComponent(() => import('./Pages/Content/Achievement/AchievementEdit.vue')),
+    achievementShow:              defineAsyncComponent(() => import('./Pages/Content/Achievement/Show.vue')),
+
+    // Research / Journal
+    journal:                      defineAsyncComponent(() => import('./Pages/Research/Journal/index.vue')),
+    journalForm:                  defineAsyncComponent(() => import('./Pages/Research/Journal/Form.vue')),
+    journalShow:                  defineAsyncComponent(() => import('./Pages/Research/Journal/Show.vue')),
+
+    // Student
+    studentActivity:              defineAsyncComponent(() => import('./Pages/Student/Activity/index.vue')),
+    studentActivityForm:          defineAsyncComponent(() => import('./Pages/Student/Activity/Form.vue')),
+    studentActivityShow:          defineAsyncComponent(() => import('./Pages/Student/Activity/Show.vue')),
+    studentUkm:                   defineAsyncComponent(() => import('./Pages/Student/Ukm/index.vue')),
+    studentUkmForm:               defineAsyncComponent(() => import('./Pages/Student/Ukm/Form.vue')),
+    studentUkmShow:               defineAsyncComponent(() => import('./Pages/Student/Ukm/Show.vue')),
+    studentTestimony:             defineAsyncComponent(() => import('./Pages/Student/Testimony/index.vue')),
+    studentTestimonyForm:         defineAsyncComponent(() => import('./Pages/Student/Testimony/Form.vue')),
+    studentTestimonyShow:         defineAsyncComponent(() => import('./Pages/Student/Testimony/Show.vue')),
+
+    // Campus Life
+    campusLiveVideo:              defineAsyncComponent(() => import('./Pages/CampusLife/Video/index.vue')),
+    campusLiveVideoForm:          defineAsyncComponent(() => import('./Pages/CampusLife/Video/Form.vue')),
+    campusLiveVideoShow:          defineAsyncComponent(() => import('./Pages/CampusLife/Video/Show.vue')),
+    lodgingInformationForm:       defineAsyncComponent(() => import('./Pages/CampusLife/LodgingInformationForm.vue')),
+
+    // PMB
+    pmbScholarshipForm:           defineAsyncComponent(() => import('./Pages/Pmb/ScholarshipForm.vue')),
+    pmbProgramExcellenceForm:     defineAsyncComponent(() => import('./Pages/Pmb/ProgramExcellenceForm.vue')),
+    pmbProgramRegulerForm:        defineAsyncComponent(() => import('./Pages/Pmb/ProgramRegulerForm.vue')),
+    pmbProgramExtensiForm:        defineAsyncComponent(() => import('./Pages/Pmb/ProgramExtensiForm.vue')),
+
+    // Roles & Users
+    role:                         defineAsyncComponent(() => import('./Pages/Role/index.vue')),
+    roleForm:                     defineAsyncComponent(() => import('./Pages/Role/RoleForm.vue')),
+    user:                         defineAsyncComponent(() => import('./Pages/User/index.vue')),
+    userForm:                     defineAsyncComponent(() => import('./Pages/User/UserForm.vue')),
+    userShow:                     defineAsyncComponent(() => import('./Pages/User/Show.vue')),
+    userSetting:                  defineAsyncComponent(() => import('./Pages/Setting/UserSetting.vue')),
+
+    // Brochure & Files
+    brochure:                     defineAsyncComponent(() => import('./Pages/Brochure/index.vue')),
+    brochureForm:                 defineAsyncComponent(() => import('./Pages/Brochure/BrochureForm.vue')),
+    brochureShow:                 defineAsyncComponent(() => import('./Pages/Brochure/Show.vue')),
+    publicFiles:                  defineAsyncComponent(() => import('./Pages/PublicFiles/index.vue')),
+    publicFilesForm:              defineAsyncComponent(() => import('./Pages/PublicFiles/PublicFilesForm.vue')),
+    publicFilesShow:              defineAsyncComponent(() => import('./Pages/PublicFiles/Show.vue')),
+
+    // Voucher
+    voucher:                      defineAsyncComponent(() => import('./Pages/Voucher/index.vue')),
+    voucherForm:                  defineAsyncComponent(() => import('./Pages/Voucher/VoucherForm.vue')),
+    voucherShow:                  defineAsyncComponent(() => import('./Pages/Voucher/Show.vue')),
+
+    // Academic Year
+    academicSchoolYear:           defineAsyncComponent(() => import('./Pages/AcademicYear/index.vue')),
+    academicSchoolYearForm:       defineAsyncComponent(() => import('./Pages/AcademicYear/SchoolYearForm.vue')),
+    academicSchoolYearShow:       defineAsyncComponent(() => import('./Pages/AcademicYear/Show.vue')),
+
+    // Program Study
+    programStudy:                 defineAsyncComponent(() => import('./Pages/ProgramStudy/index.vue')),
+    programStudyForm:             defineAsyncComponent(() => import('./Pages/ProgramStudy/ProgramStudyForm.vue')),
+    programStudyShow:             defineAsyncComponent(() => import('./Pages/ProgramStudy/Show.vue')),
+
+    // Payment & Settings
+    paymentSettingForm:           defineAsyncComponent(() => import('./Pages/PaymentSetting/PaymentSettingForm.vue')),
+
+    // Master Data
+    jobTitle:                     defineAsyncComponent(() => import('./Pages/MasterData/JobTitle/index.vue')),
+    jobTitleShow:                 defineAsyncComponent(() => import('./Pages/MasterData/JobTitle/Show.vue')),
+
+    // PMB Admin
+    pmbAdmin:                     defineAsyncComponent(() => import('./Pages/PmbAdmin/index.vue')),
+    pmbAdminShow:                 defineAsyncComponent(() => import('./Pages/PmbAdmin/Show.vue')),
+    pmbAdminEdit:                 defineAsyncComponent(() => import('./Pages/PmbAdmin/Edit.vue')),
+
+    // Misc
+    whatsappContact:              defineAsyncComponent(() => import('./Pages/WhatsappContact/index.vue')),
+
+    // Public Frontend
+    pmbFrontendForm:              defineAsyncComponent(() => import('./Pages/Frontend/PmbForm.vue')),
 };
 
+// ─── Mount App ────────────────────────────────────────────────────────────────
 const appElement = document.getElementById('app');
 
 if (appElement) {
@@ -231,17 +165,25 @@ if (appElement) {
     const rootComponent = pages[pageName];
 
     if (rootComponent) {
-        const app = createApp({
-            render: () => h(rootComponent)
+        // Import Global Components lazily (only once, shared across all pages)
+        Promise.all([
+            import('./Components/Organisms/AppSidebar.vue'),
+            import('./Components/Organisms/AppNavbar.vue'),
+            import('./Components/Molecules/StatCard.vue'),
+            import('./Components/Atoms/AppButton.vue'),
+            import('./Components/Atoms/AppInput.vue'),
+        ]).then(([AppSidebar, AppNavbar, StatCard, AppButton, AppInput]) => {
+            const app = createApp({
+                render: () => h(rootComponent)
+            });
+
+            app.component('AppSidebar', AppSidebar.default);
+            app.component('AppNavbar', AppNavbar.default);
+            app.component('StatCard', StatCard.default);
+            app.component('AppButton', AppButton.default);
+            app.component('AppInput', AppInput.default);
+
+            app.mount('#app');
         });
-
-        // Register Global Components
-        app.component('AppSidebar', AppSidebar);
-        app.component('AppNavbar', AppNavbar);
-        app.component('StatCard', StatCard);
-        app.component('AppButton', AppButton);
-        app.component('AppInput', AppInput);
-
-        app.mount('#app');
     }
 }

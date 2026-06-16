@@ -1,3 +1,6 @@
+@php
+  $pmbSite = rtrim(config('app.pmb_site_url', 'http://localhost:8001'), '/');
+@endphp
 <!-- ============================================
      SECTION 1: NAVBAR (Reusable Component)
      ============================================ -->
@@ -78,17 +81,17 @@
         </ul>
       </li>
       <li class="dropdown">
-        <a href="/pendaftaran-pmb">PMB <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        <a href="{{ $pmbSite }}/">PMB <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="m6 9 6 6 6-6" />
           </svg></a>
         <ul class="dropdown-menu">
-          <li><a href="/pendaftaran-pmb">Pendaftaran</a></li>
-          <li><a href="/biaya-kuliah">Biaya Kuliah</a></li>
-          <li><a href="/beasiswa">Beasiswa</a></li>
-          <li><a href="/program-reguler">Program Reguler</a></li>
-          <li><a href="/program-ekstensi">Program Ekstensi</a></li>
-          <li><a href="/pengumuman-diterima">Pengumuman Diterima</a></li>
+          <li><a href="{{ $pmbSite }}/">Pendaftaran</a></li>
+          <li><a href="{{ $pmbSite }}/biaya-kuliah">Biaya Kuliah</a></li>
+          <li><a href="{{ $pmbSite }}/beasiswa">Beasiswa</a></li>
+          <li><a href="{{ $pmbSite }}/program-reguler">Program Reguler</a></li>
+          <li><a href="{{ $pmbSite }}/program-ekstensi">Program Ekstensi</a></li>
+          <li><a href="{{ $pmbSite }}/pengumuman-diterima">Pengumuman Diterima</a></li>
         </ul>
       </li>
       <li class="dropdown">
@@ -452,12 +455,12 @@ document.addEventListener('DOMContentLoaded', function() {
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
         </div>
         <div class="mobile-submenu">
-          <a href="/pendaftaran-pmb">Informasi Pendaftaran</a>
-          <a href="/biaya-kuliah">Biaya Kuliah</a>
-          <a href="/beasiswa">Beasiswa</a>
-          <a href="/program-reguler">Program Reguler</a>
-          <a href="/program-ekstensi">Program Ekstensi</a>
-          <a href="/pengumuman-diterima">Pengumuman Diterima</a>
+          <a href="{{ $pmbSite }}/">Informasi Pendaftaran</a>
+          <a href="{{ $pmbSite }}/biaya-kuliah">Biaya Kuliah</a>
+          <a href="{{ $pmbSite }}/beasiswa">Beasiswa</a>
+          <a href="{{ $pmbSite }}/program-reguler">Program Reguler</a>
+          <a href="{{ $pmbSite }}/program-ekstensi">Program Ekstensi</a>
+          <a href="{{ $pmbSite }}/pengumuman-diterima">Pengumuman Diterima</a>
         </div>
       </div>
 

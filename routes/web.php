@@ -450,24 +450,31 @@ Route::get('/pmb/edit/{id}', fn() => view('pmb-admin-edit'))->name('pmb.admin.ed
 
 // Newly Migrated PMB Landing Pages
 Route::get('/pmb.html', function () {
-    return redirect('/pendaftaran-pmb', 301);
+    return redirect(rtrim(config('app.pmb_site_url', 'http://localhost:8001'), '/') . '/', 301);
 });
-Route::get('/pendaftaran-pmb', fn() => view('pmb'));
+Route::get('/pendaftaran-pmb', function () {
+    return redirect(rtrim(config('app.pmb_site_url', 'http://localhost:8001'), '/') . '/', 301);
+});
 
-Route::get('/biaya-kuliah', fn() => view('biaya-kuliah'));
-Route::get('/biaya-kuliah', fn() => view('biaya-kuliah'));
+Route::get('/biaya-kuliah', function () {
+    return redirect(rtrim(config('app.pmb_site_url', 'http://localhost:8001'), '/') . '/biaya-kuliah', 301);
+});
 
-Route::get('/beasiswa', fn() => view('beasiswa'));
-Route::get('/beasiswa', fn() => view('beasiswa'));
+Route::get('/beasiswa', function () {
+    return redirect(rtrim(config('app.pmb_site_url', 'http://localhost:8001'), '/') . '/beasiswa', 301);
+});
 
-Route::get('/program-reguler', fn() => view('program-reguler'));
-Route::get('/program-reguler', fn() => view('program-reguler'));
+Route::get('/program-reguler', function () {
+    return redirect(rtrim(config('app.pmb_site_url', 'http://localhost:8001'), '/') . '/program-reguler', 301);
+});
 
-Route::get('/program-ekstensi', fn() => view('program-ekstensi'));
-Route::get('/program-ekstensi', fn() => view('program-ekstensi'));
+Route::get('/program-ekstensi', function () {
+    return redirect(rtrim(config('app.pmb_site_url', 'http://localhost:8001'), '/') . '/program-ekstensi', 301);
+});
 
-Route::get('/pengumuman-diterima', fn() => view('pengumuman-diterima'));
-Route::get('/pengumuman-diterima', fn() => view('pengumuman-diterima'));
+Route::get('/pengumuman-diterima', function () {
+    return redirect(rtrim(config('app.pmb_site_url', 'http://localhost:8001'), '/') . '/pengumuman-diterima', 301);
+});
 
 // Batch 3 - Student, Campus Life, and Information Pages
 Route::get('/kegiatan-mahasiswa', [PublicPagesController::class, 'studentActivities']);
