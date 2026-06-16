@@ -1,7 +1,10 @@
-@extends('layouts.public')
-
-@push('styles')
-  <style>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran PMB STIM YKPN</title>
+    <style>
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: #f4f6f8;
@@ -83,12 +86,23 @@
         .info-box-text strong {
             color: #c2410c;
         }
+        .header-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header-logo img {
+            height: 50px;
+        }
     </style>
-@endpush
-
-@section('content')
-<div class="email-wrapper">
+</head>
+<body>
+    <div class="email-wrapper">
         <div class="email-content">
+            <!-- Header Logo -->
+            <div class="header-logo">
+                <img src="{{ url('/images/img/logo/logo-stim-new.png') }}" alt="STIM YKPN Logo">
+            </div>
+
             <!-- Greeting -->
             <div class="greeting">
                 Halo <strong>{{ $pmb->nama_lengkap }}</strong>,
@@ -149,4 +163,5 @@
             </p>
         </div>
     </div>
-@endsection
+</body>
+</html>
