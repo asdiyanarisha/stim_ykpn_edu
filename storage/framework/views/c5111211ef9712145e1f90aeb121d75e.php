@@ -1,14 +1,27 @@
-@extends('layouts.public')
+<?php $__env->startSection('seo'); ?>
+  <?php if (isset($component)) { $__componentOriginal4232ba5ed77147a6b6573253fafb715d = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal4232ba5ed77147a6b6573253fafb715d = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.seo-head','data' => ['title' => 'Kegiatan Mahasiswa — STIM YKPN Yogyakarta','description' => 'Ragam kegiatan kemahasiswaan di STIM YKPN Yogyakarta: organisasi, UKM, kepanitiaan, dan pengembangan soft skill mahasiswa.','canonicalUrl' => url('/kegiatan-mahasiswa')]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('seo-head'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['title' => 'Kegiatan Mahasiswa — STIM YKPN Yogyakarta','description' => 'Ragam kegiatan kemahasiswaan di STIM YKPN Yogyakarta: organisasi, UKM, kepanitiaan, dan pengembangan soft skill mahasiswa.','canonicalUrl' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(url('/kegiatan-mahasiswa'))]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal4232ba5ed77147a6b6573253fafb715d)): ?>
+<?php $attributes = $__attributesOriginal4232ba5ed77147a6b6573253fafb715d; ?>
+<?php unset($__attributesOriginal4232ba5ed77147a6b6573253fafb715d); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal4232ba5ed77147a6b6573253fafb715d)): ?>
+<?php $component = $__componentOriginal4232ba5ed77147a6b6573253fafb715d; ?>
+<?php unset($__componentOriginal4232ba5ed77147a6b6573253fafb715d); ?>
+<?php endif; ?>
+<?php $__env->stopSection(); ?>
 
-@section('seo')
-  <x-seo-head
-    title="Kegiatan Mahasiswa — STIM YKPN Yogyakarta"
-    description="Ragam kegiatan kemahasiswaan di STIM YKPN Yogyakarta: organisasi, UKM, kepanitiaan, dan pengembangan soft skill mahasiswa."
-    :canonicalUrl="url('/kegiatan-mahasiswa')"
-  />
-@endsection
-
-@push('styles')
+<?php $__env->startPush('styles'); ?>
   <style>
     body { background-color: #f8fafc; }
 
@@ -165,9 +178,9 @@
       }
     }
   </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
       <h1 class="page-title animate-on-scroll">Kegiatan Mahasiswa</h1>
@@ -205,21 +218,22 @@
   
           
       <div id="activityGrid" style="display: flex; flex-direction: column; gap: 30px;">
-        @foreach($activities as $activity)
+        <?php $__currentLoopData = $activities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $activity): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
           <div class="activity-card activity-card-layout">
             <div style="background: #eee; height: 100%; min-height: 150px;">
-                <img src="{{ !empty($activity->header_image) ? (str_contains($activity->header_image, 'http') ? $activity->header_image : asset('storage/' . $activity->header_image)) : asset('images/lambang-stim.webp') }}" style="width:100%; height:100%; object-fit:cover;" loading="lazy" alt="{{ $activity->title }}">
+                <img src="<?php echo e(!empty($activity->header_image) ? (str_contains($activity->header_image, 'http') ? $activity->header_image : asset('storage/' . $activity->header_image)) : asset('images/lambang-stim.webp')); ?>" style="width:100%; height:100%; object-fit:cover;" loading="lazy" alt="<?php echo e($activity->title); ?>">
             </div>
             <div style="padding: 20px;">
               <span style="font-size: 0.8rem; color: #f97316; font-weight: bold; text-transform: uppercase;">
-                {{ $activity->start_date ? $activity->start_date->format('d M Y') : 'KEGIATAN' }}
+                <?php echo e($activity->start_date ? $activity->start_date->format('d M Y') : 'KEGIATAN'); ?>
+
               </span>
-              <h3 style="margin: 10px 0; color: #0f172a; font-size: 1.25rem;">{{ $activity->title }}</h3>
-              <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px; line-height: 1.6;">{{ Str::limit(strip_tags($activity->description), 150) }}</p>
+              <h3 style="margin: 10px 0; color: #0f172a; font-size: 1.25rem;"><?php echo e($activity->title); ?></h3>
+              <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px; line-height: 1.6;"><?php echo e(Str::limit(strip_tags($activity->description), 150)); ?></p>
               <a href="#" style="color: #0f172a; font-weight: bold; font-size: 0.9rem; text-decoration: none;">Selengkapnya &rarr;</a>
             </div>
           </div>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
       </div>
     
         </div>
@@ -227,4 +241,6 @@
 
     </div>
   </section>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.public', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/kegiatan-mahasiswa.blade.php ENDPATH**/ ?>

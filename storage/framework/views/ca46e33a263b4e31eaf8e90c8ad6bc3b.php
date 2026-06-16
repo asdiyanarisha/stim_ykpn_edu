@@ -1,14 +1,27 @@
-@extends('layouts.public')
+<?php $__env->startSection('seo'); ?>
+  <?php if (isset($component)) { $__componentOriginal4232ba5ed77147a6b6573253fafb715d = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal4232ba5ed77147a6b6573253fafb715d = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.seo-head','data' => ['title' => 'Pengumuman Resmi â€” STIM YKPN Yogyakarta','description' => 'Pengumuman resmi akademik dan kemahasiswaan dari STIM YKPN Yogyakarta.','canonicalUrl' => url('/pengumuman')]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('seo-head'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['title' => 'Pengumuman Resmi â€” STIM YKPN Yogyakarta','description' => 'Pengumuman resmi akademik dan kemahasiswaan dari STIM YKPN Yogyakarta.','canonicalUrl' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(url('/pengumuman'))]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal4232ba5ed77147a6b6573253fafb715d)): ?>
+<?php $attributes = $__attributesOriginal4232ba5ed77147a6b6573253fafb715d; ?>
+<?php unset($__attributesOriginal4232ba5ed77147a6b6573253fafb715d); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal4232ba5ed77147a6b6573253fafb715d)): ?>
+<?php $component = $__componentOriginal4232ba5ed77147a6b6573253fafb715d; ?>
+<?php unset($__componentOriginal4232ba5ed77147a6b6573253fafb715d); ?>
+<?php endif; ?>
+<?php $__env->stopSection(); ?>
 
-@section('seo')
-  <x-seo-head
-    title="Pengumuman Resmi â€” STIM YKPN Yogyakarta"
-    description="Pengumuman resmi akademik dan kemahasiswaan dari STIM YKPN Yogyakarta."
-    :canonicalUrl="url('/pengumuman')"
-  />
-@endsection
-
-@push('styles')
+<?php $__env->startPush('styles'); ?>
   <style>
     body { background-color: #f8fafc; }
 
@@ -222,9 +235,9 @@
       }
     }
   </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <header class="page-header">
     <div class="container" style="position:relative; z-index:2;">
       <h1 class="page-title animate-on-scroll">Pengumuman</h1>
@@ -274,5 +287,7 @@
 
     </div>
   </section>
-@endsection
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('layouts.public', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/pengumuman.blade.php ENDPATH**/ ?>
