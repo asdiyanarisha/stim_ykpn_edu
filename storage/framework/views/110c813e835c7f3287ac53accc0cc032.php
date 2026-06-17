@@ -1,6 +1,6 @@
-@php
+<?php
   $pmbSite = rtrim(config('app.pmb_site_url', 'http://localhost:8001'), '/');
-@endphp
+?>
 <!-- ============================================
      SECTION 10: FOOTER (Reusable Component)
      ============================================ -->
@@ -39,11 +39,11 @@
       <div class="footer-col">
         <h4>Pendaftaran</h4>
         <ul>
-          <li><a href="{{ $pmbSite }}/">Daftar Online</a></li>
-          <li><a href="{{ $pmbSite }}/biaya-kuliah">Biaya Kuliah</a></li>
-          <li><a href="{{ $pmbSite }}/program-reguler">Program Reguler</a></li>
-          <li><a href="{{ $pmbSite }}/program-ekstensi">Program Ekstensi</a></li>
-          <li><a href="{{ $pmbSite }}/beasiswa">Beasiswa</a></li>
+          <li><a href="<?php echo e($pmbSite); ?>/">Daftar Online</a></li>
+          <li><a href="<?php echo e($pmbSite); ?>/biaya-kuliah">Biaya Kuliah</a></li>
+          <li><a href="<?php echo e($pmbSite); ?>/program-reguler">Program Reguler</a></li>
+          <li><a href="<?php echo e($pmbSite); ?>/program-ekstensi">Program Ekstensi</a></li>
+          <li><a href="<?php echo e($pmbSite); ?>/beasiswa">Beasiswa</a></li>
         </ul>
       </div>
 
@@ -206,3 +206,4 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+<?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/components/footer.blade.php ENDPATH**/ ?>
