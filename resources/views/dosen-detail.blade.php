@@ -1,5 +1,30 @@
 @extends('layouts.public')
 
+@php
+  $teacherFullName = ($teacher->front_title ? $teacher->front_title . ' ' : '') . $teacher->full_name . ($teacher->back_title ? ', ' . $teacher->back_title : '');
+  $personSchema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'Person',
+    'name' => $teacherFullName,
+    'jobTitle' => $teacher->jobTitle->title ?? 'Dosen',
+    'worksFor' => [
+      '@type' => 'CollegeOrUniversity',
+      'name' => 'STIM YKPN Yogyakarta',
+      'url' => url('/'),
+    ],
+    'image' => $teacher->image_url ?: url('/images/default-user.png'),
+    'url' => url('/dosen/' . $teacher->id),
+    'email' => $teacher->email,
+    'telephone' => $teacher->phone_number,
+    'address' => $teacher->address ? [
+      '@type' => 'PostalAddress',
+      'streetAddress' => $teacher->address,
+    ] : null,
+    'description' => $teacher->personal_description,
+    'sameAs' => isset($teacher->online_academic_profiles) ? $teacher->online_academic_profiles->pluck('url')->toArray() : [],
+  ];
+@endphp
+
 @section('seo')
   <x-seo-head
     :title="'Profil ' . $teacherFullName"
@@ -22,7 +47,7 @@
         <a href="/dosen" style="color: inherit;">Dosen</a> &nbsp;/&nbsp; 
         <span style="color: var(--white);">{{ $teacher->full_name }}</span>
       </div>
-      <h1 class="page-title animate-on-scroll">{{ ($teacher->front_title ? $teacher->front_title . ' ' : '') . $teacher->full_name . ($teacher->back_title ? ', ' . $teacher->back_title : '') }}</h1>
+      <h1 class="page-title animate-on-scroll">{{ $teacherFullName }}</h1>
       <p class="page-subtitle animate-on-scroll animate-delay-1">
         {{ $teacher->jobTitle->title ?? 'Dosen STIM YKPN' }}
       </p>
@@ -88,7 +113,7 @@
         <!-- Main Content -->
         <main class="profile-main animate-on-scroll animate-delay-1">
           <div class="profile-header">
-            <h2 class="profile-name">{{ ($teacher->front_title ? $teacher->front_title . ' ' : '') . $teacher->full_name . ($teacher->back_title ? ', ' . $teacher->back_title : '') }}</h2>
+            <h2 class="profile-name">{{ $teacherFullName }}</h2>
             <p class="profile-title">{{ $teacher->jobTitle->title ?? 'Dosen' }} | {{ $teacher->category->title ?? '' }}</p>
           </div>
 
