@@ -49,7 +49,7 @@
   ];
 @endphp
 
-@section('meta')
+@section('seo')
   <x-seo-head
     title="STIM YKPN — School of Management Yogyakarta"
     description="STIM YKPN Yogyakarta — Sekolah Tinggi Ilmu Manajemen terdepan dengan 50+ tahun pengalaman menghasilkan 15.000+ alumni profesional. Terakreditasi Baik Sekali oleh BAN-PT."

@@ -47,7 +47,7 @@
   ];
 ?>
 
-<?php $__env->startSection('meta'); ?>
+<?php $__env->startSection('seo'); ?>
   <?php if (isset($component)) { $__componentOriginal4232ba5ed77147a6b6573253fafb715d = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal4232ba5ed77147a6b6573253fafb715d = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.seo-head','data' => ['title' => 'STIM YKPN — School of Management Yogyakarta','description' => 'STIM YKPN Yogyakarta — Sekolah Tinggi Ilmu Manajemen terdepan dengan 50+ tahun pengalaman menghasilkan 15.000+ alumni profesional. Terakreditasi Baik Sekali oleh BAN-PT.','ogImage' => url('/images/img/logo/logo-stim-new.webp'),'ogType' => 'website','canonicalUrl' => url('/'),'schemaJson' => $homepageSchema]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>

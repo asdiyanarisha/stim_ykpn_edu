@@ -71,11 +71,9 @@
 <link rel="canonical" href="<?php echo e($resolvedUrl); ?>">
 
 
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="icon" type="image/webp" href="<?php echo e(asset('images/logo-stim-baru.webp')); ?>?v=2">
+<link rel="icon" type="image/png" href="<?php echo e(asset('images/logo-stim-baru.webp')); ?>?v=2">
+<link rel="apple-touch-icon" href="<?php echo e(asset('images/logo-stim-baru.webp')); ?>?v=2">
 <meta name="theme-color" content="#f18721">
 
 
