@@ -1,6 +1,4 @@
-@extends('layouts.public')
-
-@php
+<?php
   $pmbSite = rtrim(config('app.pmb_site_url', 'http://localhost:8001'), '/');
   $homepageSchema = [
     '@context' => 'https://schema.org',
@@ -47,23 +45,35 @@
       ],
     ],
   ];
-@endphp
+?>
 
-@section('seo')
-  <x-seo-head
-    title="STIM YKPN — School of Management Yogyakarta"
-    description="STIM YKPN Yogyakarta — Sekolah Tinggi Ilmu Manajemen terdepan dengan 50+ tahun pengalaman menghasilkan 15.000+ alumni profesional. Terakreditasi Baik Sekali oleh BAN-PT."
-    :ogImage="url('/images/img/logo/logo-stim-new.webp')"
-    ogType="website"
-    :canonicalUrl="url('/')"
-    :schemaJson="$homepageSchema"
-  />
-@endsection
+<?php $__env->startSection('seo'); ?>
+  <?php if (isset($component)) { $__componentOriginal4232ba5ed77147a6b6573253fafb715d = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal4232ba5ed77147a6b6573253fafb715d = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.seo-head','data' => ['title' => 'STIM YKPN — School of Management Yogyakarta','description' => 'STIM YKPN Yogyakarta — Sekolah Tinggi Ilmu Manajemen terdepan dengan 50+ tahun pengalaman menghasilkan 15.000+ alumni profesional. Terakreditasi Baik Sekali oleh BAN-PT.','ogImage' => url('/images/img/logo/logo-stim-new.webp'),'ogType' => 'website','canonicalUrl' => url('/'),'schemaJson' => $homepageSchema]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('seo-head'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['title' => 'STIM YKPN — School of Management Yogyakarta','description' => 'STIM YKPN Yogyakarta — Sekolah Tinggi Ilmu Manajemen terdepan dengan 50+ tahun pengalaman menghasilkan 15.000+ alumni profesional. Terakreditasi Baik Sekali oleh BAN-PT.','ogImage' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(url('/images/img/logo/logo-stim-new.webp')),'ogType' => 'website','canonicalUrl' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(url('/')),'schemaJson' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($homepageSchema)]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal4232ba5ed77147a6b6573253fafb715d)): ?>
+<?php $attributes = $__attributesOriginal4232ba5ed77147a6b6573253fafb715d; ?>
+<?php unset($__attributesOriginal4232ba5ed77147a6b6573253fafb715d); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal4232ba5ed77147a6b6573253fafb715d)): ?>
+<?php $component = $__componentOriginal4232ba5ed77147a6b6573253fafb715d; ?>
+<?php unset($__componentOriginal4232ba5ed77147a6b6573253fafb715d); ?>
+<?php endif; ?>
+<?php $__env->stopSection(); ?>
 
 
 
 
-@section('content')
+<?php $__env->startSection('content'); ?>
   <section class="hero" id="beranda">
     <div class="hero-slider" id="heroSlider">
       <!-- Slide 1: Static Content -->
@@ -88,7 +98,7 @@
                 kompetensi terakui.
               </p>
               <div class="hero-actions">
-                <a href="{{ $pmbSite }}/" class="btn btn-orange btn-pulse" onclick="gtag('event', 'click_pmb')">
+                <a href="<?php echo e($pmbSite); ?>/" class="btn btn-orange btn-pulse" onclick="gtag('event', 'click_pmb')">
                   DAFTAR PMB
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
                 </a>
@@ -108,43 +118,44 @@
       </div>
 
       <!-- Slide 2+: Dynamic Content -->
-      @foreach ($banners as $index => $banner)
+      <?php $__currentLoopData = $banners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $banner): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
       <div class="slide">
-        <img src="{{ $banner->url_image }}" alt="{{ $banner->title }}" loading="lazy">
+        <img src="<?php echo e($banner->url_image); ?>" alt="<?php echo e($banner->title); ?>" loading="lazy">
         <div class="hero-overlay"></div>
-        @if($banner->title || $banner->description)
+        <?php if($banner->title || $banner->description): ?>
         <div style="position: absolute; inset: 0; display: flex; align-items: center; z-index: 2;">
           <div class="container">
             <div class="hero-content">
-              @if($banner->badge_text)
+              <?php if($banner->badge_text): ?>
               <div class="hero-badge" style="display: inline-flex; align-items: center; gap: 8px;">
                 <span class="badge-dot"></span>
-                <span style="display: inline-block; transform: translateY(-1px);">{{ $banner->badge_text }}</span>
+                <span style="display: inline-block; transform: translateY(-1px);"><?php echo e($banner->badge_text); ?></span>
               </div>
-              @endif
-              @if($banner->title)
-              {{-- Gunakan h2 bukan h1 karena H1 sudah ada di slide pertama statis --}}
-              <h2 class="hero-title" style="font-size: inherit; font-weight: inherit;">{{ $banner->title }}</h2>
-              @endif
-              @if($banner->description)
-              <p class="hero-subtitle">{{ $banner->description }}</p>
-              @endif
-              @if($banner->button_text && $banner->link)
+              <?php endif; ?>
+              <?php if($banner->title): ?>
+              
+              <h2 class="hero-title" style="font-size: inherit; font-weight: inherit;"><?php echo e($banner->title); ?></h2>
+              <?php endif; ?>
+              <?php if($banner->description): ?>
+              <p class="hero-subtitle"><?php echo e($banner->description); ?></p>
+              <?php endif; ?>
+              <?php if($banner->button_text && $banner->link): ?>
               <div class="hero-actions" style="width: 100%;">
-                <a href="{{ $banner->link }}" class="btn btn-orange btn-pulse">
-                  {{ $banner->button_text }}
+                <a href="<?php echo e($banner->link); ?>" class="btn btn-orange btn-pulse">
+                  <?php echo e($banner->button_text); ?>
+
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
                 </a>
               </div>
-              @endif
+              <?php endif; ?>
             </div>
           </div>
         </div>
-        @endif
+        <?php endif; ?>
       </div>
-      @endforeach
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-      @if ($banners->isEmpty())
+      <?php if($banners->isEmpty()): ?>
       <!-- Fallback slides -->
       <div class="slide">
         <img src="/images/students.png" alt="STIM YKPN Campus 2" loading="lazy">
@@ -154,18 +165,18 @@
         <img src="/images/hero-bg.webp" alt="STIM YKPN Campus 3" loading="lazy">
         <div class="hero-overlay"></div>
       </div>
-      @endif
+      <?php endif; ?>
 
       <div class="slider-dots" id="heroSliderDots">
         <button class="dot active" data-index="0" aria-label="Slide 1"></button>
-        @foreach ($banners as $index => $banner)
-          <button class="dot" data-index="{{ $index + 1 }}" aria-label="Slide {{ $index + 2 }}"></button>
-        @endforeach
+        <?php $__currentLoopData = $banners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $banner): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <button class="dot" data-index="<?php echo e($index + 1); ?>" aria-label="Slide <?php echo e($index + 2); ?>"></button>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         
-        @if ($banners->isEmpty())
+        <?php if($banners->isEmpty()): ?>
           <button class="dot" data-index="1" aria-label="Slide 2"></button>
           <button class="dot" data-index="2" aria-label="Slide 3"></button>
-        @endif
+        <?php endif; ?>
       </div>
     </div>
     <!-- Slider Controls -->
@@ -200,35 +211,35 @@
         </p>
       </div>
 
-      @php
+      <?php
         $programImages = [
             's1-bisnis-digital' => 'images/STIMYK/optimized_STIMYK-300.jpg',
             's1-manajemen'      => 'images/STIMYK/optimized_STIMYK-290.jpg',
             'd3-manajemen'      => 'images/STIMYK/optimized_STIMYK-378.jpg'
         ];
-      @endphp
+      ?>
       <div class="programs-grid">
-        @foreach ($programs as $program)
-          @php
+        <?php $__currentLoopData = $programs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $program): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <?php
             $imagePath = $program->image_banner ?: asset($programImages[$program->slug] ?? 'images/STIMYK/optimized_STIMYK-290.jpg');
-          @endphp
-          <div class="program-card animate-on-scroll animate-delay-{{ $loop->iteration }}">
+          ?>
+          <div class="program-card animate-on-scroll animate-delay-<?php echo e($loop->iteration); ?>">
             <div class="program-card-image">
-              <img src="{{ $imagePath }}" alt="{{ $program->name }}" loading="lazy" style="object-fit: cover;">
-              @if($program->accreditation)
-                <span class="badge">TERAKREDITASI {{ strtoupper($program->accreditation) }}</span>
-              @endif
+              <img src="<?php echo e($imagePath); ?>" alt="<?php echo e($program->name); ?>" loading="lazy" style="object-fit: cover;">
+              <?php if($program->accreditation): ?>
+                <span class="badge">TERAKREDITASI <?php echo e(strtoupper($program->accreditation)); ?></span>
+              <?php endif; ?>
             </div>
             <div class="program-card-body">
-              <h3>{{ $program->name }}</h3>
-              <p>{{ $program->tagline }}</p>
-              <a href="/program/{{ $program->slug }}" class="program-link">
+              <h3><?php echo e($program->name); ?></h3>
+              <p><?php echo e($program->tagline); ?></p>
+              <a href="/program/<?php echo e($program->slug); ?>" class="program-link">
                 Selengkapnya
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-left: 4px;"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
               </a>
             </div>
           </div>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
       </div>
     </div>
   </section>
@@ -319,7 +330,7 @@
     <div class="container">
       <div class="pmb-wrapper">
         <div class="pmb-image animate-on-scroll">
-          <img src="{{ asset('images/STIMYK/optimized_STIMYK-282.jpg') }}" alt="Mahasiswa STIM YKPN">
+          <img src="<?php echo e(asset('images/STIMYK/optimized_STIMYK-282.jpg')); ?>" alt="Mahasiswa STIM YKPN">
           <div class="floating-badge">
             <div class="periode-label">Periode</div>
             <div class="periode-year">2026/2027</div>
@@ -366,7 +377,7 @@
           </div>
 
           <div class="pmb-actions">
-            <a href="{{ $pmbSite }}/" class="btn btn-orange btn-pulse" onclick="gtag('event', 'click_pmb')">
+            <a href="<?php echo e($pmbSite); ?>/" class="btn btn-orange btn-pulse" onclick="gtag('event', 'click_pmb')">
               Daftar PMB
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -374,7 +385,7 @@
                 <path d="m12 5 7 7-7 7" />
               </svg>
             </a>
-            <a href="{{ $pmbSite }}/biaya-kuliah" class="btn btn-outline">
+            <a href="<?php echo e($pmbSite); ?>/biaya-kuliah" class="btn btn-outline">
               Lihat Biaya Kuliah
             </a>
           </div>
@@ -397,16 +408,16 @@
       </div>
 
       <div class="news-grid">
-        @forelse ($latest_news as $news_item)
-        <article class="news-card animate-on-scroll animate-delay-{{ $loop->iteration }}">
+        <?php $__empty_1 = true; $__currentLoopData = $latest_news; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $news_item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+        <article class="news-card animate-on-scroll animate-delay-<?php echo e($loop->iteration); ?>">
           <div class="news-card-image">
-            <img src="{{ $news_item->url_image ?? '/images/hero-bg.webp' }}" alt="{{ $news_item->title }}">
-            <span class="date-badge">{{ $news_item->created_at->format('d M Y') }}</span>
+            <img src="<?php echo e($news_item->url_image ?? '/images/hero-bg.webp'); ?>" alt="<?php echo e($news_item->title); ?>">
+            <span class="date-badge"><?php echo e($news_item->created_at->format('d M Y')); ?></span>
           </div>
           <div class="news-card-body">
             <span class="category">Berita</span>
-            <h3><a href="/berita/{{ $news_item->id }}">{{ $news_item->title }}</a></h3>
-            <a href="/berita/{{ $news_item->id }}" class="read-more">
+            <h3><a href="/berita/<?php echo e($news_item->id); ?>"><?php echo e($news_item->title); ?></a></h3>
+            <a href="/berita/<?php echo e($news_item->id); ?>" class="read-more">
               Baca Selengkapnya
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -416,11 +427,11 @@
             </a>
           </div>
         </article>
-        @empty
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
         <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; color: #64748b;">
           <p>Belum ada berita terbaru.</p>
         </div>
-        @endforelse
+        <?php endif; ?>
       </div>
     </div>
   </section>
@@ -453,25 +464,25 @@
         </div>
 
         <div class="testimonial-dots" id="testimonialDots">
-          @if(isset($alumnis) && $alumnis->count() > 0)
-            @foreach($alumnis as $index => $alumni)
-              <button class="dot {{ $index === 0 ? 'active' : '' }}" data-index="{{ $index }}" aria-label="Testimoni {{ $index + 1 }}"></button>
-            @endforeach
-          @else
+          <?php if(isset($alumnis) && $alumnis->count() > 0): ?>
+            <?php $__currentLoopData = $alumnis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $alumni): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <button class="dot <?php echo e($index === 0 ? 'active' : ''); ?>" data-index="<?php echo e($index); ?>" aria-label="Testimoni <?php echo e($index + 1); ?>"></button>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+          <?php else: ?>
             <button class="dot active" data-index="0" aria-label="Testimoni 1"></button>
             <button class="dot" data-index="1" aria-label="Testimoni 2"></button>
             <button class="dot" data-index="2" aria-label="Testimoni 3"></button>
             <button class="dot" data-index="3" aria-label="Testimoni 4"></button>
             <button class="dot" data-index="4" aria-label="Testimoni 5"></button>
-          @endif
+          <?php endif; ?>
         </div>
       </div>
     </div>
   </section>
 
-  @if(isset($alumnis) && $alumnis->count() > 0)
+  <?php if(isset($alumnis) && $alumnis->count() > 0): ?>
   <script>
-    window.dynamicTestimonials = {!! json_encode($alumnis->map(function($a) {
+    window.dynamicTestimonials = <?php echo json_encode($alumnis->map(function($a) {
         $words = explode(' ', $a->name);
         $initials = '';
         foreach(array_slice($words, 0, 2) as $w) {
@@ -485,16 +496,16 @@
             'initials' => $initials,
             'image' => $a->image ? (str_contains($a->image, 'http') ? $a->image : asset('storage/' . $a->image)) : null
         ];
-    })) !!};
+    })); ?>;
   </script>
-  @endif
+  <?php endif; ?>
 
   <!-- ============================================
        SECTION 8: CAMPUS TOUR VIDEO
        ============================================ -->
   <section class="campus-tour" id="campus-tour">
     <div class="campus-tour-bg">
-      <img src="{{ asset('images/STIMYK/optimized_STIMYK-324.webp') }}" alt="STIM YKPN Campus Aerial View" style="object-fit: cover;">
+      <img src="<?php echo e(asset('images/STIMYK/optimized_STIMYK-324.webp')); ?>" alt="STIM YKPN Campus Aerial View" style="object-fit: cover;">
     </div>
     <div class="container">
       <div class="play-button" id="playButton" role="button" aria-label="Play campus tour video">
@@ -550,11 +561,11 @@
     </div>
   </section>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script>
-    window.dynamicTestimonials = {!! json_encode($alumnis->map(function($a) {
+    window.dynamicTestimonials = <?php echo json_encode($alumnis->map(function($a) {
         $words = explode(' ', $a->name);
         $initials = '';
         foreach(array_slice($words, 0, 2) as $w) {
@@ -568,7 +579,9 @@
             'initials' => $initials,
             'image' => $a->image ? (str_contains($a->image, 'http') ? $a->image : asset('storage/' . $a->image)) : null
         ];
-    })) !!};
+    })); ?>;
   </script>
-@endpush
+<?php $__env->stopPush(); ?>
 
+
+<?php echo $__env->make('layouts.public', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\arief\stim_ykpn_edu\resources\views/index.blade.php ENDPATH**/ ?>
