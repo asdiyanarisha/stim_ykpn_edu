@@ -173,8 +173,13 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/logo-symbol', [LogoSymbolController::class, 'update']);
 
     // Content Management - Facility
-    Route::get('/facility', [FacilityController::class, 'show']);
-    Route::post('/facility', [FacilityController::class, 'update']);
+    Route::get('/facilities', [FacilityController::class, 'index']);
+    Route::get('/facilities/{id}', [FacilityController::class, 'show']);
+    Route::post('/facilities', [FacilityController::class, 'store']);
+    Route::post('/facilities/bulk-delete', [FacilityController::class, 'bulkDestroy']);
+    Route::post('/facilities/reorder', [FacilityController::class, 'reorder']);
+    Route::post('/facilities/{id}', [FacilityController::class, 'update']);
+    Route::delete('/facilities/{id}', [FacilityController::class, 'destroy']);
 
     // Content Management - Achievement
     Route::get('/achievements', [AchievementController::class, 'index']);

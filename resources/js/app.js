@@ -44,7 +44,10 @@ const pages = {
     coreValueForm:                defineAsyncComponent(() => import('./Pages/Content/CoreValue/CoreValueForm.vue')),
     historyForm:                  defineAsyncComponent(() => import('./Pages/Content/History/HistoryForm.vue')),
     logoSymbolForm:               defineAsyncComponent(() => import('./Pages/Content/LogoSymbol/LogoSymbolForm.vue')),
+    facilityIndex:                defineAsyncComponent(() => import('./Pages/Content/Facility/index.vue')),
     facilityForm:                 defineAsyncComponent(() => import('./Pages/Content/Facility/FacilityForm.vue')),
+    facilityEdit:                 defineAsyncComponent(() => import('./Pages/Content/Facility/FacilityEdit.vue')),
+    facilityShow:                 defineAsyncComponent(() => import('./Pages/Content/Facility/Show.vue')),
     spmiAkreditasiForm:           defineAsyncComponent(() => import('./Pages/Content/SpmiAkreditasi/SpmiAkreditasiForm.vue')),
 
     // Content — Academic

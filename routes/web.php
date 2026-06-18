@@ -143,7 +143,19 @@ Route::get('/content/profil/logo-symbol', function () {
 });
 
 Route::get('/content/profil/facility', function () {
+    return view('facilities');
+});
+
+Route::get('/content/profil/facility/create', function () {
     return view('facility-form');
+});
+
+Route::get('/content/profil/facility/edit/{id}', function ($id) {
+    return view('facility-edit');
+});
+
+Route::get('/content/profil/facility/show/{id}', function ($id) {
+    return view('facility-show');
 });
 
 Route::get('/content/profil/spmi-akreditasi', function () {
@@ -375,8 +387,7 @@ Route::get('/dosen', [PublicPagesController::class, 'teacherList']);
 Route::get('/pimpinan', [PublicPagesController::class, 'pimpinan']);
 Route::get('/pimpinan', [PublicPagesController::class, 'pimpinan']);
 
-Route::get('/fasilitas', fn() => view('fasilitas'));
-Route::get('/fasilitas', fn() => view('fasilitas'));
+Route::get('/fasilitas', [PublicPagesController::class, 'facilities']);
 
 Route::get('/prestasi', fn() => view('prestasi'));
 Route::get('/prestasi', fn() => view('prestasi'));

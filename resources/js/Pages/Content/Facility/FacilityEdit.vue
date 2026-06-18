@@ -19,7 +19,7 @@
         <div v-if="isLoading" class="absolute inset-0 z-[60] bg-slate-50/80 backdrop-blur-sm flex items-center justify-center">
             <div class="flex flex-col items-center">
                 <div class="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mb-4"></div>
-                <p class="text-slate-500 font-medium animate-pulse">Memproses...</p>
+                <p class="text-slate-500 font-medium animate-pulse">Memuat Data...</p>
             </div>
         </div>
       </transition>
@@ -31,16 +31,16 @@
             <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
               <a href="/content/profil/facility" class="hover:text-indigo-600 transition-colors">Manajemen Fasilitas</a>
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-              <span class="text-slate-900 font-medium">Tambah</span>
+              <span class="text-slate-900 font-medium">Edit</span>
             </div>
-            <h1 class="text-2xl font-bold text-slate-900">Tambah Fasilitas</h1>
-            <p class="text-slate-500">Tambahkan fasilitas pendukung pendidikan baru di STIM YKPN.</p>
+            <h1 class="text-2xl font-bold text-slate-900">Edit Fasilitas</h1>
+            <p class="text-slate-500">Ubah detail data fasilitas kampus pendukung pendidikan STIM YKPN.</p>
           </div>
         </div>
 
         <div class="max-w-4xl mx-auto">
           <form @submit.prevent="handleSubmit" class="space-y-6">
-            <!-- Image Upload Section -->
+            <!-- Image Section -->
             <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
               <h2 class="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
                 <span class="p-2 bg-indigo-50 rounded-xl text-indigo-600">
@@ -190,7 +190,7 @@
               <AppButton variant="primary" size="md" type="submit" :disabled="isSubmitting">
                 <svg v-if="isSubmitting" class="animate-spin h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                 <svg v-if="!isSubmitting" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                {{ isSubmitting ? 'Menyimpan...' : 'Simpan Fasilitas' }}
+                {{ isSubmitting ? 'Menyimpan...' : 'Simpan Perubahan' }}
               </AppButton>
             </div>
           </form>
@@ -218,6 +218,8 @@ const isAuthenticated = ref(false);
 const isSubmitting = ref(false);
 const isLoading = ref(false);
 const errors = reactive({});
+
+const facilityId = ref(null);
 
 const form = reactive({
   title: '',
@@ -324,6 +326,32 @@ const handleImageUpload = (e) => {
   }
 };
 
+const fetchFacility = async (id) => {
+  isLoading.value = true;
+  try {
+    const token = getCookie(TOKEN_COOKIE_NAME);
+    const response = await axios.get(`/api/facilities/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (response.data.status === 'success') {
+      const data = response.data.data;
+      form.title = data.title || '';
+      form.content = data.content || '';
+      form.top_facility = data.top_facility || '';
+      form.icon = data.icon || '';
+      imagePreview.value = data.header_image || null;
+    }
+  } catch (error) {
+    console.error('Error fetching facility:', error);
+    Swal.fire({ icon: 'error', title: 'Gagal!', text: 'Gagal mengambil data fasilitas.' });
+    setTimeout(() => {
+      window.location.href = '/content/profil/facility';
+    }, 1500);
+  } finally {
+    isLoading.value = false;
+  }
+};
+
 const handleSubmit = async () => {
   // Clear errors
   Object.keys(errors).forEach(key => errors[key] = '');
@@ -344,18 +372,14 @@ const handleSubmit = async () => {
     const formData = new FormData();
     formData.append('title', form.title);
     formData.append('content', form.content);
-    if (form.top_facility) {
-      formData.append('top_facility', form.top_facility);
-    }
-    if (form.icon) {
-      formData.append('icon', form.icon);
-    }
+    formData.append('top_facility', form.top_facility || '');
+    formData.append('icon', form.icon || '');
     
     if (form.image instanceof File) {
       formData.append('image', form.image);
     }
 
-    const response = await axios.post('/api/facilities', formData, {
+    const response = await axios.post(`/api/facilities/${facilityId.value}`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data'
@@ -390,11 +414,19 @@ onMounted(async () => {
     window.location.href = '/unauthenticated';
     return;
   }
+
+  // Parse ID from URL path (e.g. /content/profil/facility/edit/12)
+  const pathParts = window.location.pathname.split('/');
+  facilityId.value = pathParts[pathParts.length - 1];
+
   try {
     await axios.post('/api/auth/validate-token', {}, {
       headers: { Authorization: `Bearer ${token}` }
     });
     isAuthenticated.value = true;
+    if (facilityId.value) {
+      fetchFacility(facilityId.value);
+    }
   } catch (error) {
     deleteCookie(TOKEN_COOKIE_NAME);
     window.location.href = '/unauthenticated';

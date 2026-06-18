@@ -41,6 +41,10 @@
           {
             "name": "Jabatan",
             "link": "/masterData/job-title"
+          },
+          {
+            "name": "Fasilitas",
+            "link": "/content/profil/facility"
           }
         ]
       }

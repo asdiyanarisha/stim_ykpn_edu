@@ -19,6 +19,7 @@ use App\Models\TahunAkademik;
 use App\Models\Brochure;
 use App\Models\JobVacancy;
 use App\Models\ProgramStudy;
+use App\Models\Facility;
 
 class PublicPagesController extends Controller
 {
@@ -244,5 +245,11 @@ class PublicPagesController extends Controller
         $programTitle = $program->name;
 
         return view('program-detail', compact('program', 'programTitle', 'slug'));
+    }
+
+    public function facilities()
+    {
+        $facilities = Facility::orderBy('sort_order', 'asc')->orderBy('id', 'asc')->get();
+        return view('fasilitas', compact('facilities'));
     }
 }

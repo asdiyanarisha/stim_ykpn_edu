@@ -13,5 +13,8 @@ class Facility extends Model
         'title',
         'content',
         'header_image',
+        'top_facility',
+        'icon',
+        'sort_order',
     ];
 }

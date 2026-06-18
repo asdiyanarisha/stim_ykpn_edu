@@ -19,7 +19,7 @@
 
     .fasilitas-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       gap: 40px;
       max-width: 1200px;
       margin: 0 auto;
@@ -147,95 +147,29 @@
     <div class="container">
       <div class="fasilitas-grid">
         
-        <!-- Gedung Kampus Terpadu -->
-        <div class="fasilitas-card animate-on-scroll">
+        @foreach($facilities as $index => $facility)
+        <div class="fasilitas-card animate-on-scroll {{ $index > 0 ? 'animate-delay-' . ($index % 3) : '' }}">
           <div class="fasilitas-img-wrapper">
-            <span class="badge">Eksklusif</span>
-            <!-- <img src="/images/fasilitas/gedung.png" alt="Gedung Kampus" loading="lazy"> -->
+            @if($facility->top_facility)
+            <span class="badge {{ $index % 2 == 0 ? '' : 'badge-secondary' }}">{{ $facility->top_facility }}</span>
+            @endif
+            @if($facility->header_image)
+            <img src="{{ $facility->header_image }}" alt="{{ $facility->title }}" loading="lazy">
+            @endif
           </div>
           <div class="fasilitas-content">
             <div class="fasilitas-title-wrapper">
+              @if($facility->icon)
+              <div class="fasilitas-icon"><i class="{{ $facility->icon }}"></i></div>
+              @else
               <div class="fasilitas-icon"><i class="fi fi-rr-building"></i></div>
-              <h3>Gedung Kampus Terpadu</h3>
+              @endif
+              <h3>{{ $facility->title }}</h3>
             </div>
-            <p>Menempati lahan seluas 0.74 hektar yang asri di Jalan Palagan Tentara Pelajar km.7. Dilengkapi pusat administrasi modern, lobby yang nyaman, serta ruang terbuka hijau.</p>
+            <p>{!! $facility->content !!}</p>
           </div>
         </div>
-
-        <!-- Ruang Kelas Modern -->
-        <div class="fasilitas-card animate-on-scroll animate-delay-1">
-          <div class="fasilitas-img-wrapper">
-            <span class="badge">Full AC & Multimedia</span>
-            <!-- <img src="/images/fasilitas/kelas.png" alt="Ruang Kelas Modern" loading="lazy"> -->
-          </div>
-          <div class="fasilitas-content">
-            <div class="fasilitas-title-wrapper">
-              <div class="fasilitas-icon"><i class="fi fi-rr-chalkboard-user"></i></div>
-              <h3>Ruang Kelas Modern</h3>
-            </div>
-            <p>16 ruang kelas berkapasitas 50 mahasiswa. Dilengkapi pendingin udara, proyektor, audio sistem, dan kursi ergonomis untuk memastikan kenyamanan belajar optimal.</p>
-          </div>
-        </div>
-
-        <!-- Laboratorium Komputer -->
-        <div class="fasilitas-card animate-on-scroll animate-delay-2">
-          <div class="fasilitas-img-wrapper">
-            <span class="badge badge-secondary">High-End PC</span>
-            <!-- <img src="/images/fasilitas/lab.png" alt="Laboratorium Komputer" loading="lazy"> -->
-          </div>
-          <div class="fasilitas-content">
-            <div class="fasilitas-title-wrapper">
-              <div class="fasilitas-icon"><i class="fi fi-rr-computer"></i></div>
-              <h3>Laboratorium Komputer</h3>
-            </div>
-            <p>2 ruang lab komputer canggih dengan 50+ unit PC berkinerja tinggi, internet stabil, dan *software* khusus untuk praktik pasar modal serta kewirausahaan.</p>
-          </div>
-        </div>
-
-        <!-- BI Corner & Perpustakaan -->
-        <div class="fasilitas-card animate-on-scroll">
-          <div class="fasilitas-img-wrapper">
-            <span class="badge badge-secondary">Akses Gratis</span>
-            <!-- <img src="/images/fasilitas/perpus.png" alt="BI Corner & Perpustakaan" loading="lazy"> -->
-          </div>
-          <div class="fasilitas-content">
-            <div class="fasilitas-title-wrapper">
-              <div class="fasilitas-icon"><i class="fi fi-rr-books"></i></div>
-              <h3>BI Corner & Perpustakaan</h3>
-            </div>
-            <p>Ruang baca eksklusif persembahan Bank Indonesia yang menyediakan ratusan literatur finansial, moneter, perbankan, hingga jurnal-jurnal internasional berkualitas tinggi.</p>
-          </div>
-        </div>
-
-        <!-- Masjid Kampus -->
-        <div class="fasilitas-card animate-on-scroll animate-delay-1">
-          <div class="fasilitas-img-wrapper">
-            <span class="badge">Nyaman & Sejuk</span>
-            <!-- <img src="/images/fasilitas/masjid.png" alt="Masjid Kampus" loading="lazy"> -->
-          </div>
-          <div class="fasilitas-content">
-            <div class="fasilitas-title-wrapper">
-              <div class="fasilitas-icon"><i class="fi fi-rr-star-and-crescent"></i></div>
-              <h3>Masjid Kampus</h3>
-            </div>
-            <p>Fasilitas ibadah yang representatif di sisi selatan gedung. Area bersih, sejuk, dan dilengkapi sarana ibadah lengkap serta perpustakaan mini Islami.</p>
-          </div>
-        </div>
-
-        <!-- Area Diskusi Mahasiswa -->
-        <div class="fasilitas-card animate-on-scroll animate-delay-2">
-          <div class="fasilitas-img-wrapper">
-            <span class="badge badge-secondary">24/7 Wi-Fi</span>
-            <!-- <img src="/images/fasilitas/diskusi.png" alt="Area Diskusi Mahasiswa" loading="lazy"> -->
-          </div>
-          <div class="fasilitas-content">
-            <div class="fasilitas-title-wrapper">
-              <div class="fasilitas-icon"><i class="fi fi-rr-users-alt"></i></div>
-              <h3>Area Diskusi Mahasiswa</h3>
-            </div>
-            <p>Ruang-ruang diskusi semi-terbuka dengan akses *high-speed Wi-Fi* untuk memfasilitasi kerja kelompok, organisasi kemahasiswaan, dan pertukaran ide kreatif.</p>
-          </div>
-        </div>
+        @endforeach
 
       </div>
     </div>
