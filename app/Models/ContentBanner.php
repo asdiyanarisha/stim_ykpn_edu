@@ -19,6 +19,7 @@ class ContentBanner extends Model
         'link',
         'url_image',
         'created_by',
+        'sort_order',
     ];
 
     protected $casts = [

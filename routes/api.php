@@ -125,6 +125,7 @@ Route::middleware('jwt.auth')->group(function () {
     Route::get('/banners', [ContentBannerController::class, 'index']);
     Route::get('/banners/{id}', [ContentBannerController::class, 'show']);
     Route::post('/banners', [ContentBannerController::class, 'store']);
+    Route::post('/banners/reorder', [ContentBannerController::class, 'reorder']);
     Route::post('/banners/bulk-delete', [ContentBannerController::class, 'bulkDestroy']);
     Route::post('/banners/{id}', [ContentBannerController::class, 'update']);
     Route::delete('/banners/{id}', [ContentBannerController::class, 'destroy']);

@@ -24,7 +24,7 @@ class PublicPagesController extends Controller
 {
     public function index()
     {
-        $banners = ContentBanner::orderBy('created_at', 'desc')->get();
+        $banners = ContentBanner::orderBy('sort_order', 'asc')->orderBy('id', 'asc')->get();
         $latest_news = News::where('status', 'published')->orderBy('created_at', 'desc')->take(3)->get();
         $alumnis = TestimonyAlumni::all();
         $programs = ProgramStudy::where('is_active', true)->orderBy('order')->get();

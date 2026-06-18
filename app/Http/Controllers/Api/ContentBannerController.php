@@ -7,16 +7,19 @@ use App\Models\ContentBanner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class ContentBannerController extends Controller
 {
     /**
-     * Display a listing of the banners.
+     * Display a listing of the banners ordered by sort_order.
      */
     public function index()
     {
         try {
-            $banners = ContentBanner::orderBy('created_at', 'desc')->get();
+            $banners = ContentBanner::orderBy('sort_order', 'asc')
+                ->orderBy('id', 'asc')
+                ->get();
             return response()->json([
                 'status' => 'success',
                 'data' => $banners
@@ -31,6 +34,7 @@ class ContentBannerController extends Controller
 
     /**
      * Store a newly created banner.
+     * Auto-assign sort_order as max + 1 so new banners go to the end.
      */
     public function store(Request $request)
     {
@@ -54,6 +58,9 @@ class ContentBannerController extends Controller
             $path = $request->file('image')->store('banners', 'public');
             $url = Storage::url($path);
 
+            // Auto-assign sort_order: ambil nilai max yang ada + 1
+            $maxSortOrder = ContentBanner::max('sort_order') ?? 0;
+
             $banner = ContentBanner::create([
                 'title' => $request->title,
                 'description' => $request->description,
@@ -61,6 +68,7 @@ class ContentBannerController extends Controller
                 'link' => $request->link,
                 'url_image' => asset($url),
                 'created_by' => auth()->id() ?? 1,
+                'sort_order' => $maxSortOrder + 1,
             ]);
 
             return response()->json([
@@ -205,5 +213,45 @@ class ContentBannerController extends Controller
             'status' => 'success',
             'message' => 'Banners deleted successfully'
         ]);
+    }
+
+    /**
+     * Reorder banners by updating sort_order for each banner.
+     * Expects request body: { "orders": [{"id": 1, "sort_order": 0}, {"id": 3, "sort_order": 1}, ...] }
+     */
+    public function reorder(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'orders' => 'required|array|min:1',
+            'orders.*.id' => 'required|integer|exists:content_banner,id',
+            'orders.*.sort_order' => 'required|integer|min:0',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            DB::transaction(function () use ($request) {
+                foreach ($request->orders as $item) {
+                    ContentBanner::where('id', $item['id'])
+                        ->update(['sort_order' => $item['sort_order']]);
+                }
+            });
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Urutan banner berhasil disimpan'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Gagal menyimpan urutan: ' . $e->getMessage()
+            ], 500);
+        }
     }
 }
