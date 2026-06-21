@@ -8,4 +8,29 @@ use Illuminate\Database\Eloquent\Model;
 class Pengumuman extends Model
 {
     use HasFactory;
+
+    protected $table = 'pengumumen';
+
+    protected $fillable = [
+        'title',
+        'content',
+        'url_image',
+        'views_count',
+        'status',
+        'created_by',
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'views_count' => 'integer',
+    ];
+
+    /**
+     * Get the user who created the announcement.
+     */
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

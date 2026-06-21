@@ -35,6 +35,11 @@ const pages = {
     newsForm:                     defineAsyncComponent(() => import('./Pages/Content/News/NewsForm.vue')),
     newsShow:                     defineAsyncComponent(() => import('./Pages/Content/News/Show.vue')),
 
+    // Content — Announcements
+    announcement:                 defineAsyncComponent(() => import('./Pages/Content/Announcement/index.vue')),
+    announcementForm:             defineAsyncComponent(() => import('./Pages/Content/Announcement/AnnouncementForm.vue')),
+    announcementShow:             defineAsyncComponent(() => import('./Pages/Content/Announcement/Show.vue')),
+
     // Content — Misc
     jobVacancies:                 defineAsyncComponent(() => import('./Pages/Content/JobVacancy/index.vue')),
     jobVacancyForm:               defineAsyncComponent(() => import('./Pages/Content/JobVacancy/JobVacancyForm.vue')),

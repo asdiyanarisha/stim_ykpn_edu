@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\TeacherController;
 use App\Http\Controllers\Api\AffiliateController;
 use App\Http\Controllers\Api\ContentBannerController;
 use App\Http\Controllers\Api\NewsController;
+use App\Http\Controllers\Api\AnnouncementController;
 use App\Http\Controllers\Api\JobVacancyController;
 use App\Http\Controllers\Api\CertificationLogoController;
 use App\Http\Controllers\Api\GreetingChiefController;
@@ -138,6 +139,15 @@ Route::middleware('jwt.auth')->group(function () {
     Route::post('/news/bulk-publish', [NewsController::class, 'bulkPublish']);
     Route::post('/news/{id}', [NewsController::class, 'update']);
     Route::delete('/news/{id}', [NewsController::class, 'destroy']);
+
+    // Content Management - Announcements (Pengumuman)
+    Route::get('/announcements', [AnnouncementController::class, 'index']);
+    Route::get('/announcements/{id}', [AnnouncementController::class, 'show']);
+    Route::post('/announcements', [AnnouncementController::class, 'store']);
+    Route::post('/announcements/bulk-delete', [AnnouncementController::class, 'bulkDestroy']);
+    Route::post('/announcements/bulk-publish', [AnnouncementController::class, 'bulkPublish']);
+    Route::post('/announcements/{id}', [AnnouncementController::class, 'update']);
+    Route::delete('/announcements/{id}', [AnnouncementController::class, 'destroy']);
 
     // Content Management - Job Vacancies
     Route::get('/job-vacancies', [JobVacancyController::class, 'index']);

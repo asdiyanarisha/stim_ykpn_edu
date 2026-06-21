@@ -102,6 +102,23 @@ Route::get('/content/berita/edit/{id}', function ($id) {
     return view('news-edit');
 });
 
+// Announcement Admin Dashboard
+Route::get('/announcement', function () {
+    return view('announcement');
+});
+
+Route::get('/announcement/create', function () {
+    return view('announcement-form');
+});
+
+Route::get('/announcement/show/{id}', function ($id) {
+    return view('announcement-show');
+});
+
+Route::get('/announcement/edit/{id}', function ($id) {
+    return view('announcement-edit');
+});
+
 Route::get('/content/lowongan-kerja', function () {
     return view('job-vacancies');
 });
