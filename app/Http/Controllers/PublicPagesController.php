@@ -62,7 +62,20 @@ class PublicPagesController extends Controller
             'mainEntityOfPage' => url('/berita/' . $news->id),
         ];
 
-        return view('berita-detail', compact('news', 'articleSchema'));
+        $latestNews = News::where('status', 'published')
+            ->where('id', '!=', $id)
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        $popularNews = News::where('status', 'published')
+            ->where('id', '!=', $id)
+            ->where('created_at', '>=', now()->subMonths(6))
+            ->orderBy('views_count', 'desc')
+            ->take(5)
+            ->get();
+
+        return view('berita-detail', compact('news', 'articleSchema', 'latestNews', 'popularNews'));
     }
 
     public function newsList(Request $request)
