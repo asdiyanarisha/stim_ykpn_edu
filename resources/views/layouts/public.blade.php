@@ -24,7 +24,7 @@
     'seminar-proposal', 'ketentuan-ujian', 'logo', 'sambutan-ketua', 'pimpinan', 'visi-misi',
     'unduh', 'program', 'program/*', 'biaya-kuliah', 'beasiswa', 'program-reguler',
     'program-ekstensi', 'pengumuman-diterima', 'kegiatan-mahasiswa', 'ukm', 'ppkpt',
-    'pengumuman', 'video', 'informasi-tempat-tinggal', 'brosur', 'alumni', 'lowongan-kerja',
+    'pengumuman', 'pengumuman/*', 'video', 'informasi-tempat-tinggal', 'brosur', 'alumni', 'lowongan-kerja',
     'lowongan-kerja/*', 'whatsapp-contact', 'jurnal-penelitian', 'jurnal-pengabdian', 'perpustakaan'
   ];
   

@@ -20,6 +20,7 @@ use App\Models\Brochure;
 use App\Models\JobVacancy;
 use App\Models\ProgramStudy;
 use App\Models\Facility;
+use App\Models\Pengumuman;
 
 class PublicPagesController extends Controller
 {
@@ -264,5 +265,43 @@ class PublicPagesController extends Controller
     {
         $facilities = Facility::orderBy('sort_order', 'asc')->orderBy('id', 'asc')->get();
         return view('fasilitas', compact('facilities'));
+    }
+
+    public function pengumumanList(Request $request)
+    {
+        $query = Pengumuman::where('status', 'published');
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('content', 'like', "%{$search}%");
+            });
+        }
+
+        $query->orderBy('created_at', 'desc');
+
+        $pengumumans = $query->paginate(9)->withQueryString();
+
+        return view('pengumuman', compact('pengumumans'));
+    }
+
+    public function pengumumanDetail($id)
+    {
+        $pengumuman = Pengumuman::findOrFail($id);
+
+        if ($pengumuman->status !== 'published') {
+            abort(404);
+        }
+
+        $pengumuman->increment('views_count');
+
+        $relatedPengumumans = Pengumuman::where('status', 'published')
+            ->where('id', '!=', $id)
+            ->orderBy('created_at', 'desc')
+            ->take(4)
+            ->get();
+
+        return view('pengumuman-detail', compact('pengumuman', 'relatedPengumumans'));
     }
 }

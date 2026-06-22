@@ -514,8 +514,8 @@ Route::get('/ukm', [PublicPagesController::class, 'ukm']);
 Route::get('/ppkpt', fn() => view('ppkpt'));
 Route::get('/ppkpt', fn() => view('ppkpt'));
 
-Route::get('/pengumuman', fn() => view('pengumuman'));
-Route::get('/pengumuman', fn() => view('pengumuman'));
+Route::get('/pengumuman', [PublicPagesController::class, 'pengumumanList']);
+Route::get('/pengumuman/{id}', [PublicPagesController::class, 'pengumumanDetail']);
 
 Route::get('/video', fn() => view('video'));
 Route::get('/video', fn() => view('video'));
