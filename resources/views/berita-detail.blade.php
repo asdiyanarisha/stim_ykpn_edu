@@ -90,6 +90,17 @@
       color: #334155;
     }
 
+    .news-body-content a {
+      color: var(--blue-500);
+      text-decoration: underline;
+      transition: color var(--transition-fast, 0.2s) ease;
+    }
+
+    .news-body-content a:hover {
+      color: var(--blue-600);
+      text-decoration: underline;
+    }
+
     .news-body-content p {
       margin-bottom: 24px;
       text-align: justify;

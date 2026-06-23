@@ -58,6 +58,7 @@
     :canonicalUrl="url('/')"
     :schemaJson="$homepageSchema"
   />
+  <link rel="preload" as="image" href="/images/Banner1.webp" fetchpriority="high">
 @endsection
 
 

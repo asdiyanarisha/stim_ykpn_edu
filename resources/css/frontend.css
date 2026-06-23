@@ -4124,3 +4124,15 @@ a.btn.btn-orange:hover {
     transform: scale(1) !important;
   }
 }
+
+/* Link styling inside article/news body content */
+.news-body-content a {
+  color: var(--blue-500);
+  text-decoration: underline;
+  transition: color var(--transition-fast, 0.2s) ease;
+}
+
+.news-body-content a:hover {
+  color: var(--blue-600);
+  text-decoration: underline;
+}
