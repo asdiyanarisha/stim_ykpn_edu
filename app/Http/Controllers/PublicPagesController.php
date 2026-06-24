@@ -21,6 +21,7 @@ use App\Models\JobVacancy;
 use App\Models\ProgramStudy;
 use App\Models\Facility;
 use App\Models\Pengumuman;
+use App\Models\PublicFile;
 
 class PublicPagesController extends Controller
 {
@@ -303,5 +304,11 @@ class PublicPagesController extends Controller
             ->get();
 
         return view('pengumuman-detail', compact('pengumuman', 'relatedPengumumans'));
+    }
+
+    public function unduh()
+    {
+        $files = PublicFile::orderBy('created_at', 'desc')->get();
+        return view('unduh', compact('files'));
     }
 }

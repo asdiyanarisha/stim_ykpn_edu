@@ -526,8 +526,7 @@ Route::get('/informasi-tempat-tinggal', fn() => view('informasi-tempat-tinggal')
 Route::get('/brosur', [PublicPagesController::class, 'brochure']);
 Route::get('/brosur', [PublicPagesController::class, 'brochure']);
 
-Route::get('/unduh', fn() => view('unduh'));
-Route::get('/unduh', fn() => view('unduh'));
+Route::get('/unduh', [PublicPagesController::class, 'unduh']);
 
 Route::get('/alumni', [PublicPagesController::class, 'alumni']);
 Route::get('/alumni', [PublicPagesController::class, 'alumni']);
