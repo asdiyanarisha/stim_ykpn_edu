@@ -153,95 +153,31 @@
                 </tr>
               </thead>
               <tbody id="journalTable">
-                
+                @forelse($journals as $journal)
                   <tr class="journal-row" style="border-bottom: 1px solid #e2e8f0; transition: background 0.2s;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='transparent'">
-                    <td style="padding: 15px; color: #334155; font-weight: 500;">Pengaruh Komunikasi Pemasaran Terpadu terhadap Ekuitas Merek: Studi pada Hotel Cakra Kembang Yogyakarta</td>
-                    <td style="padding: 15px; color: #64748b; font-size: 0.9rem;">Lisiya Fatma Umami, Ralina Transistari</td>
-                    <td style="padding: 15px; color: #64748b; text-align: center;">2020</td>
+                    <td style="padding: 15px; color: #334155; font-weight: 500;">{{ $journal->title }}</td>
+                    <td style="padding: 15px; color: #64748b; font-size: 0.9rem;">{{ $journal->author ?: '-' }}</td>
+                    <td style="padding: 15px; color: #64748b; text-align: center;">{{ $journal->year ?: '-' }}</td>
                     <td style="padding: 15px; text-align: center;">
-                      <a href="https://stimykpn.ac.id/storage/journal/122-225-3-PB_1707102034.pdf" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 5px; color: var(--orange-500); font-weight: bold; text-decoration: none; font-size: 0.85rem;">
-                         PDF <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                      </a>
+                      @if($journal->file_path)
+                        @php
+                            $ext = strtoupper(pathinfo(parse_url($journal->file_path, PHP_URL_PATH), PATHINFO_EXTENSION)) ?: 'PDF';
+                        @endphp
+                        <a href="{{ $journal->file_path }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 5px; color: var(--orange-500); font-weight: bold; text-decoration: none; font-size: 0.85rem;">
+                           {{ $ext }} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        </a>
+                      @else
+                        <span style="color: var(--gray-400); font-size: 0.85rem;">Tidak ada file</span>
+                      @endif
                     </td>
                   </tr>
-                
-                  <tr class="journal-row" style="border-bottom: 1px solid #e2e8f0; transition: background 0.2s;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='transparent'">
-                    <td style="padding: 15px; color: #334155; font-weight: 500;">Antecedents of Customers Loyalty toward Go-Jek Service</td>
-                    <td style="padding: 15px; color: #64748b; font-size: 0.9rem;">Helmy Ilham Nugraha, Anas Hidayat, Putra Endi Catyanaika, Sri Rejeki Ekasasi</td>
-                    <td style="padding: 15px; color: #64748b; text-align: center;">2020</td>
-                    <td style="padding: 15px; text-align: center;">
-                      <a href="https://stimykpn.ac.id/storage/journal/188-512-1-PB_1707101976.pdf" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 5px; color: var(--orange-500); font-weight: bold; text-decoration: none; font-size: 0.85rem;">
-                         PDF <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                      </a>
+                @empty
+                  <tr>
+                    <td colspan="4" style="padding: 30px; text-align: center; color: var(--gray-500);">
+                      Belum ada artikel penelitian yang tersedia.
                     </td>
                   </tr>
-                
-                  <tr class="journal-row" style="border-bottom: 1px solid #e2e8f0; transition: background 0.2s;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='transparent'">
-                    <td style="padding: 15px; color: #334155; font-weight: 500;">Pengaruh gaya Hidup, Kualitas Produk, dan Promosi terhadap Keputusan Pembelian Produk makanan Sehat Soyjoy</td>
-                    <td style="padding: 15px; color: #64748b; font-size: 0.9rem;">Novita Sukmawati, Sri Rejeki Ekasasi</td>
-                    <td style="padding: 15px; color: #64748b; text-align: center;">2020</td>
-                    <td style="padding: 15px; text-align: center;">
-                      <a href="https://stimykpn.ac.id/storage/journal/125-221-3-PB_1707101650.pdf" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 5px; color: var(--orange-500); font-weight: bold; text-decoration: none; font-size: 0.85rem;">
-                         PDF <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                      </a>
-                    </td>
-                  </tr>
-                
-                  <tr class="journal-row" style="border-bottom: 1px solid #e2e8f0; transition: background 0.2s;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='transparent'">
-                    <td style="padding: 15px; color: #334155; font-weight: 500;">Konflik Peran terhadap Komitmen Organisasi melalui Kepuasan Kerja Sebagai Variabel Intervening</td>
-                    <td style="padding: 15px; color: #64748b; font-size: 0.9rem;">Dwi Lestari, Ralina Transistari</td>
-                    <td style="padding: 15px; color: #64748b; text-align: center;">2020</td>
-                    <td style="padding: 15px; text-align: center;">
-                      <a href="https://stimykpn.ac.id/storage/journal/185-323-1-SM_1707101588.pdf" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 5px; color: var(--orange-500); font-weight: bold; text-decoration: none; font-size: 0.85rem;">
-                         PDF <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                      </a>
-                    </td>
-                  </tr>
-                
-                  <tr class="journal-row" style="border-bottom: 1px solid #e2e8f0; transition: background 0.2s;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='transparent'">
-                    <td style="padding: 15px; color: #334155; font-weight: 500;">Pengaruh nilai tukar, produksi, dan harga terhadap volume ekspor batubara di Provinsi Bengkulu</td>
-                    <td style="padding: 15px; color: #64748b; font-size: 0.9rem;">Wahyuni Dwi Safitri, Retno Hartati</td>
-                    <td style="padding: 15px; color: #64748b; text-align: center;">2020</td>
-                    <td style="padding: 15px; text-align: center;">
-                      <a href="https://stimykpn.ac.id/storage/journal/1144-2403-1-PB_1707101531.pdf" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 5px; color: var(--orange-500); font-weight: bold; text-decoration: none; font-size: 0.85rem;">
-                         PDF <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                      </a>
-                    </td>
-                  </tr>
-                
-                  <tr class="journal-row" style="border-bottom: 1px solid #e2e8f0; transition: background 0.2s;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='transparent'">
-                    <td style="padding: 15px; color: #334155; font-weight: 500;">Pengaruh Pendidikan, Pelatihan, dan Lingkungan Kerja terhadap Kinerja Karyawan di PT Kereta Api Indonesia</td>
-                    <td style="padding: 15px; color: #64748b; font-size: 0.9rem;">Putu Yama Asmara, Sri Ekanti Sabardini</td>
-                    <td style="padding: 15px; color: #64748b; text-align: center;">2020</td>
-                    <td style="padding: 15px; text-align: center;">
-                      <a href="https://stimykpn.ac.id/storage/journal/126-222-3-PB_1707101460.pdf" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 5px; color: var(--orange-500); font-weight: bold; text-decoration: none; font-size: 0.85rem;">
-                         PDF <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                      </a>
-                    </td>
-                  </tr>
-                
-                  <tr class="journal-row" style="border-bottom: 1px solid #e2e8f0; transition: background 0.2s;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='transparent'">
-                    <td style="padding: 15px; color: #334155; font-weight: 500;">Does GCG Increase Financial Performance? A Study in Indonesian Sharia Banks</td>
-                    <td style="padding: 15px; color: #64748b; font-size: 0.9rem;">Devi Novianti, Tri Gunarsih, Ralina Transistari</td>
-                    <td style="padding: 15px; color: #64748b; text-align: center;">2020</td>
-                    <td style="padding: 15px; text-align: center;">
-                      <a href="https://stimykpn.ac.id/storage/journal/Does%20GCG%20Increase%20Financial%20Performance_Okt%202020_1707098712.pdf" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 5px; color: var(--orange-500); font-weight: bold; text-decoration: none; font-size: 0.85rem;">
-                         PDF <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                      </a>
-                    </td>
-                  </tr>
-                
-                  <tr class="journal-row" style="border-bottom: 1px solid #e2e8f0; transition: background 0.2s;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='transparent'">
-                    <td style="padding: 15px; color: #334155; font-weight: 500;">The Impact of The Coronavirus Outbreak on Hotel Tax and Recovery Strategy</td>
-                    <td style="padding: 15px; color: #64748b; font-size: 0.9rem;">Suparmono, dkk.</td>
-                    <td style="padding: 15px; color: #64748b; text-align: center;">2022</td>
-                    <td style="padding: 15px; text-align: center;">
-                      <a href="https://stimykpn.ac.id/storage/journal/20suparmono_1686638416.pdf" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 5px; color: var(--orange-500); font-weight: bold; text-decoration: none; font-size: 0.85rem;">
-                         PDF <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                      </a>
-                    </td>
-                  </tr>
-                
+                @endforelse
               </tbody>
             </table>
           </div>

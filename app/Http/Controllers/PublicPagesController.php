@@ -23,6 +23,7 @@ use App\Models\Facility;
 use App\Models\Pengumuman;
 use App\Models\PublicFile;
 use App\Models\CampusLiveVideo;
+use App\Models\ArticleTeacher;
 
 class PublicPagesController extends Controller
 {
@@ -317,5 +318,17 @@ class PublicPagesController extends Controller
     {
         $videos = CampusLiveVideo::orderBy('created_at', 'desc')->get();
         return view('video', compact('videos'));
+    }
+
+    public function jurnalPenelitian()
+    {
+        $journals = ArticleTeacher::where('type_article', 'Penelitian')->orderBy('year', 'desc')->orderBy('created_at', 'desc')->get();
+        return view('jurnal-penelitian', compact('journals'));
+    }
+
+    public function jurnalPengabdian()
+    {
+        $journals = ArticleTeacher::where('type_article', 'Pengabdian')->orderBy('year', 'desc')->orderBy('created_at', 'desc')->get();
+        return view('jurnal-pengabdian', compact('journals'));
     }
 }

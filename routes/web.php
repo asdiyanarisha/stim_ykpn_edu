@@ -542,13 +542,11 @@ Route::get('/api/inspect-data', [PublicPagesController::class, 'inspectData']);
 Route::get('/berita', [PublicPagesController::class, 'newsList']);
 Route::get('/berita', [PublicPagesController::class, 'newsList']);
 
-// Jurnal Penelitian Dosen (Public Static Page)
-Route::get('/jurnal-penelitian', fn() => view('jurnal-penelitian'));
-Route::get('/jurnal-penelitian', fn() => view('jurnal-penelitian'));
+// Jurnal Penelitian Dosen (Public Page)
+Route::get('/jurnal-penelitian', [PublicPagesController::class, 'jurnalPenelitian']);
 
-// Jurnal Pengabdian Dosen (Public Static Page)
-Route::get('/jurnal-pengabdian', fn() => view('jurnal-pengabdian'));
-Route::get('/jurnal-pengabdian', fn() => view('jurnal-pengabdian'));
+// Jurnal Pengabdian Dosen (Public Page)
+Route::get('/jurnal-pengabdian', [PublicPagesController::class, 'jurnalPengabdian']);
 
 
 
