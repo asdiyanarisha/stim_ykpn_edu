@@ -207,6 +207,19 @@ class PublicPagesController extends Controller
         return view('kegiatan-mahasiswa', compact('activities'));
     }
 
+    public function studentActivityDetail($id)
+    {
+        $activity = StudentActivity::where('is_publish', true)->findOrFail($id);
+
+        $relatedActivities = StudentActivity::where('is_publish', true)
+            ->where('id', '!=', $id)
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        return view('kegiatan-mahasiswa-detail', compact('activity', 'relatedActivities'));
+    }
+
     public function ukm()
     {
         $ukms = StudentUkm::all();

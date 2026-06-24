@@ -506,7 +506,7 @@ Route::get('/pengumuman-diterima', function () {
 
 // Batch 3 - Student, Campus Life, and Information Pages
 Route::get('/kegiatan-mahasiswa', [PublicPagesController::class, 'studentActivities']);
-Route::get('/kegiatan-mahasiswa', [PublicPagesController::class, 'studentActivities']);
+Route::get('/kegiatan-mahasiswa/{id}', [PublicPagesController::class, 'studentActivityDetail']);
 
 Route::get('/ukm', [PublicPagesController::class, 'ukm']);
 Route::get('/ukm', [PublicPagesController::class, 'ukm']);

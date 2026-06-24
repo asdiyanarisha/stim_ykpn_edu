@@ -210,13 +210,13 @@
             <div style="background: #eee; height: 100%; min-height: 150px;">
                 <img src="{{ !empty($activity->header_image) ? (str_contains($activity->header_image, 'http') ? $activity->header_image : asset('storage/' . $activity->header_image)) : asset('images/lambang-stim.webp') }}" style="width:100%; height:100%; object-fit:cover;" loading="lazy" alt="{{ $activity->title }}">
             </div>
-            <div style="padding: 20px;">
+            <div style="padding: 20px; overflow: hidden; min-width: 0;">
               <span style="font-size: 0.8rem; color: #f97316; font-weight: bold; text-transform: uppercase;">
                 {{ $activity->start_date ? $activity->start_date->format('d M Y') : 'KEGIATAN' }}
               </span>
-              <h3 style="margin: 10px 0; color: #0f172a; font-size: 1.25rem;">{{ $activity->title }}</h3>
-              <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px; line-height: 1.6;">{{ Str::limit(strip_tags($activity->description), 150) }}</p>
-              <a href="#" style="color: #0f172a; font-weight: bold; font-size: 0.9rem; text-decoration: none;">Selengkapnya &rarr;</a>
+              <h3 style="margin: 10px 0; color: #0f172a; font-size: 1.25rem; word-break: break-word;">{{ $activity->title }}</h3>
+              <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px; line-height: 1.6; word-break: break-word; overflow-wrap: break-word;">{{ Str::limit(strip_tags($activity->description), 80) }}</p>
+              <a href="/kegiatan-mahasiswa/{{ $activity->id }}" style="color: #0f172a; font-weight: bold; font-size: 0.9rem; text-decoration: none;">Selengkapnya &rarr;</a>
             </div>
           </div>
         @endforeach

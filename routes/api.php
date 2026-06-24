@@ -296,34 +296,34 @@ Route::middleware('jwt.auth')->group(function () {
     // Student Activity
     Route::get('/student-activities', [StudentActivityController::class, 'index']);
     Route::post('/student-activities', [StudentActivityController::class, 'store']);
+    Route::post('/student-activities/bulk-delete', [StudentActivityController::class, 'bulkDestroy']);
     Route::get('/student-activities/{id}', [StudentActivityController::class, 'show']);
     Route::post('/student-activities/{id}', [StudentActivityController::class, 'update']);
     Route::delete('/student-activities/{id}', [StudentActivityController::class, 'destroy']);
-    Route::post('/student-activities/bulk-delete', [StudentActivityController::class, 'bulkDestroy']);
     
     // Student UKM
     Route::get('/student-ukms', [App\Http\Controllers\Api\StudentUkmController::class, 'index']);
     Route::post('/student-ukms', [App\Http\Controllers\Api\StudentUkmController::class, 'store']);
+    Route::post('/student-ukms/bulk-delete', [App\Http\Controllers\Api\StudentUkmController::class, 'bulkDestroy']);
     Route::get('/student-ukms/{id}', [App\Http\Controllers\Api\StudentUkmController::class, 'show']);
     Route::post('/student-ukms/{id}', [App\Http\Controllers\Api\StudentUkmController::class, 'update']);
     Route::delete('/student-ukms/{id}', [App\Http\Controllers\Api\StudentUkmController::class, 'destroy']);
-    Route::post('/student-ukms/bulk-delete', [App\Http\Controllers\Api\StudentUkmController::class, 'bulkDestroy']);
 
     // Testimony Alumni
     Route::get('/testimony-alumnis', [App\Http\Controllers\Api\TestimonyAlumniController::class, 'index']);
     Route::post('/testimony-alumnis', [App\Http\Controllers\Api\TestimonyAlumniController::class, 'store']);
+    Route::post('/testimony-alumnis/bulk-delete', [App\Http\Controllers\Api\TestimonyAlumniController::class, 'bulkDestroy']);
     Route::get('/testimony-alumnis/{id}', [App\Http\Controllers\Api\TestimonyAlumniController::class, 'show']);
     Route::post('/testimony-alumnis/{id}', [App\Http\Controllers\Api\TestimonyAlumniController::class, 'update']);
     Route::delete('/testimony-alumnis/{id}', [App\Http\Controllers\Api\TestimonyAlumniController::class, 'destroy']);
-    Route::post('/testimony-alumnis/bulk-delete', [App\Http\Controllers\Api\TestimonyAlumniController::class, 'bulkDestroy']);
 
     // Campus Live Video
     Route::get('/campus-live-videos', [CampusLiveVideoController::class, 'index']);
     Route::post('/campus-live-videos', [CampusLiveVideoController::class, 'store']);
+    Route::post('/campus-live-videos/bulk-delete', [CampusLiveVideoController::class, 'bulkDestroy']);
     Route::get('/campus-live-videos/{id}', [CampusLiveVideoController::class, 'show']);
     Route::post('/campus-live-videos/{id}', [CampusLiveVideoController::class, 'update']);
     Route::delete('/campus-live-videos/{id}', [CampusLiveVideoController::class, 'destroy']);
-    Route::post('/campus-live-videos/bulk-delete', [CampusLiveVideoController::class, 'bulkDestroy']);
 
     // Lodging Information
     Route::get('/lodging-information', [LodgingInformationController::class, 'show']);
@@ -356,58 +356,57 @@ Route::middleware('jwt.auth')->group(function () {
     // Roles Management
     Route::get('/roles', [RoleController::class, 'index']);
     Route::post('/roles', [RoleController::class, 'store']);
+    Route::post('/roles/bulk-delete', [RoleController::class, 'bulkDestroy']);
     Route::post('/roles/{id}', [RoleController::class, 'update']);
     Route::delete('/roles/{id}', [RoleController::class, 'destroy']);
-    // Bulk actions
-    Route::post('/roles/bulk-delete', [RoleController::class, 'bulkDestroy']);
 
     // User Management
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/{id}', [UserController::class, 'show']);
     Route::post('/users', [UserController::class, 'store']);
+    Route::post('/users/bulk-delete', [UserController::class, 'bulkDestroy']);
     Route::post('/users/{id}', [UserController::class, 'update']);
     Route::delete('/users/{id}', [UserController::class, 'destroy']);
-    Route::post('/users/bulk-delete', [UserController::class, 'bulkDestroy']);
 
     // Brochure Management
     Route::get('/brochures', [BrochureController::class, 'index']);
     Route::get('/brochures/{id}', [BrochureController::class, 'show']);
     Route::post('/brochures', [BrochureController::class, 'store']);
+    Route::post('/brochures/bulk-delete', [BrochureController::class, 'bulkDestroy']);
     Route::post('/brochures/{id}', [BrochureController::class, 'update']);
     Route::delete('/brochures/{id}', [BrochureController::class, 'destroy']);
-    Route::post('/brochures/bulk-delete', [BrochureController::class, 'bulkDestroy']);
 
     // Public File Management
     Route::get('/public-files', [PublicFileController::class, 'index']);
     Route::get('/public-files/{id}', [PublicFileController::class, 'show']);
     Route::post('/public-files', [PublicFileController::class, 'store']);
+    Route::post('/public-files/bulk-delete', [PublicFileController::class, 'bulkDestroy']);
     Route::post('/public-files/{id}', [PublicFileController::class, 'update']);
     Route::delete('/public-files/{id}', [PublicFileController::class, 'destroy']);
-    Route::post('/public-files/bulk-delete', [PublicFileController::class, 'bulkDestroy']);
 
     // Voucher Management
     Route::get('/vouchers', [VoucherController::class, 'index']);
     Route::get('/vouchers/{id}', [VoucherController::class, 'show']);
     Route::post('/vouchers', [VoucherController::class, 'store']);
+    Route::post('/vouchers/bulk-delete', [VoucherController::class, 'bulkDestroy']);
     Route::post('/vouchers/{id}', [VoucherController::class, 'update']);
     Route::delete('/vouchers/{id}', [VoucherController::class, 'destroy']);
-    Route::post('/vouchers/bulk-delete', [VoucherController::class, 'bulkDestroy']);
 
     // Academic Year Management
     Route::get('/academic-years', [AcademicYearController::class, 'index']);
     Route::get('/academic-years/{id}', [AcademicYearController::class, 'show']);
     Route::post('/academic-years', [AcademicYearController::class, 'store']);
+    Route::post('/academic-years/bulk-delete', [AcademicYearController::class, 'bulkDestroy']);
     Route::post('/academic-years/{id}', [AcademicYearController::class, 'update']);
     Route::delete('/academic-years/{id}', [AcademicYearController::class, 'destroy']);
-    Route::post('/academic-years/bulk-delete', [AcademicYearController::class, 'bulkDestroy']);
 
     // Program Study Management
     Route::get('/program-studies', [ProgramStudyController::class, 'index']);
     Route::get('/program-studies/{id}', [ProgramStudyController::class, 'show']);
     Route::post('/program-studies', [ProgramStudyController::class, 'store']);
+    Route::post('/program-studies/bulk-delete', [ProgramStudyController::class, 'bulkDestroy']);
     Route::post('/program-studies/{id}', [ProgramStudyController::class, 'update']);
     Route::delete('/program-studies/{id}', [ProgramStudyController::class, 'destroy']);
-    Route::post('/program-studies/bulk-delete', [ProgramStudyController::class, 'bulkDestroy']);
 
     // Payment Settings Management
     Route::get('/payment-settings', [PaymentSettingController::class, 'show']);
@@ -444,7 +443,7 @@ Route::middleware('jwt.auth')->group(function () {
     Route::get('/academic-calendar-categories', [\App\Http\Controllers\Api\AcademicCalendarCategoryController::class, 'index']);
     Route::get('/academic-calendar-categories/{id}', [\App\Http\Controllers\Api\AcademicCalendarCategoryController::class, 'show']);
     Route::post('/academic-calendar-categories', [\App\Http\Controllers\Api\AcademicCalendarCategoryController::class, 'store']);
+    Route::post('/academic-calendar-categories/bulk-delete', [\App\Http\Controllers\Api\AcademicCalendarCategoryController::class, 'bulkDestroy']);
     Route::post('/academic-calendar-categories/{id}', [\App\Http\Controllers\Api\AcademicCalendarCategoryController::class, 'update']);
     Route::delete('/academic-calendar-categories/{id}', [\App\Http\Controllers\Api\AcademicCalendarCategoryController::class, 'destroy']);
-    Route::post('/academic-calendar-categories/bulk-delete', [\App\Http\Controllers\Api\AcademicCalendarCategoryController::class, 'bulkDestroy']);
 });
