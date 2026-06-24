@@ -169,25 +169,38 @@
         </div>
         <div class="article-body">
           
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 30px;">
-        <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
-          <div style="position: relative; padding-bottom: 56.25%; height: 0;">
-            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/miUW4EkRWN8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 30px;">
+        @forelse($videos as $video)
+          @php
+              $youtubeId = null;
+              if ($video->link) {
+                  if (preg_match('%(?:youtube\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $video->link, $match)) {
+                      $youtubeId = $match[1];
+                  }
+              }
+          @endphp
+          <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); display: flex; flex-direction: column;">
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; background: #000;">
+              @if($youtubeId)
+                <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/{{ $youtubeId }}" title="{{ $video->title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              @else
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--gray-400); font-size: 0.9rem;">
+                  Video tidak tersedia
+                </div>
+              @endif
+            </div>
+            <div style="padding: 20px; flex-grow: 1; display: flex; flex-direction: column;">
+              <h3 style="color: var(--primary-blue); font-size: 1.2rem; margin-bottom: 10px; font-weight: 700;">{{ $video->title }}</h3>
+              @if($video->description)
+                <div style="color: #666; font-size: 0.9rem; line-height: 1.5; flex-grow: 1;">{!! $video->description !!}</div>
+              @endif
+            </div>
           </div>
-          <div style="padding: 20px;">
-            <h3 style="color: var(--primary-blue); font-size: 1.2rem; margin-bottom: 10px;">STIM YKPN Campus Life</h3>
-            <p style="color: #666; font-size: 0.9rem;">Melihat lebih dekat lingkungan kampus, fasilitas, dan keseharian mahasiswa di STIM YKPN Yogyakarta.</p>
+        @empty
+          <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--gray-500); background: white; border-radius: 12px; border: 1px solid #e2e8f0;">
+            Belum ada video yang tersedia saat ini.
           </div>
-        </div>
-        <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
-          <div style="position: relative; padding-bottom: 56.25%; height: 0;">
-            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/SLyCS5tOfQI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div style="padding: 20px;">
-            <h3 style="color: var(--primary-blue); font-size: 1.2rem; margin-bottom: 10px;">Profil STIM YKPN</h3>
-            <p style="color: #666; font-size: 0.9rem;">Video profil resmi yang memperkenalkan visi, misi, dan keunggulan akademik STIM YKPN.</p>
-          </div>
-        </div>
+        @endforelse
       </div>
     
         </div>

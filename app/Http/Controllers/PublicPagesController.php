@@ -22,6 +22,7 @@ use App\Models\ProgramStudy;
 use App\Models\Facility;
 use App\Models\Pengumuman;
 use App\Models\PublicFile;
+use App\Models\CampusLiveVideo;
 
 class PublicPagesController extends Controller
 {
@@ -310,5 +311,11 @@ class PublicPagesController extends Controller
     {
         $files = PublicFile::orderBy('created_at', 'desc')->get();
         return view('unduh', compact('files'));
+    }
+
+    public function video()
+    {
+        $videos = CampusLiveVideo::orderBy('created_at', 'desc')->get();
+        return view('video', compact('videos'));
     }
 }

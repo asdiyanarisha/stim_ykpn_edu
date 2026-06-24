@@ -517,8 +517,7 @@ Route::get('/ppkpt', fn() => view('ppkpt'));
 Route::get('/pengumuman', [PublicPagesController::class, 'pengumumanList']);
 Route::get('/pengumuman/{id}', [PublicPagesController::class, 'pengumumanDetail']);
 
-Route::get('/video', fn() => view('video'));
-Route::get('/video', fn() => view('video'));
+Route::get('/video', [PublicPagesController::class, 'video']);
 
 Route::get('/informasi-tempat-tinggal', fn() => view('informasi-tempat-tinggal'));
 Route::get('/informasi-tempat-tinggal', fn() => view('informasi-tempat-tinggal'));
