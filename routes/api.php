@@ -416,16 +416,16 @@ Route::middleware('jwt.auth')->group(function () {
     Route::get('/category-teachers', [CategoryTeacherController::class, 'index']);
     Route::get('/category-teachers/{id}', [CategoryTeacherController::class, 'show']);
     Route::post('/category-teachers', [CategoryTeacherController::class, 'store']);
+    Route::post('/category-teachers/bulk-delete', [CategoryTeacherController::class, 'bulkDestroy']);
     Route::post('/category-teachers/{id}', [CategoryTeacherController::class, 'update']);
     Route::delete('/category-teachers/{id}', [CategoryTeacherController::class, 'destroy']);
-    Route::post('/category-teachers/bulk-delete', [CategoryTeacherController::class, 'bulkDestroy']);
     // Job Title Management
     Route::get('/job-titles', [JobTitleController::class, 'index']);
     Route::get('/job-titles/{id}', [JobTitleController::class, 'show']);
     Route::post('/job-titles', [JobTitleController::class, 'store']);
+    Route::post('/job-titles/bulk-delete', [JobTitleController::class, 'bulkDestroy']);
     Route::post('/job-titles/{id}', [JobTitleController::class, 'update']);
     Route::delete('/job-titles/{id}', [JobTitleController::class, 'destroy']);
-    Route::post('/job-titles/bulk-delete', [JobTitleController::class, 'bulkDestroy']);
 
     // Whatsapp Contacts Management
     Route::get('/whatsapp-contacts', [\App\Http\Controllers\Api\WhatsappContactController::class, 'index']);
