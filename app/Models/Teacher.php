@@ -23,6 +23,7 @@ class Teacher extends Model
         'address',
         'personal_description',
         'image_url',
+        'sort_order',
     ];
 
     public function category()

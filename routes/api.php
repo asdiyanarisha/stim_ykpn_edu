@@ -111,6 +111,7 @@ Route::middleware('jwt.auth')->group(function () {
     Route::get('/teachers', [TeacherController::class, 'index']);
     Route::get('/teachers/{id}', [TeacherController::class, 'show']);
     Route::post('/teachers', [TeacherController::class, 'store']);
+    Route::post('/teachers/reorder', [TeacherController::class, 'reorder']);
     Route::post('/teachers/{id}', [TeacherController::class, 'update']);
     Route::delete('/teachers/{id}', [TeacherController::class, 'destroy']);
 

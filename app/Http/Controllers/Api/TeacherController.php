@@ -21,6 +21,7 @@ class TeacherController extends Controller
                 ->leftJoin('category_teachers as c', 'c.id', '=', 't.category_teacher_id')
                 ->select(
                     't.id',
+                    't.sort_order',
                     't.front_title',
                     't.full_name',
                     't.back_title',
@@ -32,7 +33,9 @@ class TeacherController extends Controller
                     DB::raw('MAX(e.degree) as education')
                 )
                 ->leftJoin('job_titles as jt', 'jt.id', '=', 't.job_title_teacher_id')
-                ->groupBy('t.id', 't.front_title', 't.full_name', 't.back_title', 't.email', 't.image_url', 't.created_at', 'c.title', 'jt.title')
+                ->groupBy('t.id', 't.sort_order', 't.front_title', 't.full_name', 't.back_title', 't.email', 't.image_url', 't.created_at', 'c.title', 'jt.title')
+                ->orderByRaw('CASE WHEN t.sort_order = 0 THEN 1 ELSE 0 END')
+                ->orderBy('t.sort_order', 'asc')
                 ->orderByDesc('t.created_at')
                 ->get();
 
@@ -496,6 +499,38 @@ class TeacherController extends Controller
                 'status' => 'error',
                 'message' => 'Gagal menghapus data dosen.',
                 'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Reorder teachers by updating sort_order.
+     */
+    public function reorder(Request $request)
+    {
+        try {
+            $ids = $request->input('ids');
+            if (!is_array($ids) || empty($ids)) {
+                return response()->json(['status' => 'error', 'message' => 'IDs tidak valid.'], 400);
+            }
+
+            DB::transaction(function () use ($ids) {
+                foreach ($ids as $index => $id) {
+                    DB::table('teachers')
+                        ->where('id', $id)
+                        ->update(['sort_order' => $index + 1, 'updated_at' => now()]);
+                }
+            });
+
+            return response()->json([
+                'status'  => 'success',
+                'message' => 'Urutan dosen berhasil disimpan.',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => 'Gagal menyimpan urutan dosen.',
+                'error'   => $th->getMessage(),
             ], 500);
         }
     }

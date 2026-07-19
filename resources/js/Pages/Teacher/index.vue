@@ -11,7 +11,7 @@
         <!-- Header Section -->
         <div class="mb-8">
           <h1 class="text-2xl font-bold text-slate-900">Data Dosen</h1>
-          <p class="text-slate-500">Kelola dan lihat informasi tenaga pengajar di sini.</p>
+          <p class="text-slate-500">Kelola dan atur urutan tampilan dosen di halaman publik.</p>
         </div>
 
         <!-- Toolbar Section -->
@@ -25,13 +25,35 @@
           </div>
           
           <div class="flex flex-wrap items-center gap-3">
-            <!-- Delete Selection Button (Visible only if items selected) -->
-            <transition 
-              enter-active-class="transition duration-200 ease-out" 
-              enter-from-class="transform opacity-0 translate-x-4" 
-              enter-to-class="transform opacity-100 translate-x-0" 
-              leave-active-class="transition duration-100 ease-in" 
-              leave-from-class="transform opacity-100 translate-x-0" 
+            <!-- Save Order Button (muncul saat ada perubahan urutan) -->
+            <transition
+              enter-active-class="transition duration-200 ease-out"
+              enter-from-class="transform opacity-0 scale-95"
+              enter-to-class="transform opacity-100 scale-100"
+              leave-active-class="transition duration-100 ease-in"
+              leave-from-class="transform opacity-100 scale-100"
+              leave-to-class="transform opacity-0 scale-95"
+            >
+              <button
+                v-if="orderChanged"
+                @click="saveOrder"
+                :disabled="isSavingOrder"
+                id="btn-save-order"
+                class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-95 transition-all rounded-xl shadow-sm disabled:opacity-60 disabled:active:scale-100 whitespace-nowrap"
+              >
+                <svg v-if="isSavingOrder" class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                {{ isSavingOrder ? 'Menyimpan...' : 'Simpan Urutan' }}
+              </button>
+            </transition>
+
+            <!-- Delete Selection Button -->
+            <transition
+              enter-active-class="transition duration-200 ease-out"
+              enter-from-class="transform opacity-0 translate-x-4"
+              enter-to-class="transform opacity-100 translate-x-0"
+              leave-active-class="transition duration-100 ease-in"
+              leave-from-class="transform opacity-100 translate-x-0"
               leave-to-class="transform opacity-0 translate-x-4"
             >
               <AppButton v-if="selectedTeachers.length > 0" variant="danger" size="md" @click="openBulkDeleteModal" class="whitespace-nowrap z-10">
@@ -47,87 +69,110 @@
                 Tambah Dosen
               </AppButton>
             </a>
-
-            <!-- Options Dropdown wrapper -->
-            <div class="relative z-20">
-              <AppButton variant="secondary" size="md" @click="isOptionsOpen = !isOptionsOpen" class="!px-2.5">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
-              </AppButton>
-
-              <!-- Dropdown Menu -->
-              <transition 
-                enter-active-class="transition ease-out duration-100" 
-                enter-from-class="transform opacity-0 scale-95" 
-                enter-to-class="transform opacity-100 scale-100" 
-                leave-active-class="transition ease-in duration-75" 
-                leave-from-class="transform opacity-100 scale-100" 
-                leave-to-class="transform opacity-0 scale-95"
-              >
-                <div v-show="isOptionsOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-slate-100 z-50 overflow-hidden">
-                  <div class="py-1">
-                    <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-                      Export Data Dosen
-                    </a>
-                    <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14v-6m0 0l-3 3m3-3l3 3" /></svg>
-                      Import Data Dosen
-                    </a>
-                  </div>
-                </div>
-              </transition>
-            </div>
-
-            <!-- Click outside overlay -->
-            <div v-if="isOptionsOpen" @click="isOptionsOpen = false" class="fixed inset-0 z-10 hidden sm:block cursor-default"></div>
           </div>
+        </div>
+
+        <!-- Order mode info banner -->
+        <div class="mb-4 flex items-center gap-2 px-4 py-2.5 bg-blue-50 border border-blue-100 rounded-xl text-sm text-blue-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>Ketik nomor urutan langsung di kolom <strong>No.</strong>, atau gunakan tombol <strong>↑ ↓</strong>. Klik <strong>Simpan Urutan</strong> untuk menyimpan ke database.</span>
         </div>
 
         <!-- Table Section -->
         <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
           <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse min-w-[800px]">
+            <table class="w-full text-left border-collapse min-w-[900px]">
               <thead>
                 <tr class="bg-slate-50 border-b border-slate-100">
-                  <th class="px-6 py-4 w-12">
-                    <input type="checkbox" @change="toggleSelectAll" :checked="selectedTeachers.length === paginatedTeachers.length && paginatedTeachers.length > 0" class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer transition-colors">
+                  <th class="px-4 py-4 w-28 text-xs font-bold text-slate-500 uppercase tracking-wider text-center">No. Urutan</th>
+                  <th class="px-6 py-4 w-10">
+                    <input type="checkbox" @change="toggleSelectAll" :checked="selectedTeachers.length === paginatedTeachers.length && paginatedTeachers.length > 0" class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                   </th>
-                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Nama Dosen</th>
+                  <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Nama Dosen</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Kategori</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Pendidikan</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Jabatan</th>
-                  <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Alamat Email</th>
                   <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">Aksi</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-100">
-                <tr v-for="teacher in paginatedTeachers" :key="teacher.id" class="hover:bg-slate-50 transition-colors group">
+                <tr
+                  v-for="(teacher, index) in paginatedTeachers"
+                  :key="teacher.id"
+                  class="transition-colors group hover:bg-slate-50"
+                >
+                  <!-- No. Urutan: input + tombol ↑↓ -->
+                  <td class="px-4 py-3" colspan="1">
+                    <div class="flex flex-col items-center gap-1">
+                      <!-- Input number manual -->
+                      <input
+                        type="number"
+                        :value="getTeacherRealOrder(teacher.id)"
+                        min="1"
+                        :max="allTeachers.length"
+                        @change="applyManualOrder(index, $event)"
+                        @keydown.enter="$event.target.blur()"
+                        class="w-14 text-center text-sm font-bold border border-slate-200 rounded-lg py-1 px-1 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-colors bg-white text-slate-700"
+                        title="Ketik nomor urutan lalu tekan Enter atau klik di luar"
+                      />
+                      <!-- Tombol ↑ ↓ -->
+                      <div class="flex gap-1">
+                        <button
+                          @click="moveUp(index)"
+                          :disabled="getTeacherRealOrder(teacher.id) === 1"
+                          class="p-0.5 rounded text-slate-300 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+                          title="Pindah ke atas"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7" /></svg>
+                        </button>
+                        <button
+                          @click="moveDown(index)"
+                          :disabled="getTeacherRealOrder(teacher.id) === allTeachers.length"
+                          class="p-0.5 rounded text-slate-300 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+                          title="Pindah ke bawah"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /></svg>
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+
+                  <!-- Checkbox -->
                   <td class="px-6 py-4">
                     <input type="checkbox" :value="teacher.id" v-model="selectedTeachers" class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer transition-colors">
                   </td>
+
+                  <!-- Nama Dosen -->
                   <td class="px-6 py-4">
                     <div class="flex items-center gap-3">
-                      <img :src="teacher.avatar" class="w-9 h-9 rounded-full border border-slate-200">
+                      <img :src="teacher.avatar" class="w-9 h-9 rounded-full border border-slate-200 object-cover flex-shrink-0">
                       <span class="font-semibold text-slate-900 text-sm group-hover:text-indigo-600 transition-colors">{{ teacher.name }}</span>
                     </div>
                   </td>
+
+                  <!-- Kategori -->
                   <td class="px-6 py-4 text-sm text-slate-600">
                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100">
                       {{ teacher.category }}
                     </span>
                   </td>
+
+                  <!-- Pendidikan -->
                   <td class="px-6 py-4 text-sm text-slate-600">
                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">
                       {{ teacher.education }}
                     </span>
                   </td>
+
+                  <!-- Jabatan -->
                   <td class="px-6 py-4 text-sm text-slate-600">
                     <span v-if="teacher.job_title" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-100">
                       {{ teacher.job_title }}
                     </span>
                     <span v-else class="text-slate-400">-</span>
                   </td>
-                  <td class="px-6 py-4 text-sm text-slate-500">{{ teacher.email }}</td>
+
+                  <!-- Aksi -->
                   <td class="px-6 py-4 text-right">
                     <a :href="`/masterData/teacher/show/${teacher.id}`" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
@@ -136,7 +181,7 @@
                   </td>
                 </tr>
                 <tr v-if="paginatedTeachers.length === 0">
-                  <td colspan="6" class="px-6 py-8 text-center text-slate-500 text-sm">Tidak ada data dosen yang tersedia.</td>
+                  <td colspan="8" class="px-6 py-8 text-center text-slate-500 text-sm">Tidak ada data dosen yang tersedia.</td>
                 </tr>
               </tbody>
             </table>
@@ -172,9 +217,9 @@
           </div>
         </div>
 
-        <!-- Custom Delete Modal -->
-        <div v-if="showDeleteModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm transition-opacity">
-          <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden transform transition-all translate-y-0 scale-100">
+        <!-- Delete Modal -->
+        <div v-if="showDeleteModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
+          <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
             <div class="p-6">
               <div class="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -207,6 +252,7 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import AppSidebar from '../../Components/Organisms/AppSidebar.vue';
 import AppNavbar from '../../Components/Organisms/AppNavbar.vue';
 import AppButton from '../../Components/Atoms/AppButton.vue';
@@ -215,41 +261,144 @@ import { getCookie, deleteCookie, TOKEN_COOKIE_NAME } from '../../Helpers/cookie
 
 const sidebarOpen = ref(false);
 const isAuthenticated = ref(false);
-
 const allTeachers = ref([]);
+const originalOrder = ref([]);
+const orderChanged = ref(false);
+const isSavingOrder = ref(false);
 
-const selectedTeachers = ref([]);
-const isOptionsOpen = ref(false);
+// ============================================================
+// DRAG & DROP
+// ============================================================
+const dragIndex = ref(null);
+const dragOverIndex = ref(null);
 
-const openBulkDeleteModal = () => {
-    if (selectedTeachers.value.length === 0) return;
-    isBulkDelete.value = true;
-    showDeleteModal.value = true;
+const onDragStart = (index) => {
+  dragIndex.value = globalIndex(index);
 };
 
+const onDragOver = (index) => {
+  dragOverIndex.value = index;
+};
+
+const onDragEnd = () => {
+  if (dragIndex.value !== null && dragOverIndex.value !== null) {
+    const fromGlobal = dragIndex.value;
+    const toGlobal = globalIndex(dragOverIndex.value);
+    if (fromGlobal !== toGlobal) {
+      const arr = [...allTeachers.value];
+      const [moved] = arr.splice(fromGlobal, 1);
+      arr.splice(toGlobal, 0, moved);
+      allTeachers.value = arr;
+      checkOrderChanged();
+    }
+  }
+  dragIndex.value = null;
+  dragOverIndex.value = null;
+};
+
+// ============================================================
+// MOVE UP / DOWN
+// ============================================================
+// Mendapatkan urutan aslinya dari database (1-based index di allTeachers)
+const getTeacherRealOrder = (teacherId) => {
+  return allTeachers.value.findIndex(t => t.id === teacherId) + 1;
+};
+
+const globalIndex = (pageIndex) => {
+  return (currentPage.value - 1) * limit.value + pageIndex;
+};
+
+const moveUp = (pageIndex) => {
+  const teacherId = paginatedTeachers.value[pageIndex].id;
+  const gi = allTeachers.value.findIndex(t => t.id === teacherId);
+  if (gi === -1 || gi === 0) return;
+  const arr = [...allTeachers.value];
+  [arr[gi - 1], arr[gi]] = [arr[gi], arr[gi - 1]];
+  allTeachers.value = arr;
+  checkOrderChanged();
+};
+
+const moveDown = (pageIndex) => {
+  const teacherId = paginatedTeachers.value[pageIndex].id;
+  const gi = allTeachers.value.findIndex(t => t.id === teacherId);
+  if (gi === -1 || gi >= allTeachers.value.length - 1) return;
+  const arr = [...allTeachers.value];
+  [arr[gi], arr[gi + 1]] = [arr[gi + 1], arr[gi]];
+  allTeachers.value = arr;
+  checkOrderChanged();
+};
+
+// Input manual: pindahkan dosen ke posisi yang diketik user (1-based)
+const applyManualOrder = (pageIndex, event) => {
+  const inputVal = parseInt(event.target.value);
+  const total = allTeachers.value.length;
+  const targetPos = Math.max(1, Math.min(total, inputVal || 1)) - 1; // 0-based
+  
+  const teacherId = paginatedTeachers.value[pageIndex].id;
+  const fromPos = allTeachers.value.findIndex(t => t.id === teacherId);
+
+  if (fromPos === -1 || fromPos === targetPos) return;
+
+  const arr = [...allTeachers.value];
+  const [moved] = arr.splice(fromPos, 1);
+  arr.splice(targetPos, 0, moved);
+  allTeachers.value = arr;
+  checkOrderChanged();
+
+  // Reset input ke nilai yang benar (kalau user ketik di luar range)
+  event.target.value = targetPos + 1;
+};
+
+const checkOrderChanged = () => {
+  const currentIds = allTeachers.value.map(t => t.id);
+  const origIds = originalOrder.value;
+  orderChanged.value = JSON.stringify(currentIds) !== JSON.stringify(origIds);
+};
+
+// ============================================================
+// SAVE ORDER
+// ============================================================
+const saveOrder = async () => {
+  isSavingOrder.value = true;
+  try {
+    const token = getCookie(TOKEN_COOKIE_NAME);
+    const ids = allTeachers.value.map(t => t.id);
+    await axios.post('/api/teachers/reorder', { ids }, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    originalOrder.value = [...ids];
+    orderChanged.value = false;
+    Swal.fire({ icon: 'success', title: 'Berhasil!', text: 'Urutan dosen berhasil disimpan.', timer: 2000, showConfirmButton: false });
+  } catch (error) {
+    Swal.fire({ icon: 'error', title: 'Gagal!', text: 'Gagal menyimpan urutan dosen.' });
+  } finally {
+    isSavingOrder.value = false;
+  }
+};
+
+// ============================================================
+// SEARCH & PAGINATION
+// ============================================================
+const selectedTeachers = ref([]);
 const searchQuery = ref('');
 
 const filteredTeachers = computed(() => {
   if (!searchQuery.value) return allTeachers.value;
   const q = searchQuery.value.toLowerCase();
-  return allTeachers.value.filter(t => 
-    t.name.toLowerCase().includes(q) || 
-    t.email.toLowerCase().includes(q) || 
-    t.category.toLowerCase().includes(q) || 
+  return allTeachers.value.filter(t =>
+    t.name.toLowerCase().includes(q) ||
+    t.email.toLowerCase().includes(q) ||
+    t.category.toLowerCase().includes(q) ||
     t.education.toLowerCase().includes(q)
   );
 });
 
-watch(searchQuery, () => {
-  currentPage.value = 1;
-});
+watch(searchQuery, () => { currentPage.value = 1; });
 
-// Pagination logic
 const currentPage = ref(1);
 const limit = ref(10);
 const totalItems = computed(() => filteredTeachers.value.length);
 const totalPages = computed(() => Math.ceil(totalItems.value / limit.value) || 1);
-
 const paginatedTeachers = computed(() => {
   const offset = (currentPage.value - 1) * limit.value;
   return filteredTeachers.value.slice(offset, offset + limit.value);
@@ -257,29 +406,21 @@ const paginatedTeachers = computed(() => {
 
 const prevPage = () => { if (currentPage.value > 1) currentPage.value--; };
 const nextPage = () => { if (currentPage.value < totalPages.value) currentPage.value++; };
-
 const toggleSelectAll = (e) => {
   if (e.target.checked) selectedTeachers.value = paginatedTeachers.value.map(t => t.id);
   else selectedTeachers.value = [];
 };
 
+// ============================================================
+// FETCH TEACHERS
+// ============================================================
 const buildAvatarUrl = (imageUrl, displayName) => {
   if (!imageUrl || !String(imageUrl).trim()) {
     return `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random`;
   }
-
-  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-    return imageUrl;
-  }
-
-  if (imageUrl.startsWith('/storage/')) {
-    return imageUrl;
-  }
-
-  if (imageUrl.startsWith('storage/')) {
-    return `/${imageUrl}`;
-  }
-
+  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) return imageUrl;
+  if (imageUrl.startsWith('/storage/')) return imageUrl;
+  if (imageUrl.startsWith('storage/')) return `/${imageUrl}`;
   return `/storage/${imageUrl.replace(/^\/+/, '')}`;
 };
 
@@ -287,7 +428,6 @@ const buildTeacherDisplayName = (frontTitle, fullName, backTitle) => {
   const prefix = (frontTitle || '').trim();
   const name = (fullName || '').trim();
   const suffix = (backTitle || '').trim();
-
   const main = [prefix, name].filter(Boolean).join(' ').trim();
   if (!main && suffix) return suffix;
   if (main && suffix) return `${main}, ${suffix}`;
@@ -298,17 +438,12 @@ const fetchTeachers = async (token) => {
   const response = await axios.get('/api/teachers', {
     headers: { Authorization: `Bearer ${token}` },
   });
-
   const teachers = response?.data?.data ?? [];
   allTeachers.value = teachers.map((teacher) => {
-    const displayName = buildTeacherDisplayName(
-      teacher.front_title,
-      teacher.full_name,
-      teacher.back_title
-    );
-
+    const displayName = buildTeacherDisplayName(teacher.front_title, teacher.full_name, teacher.back_title);
     return {
       id: teacher.id,
+      sort_order: teacher.sort_order,
       name: displayName,
       category: teacher.category_title || 'Tidak Ada Kategori',
       job_title: teacher.job_title || null,
@@ -317,12 +452,23 @@ const fetchTeachers = async (token) => {
       avatar: buildAvatarUrl(teacher.image_url, displayName),
     };
   });
+  originalOrder.value = allTeachers.value.map(t => t.id);
+  orderChanged.value = false;
 };
 
+// ============================================================
+// DELETE
+// ============================================================
 const showDeleteModal = ref(false);
 const teacherToDeleteId = ref(null);
 const isDeleting = ref(false);
 const isBulkDelete = ref(false);
+
+const openBulkDeleteModal = () => {
+  if (selectedTeachers.value.length === 0) return;
+  isBulkDelete.value = true;
+  showDeleteModal.value = true;
+};
 
 const openDeleteModal = (id) => {
   teacherToDeleteId.value = id;
@@ -341,24 +487,20 @@ const executeDelete = async () => {
   isDeleting.value = true;
   try {
     const token = getCookie(TOKEN_COOKIE_NAME);
-    
     if (isBulkDelete.value) {
-       const deletePromises = selectedTeachers.value.map(id => 
-         axios.delete(`/api/teachers/${id}`, { headers: { Authorization: `Bearer ${token}` } })
-       );
-       await Promise.all(deletePromises);
-       
-       selectedTeachers.value = [];
-       if (paginatedTeachers.value && paginatedTeachers.value.length === 0 && currentPage.value > 1) {
-           currentPage.value--;
-       }
+      await Promise.all(
+        selectedTeachers.value.map(id =>
+          axios.delete(`/api/teachers/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+        )
+      );
+      selectedTeachers.value = [];
+      if (paginatedTeachers.value.length === 0 && currentPage.value > 1) currentPage.value--;
     } else {
-       if (!teacherToDeleteId.value) return;
-       await axios.delete(`/api/teachers/${teacherToDeleteId.value}`, {
-         headers: { Authorization: `Bearer ${token}` }
-       });
+      if (!teacherToDeleteId.value) return;
+      await axios.delete(`/api/teachers/${teacherToDeleteId.value}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
     }
-    
     closeDeleteModal();
     await fetchTeachers(token);
   } catch (error) {
@@ -368,32 +510,22 @@ const executeDelete = async () => {
   }
 };
 
+// ============================================================
+// ON MOUNTED
+// ============================================================
 onMounted(async () => {
   const token = getCookie(TOKEN_COOKIE_NAME);
-
-  if (!token) {
-    window.location.href = '/unauthenticated';
-    return;
-  }
-
+  if (!token) { window.location.href = '/unauthenticated'; return; }
   try {
-    await axios.post('/api/auth/validate-token', {}, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    await axios.post('/api/auth/validate-token', {}, { headers: { Authorization: `Bearer ${token}` } });
     isAuthenticated.value = true;
-    try {
-      await fetchTeachers(token);
-    } catch (fetchError) {
-      console.error('Failed to fetch teachers:', fetchError);
-      // Optional: show a toast or error message on page instead of redirecting
-    }
+    await fetchTeachers(token);
   } catch (error) {
     if (error.response?.status === 401) {
       deleteCookie(TOKEN_COOKIE_NAME);
       window.location.href = '/unauthenticated';
     } else {
-      console.error('Token validation error:', error);
-      isAuthenticated.value = true; // Still allow view if it's not a 401 (e.g. server error on validation)
+      isAuthenticated.value = true;
     }
   }
 });
